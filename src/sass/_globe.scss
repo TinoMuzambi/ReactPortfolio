@@ -1,0 +1,17 @@
+.globe-wrapper {
+	background: black;
+	min-height: 100vh;
+
+	.sky {
+		height: 100vh;
+		width: 100vw;
+		object-fit: cover;
+		transform: scale(2);
+	}
+
+	.globe {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+}
