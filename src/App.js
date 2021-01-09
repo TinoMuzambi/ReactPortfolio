@@ -1,14 +1,8 @@
-import "./App.css";
-import Globe from "react-globe.gl";
+import "./css/App.min.css";
+import Globe from "./components/WorldGlobe";
 
 function App() {
-	return (
-		<Globe
-			globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-			bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-			backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
-		/>
-	);
+	return <Globe />;
 }
 
 export default App;
