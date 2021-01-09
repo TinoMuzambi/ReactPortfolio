@@ -9,6 +9,7 @@ const Holder = () => {
 					<div className="profile">
 						<img src="/assets/me.jpg" alt="me" className="profile-img" />
 						<h2 className="title">Tino Muzambi</h2>
+						<h3 className="subtitle">Full-Stack Web Developer</h3>
 					</div>
 					<ul>
 						<li>About</li>

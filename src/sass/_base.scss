@@ -1,14 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Lexend+Deca&family=Livvic&display=swap");
+
 $primary-color: #37ed53;
 $secondary-color: #0cf277;
 $tertiary-color: #00dba7;
 $primary-blue: #0ce3f2;
 $secondary-blue: #109de8;
 
+$primary-font: "Lexend Deca", sans-serif;
+$secondary-font: "Josefin Sans", sans-serif;
+$tertiary-font: "Livvic", sans-serif;
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: sans-serif;
+	font-family: $primary-font;
 	overflow-x: hidden;
 	transition: all 0.2s;
 }
