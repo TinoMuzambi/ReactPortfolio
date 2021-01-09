@@ -6,6 +6,10 @@ const Holder = () => {
 		<div className="holder">
 			<div className="card">
 				<div className="sidebar">
+					<div className="profile">
+						<img src="/assets/me.jpg" alt="me" className="profile-img" />
+						<h2 className="title">Tino Muzambi</h2>
+					</div>
 					<ul>
 						<li>About</li>
 						<li>Education</li>

@@ -20,6 +20,16 @@
 			min-height: 100%;
 			background: rgba($color: white, $alpha: 0.5);
 			padding: 2rem;
+			@include flexCenter;
+
+			.profile {
+				.profile-img {
+					width: 10rem;
+					height: 10rem;
+					border-radius: 50%;
+					object-fit: cover;
+				}
+			}
 		}
 
 		.content {
