@@ -11,7 +11,7 @@ const Hero = () => {
 				className="enter"
 				onClick={() =>
 					document
-						.querySelector(".about")
+						.querySelector(".holder")
 						.scrollIntoView({ behavior: "smooth" })
 				}
 			>
