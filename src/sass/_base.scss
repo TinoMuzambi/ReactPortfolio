@@ -4,4 +4,22 @@
 	box-sizing: border-box;
 	font-family: sans-serif;
 	overflow-x: hidden;
+	transition: all 0.2s;
+}
+
+%flex {
+	display: flex;
+	align-items: center;
+}
+
+@mixin flexCenter {
+	@extend %flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+@mixin mq($size) {
+	@media only screen and (max-width: $size) {
+		@content;
+	}
 }

@@ -1,0 +1,30 @@
+.hero {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	@include flexCenter;
+
+	.pill {
+		background: rgba($color: white, $alpha: 0.5);
+		padding: 1rem;
+		border-radius: 1000px;
+	}
+
+	.enter {
+		margin-top: 4rem;
+		background: none;
+		outline: none;
+		border: none;
+		cursor: pointer;
+
+		.icon {
+			filter: invert(1);
+			font-size: 4rem;
+		}
+
+		&:hover {
+			transform: translateY(-10px);
+		}
+	}
+}
