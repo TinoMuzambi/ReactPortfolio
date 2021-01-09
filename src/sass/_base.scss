@@ -18,8 +18,25 @@
 	flex-direction: column;
 }
 
+@mixin button {
+	background: none;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
 @mixin mq($size) {
 	@media only screen and (max-width: $size) {
 		@content;
 	}
+}
+
+.up-icon {
+	@include button;
+	font-size: 4rem;
+	position: fixed;
+	right: 2rem;
+	bottom: 2rem;
+	opacity: 0.7;
+	filter: invert(0.8);
 }
