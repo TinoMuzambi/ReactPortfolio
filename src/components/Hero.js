@@ -7,7 +7,14 @@ const Hero = () => {
 			<div className="pill">
 				<h1 className="title">Welcome to my World.</h1>
 			</div>
-			<button className="enter">
+			<button
+				className="enter"
+				onClick={() =>
+					document
+						.querySelector(".about")
+						.scrollIntoView({ behavior: "smooth" })
+				}
+			>
 				<IoArrowDownCircle className="icon" />
 			</button>
 		</div>
