@@ -2,20 +2,30 @@
 	min-height: 100vh;
 	background-image: linear-gradient(
 			to bottom,
-			rgba(0, 0, 0, 0.52),
-			rgba(255, 255, 255, 0.73) 60%
+			rgba($primary-color, 0.6),
+			rgba($primary-blue, 0.6) 60%
 		),
 		url("sky.png");
 	@include flexCenter;
+	color: white;
 
 	.card {
 		border-radius: 10px;
-		padding: 2rem;
-		box-shadow: 0 0 5px 5px rgba($color: #000000, $alpha: 0.4);
 		height: 70vh;
 		width: 70vw;
 		display: grid;
 		grid-template-columns: 30% 70%;
-		gap: 2rem;
+
+		.sidebar {
+			min-height: 100%;
+			background: rgba($color: white, $alpha: 0.5);
+			padding: 2rem;
+		}
+
+		.content {
+			min-height: 100%;
+			background: rgba($color: white, $alpha: 0.2);
+			padding: 2rem;
+		}
 	}
 }
