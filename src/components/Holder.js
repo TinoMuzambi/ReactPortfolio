@@ -1,6 +1,12 @@
 import React from "react";
 import About from "./About";
-import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
+import {
+	FaInfoCircle,
+	FaSchool,
+	FaBuilding,
+	FaCode,
+	FaLaughBeam,
+} from "react-icons/fa";
 const Holder = () => {
 	return (
 		<div className="holder">
@@ -37,6 +43,14 @@ const Holder = () => {
 							Portfolio
 						</li>
 					</ul>
+					<div className="joke">
+						<p className="text">
+							Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id quo
+							ipsa saepe esse doloremque dolorem incidunt ratione ducimus sint
+							error.
+						</p>
+						<FaLaughBeam className="icon" />
+					</div>
 				</div>
 				<div className="content">
 					<About />

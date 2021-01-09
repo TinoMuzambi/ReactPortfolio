@@ -11,7 +11,7 @@
 
 	.card {
 		border-radius: 10px;
-		height: 70vh;
+		height: 85vh;
 		width: 70vw;
 		display: grid;
 		grid-template-columns: 30% 70%;
@@ -26,8 +26,8 @@
 				text-align: center;
 
 				.profile-img {
-					width: 10rem;
-					height: 10rem;
+					width: 7rem;
+					height: 7rem;
 					border-radius: 50%;
 					object-fit: cover;
 				}
@@ -60,6 +60,23 @@
 					&.active {
 						background: rgba($color: white, $alpha: 0.1);
 					}
+				}
+			}
+
+			.joke {
+				margin-top: 1rem;
+				display: flex;
+				align-items: center;
+				gap: 2rem;
+				border-radius: 10px;
+				background: linear-gradient(
+					rgba($primary-color, 0.3),
+					rgba($secondary-blue, 0.3)
+				);
+				padding: 1rem;
+
+				.icon {
+					font-size: 8rem;
 				}
 			}
 		}
