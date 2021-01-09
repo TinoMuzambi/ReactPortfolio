@@ -1,9 +1,10 @@
 .globe-wrapper {
 	background: black;
-	min-height: 100vh;
+	height: 100vh;
+	overflow: hidden;
 
 	.sky {
-		height: 100vh;
+		height: 100%;
 		width: 100vw;
 		object-fit: cover;
 		transform: scale(2);
