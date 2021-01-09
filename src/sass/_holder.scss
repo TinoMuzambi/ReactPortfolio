@@ -23,11 +23,43 @@
 			@include flexCenter;
 
 			.profile {
+				text-align: center;
+
 				.profile-img {
 					width: 10rem;
 					height: 10rem;
 					border-radius: 50%;
 					object-fit: cover;
+				}
+
+				.subtitle {
+					font-family: $tertiary-font;
+				}
+			}
+
+			.items {
+				margin-top: 2rem;
+
+				.item {
+					display: flex;
+					align-items: center;
+					gap: 2rem;
+					cursor: pointer;
+					background: transparent;
+					border-radius: 1000px;
+					padding: 1rem;
+
+					.icon {
+						font-size: 3rem;
+						color: rgba($secondary-blue, 0.5);
+					}
+
+					&:hover,
+					&:active,
+					&:focus,
+					&.active {
+						background: rgba($color: white, $alpha: 0.1);
+					}
 				}
 			}
 		}

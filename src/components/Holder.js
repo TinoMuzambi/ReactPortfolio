@@ -1,6 +1,6 @@
 import React from "react";
 import About from "./About";
-
+import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
 const Holder = () => {
 	return (
 		<div className="holder">
@@ -11,11 +11,31 @@ const Holder = () => {
 						<h2 className="title">Tino Muzambi</h2>
 						<h3 className="subtitle">Full-Stack Web Developer</h3>
 					</div>
-					<ul>
-						<li>About</li>
-						<li>Education</li>
-						<li>Experience</li>
-						<li>Portfolio</li>
+					<ul className="items">
+						<li className="item active">
+							<span>
+								<FaInfoCircle className="icon" />
+							</span>
+							About
+						</li>
+						<li className="item">
+							<span>
+								<FaSchool className="icon" />
+							</span>
+							Education
+						</li>
+						<li className="item">
+							<span>
+								<FaBuilding className="icon" />
+							</span>
+							Experience
+						</li>
+						<li className="item">
+							<span>
+								<FaCode className="icon" />
+							</span>
+							Portfolio
+						</li>
 					</ul>
 				</div>
 				<div className="content">
