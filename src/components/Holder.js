@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import About from "./About";
+import Education from "./Education";
+import Experience from "./Experience";
+import Portfolio from "./Portfolio";
 import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
 const Holder = () => {
 	const [joke, setJoke] = useState("");
@@ -78,7 +81,10 @@ const Holder = () => {
 					</div>
 				</div>
 				<div className="content">
-					<About />
+					{currentView === "about" && <About />}
+					{currentView === "edu" && <Education />}
+					{currentView === "exp" && <Experience />}
+					{currentView === "por" && <Portfolio />}
 				</div>
 			</div>
 		</div>
