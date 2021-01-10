@@ -64,7 +64,7 @@ const projects = [
 	{
 		name: "projects.tinomuzambi",
 		shortname: "PT",
-		title: "Projects.TinoMuzambi",
+		title: "Projects.TinoM...",
 		content: [
 			`This React app is a landing page for all the personal projects I've worked on. It provides an overview of each project as well as the tech stack used in each project and where possible, a link to see it in action.`,
 			`In terms of the tech stack, this project uses React for the front-end. The repetitive nature of elements made something like React which uses reusable components the perfect tool for this website. I used Bootstrap and CSS3 for styling the page. I used a Javascript library called AOS (Animation on Scroll) for the reveal effects that the wrapper elements have. Icons are from react-icons font-awesome.`,
