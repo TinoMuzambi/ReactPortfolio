@@ -13,7 +13,7 @@ const WorldGlobe = () => {
 	useEffect(() => {
 		// Auto-rotate
 		globeEl.current.controls().autoRotate = true;
-		globeEl.current.controls().autoRotateSpeed = 0.3;
+		globeEl.current.controls().autoRotateSpeed = 1;
 	}, []);
 
 	return (
@@ -21,7 +21,7 @@ const WorldGlobe = () => {
 			<div className="globe">
 				<Globe
 					ref={globeEl}
-					width={500}
+					width={window.innerWidth}
 					height={400}
 					globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
 					bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"

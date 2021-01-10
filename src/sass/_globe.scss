@@ -12,11 +12,6 @@
 	.globe {
 		cursor: pointer;
 		position: absolute;
-		right: 0;
 		bottom: 0;
-
-		@include mq(768px) {
-			width: 100vw;
-		}
 	}
 }
