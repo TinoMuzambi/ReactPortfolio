@@ -9,11 +9,12 @@
 	@include flexCenter;
 	color: white;
 	position: relative;
+	overflow-x: hidden;
 
 	.card {
 		border-radius: 10px;
 		height: 85vh;
-		width: 70vw;
+		width: 80vw;
 		display: grid;
 		grid-template-columns: 30% 70%;
 
@@ -144,7 +145,8 @@
 			height: 100%;
 			width: 100%;
 			background: rgba($color: white, $alpha: 0.2);
-			padding: 2rem 10rem;
+			padding: 2rem 5rem;
+			position: relative;
 
 			@include mq(768px) {
 				padding: 2rem;
