@@ -9,7 +9,7 @@ const Portfolio = () => {
 
 			<div className="cards">
 				{projects.slice(0, 5).map((project, key) => (
-					<div className="mini-card">
+					<div className="mini-card" key={key}>
 						<h2 className="title">
 							{project.link ? (
 								<a
