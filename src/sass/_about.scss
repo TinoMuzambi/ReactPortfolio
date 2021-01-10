@@ -65,14 +65,13 @@
 				.link {
 					display: flex;
 					background: coral;
-					padding: 0.7rem;
+					padding: 1rem;
 					border-radius: 50%;
 					color: white;
 					border: 2px solid transparent;
 
 					@include mq(768px) {
-						padding: 0.3rem;
-						font-size: 1rem;
+						padding: 0.5rem;
 					}
 
 					&:nth-child(1) {
