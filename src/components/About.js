@@ -1,5 +1,12 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+	FaFacebook,
+	FaTwitter,
+	FaInstagram,
+	FaLinkedin,
+	FaYoutube,
+	FaGithub,
+} from "react-icons/fa";
 
 const About = () => {
 	return (
@@ -39,7 +46,7 @@ const About = () => {
 
 				<div className="socials">
 					<a
-						href="https://www.facebook.com/tino.muzambi/"
+						href="https://bit.ly/TinoFacebook"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
@@ -47,7 +54,7 @@ const About = () => {
 						<FaFacebook className="icon" />
 					</a>
 					<a
-						href="https://www.linkedin.com/in/tinomuzambi/"
+						href="https://bit.ly/TinoLinkedIn"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
@@ -55,7 +62,7 @@ const About = () => {
 						<FaLinkedin className="icon" />
 					</a>
 					<a
-						href="https://twitter.com/TinoMuzambi"
+						href="https://bit.ly/TinoTwitter"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
@@ -63,12 +70,28 @@ const About = () => {
 						<FaTwitter className="icon" />
 					</a>
 					<a
-						href="https://www.instagram.com/tinomuzambi/"
+						href="https://bit.ly/TinoInstagram"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
 					>
 						<FaInstagram className="icon" />
+					</a>
+					<a
+						href="https://bit.ly/TinoYouTube"
+						className="link"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<FaYoutube className="icon" />
+					</a>
+					<a
+						href="https://bit.ly/TinoGitHub"
+						className="link"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<FaGithub className="icon" />
 					</a>
 				</div>
 			</div>

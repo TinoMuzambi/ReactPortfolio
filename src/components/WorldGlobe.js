@@ -13,7 +13,7 @@ const WorldGlobe = () => {
 	useEffect(() => {
 		// Auto-rotate
 		globeEl.current.controls().autoRotate = true;
-		globeEl.current.controls().autoRotateSpeed = 0.1;
+		globeEl.current.controls().autoRotateSpeed = 0.3;
 	}, []);
 
 	return (
