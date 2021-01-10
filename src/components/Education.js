@@ -5,6 +5,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { FaUniversity } from "react-icons/fa";
+import education from "../data/education";
 
 const Education = () => {
 	return (
@@ -12,81 +13,35 @@ const Education = () => {
 			<h1 className="title">Education</h1>
 
 			<VerticalTimeline className="timeline">
-				<VerticalTimelineElement
-					className="vertical-timeline-element--work"
-					contentStyle={{
-						background: " rgba(55, 237, 83, 0.4)",
-						color: "#fff",
-						marginTop: "2rem",
-						width: "42%",
-					}}
-					date="2011 - present"
-					dateClassName="date"
-					iconStyle={{
-						background: "#0ce3f2",
-						color: "#fff",
-						marginTop: "1rem",
-					}}
-					icon={<FaUniversity />}
-					visible={true}
-				>
-					<h3 className="vertical-timeline-element-title">Creative Director</h3>
-					<h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-					<p>
-						Creative Direction, User Experience, Visual Design, Project
-						Management, Team Leading
-					</p>
-				</VerticalTimelineElement>
-				<VerticalTimelineElement
-					className="vertical-timeline-element--work"
-					contentStyle={{
-						background: " rgba(55, 237, 83, 0.4)",
-						color: "#fff",
-						marginTop: "2rem",
-						width: "42%",
-					}}
-					date="2011 - present"
-					dateClassName="date"
-					iconStyle={{
-						background: "#0ce3f2",
-						color: "#fff",
-						marginTop: "1rem",
-					}}
-					icon={<FaUniversity />}
-					visible={true}
-				>
-					<h3 className="vertical-timeline-element-title">Creative Director</h3>
-					<h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-					<p>
-						Creative Direction, User Experience, Visual Design, Project
-						Management, Team Leading
-					</p>
-				</VerticalTimelineElement>
-				<VerticalTimelineElement
-					className="vertical-timeline-element--work"
-					contentStyle={{
-						background: " rgba(55, 237, 83, 0.4)",
-						color: "#fff",
-						marginTop: "2rem",
-						width: "42%",
-					}}
-					date="2011 - present"
-					dateClassName="date"
-					iconStyle={{
-						background: "#0ce3f2",
-						color: "#fff",
-						marginTop: "1rem",
-					}}
-					icon={<FaUniversity />}
-					visible={true}
-				>
-					<h3 className="vertical-timeline-element-title">Creative Director</h3>
-					<h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-					<p>
-						Creative Direction, User Experience, Visual Design, Project
-						Management, Team Leading
-					</p>
-				</VerticalTimelineElement>
+				{education.map((item, key) => (
+					<VerticalTimelineElement
+						key={key}
+						className="vertical-timeline-element--work"
+						contentStyle={{
+							background: " rgba(55, 237, 83, 0.4)",
+							color: "#fff",
+							marginTop: "2rem",
+							width: "42%",
+						}}
+						date={item.period}
+						iconStyle={{
+							background: "#0ce3f2",
+							color: "#fff",
+							marginTop: "1rem",
+						}}
+						icon={<FaUniversity />}
+						visible={true}
+					>
+						<h3 className="vertical-timeline-element-title">{item.title}</h3>
+						<h4 className="vertical-timeline-element-subtitle">
+							{item.institution}
+						</h4>
+						<h4 className="vertical-timeline-element-subtitle">
+							{item.period}
+						</h4>
+						<p>{item.description}</p>
+					</VerticalTimelineElement>
+				))}
 			</VerticalTimeline>
 		</div>
 	);
