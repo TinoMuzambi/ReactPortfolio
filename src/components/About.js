@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const About = () => {
 	return (
@@ -18,21 +19,58 @@ const About = () => {
 				<img src="/assets/hobbies.png" alt="person" className="tag" />
 
 				<p className="text">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum odit
-					aspernatur consequuntur voluptates ipsa earum, et, laboriosam aliquam,
-					architecto dignissimos impedit doloremque quaerat reiciendis fugit
-					assumenda! Tempore animi incidunt perferendis!
+					In my free time I enjoy playing the piano, solving the Rubik's cube as
+					well as discovering new places. I'm also a hobby video editor, and a
+					hobby blogger. You can read more about both of those and about me in
+					general on my blog{" "}
+					<a
+						href="https://blog.tinomuzambi.com"
+						target="_blank"
+						rel="noreferrer"
+						className="blog-link"
+					>
+						blog.tinomuzambi.com
+					</a>
+					.
 				</p>
 			</div>
 			<div className="mini-card">
 				<img src="/assets/socials.png" alt="person" className="tag" />
 
-				<p className="text">
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum odit
-					aspernatur consequuntur voluptates ipsa earum, et, laboriosam aliquam,
-					architecto dignissimos impedit doloremque quaerat reiciendis fugit
-					assumenda! Tempore animi incidunt perferendis!
-				</p>
+				<div className="socials">
+					<a
+						href="https://facebook.com"
+						className="link"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<FaFacebook className="icon" />
+					</a>
+					<a
+						href="https://linkedin.com"
+						className="link"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<FaLinkedin className="icon" />
+					</a>
+					<a
+						href="https://twitter.com"
+						className="link"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<FaTwitter className="icon" />
+					</a>
+					<a
+						href="https://instagram.com"
+						className="link"
+						target="_blank"
+						rel="noreferrer"
+					>
+						<FaInstagram className="icon" />
+					</a>
+				</div>
 			</div>
 		</div>
 	);

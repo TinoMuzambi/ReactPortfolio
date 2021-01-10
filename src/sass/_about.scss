@@ -5,14 +5,63 @@
 		padding: 2rem;
 		border-radius: 30px;
 		border: solid 3px rgba($color: white, $alpha: 0.2);
-		display: flex;
-		gap: 2rem;
+		display: grid;
+		grid-template-columns: 30% 70%;
 		align-items: center;
 
 		.tag {
 			height: 7rem;
-			width: 40rem;
+			width: 10rem;
 			object-fit: contain;
+		}
+
+		.text {
+			.blog-link {
+				color: white;
+
+				&:hover {
+					color: $secondary-blue;
+				}
+			}
+		}
+
+		.socials {
+			display: flex;
+			gap: 1rem;
+			width: 100%;
+			font-size: 2rem;
+
+			@include mq(768px) {
+				font-size: 1rem;
+			}
+
+			.link {
+				display: flex;
+				background: coral;
+				padding: 1rem;
+				border-radius: 50%;
+				color: white;
+				border: 2px solid transparent;
+
+				&:nth-child(1) {
+					background: rgb(23, 120, 242);
+				}
+				&:nth-child(2) {
+					background: rgb(13, 102, 194);
+				}
+				&:nth-child(3) {
+					background: rgb(29, 161, 242);
+				}
+				&:nth-child(4) {
+					background: rgb(240, 0, 117);
+				}
+
+				&:focus,
+				&:active,
+				&:hover {
+					border: 2px solid white;
+				}
+			}
 		}
 	}
 }
