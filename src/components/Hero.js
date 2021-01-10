@@ -10,9 +10,10 @@ const Hero = () => {
 			<button
 				className="enter"
 				onClick={() =>
-					document
-						.querySelector(".holder")
-						.scrollIntoView({ behavior: "smooth" })
+					window.scrollTo({
+						top: document.body.scrollHeight,
+						behavior: "smooth",
+					})
 				}
 			>
 				<IoArrowDownCircle className="icon" />
