@@ -13,14 +13,12 @@ const Holder = () => {
 
 	useEffect(() => {
 		const getJoke = async () => {
-			// const result = await fetch(
-			// 	"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single"
-			// );
-			// const data = await result.json();
-			// setJoke(data.joke);
-			setJoke(
-				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consectetur et saepe vel quidem recusandae dolorum aperiam itaque, quasi tempore!"
+			const result = await fetch(
+				"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single"
 			);
+			const data = await result.json();
+			setJoke(data.joke);
+
 			setLoading(false);
 		};
 		getJoke();
