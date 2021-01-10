@@ -163,7 +163,8 @@
 
 		@include mq(768px) {
 			font-size: 2rem;
-			right: 0.5rem;
+			right: 0rem;
+			bottom: 0.5rem;
 		}
 	}
 

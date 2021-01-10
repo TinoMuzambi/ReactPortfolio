@@ -5,6 +5,10 @@
 	transform: translate(-50%, -50%);
 	@include flexCenter;
 
+	@include mq(768px) {
+		top: 30%;
+	}
+
 	.pill {
 		background: rgba($color: $primary-color, $alpha: 0.5);
 		padding: 1.5rem;
