@@ -20,7 +20,15 @@
 			margin-top: 0.5rem;
 			overflow: visible;
 
-			@include mq(768px) {
+			@include mq(1300px) {
+				grid-template-columns: 40% 60%;
+			}
+
+			@include mq(1100px) {
+				grid-template-columns: 1fr 1fr;
+			}
+
+			@include mq(900px) {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
