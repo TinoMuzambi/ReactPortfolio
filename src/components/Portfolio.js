@@ -1,5 +1,6 @@
 import React from "react";
 import projects from "../data/projects";
+import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
 
 const Portfolio = () => {
 	return (
@@ -35,6 +36,22 @@ const Portfolio = () => {
 								</a>
 							</p>
 						)}
+
+						<div className="icons">
+							{project.keywords.includes("react") && (
+								<FaReact className="icon" title="react" />
+							)}
+							{project.keywords.includes("html") && (
+								<FaHtml5 className="icon" title="html5" />
+							)}
+							{(project.keywords.includes("css") ||
+								project.keywords.includes("sass")) && (
+								<FaCss3Alt className="icon" title="css3" />
+							)}
+							{project.keywords.includes("python") && (
+								<FaPython className="icon" title="python" />
+							)}
+						</div>
 					</div>
 				))}
 			</div>

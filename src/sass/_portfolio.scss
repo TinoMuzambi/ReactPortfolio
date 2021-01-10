@@ -16,6 +16,17 @@
 			a {
 				color: white;
 			}
+
+			.icons {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+
+				.icon {
+					font-size: 3rem;
+					color: $secondary-blue;
+				}
+			}
 		}
 	}
 }
