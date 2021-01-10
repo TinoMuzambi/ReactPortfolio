@@ -39,7 +39,7 @@ const About = () => {
 
 				<div className="socials">
 					<a
-						href="https://facebook.com"
+						href="https://www.facebook.com/tino.muzambi/"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
@@ -47,7 +47,7 @@ const About = () => {
 						<FaFacebook className="icon" />
 					</a>
 					<a
-						href="https://linkedin.com"
+						href="https://www.linkedin.com/in/tinomuzambi/"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
@@ -55,7 +55,7 @@ const About = () => {
 						<FaLinkedin className="icon" />
 					</a>
 					<a
-						href="https://twitter.com"
+						href="https://twitter.com/TinoMuzambi"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
@@ -63,7 +63,7 @@ const About = () => {
 						<FaTwitter className="icon" />
 					</a>
 					<a
-						href="https://instagram.com"
+						href="https://www.instagram.com/tinomuzambi/"
 						className="link"
 						target="_blank"
 						rel="noreferrer"
