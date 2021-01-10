@@ -14,8 +14,7 @@
 
 		.vertical-timeline-element-content {
 			@include mq(768px) {
-				width: 100% !important;
-				word-wrap: break-word;
+				width: 80% !important;
 			}
 		}
 	}
