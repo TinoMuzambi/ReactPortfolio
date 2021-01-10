@@ -1,80 +1,93 @@
 .about {
 	.mini-card {
 		@include mini-card;
-		display: grid;
-		grid-template-columns: 30% 70%;
-		align-items: center;
+		padding: 1.2rem;
 
-		@include mq(768px) {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 1rem;
-		}
+		.subtitle {
+			margin-left: 1.5rem;
 
-		.tag {
-			height: 7rem;
-			width: 10rem;
-			object-fit: contain;
-		}
-
-		.text {
-			.blog-link {
-				color: white;
-
-				&:hover {
-					color: $secondary-blue;
-				}
+			@include mq(768px) {
+				margin: 0 auto;
 			}
 		}
 
-		.socials {
-			display: flex;
-			gap: 1rem;
-			width: 100%;
-			height: 100%;
-			font-size: 1.5rem;
+		.inner {
+			display: grid;
+			grid-template-columns: 30% 70%;
 			align-items: center;
+			margin-top: 0.5rem;
 
-			.link {
+			@include mq(768px) {
 				display: flex;
-				background: coral;
-				padding: 1rem;
-				border-radius: 50%;
-				color: white;
-				border: 2px solid transparent;
+				flex-direction: column;
+				align-items: center;
+				gap: 1rem;
+			}
 
-				@include mq(768px) {
-					padding: 0.3rem;
-				}
+			.tag {
+				height: 7rem;
+				width: 10rem;
+				object-fit: contain;
+			}
 
-				&:nth-child(1) {
-					background: rgb(23, 120, 242);
-				}
-				&:nth-child(2) {
-					background: rgb(13, 102, 194);
-				}
-				&:nth-child(3) {
-					background: rgb(29, 161, 242);
-				}
-				&:nth-child(4) {
-					background: rgb(240, 0, 117);
-				}
-				&:nth-child(5) {
-					background: rgb(242, 6, 4);
-				}
-				&:nth-child(6) {
-					background: rgb(0, 0, 0);
-				}
+			.text {
+				.blog-link {
+					color: white;
 
-				&:focus,
-				&:active,
-				&:hover {
-					transform: translateY(-1rem);
+					&:hover {
+						color: $secondary-blue;
+					}
+				}
+			}
+
+			.socials {
+				display: flex;
+				gap: 1rem;
+				width: 100%;
+				height: 100%;
+				font-size: 1.5rem;
+				align-items: center;
+
+				.link {
+					display: flex;
+					background: coral;
+					padding: 1rem;
+					border-radius: 50%;
+					color: white;
+					border: 2px solid transparent;
 
 					@include mq(768px) {
-						transform: translateY(0);
-						border: solid 1px white;
+						padding: 0.3rem;
+					}
+
+					&:nth-child(1) {
+						background: rgb(23, 120, 242);
+					}
+					&:nth-child(2) {
+						background: rgb(13, 102, 194);
+					}
+					&:nth-child(3) {
+						background: rgb(29, 161, 242);
+					}
+					&:nth-child(4) {
+						background: rgb(240, 0, 117);
+					}
+					&:nth-child(5) {
+						background: rgb(242, 6, 4);
+					}
+					&:nth-child(6) {
+						background: rgb(0, 0, 0);
+					}
+
+					&:focus,
+					&:active,
+					&:hover {
+						transform: translateY(-1rem);
+
+						@include mq(768px) {
+							transform: translateY(0);
+							border: solid 1px white;
+						}
 					}
 				}
 			}
