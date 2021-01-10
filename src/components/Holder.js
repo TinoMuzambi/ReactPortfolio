@@ -4,13 +4,7 @@ import Education from "./Education";
 import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import { IoArrowUpCircle } from "react-icons/io5";
-import {
-	FaInfoCircle,
-	FaSchool,
-	FaBuilding,
-	FaCode,
-	FaCopyright,
-} from "react-icons/fa";
+import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
 
 const Holder = () => {
 	const [joke, setJoke] = useState("");
@@ -38,8 +32,10 @@ const Holder = () => {
 				<div className="sidebar">
 					<div className="profile">
 						<img src="/assets/me.jpg" alt="me" className="profile-img" />
-						<h2 className="title">Tino Muzambi</h2>
-						<h3 className="subtitle">Full-Stack Web Developer</h3>
+						<div className="info">
+							<h2 className="title">Tino Muzambi</h2>
+							<h3 className="subtitle">Full-Stack Web Developer</h3>
+						</div>
 					</div>
 					<ul className="items">
 						<li
@@ -99,13 +95,7 @@ const Holder = () => {
 				className="up-icon"
 				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
 			/>
-			<p className="rights">
-				Copyright{" "}
-				<span>
-					<FaCopyright />
-				</span>{" "}
-				Tino Muzambi 2021
-			</p>
+			<p className="rights">Copyright © Tino Muzambi 2021</p>
 		</div>
 	);
 };

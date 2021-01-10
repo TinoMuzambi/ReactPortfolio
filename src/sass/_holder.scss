@@ -13,7 +13,7 @@
 
 	.card {
 		border-radius: 10px;
-		height: 85vh;
+		height: 90vh;
 		width: 80vw;
 		display: grid;
 		grid-template-columns: 30% 70%;
@@ -27,7 +27,7 @@
 		.sidebar {
 			min-height: 100%;
 			background: rgba($color: white, $alpha: 0.5);
-			padding: 2rem;
+			padding: 0rem 2rem 1rem 2rem;
 			@include flexCenter;
 
 			@include mq(768px) {
@@ -39,10 +39,15 @@
 
 			.profile {
 				text-align: center;
+				display: flex;
+				gap: 0.5rem;
+				align-items: center;
+				justify-content: space-evenly;
+				height: 9rem;
 
 				.profile-img {
-					width: 7rem;
-					height: 7rem;
+					width: 5rem;
+					height: 5rem;
 					border-radius: 50%;
 					object-fit: cover;
 
@@ -68,11 +73,8 @@
 			}
 
 			.items {
-				margin-top: 2rem;
-
 				@include mq(768px) {
 					display: flex;
-					margin-top: 0;
 				}
 
 				@include mq(500px) {
@@ -81,11 +83,11 @@
 				.item {
 					display: flex;
 					align-items: center;
-					gap: 2rem;
+					gap: 1rem;
 					cursor: pointer;
 					background: transparent;
 					border-radius: 1000px;
-					padding: 1rem;
+					padding: 0.5rem;
 
 					@include mq(768px) {
 						padding: 0.5rem;
@@ -95,7 +97,7 @@
 					}
 
 					.icon {
-						font-size: 3rem;
+						font-size: 2rem;
 						color: rgba($secondary-blue, 0.5);
 
 						@include mq(768px) {
@@ -172,6 +174,6 @@
 
 	.rights {
 		position: absolute;
-		bottom: 1rem;
+		bottom: 0.1rem;
 	}
 }
