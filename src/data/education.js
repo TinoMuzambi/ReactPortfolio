@@ -10,7 +10,7 @@ const education = [
 		institution: "Univesity of Cape Town",
 		period: "2018 - 2020",
 		description:
-			"3 year Computer Science degree which covered several aspects of computing. From number systems to data structures and several programming languages including Python, Java, Assembly & C++. In my time at UCT I was awarded the Dean's Merit List in 2018 as well as joining Golden Key International Honour Society in 2019.",
+			"3 year Computer Science degree which covered several aspects of computing. In my time at UCT I was awarded the Dean's Merit List in 2018 as well as joining Golden Key International Honour Society in 2019.",
 	},
 	{
 		title: "NSC Matric",
