@@ -7,5 +7,22 @@
 			height: 3rem;
 			object-fit: contain;
 		}
+
+		.date {
+			@include mq(768px) {
+				display: none;
+			}
+		}
+
+		@include mq(768px) {
+			width: 100% !important;
+		}
+
+		.vertical-timeline-element-content {
+			@include mq(768px) {
+				width: 100% !important;
+				word-wrap: break-word;
+			}
+		}
 	}
 }

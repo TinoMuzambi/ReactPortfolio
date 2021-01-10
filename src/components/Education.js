@@ -36,7 +36,7 @@ const Education = () => {
 						<h4 className="vertical-timeline-element-subtitle">
 							{item.institution}
 						</h4>
-						<h4 className="vertical-timeline-element-subtitle">
+						<h4 className="vertical-timeline-element-subtitle date">
 							{item.period}
 						</h4>
 						<p>{item.description}</p>

@@ -1,5 +1,22 @@
 .education {
 	.timeline {
 		margin-top: 2rem;
+
+		@include mq(768px) {
+			width: 100% !important;
+		}
+
+		.date {
+			@include mq(768px) {
+				display: none;
+			}
+		}
+
+		.vertical-timeline-element-content {
+			@include mq(768px) {
+				width: 100% !important;
+				word-wrap: break-word;
+			}
+		}
 	}
 }
