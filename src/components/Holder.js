@@ -13,6 +13,14 @@ const Holder = () => {
 	const [currentView, setCurrentView] = useState("about");
 	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
+	const contentStyle = {
+		background: "rgba(55, 237, 83, 1)",
+		padding: "1.5rem",
+		borderRadius: "1000px",
+		color: "white",
+		border: "none",
+		textAlign: "center",
+	};
 
 	useEffect(() => {
 		const getJoke = async () => {
@@ -76,8 +84,13 @@ const Holder = () => {
 							Portfolio
 						</li>
 					</ul>
-					<Popup open={open} modal onClose={() => setOpen(false)}>
-						<span> {joke} </span>
+					<Popup
+						open={open}
+						modal
+						contentStyle={contentStyle}
+						onClose={() => setOpen(false)}
+					>
+						<span className="modal"> {joke} </span>
 					</Popup>
 					<div className="joke" title={joke} onClick={() => setOpen(true)}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
