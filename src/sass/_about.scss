@@ -48,16 +48,21 @@
 				font-size: 1.5rem;
 				align-items: center;
 
+				@include mq(768px) {
+					flex-wrap: wrap;
+				}
+
 				.link {
 					display: flex;
 					background: coral;
-					padding: 1rem;
+					padding: 0.7rem;
 					border-radius: 50%;
 					color: white;
 					border: 2px solid transparent;
 
 					@include mq(768px) {
 						padding: 0.3rem;
+						font-size: 1rem;
 					}
 
 					&:nth-child(1) {
@@ -80,7 +85,6 @@
 					}
 
 					&:focus,
-					&:active,
 					&:hover {
 						transform: translateY(-1rem);
 

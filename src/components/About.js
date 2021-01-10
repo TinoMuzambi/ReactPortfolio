@@ -6,6 +6,7 @@ import {
 	FaLinkedin,
 	FaYoutube,
 	FaGithub,
+	FaMailBulk,
 } from "react-icons/fa";
 
 const About = () => {
@@ -100,6 +101,9 @@ const About = () => {
 							rel="noreferrer"
 						>
 							<FaGithub className="icon" />
+						</a>
+						<a href="mailto:tino@tinomuzambi.com" className="link">
+							<FaMailBulk className="icon" />
 						</a>
 					</div>
 				</div>
