@@ -128,6 +128,7 @@
 					rgba($secondary-blue, 0.3)
 				);
 				padding: 1rem;
+				cursor: pointer;
 
 				@include mq(1300px) {
 					grid-template-columns: 60% 40%;

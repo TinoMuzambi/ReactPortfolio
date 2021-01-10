@@ -5,11 +5,14 @@ import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import { IoArrowUpCircle } from "react-icons/io5";
 import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 const Holder = () => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setCurrentView] = useState("about");
 	const [loading, setLoading] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
 		const getJoke = async () => {
@@ -73,7 +76,10 @@ const Holder = () => {
 							Portfolio
 						</li>
 					</ul>
-					<div className="joke" title={joke}>
+					<Popup open={open} modal onClose={() => setOpen(false)}>
+						<span> {joke} </span>
+					</Popup>
+					<div className="joke" title={joke} onClick={() => setOpen(true)}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
 						<img
 							src="https://image.flaticon.com/icons/png/512/3409/3409731.png"
