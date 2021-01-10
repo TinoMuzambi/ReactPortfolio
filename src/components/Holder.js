@@ -3,15 +3,19 @@ import About from "./About";
 import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
 const Holder = () => {
 	const [joke, setJoke] = useState("");
+	const [currentView, setCurrentView] = useState("about");
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const getJoke = async () => {
-			const result = await fetch(
-				"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single"
+			// const result = await fetch(
+			// 	"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single"
+			// );
+			// const data = await result.json();
+			// setJoke(data.joke);
+			setJoke(
+				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui consectetur et saepe vel quidem recusandae dolorum aperiam itaque, quasi tempore!"
 			);
-			const data = await result.json();
-			setJoke(data.joke);
 			setLoading(false);
 		};
 		getJoke();
@@ -27,25 +31,37 @@ const Holder = () => {
 						<h3 className="subtitle">Full-Stack Web Developer</h3>
 					</div>
 					<ul className="items">
-						<li className="item active">
+						<li
+							className={`item ${currentView === "about" && "active"}`}
+							onClick={() => setCurrentView("about")}
+						>
 							<span>
 								<FaInfoCircle className="icon" />
 							</span>
 							About
 						</li>
-						<li className="item">
+						<li
+							className={`item ${currentView === "edu" && "active"}`}
+							onClick={() => setCurrentView("edu")}
+						>
 							<span>
 								<FaSchool className="icon" />
 							</span>
 							Education
 						</li>
-						<li className="item">
+						<li
+							className={`item ${currentView === "exp" && "active"}`}
+							onClick={() => setCurrentView("exp")}
+						>
 							<span>
 								<FaBuilding className="icon" />
 							</span>
 							Experience
 						</li>
-						<li className="item">
+						<li
+							className={`item ${currentView === "por" && "active"}`}
+							onClick={() => setCurrentView("por")}
+						>
 							<span>
 								<FaCode className="icon" />
 							</span>
