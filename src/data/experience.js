@@ -2,7 +2,7 @@ import SSC from "./ssc.png";
 import SPSC from "./spsc.png";
 import ElleZeka from "./elle.png";
 import Electrum from "./electrum.png";
-import UCT from "./uct.gif";
+import UCT from "./uct.png";
 
 const experience = [
 	{
