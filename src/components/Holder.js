@@ -73,7 +73,7 @@ const Holder = () => {
 							Portfolio
 						</li>
 					</ul>
-					<div className="joke">
+					<div className="joke" title={joke}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
 						<img
 							src="https://image.flaticon.com/icons/png/512/3409/3409731.png"
