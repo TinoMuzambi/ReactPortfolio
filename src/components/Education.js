@@ -29,6 +29,7 @@ const Education = () => {
 							color: "#fff",
 							marginTop: "1rem",
 						}}
+						iconClassName="round"
 						icon={<FaUniversity />}
 						visible={true}
 					>

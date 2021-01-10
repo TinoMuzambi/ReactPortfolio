@@ -32,6 +32,7 @@ const Experience = () => {
 							justifyContent: "center",
 						}}
 						icon={item.icon}
+						iconClassName="round"
 						visible={true}
 					>
 						<h3 className="vertical-timeline-element-title">{item.title}</h3>

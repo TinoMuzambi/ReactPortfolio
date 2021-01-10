@@ -12,6 +12,12 @@
 			}
 		}
 
+		.round {
+			@include mq(768px) {
+				margin-left: 0.3rem;
+			}
+		}
+
 		.vertical-timeline-element-content {
 			@include mq(768px) {
 				width: 80% !important;
