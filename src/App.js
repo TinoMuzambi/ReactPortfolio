@@ -4,6 +4,7 @@ import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
 import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
+import { IoArrowUpCircle } from "react-icons/io5";
 
 function App() {
 	useEffect(() => {
@@ -29,6 +30,10 @@ function App() {
 			<Globe />
 			<Hero />
 			<Holder />
+			<IoArrowUpCircle
+				className="up-icon"
+				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+			/>
 		</>
 	);
 }

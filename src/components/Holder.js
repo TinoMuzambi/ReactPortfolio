@@ -3,7 +3,6 @@ import About from "./About";
 import Education from "./Education";
 import Experience from "./Experience";
 import Portfolio from "./Portfolio";
-import { IoArrowUpCircle } from "react-icons/io5";
 import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -108,10 +107,7 @@ const Holder = () => {
 					{currentView === "por" && <Portfolio />}
 				</div>
 			</div>
-			<IoArrowUpCircle
-				className="up-icon"
-				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-			/>
+
 			<p className="rights">Copyright © Tino Muzambi 2021</p>
 		</div>
 	);
