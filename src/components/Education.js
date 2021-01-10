@@ -4,11 +4,7 @@ import {
 	VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import {
-	MdSchool as SchoolIcon,
-	MdWork as WorkIcon,
-	MdStar as StarIcon,
-} from "react-icons/md";
+import { MdSchool as SchoolIcon, MdWork as WorkIcon } from "react-icons/md";
 
 const Education = () => {
 	return (
@@ -18,9 +14,13 @@ const Education = () => {
 			<VerticalTimeline>
 				<VerticalTimelineElement
 					className="vertical-timeline-element--work"
-					contentStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					contentArrowStyle={{ borderRight: "7px solid  rgb(33, 150, 243)" }}
 					date="2011 - present"
+					dateClassName="date"
 					iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
 					icon={<WorkIcon />}
 				>
@@ -34,6 +34,10 @@ const Education = () => {
 				<VerticalTimelineElement
 					className="vertical-timeline-element--work"
 					date="2010 - 2011"
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
 					icon={<WorkIcon />}
 				>
@@ -49,6 +53,10 @@ const Education = () => {
 				<VerticalTimelineElement
 					className="vertical-timeline-element--work"
 					date="2008 - 2010"
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
 					icon={<WorkIcon />}
 				>
@@ -61,6 +69,10 @@ const Education = () => {
 				<VerticalTimelineElement
 					className="vertical-timeline-element--work"
 					date="2006 - 2008"
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					iconStyle={{ background: "rgb(33, 150, 243)", color: "#fff" }}
 					icon={<WorkIcon />}
 				>
@@ -73,6 +85,10 @@ const Education = () => {
 				<VerticalTimelineElement
 					className="vertical-timeline-element--education"
 					date="April 2013"
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					iconStyle={{ background: "rgb(233, 30, 99)", color: "#fff" }}
 					icon={<SchoolIcon />}
 				>
@@ -85,6 +101,10 @@ const Education = () => {
 				<VerticalTimelineElement
 					className="vertical-timeline-element--education"
 					date="November 2012"
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					iconStyle={{ background: "rgb(233, 30, 99)", color: "#fff" }}
 					icon={<SchoolIcon />}
 				>
@@ -97,6 +117,10 @@ const Education = () => {
 				<VerticalTimelineElement
 					className="vertical-timeline-element--education"
 					date="2002 - 2006"
+					contentStyle={{
+						background: " rgba(55, 237, 83, 0.4)",
+						color: "#fff",
+					}}
 					iconStyle={{ background: "rgb(233, 30, 99)", color: "#fff" }}
 					icon={<SchoolIcon />}
 				>
@@ -108,10 +132,6 @@ const Education = () => {
 					</h4>
 					<p>Creative Direction, Visual Design</p>
 				</VerticalTimelineElement>
-				<VerticalTimelineElement
-					iconStyle={{ background: "rgb(16, 204, 82)", color: "#fff" }}
-					icon={<StarIcon />}
-				/>
 			</VerticalTimeline>
 		</div>
 	);
