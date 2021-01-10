@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Globe from "react-globe.gl";
+import Nothing from "./transparency.png";
 
 const WorldGlobe = () => {
 	const globeEl = useRef();
@@ -12,7 +13,7 @@ const WorldGlobe = () => {
 	useEffect(() => {
 		// Auto-rotate
 		globeEl.current.controls().autoRotate = true;
-		globeEl.current.controls().autoRotateSpeed = 0.002;
+		globeEl.current.controls().autoRotateSpeed = 0.1;
 	}, []);
 
 	return (
@@ -24,7 +25,7 @@ const WorldGlobe = () => {
 					height={400}
 					globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
 					bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-					backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+					backgroundImageUrl={Nothing}
 				/>
 			</div>
 		</div>

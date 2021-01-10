@@ -3,6 +3,7 @@ import About from "./About";
 import Education from "./Education";
 import Experience from "./Experience";
 import Portfolio from "./Portfolio";
+import { IoArrowUpCircle } from "react-icons/io5";
 import {
 	FaInfoCircle,
 	FaSchool,
@@ -93,6 +94,10 @@ const Holder = () => {
 					{currentView === "por" && <Portfolio />}
 				</div>
 			</div>
+			<IoArrowUpCircle
+				className="up-icon"
+				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+			/>
 			<p className="rights">
 				Copyright{" "}
 				<span>
