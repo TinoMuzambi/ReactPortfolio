@@ -13,23 +13,24 @@ const Portfolio = () => {
 			<div className="cards">
 				{projects.slice(0, 5).map((project, key) => (
 					<div className="mini-card" key={key}>
-						<h2 className="title">
-							{project.link ? (
-								<a
-									target="_blank"
-									rel="noopener noreferrer"
-									href={project.link}
-								>
-									{project.title}
-								</a>
-							) : (
-								project.title
-							)}
-						</h2>
-						<p className="text">{project.content[0]}</p>
-
+						<div className="lead">
+							<h2 className="title">
+								{project.link ? (
+									<a
+										target="_blank"
+										rel="noopener noreferrer"
+										href={project.link}
+									>
+										{project.title}
+									</a>
+								) : (
+									project.title
+								)}
+							</h2>
+							<p className="text">{project.content[0]}</p>
+						</div>
 						{project.github && (
-							<p className="text">
+							<p className="text-g">
 								<a
 									target="_blank"
 									rel="noopener noreferrer"

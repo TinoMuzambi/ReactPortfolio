@@ -17,14 +17,34 @@
 				width: 100%;
 			}
 
-			.title {
-				@include mq(1023px) {
-					font-size: 1.2rem;
-				}
-			}
-
 			a {
 				color: white;
+			}
+
+			.lead {
+				height: 15rem;
+
+				@include mq(900px) {
+					height: unset;
+				}
+
+				.title {
+					@include mq(1023px) {
+						font-size: 1.2rem;
+					}
+				}
+
+				.text {
+					padding-top: 1rem;
+				}
+
+				.text-g {
+					text-align: center;
+				}
+
+				a {
+					color: white;
+				}
 			}
 
 			.icons {
