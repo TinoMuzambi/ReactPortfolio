@@ -6,6 +6,7 @@
 		),
 		url("sky.png");
 	height: 100vh;
+	position: relative;
 	overflow: hidden;
 
 	.globe {
@@ -13,5 +14,9 @@
 		position: absolute;
 		right: 0;
 		bottom: 0;
+
+		@include mq(768px) {
+			width: 100vw;
+		}
 	}
 }

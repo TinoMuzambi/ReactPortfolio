@@ -11,10 +11,16 @@
 		border-radius: 1000px;
 		color: white;
 		text-align: center;
+
+		.title {
+			@include mq(768px) {
+				font-size: 1rem;
+			}
+		}
 	}
 
 	.enter {
-		margin-top: 4rem;
+		margin-top: 3rem;
 		@include button;
 
 		.icon {
