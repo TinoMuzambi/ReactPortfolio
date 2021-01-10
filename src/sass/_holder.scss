@@ -20,6 +20,7 @@
 		@include mq(768px) {
 			grid-template-columns: 1fr;
 			// grid-template-rows: 30% 70%;
+			width: 90vw;
 		}
 
 		.sidebar {
@@ -29,7 +30,8 @@
 			@include flexCenter;
 
 			@include mq(768px) {
-				height: 10rem;
+				height: 12rem;
+				padding: 0.5rem;
 				flex-direction: row;
 			}
 
@@ -157,6 +159,11 @@
 		bottom: 2rem;
 		opacity: 0.7;
 		filter: invert(0.8);
+
+		@include mq(768px) {
+			font-size: 2rem;
+			right: 0.5rem;
+		}
 	}
 
 	.rights {
