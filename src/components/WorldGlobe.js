@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import Globe from "react-globe.gl";
 import Nothing from "./transparency.png";
+import { useSpring, animated } from "react-spring";
 
 const WorldGlobe = () => {
 	const globeEl = useRef();
@@ -10,6 +11,13 @@ const WorldGlobe = () => {
 	// 	{ lat: "-17.825167", lng: "31.033510" },
 	// ];
 
+	const props = useSpring({
+		left: 0,
+		bottom: 0,
+		from: { left: -2000, bottom: 2000 },
+		config: { delay: 3 },
+	});
+
 	useEffect(() => {
 		// Auto-rotate
 		globeEl.current.controls().autoRotate = true;
@@ -18,7 +26,7 @@ const WorldGlobe = () => {
 
 	return (
 		<div className="globe-wrapper">
-			<div className="globe">
+			<animated.div className="globe" style={props}>
 				<Globe
 					ref={globeEl}
 					width={window.innerWidth}
@@ -27,7 +35,7 @@ const WorldGlobe = () => {
 					bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
 					backgroundImageUrl={Nothing}
 				/>
-			</div>
+			</animated.div>
 		</div>
 	);
 };
