@@ -26,10 +26,26 @@
 	.enter {
 		margin-top: 2rem;
 		@include button;
+		animation: bounce 2s linear infinite alternate;
 
 		.icon {
 			filter: invert(1);
 			font-size: 4rem;
+		}
+
+		@keyframes bounce {
+			0% {
+				transform: translateY(0);
+			}
+			25% {
+				transform: translateY(-10px);
+			}
+			50% {
+				transform: translateY(0px);
+			}
+			100% {
+				transform: translateY(-10px);
+			}
 		}
 
 		&:hover {
