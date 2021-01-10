@@ -89,9 +89,19 @@
 		}
 
 		.content {
-			min-height: 100%;
+			height: 100%;
+			width: 100%;
 			background: rgba($color: white, $alpha: 0.2);
-			padding: 2rem;
+			padding: 2rem 10rem;
+			@include flexCenter;
+			justify-content: flex-start;
+
+			.me {
+				background: rgba($color: white, $alpha: 0.6);
+				margin-top: 2rem;
+				padding: 2rem;
+				border-radius: 30px;
+			}
 		}
 	}
 }
