@@ -15,7 +15,7 @@ const WorldGlobe = () => {
 		left: 0,
 		bottom: 0,
 		from: { left: -2000, bottom: 2000 },
-		delay: 2000,
+		delay: 3000,
 	});
 
 	useEffect(() => {
