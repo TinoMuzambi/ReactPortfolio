@@ -1,0 +1,21 @@
+.portfolio {
+	width: 100%;
+
+	.cards {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+
+		.mini-card {
+			@include mini-card;
+			@include flexCenter;
+			justify-content: flex-start;
+			gap: 1rem;
+			width: 45%;
+
+			a {
+				color: white;
+			}
+		}
+	}
+}
