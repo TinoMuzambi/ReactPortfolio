@@ -8,7 +8,7 @@ const Portfolio = () => {
 			<h1 className="title">Portfolio</h1>
 
 			<div className="cards">
-				{projects.splice(0, 5).map((project, key) => (
+				{projects.slice(0, 5).map((project, key) => (
 					<div className="mini-card">
 						<h2 className="title">
 							{project.link ? (

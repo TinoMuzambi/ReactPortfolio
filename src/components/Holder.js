@@ -3,7 +3,13 @@ import About from "./About";
 import Education from "./Education";
 import Experience from "./Experience";
 import Portfolio from "./Portfolio";
-import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
+import {
+	FaInfoCircle,
+	FaSchool,
+	FaBuilding,
+	FaCode,
+	FaCopyright,
+} from "react-icons/fa";
 const Holder = () => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setCurrentView] = useState("about");
@@ -87,6 +93,13 @@ const Holder = () => {
 					{currentView === "por" && <Portfolio />}
 				</div>
 			</div>
+			<p className="rights">
+				Copyright{" "}
+				<span>
+					<FaCopyright />
+				</span>{" "}
+				Tino Muzambi 2021
+			</p>
 		</div>
 	);
 };

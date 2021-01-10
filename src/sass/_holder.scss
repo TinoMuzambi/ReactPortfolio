@@ -8,6 +8,7 @@
 		url("sky.png");
 	@include flexCenter;
 	color: white;
+	position: relative;
 
 	.card {
 		border-radius: 10px;
@@ -94,5 +95,10 @@
 			background: rgba($color: white, $alpha: 0.2);
 			padding: 2rem 10rem;
 		}
+	}
+
+	.rights {
+		position: absolute;
+		bottom: 1rem;
 	}
 }
