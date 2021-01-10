@@ -6,9 +6,10 @@
 	@include flexCenter;
 
 	.pill {
-		background: rgba($color: white, $alpha: 0.5);
+		background: rgba($color: $primary-color, $alpha: 0.5);
 		padding: 1rem;
 		border-radius: 1000px;
+		color: white;
 	}
 
 	.enter {

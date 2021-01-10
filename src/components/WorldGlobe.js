@@ -17,7 +17,6 @@ const WorldGlobe = () => {
 
 	return (
 		<div className="globe-wrapper">
-			<img src="assets/sky.png" alt="sky" className="sky" />
 			<div className="globe">
 				<Globe
 					ref={globeEl}

@@ -1,14 +1,12 @@
 .globe-wrapper {
-	background: black;
+	background-image: linear-gradient(
+			to bottom,
+			rgba($primary-blue, 0.6),
+			rgba($primary-color, 0.6) 60%
+		),
+		url("sky.png");
 	height: 100vh;
 	overflow: hidden;
-
-	.sky {
-		height: 100%;
-		width: 100vw;
-		object-fit: cover;
-		transform: scale(2);
-	}
 
 	.globe {
 		cursor: pointer;
