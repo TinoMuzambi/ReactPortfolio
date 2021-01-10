@@ -8,10 +8,13 @@ import {
 	FaGithub,
 	FaMailBulk,
 } from "react-icons/fa";
+import { useSpring, animated } from "react-spring";
 
 const About = () => {
+	const props = useSpring({ opacity: 1, from: { opacity: 0 } });
+
 	return (
-		<div className="about">
+		<animated.div className="about" style={props}>
 			<h1 className="title">About</h1>
 			<div className="mini-card">
 				<h2 className="subtitle">Bio</h2>
@@ -108,7 +111,7 @@ const About = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</animated.div>
 	);
 };
 

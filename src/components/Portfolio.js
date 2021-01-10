@@ -1,10 +1,13 @@
 import React from "react";
 import projects from "../data/projects";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
+import { useSpring, animated } from "react-spring";
 
 const Portfolio = () => {
+	const props = useSpring({ opacity: 1, from: { opacity: 0 } });
+
 	return (
-		<div className="portfolio">
+		<animated.div className="portfolio" style={props}>
 			<h1 className="title">Portfolio</h1>
 
 			<div className="cards">
@@ -55,7 +58,7 @@ const Portfolio = () => {
 					</div>
 				))}
 			</div>
-		</div>
+		</animated.div>
 	);
 };
 

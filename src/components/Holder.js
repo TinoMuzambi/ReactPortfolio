@@ -11,6 +11,7 @@ import {
 	FaCode,
 	FaCopyright,
 } from "react-icons/fa";
+
 const Holder = () => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setCurrentView] = useState("about");
