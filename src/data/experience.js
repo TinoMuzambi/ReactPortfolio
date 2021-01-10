@@ -13,7 +13,7 @@ const experience = [
 		other executive members in the execution of their duties as well as to be
 		the voice of the postgraduate students in meetings with University
 		executive.`,
-		icon: <img src={SPSC} alt="spsc" />,
+		icon: <img src={SPSC} alt="spsc" className="timeline-image" />,
 	},
 	{
 		title: "Full Stack Web Developer",
@@ -23,7 +23,7 @@ const experience = [
 			as well as full-stack website solutions for business clients. This post
 			involves web designs, web hosting as well as the implementation of the
 			websites.`,
-		icon: <img src={ElleZeka} alt="elle zeka" />,
+		icon: <img src={ElleZeka} alt="elle zeka" className="timeline-image" />,
 	},
 	{
 		title: "IT & Resource Manager of the Science Students' Council",
@@ -36,7 +36,7 @@ const experience = [
 			undergraduate computer labs.
 			-Responsible for research and analysing information for
 			recommendation to the relevant portfolio holders within the SSC.`,
-		icon: <img src={SSC} alt="ssc" />,
+		icon: <img src={SSC} alt="ssc" className="timeline-image" />,
 	},
 	{
 		title: "Computer Science Tutor",
@@ -47,7 +47,7 @@ const experience = [
 			-Conducting practical programming sessions.
 			-Conducting theoretical problem solving sessions.
 			-Invigilating and marking tests.`,
-		icon: <img src={UCT} alt="uct" />,
+		icon: <img src={UCT} alt="uct" className="timeline-image" />,
 	},
 	{
 		title: "Software Developer Intern",
@@ -55,7 +55,7 @@ const experience = [
 		period: "June 2019 - July 2019",
 		description: `I worked on a real life project that was implemented by Capitec Bank.
 		Technologies used include Java, XML and AWS.`,
-		icon: <img src={Electrum} alt="electrum" />,
+		icon: <img src={Electrum} alt="electrum" className="timeline-image" />,
 	},
 ];
 

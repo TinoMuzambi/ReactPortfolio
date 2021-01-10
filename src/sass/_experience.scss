@@ -1,5 +1,11 @@
 .experience {
 	.timeline {
 		margin-top: 2rem;
+
+		.timeline-image {
+			width: 3rem;
+			height: 3rem;
+			object-fit: contain;
+		}
 	}
 }

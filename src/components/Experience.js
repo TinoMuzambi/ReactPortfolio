@@ -26,8 +26,10 @@ const Experience = () => {
 						date={item.period}
 						iconStyle={{
 							background: "#0cf277",
-							color: "#fff",
 							marginTop: "1rem",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
 						}}
 						icon={item.icon}
 						visible={true}
