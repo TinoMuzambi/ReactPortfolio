@@ -1,8 +1,12 @@
 .education {
 	color: white !important;
 
-	.date {
-		z-index: 20 !important;
-		color: yellow !important;
+	.timeline {
+		margin-top: 2rem;
+
+		.date {
+			z-index: 20 !important;
+			color: yellow !important;
+		}
 	}
 }
