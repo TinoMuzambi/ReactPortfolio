@@ -19,6 +19,8 @@
 		}
 
 		.date {
+			font-weight: lighter;
+
 			@include mq(1170px) {
 				display: none;
 			}
