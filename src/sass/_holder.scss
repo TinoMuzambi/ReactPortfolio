@@ -52,7 +52,7 @@
 					width: 5rem;
 					height: 5rem;
 					border-radius: 50%;
-					object-fit: contain;
+					object-fit: cover;
 
 					@include mq(768px) {
 						width: 4rem;
