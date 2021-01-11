@@ -33,18 +33,18 @@ const Holder = () => {
 		};
 		getJoke();
 
-		const localView = localStorage.getItem("tino-last-viewed");
+		const localView = window.localStorage.getItem("tino-last-viewed");
 		if (localView) {
 			setView(localView);
 		} else {
-			localStorage.setItem("tino-last-viewed", currentView);
+			window.localStorage.setItem("tino-last-viewed", currentView);
 		}
 	}, []);
 
 	const setCurrentView = (view) => {
 		// Save last view to localstorage. And open that view when component loads.
 		setView(view);
-		localStorage.setItem("tino-last-viewed", view);
+		window.localStorage.setItem("tino-last-viewed", view);
 	};
 
 	return (
