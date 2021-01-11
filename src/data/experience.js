@@ -39,7 +39,7 @@ const experience = [
 		period: "January 2019 - November 2020",
 		description: `This job included conducting practical and theoretical programming sessions as well as invigilating and marking tests
 			for first & second year Computer Science
-			courses primarily in Python & Java:
+			courses primarily in Python & Java.
 			`,
 		icon: <img src={UCT} alt="uct" className="timeline-image" />,
 	},
