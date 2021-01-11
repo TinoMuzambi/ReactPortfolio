@@ -16,7 +16,7 @@ const experience = [
 		icon: <img src={SPSC} alt="spsc" className="timeline-image" />,
 	},
 	{
-		title: "Full Stack Web Developer",
+		title: "Full-Stack Web Developer",
 		institution: "Elle Zeka",
 		period: "August 2020 - current",
 		description: `I work on implementing front-end as well as full-stack website solutions for business clients. 
