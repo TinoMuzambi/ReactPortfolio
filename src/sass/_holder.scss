@@ -20,7 +20,6 @@
 
 		@include mq(768px) {
 			grid-template-columns: 1fr;
-			// grid-template-rows: 30% 70%;
 			width: 90vw;
 		}
 

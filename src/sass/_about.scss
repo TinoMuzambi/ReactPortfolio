@@ -1,6 +1,10 @@
 .about {
 	width: 90%;
 
+	@include mq(768px) {
+		width: 100%;
+	}
+
 	.mini-card {
 		@include mini-card;
 		padding: 1.2rem;
