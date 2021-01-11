@@ -9,7 +9,7 @@ import "reactjs-popup/dist/index.css";
 
 const Holder = () => {
 	const [joke, setJoke] = useState("");
-	const [currentView, setCurrentView] = useState("about");
+	const [currentView, setView] = useState("about");
 	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
 	const contentStyle = {
@@ -32,7 +32,20 @@ const Holder = () => {
 			setLoading(false);
 		};
 		getJoke();
+
+		const localView = localStorage.getItem("tino-last-viewed");
+		if (localView) {
+			setView(localView);
+		} else {
+			localStorage.setItem("tino-last-viewed", currentView);
+		}
 	}, []);
+
+	const setCurrentView = (view) => {
+		// Save last view to localstorage. And open that view when component loads.
+		setView(view);
+		localStorage.setItem("tino-last-viewed", view);
+	};
 
 	return (
 		<div className="holder">
