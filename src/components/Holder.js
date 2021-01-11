@@ -36,10 +36,17 @@ const Holder = () => {
 		const localView = window.localStorage.getItem("tino-last-viewed");
 		if (localView) {
 			setView(localView);
+		}
+	}, []);
+
+	useEffect(() => {
+		const localView = window.localStorage.getItem("tino-last-viewed");
+		if (localView) {
+			setView(localView);
 		} else {
 			window.localStorage.setItem("tino-last-viewed", currentView);
 		}
-	}, []);
+	}, [currentView]);
 
 	const setCurrentView = (view) => {
 		// Save last view to localstorage. And open that view when component loads.
