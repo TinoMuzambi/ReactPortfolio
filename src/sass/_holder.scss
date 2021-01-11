@@ -44,6 +44,10 @@
 				justify-content: space-evenly;
 				height: 9rem;
 
+				@include mq(768px) {
+					flex-direction: column;
+				}
+
 				.profile-img {
 					width: 5rem;
 					height: 5rem;
