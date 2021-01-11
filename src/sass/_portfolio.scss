@@ -24,7 +24,7 @@
 			.lead {
 				height: 16rem;
 
-				@include mq(900px) {
+				@include mq(1023px) {
 					height: unset;
 				}
 
