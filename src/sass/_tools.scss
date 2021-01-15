@@ -11,6 +11,12 @@
 		flex-wrap: wrap;
 		row-gap: 1rem;
 
+		a {
+			.tools-img {
+				width: 100%;
+			}
+		}
+
 		.tools-img {
 			width: 20%;
 		}

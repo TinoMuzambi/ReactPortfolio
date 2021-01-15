@@ -11,13 +11,18 @@ const Tools = () => {
 			<div className="content">
 				{tools.map((tool) =>
 					tool.link ? (
-						<a href={tool.link} target="__blank" rel="noreferrer">
+						<a
+							href={tool.link}
+							target="__blank"
+							rel="noreferrer"
+							className="tools-img"
+						>
 							<img
 								src={tool.icon}
 								alt={tool.title}
 								title={tool.title}
-								className="tools-img"
 								key={tool.id}
+								className="tools-img"
 							/>
 						</a>
 					) : (
