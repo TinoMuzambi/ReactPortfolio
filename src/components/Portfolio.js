@@ -32,7 +32,7 @@ const Portfolio = () => {
 			<h1 className="title">Portfolio</h1>
 
 			<div className="cards">
-				{shuffle(projects.slice(0, 5)).map((project, key) => (
+				{shuffle(projects.slice(0, 6)).map((project, key) => (
 					<div className="mini-card" key={key}>
 						<div className="lead">
 							<h2 className="title">

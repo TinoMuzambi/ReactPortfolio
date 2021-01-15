@@ -35,6 +35,11 @@ $tertiary-font: "Livvic", sans-serif;
 	outline: none;
 	border: none;
 	cursor: pointer;
+
+	&:hover {
+		transform: scale(0.9);
+		opacity: 0.9;
+	}
 }
 
 @mixin mq($size) {
