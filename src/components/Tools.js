@@ -16,12 +16,12 @@ const Tools = () => {
 							target="__blank"
 							rel="noreferrer"
 							className="tools-img"
+							key={tool.id}
 						>
 							<img
 								src={tool.icon}
 								alt={tool.title}
 								title={tool.title}
-								key={tool.id}
 								className="tools-img"
 							/>
 						</a>
