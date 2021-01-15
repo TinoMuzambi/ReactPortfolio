@@ -119,7 +119,7 @@
 
 			.joke {
 				margin-top: 1rem;
-				max-height: 10rem;
+				max-height: 6rem;
 				display: grid;
 				grid-template-columns: 70% 30%;
 				align-items: center;
@@ -139,10 +139,6 @@
 
 				@include mq(1100px) {
 					grid-template-columns: 1fr;
-				}
-
-				@include mq(1024px) {
-					max-height: 6rem;
 				}
 
 				@include mq(768px) {
