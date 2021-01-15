@@ -3,7 +3,14 @@ import About from "./About";
 import Education from "./Education";
 import Experience from "./Experience";
 import Portfolio from "./Portfolio";
-import { FaInfoCircle, FaSchool, FaBuilding, FaCode } from "react-icons/fa";
+import Tools from "./Tools";
+import {
+	FaInfoCircle,
+	FaSchool,
+	FaBuilding,
+	FaCode,
+	FaToolbox,
+} from "react-icons/fa";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
@@ -102,6 +109,15 @@ const Holder = () => {
 							</span>
 							Portfolio
 						</li>
+						<li
+							className={`item ${currentView === "too" && "active"}`}
+							onClick={() => setCurrentView("too")}
+						>
+							<span>
+								<FaToolbox className="icon" />
+							</span>
+							Tools
+						</li>
 					</ul>
 					<Popup
 						open={open}
@@ -125,6 +141,7 @@ const Holder = () => {
 					{currentView === "edu" && <Education />}
 					{currentView === "exp" && <Experience />}
 					{currentView === "por" && <Portfolio />}
+					{currentView === "too" && <Tools />}
 				</div>
 			</div>
 
