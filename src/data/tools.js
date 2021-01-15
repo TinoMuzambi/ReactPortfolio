@@ -1,3 +1,65 @@
-const tools = [];
+import android from "./tools/android.png";
+import c from "./tools/c.png";
+import cpp from "./tools/c++.png";
+import css from "./tools/css.png";
+import gimp from "./tools/gimp.png";
+import git from "./tools/git.png";
+import github from "./tools/github.png";
+import godaddy from "./tools/godaddy.png";
+import golang from "./tools/golang.png";
+import google from "./tools/google.png";
+import heroku from "./tools/heroku.png";
+import hitfilm from "./tools/hitfilm.png";
+import html from "./tools/html.png";
+import java from "./tools/java.png";
+import jetbrains from "./tools/jetbrains.png";
+import mongodb from "./tools/mongodb.png";
+import netlify from "./tools/netlify.png";
+import nodejs from "./tools/nodejs.png";
+import notepadpp from "./tools/notepad++.png";
+import office from "./tools/office.png";
+import python from "./tools/python.png";
+import react from "./tools/react.png";
+import rstudio from "./tools/rstudio.png";
+import selenium from "./tools/selenium.png";
+import slack from "./tools/slack.png";
+import tableau from "./tools/tableau.png";
+import ubuntu from "./tools/ubuntu.png";
+import vercel from "./tools/vercel.png";
+import vs_code from "./tools/vs_code.png";
+import wakatime from "./tools/wakatime.png";
+
+const tools = [
+	<img src={android} alt="logo" />,
+	<img src={c} alt="logo" />,
+	<img src={cpp} alt="logo" />,
+	<img src={css} alt="logo" />,
+	<img src={gimp} alt="logo" />,
+	<img src={git} alt="logo" />,
+	<img src={github} alt="logo" />,
+	<img src={godaddy} alt="logo" />,
+	<img src={golang} alt="logo" />,
+	<img src={google} alt="logo" />,
+	<img src={heroku} alt="logo" />,
+	<img src={hitfilm} alt="logo" />,
+	<img src={html} alt="logo" />,
+	<img src={java} alt="logo" />,
+	<img src={jetbrains} alt="logo" />,
+	<img src={mongodb} alt="logo" />,
+	<img src={netlify} alt="logo" />,
+	<img src={nodejs} alt="logo" />,
+	<img src={notepadpp} alt="logo" />,
+	<img src={office} alt="logo" />,
+	<img src={python} alt="logo" />,
+	<img src={react} alt="logo" />,
+	<img src={rstudio} alt="logo" />,
+	<img src={selenium} alt="logo" />,
+	<img src={slack} alt="logo" />,
+	<img src={tableau} alt="logo" />,
+	<img src={ubuntu} alt="logo" />,
+	<img src={vercel} alt="logo" />,
+	<img src={vs_code} alt="logo" />,
+	<img src={wakatime} alt="logo" />,
+];
 
 export default tools;
