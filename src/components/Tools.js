@@ -8,7 +8,17 @@ const Tools = () => {
 	return (
 		<animated.div className="tools" style={props}>
 			<h1 className="title">Tools and Technologies</h1>
-			<div className="content">{tools.map((tool) => tool.icon)}</div>
+			<div className="content">
+				{tools.map((tool) => (
+					<img
+						src={tool.icon}
+						alt={tool.title}
+						title={tool.title}
+						className="tools-img"
+						key={tool.id}
+					/>
+				))}
+			</div>
 		</animated.div>
 	);
 };
