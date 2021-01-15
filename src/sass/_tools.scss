@@ -1,0 +1,24 @@
+.tools {
+	.title {
+		margin-bottom: 2rem;
+	}
+
+	.content {
+		background: none !important;
+		padding: 0 !important;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		row-gap: 1rem;
+
+		a {
+			.tools-img {
+				width: 100%;
+			}
+		}
+
+		.tools-img {
+			width: 20%;
+		}
+	}
+}

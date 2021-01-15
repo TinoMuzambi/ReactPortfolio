@@ -141,6 +141,10 @@
 					grid-template-columns: 1fr;
 				}
 
+				@include mq(1024px) {
+					max-height: 6rem;
+				}
+
 				@include mq(768px) {
 					display: none;
 				}
