@@ -19,6 +19,10 @@
 
 		.tools-img {
 			width: 20%;
+
+			&:hover {
+				transform: scale(0.9);
+			}
 		}
 	}
 }
