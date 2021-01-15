@@ -34,39 +34,39 @@ const tools = [
 		icon: (
 			<img
 				src={android}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="android"
 				key={0}
 			/>
 		),
 	},
-	{ icon: <img src={c} alt="logo" className="tools-img" title="c" key={1} /> },
+	{ icon: <img src={c} alt="tool" className="tools-img" title="c" key={1} /> },
 	{
 		icon: (
-			<img src={cpp} alt="logo" className="tools-img" title="cpp" key={2} />
+			<img src={cpp} alt="tool" className="tools-img" title="cpp" key={2} />
 		),
 	},
 	{
 		icon: (
-			<img src={css} alt="logo" className="tools-img" title="css" key={3} />
+			<img src={css} alt="tool" className="tools-img" title="css" key={3} />
 		),
 	},
 	{
 		icon: (
-			<img src={gimp} alt="logo" className="tools-img" title="gimp" key={4} />
+			<img src={gimp} alt="tool" className="tools-img" title="gimp" key={4} />
 		),
 	},
 	{
 		icon: (
-			<img src={git} alt="logo" className="tools-img" title="git" key={5} />
+			<img src={git} alt="tool" className="tools-img" title="git" key={5} />
 		),
 	},
 	{
 		icon: (
 			<img
 				src={github}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="github"
 				key={6}
@@ -77,7 +77,7 @@ const tools = [
 		icon: (
 			<img
 				src={godaddy}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="godaddy"
 				key={7}
@@ -88,7 +88,7 @@ const tools = [
 		icon: (
 			<img
 				src={golang}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="golang"
 				key={8}
@@ -99,7 +99,7 @@ const tools = [
 		icon: (
 			<img
 				src={google}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="google"
 				key={9}
@@ -110,7 +110,7 @@ const tools = [
 		icon: (
 			<img
 				src={heroku}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="heroku"
 				key={10}
@@ -121,7 +121,7 @@ const tools = [
 		icon: (
 			<img
 				src={hitfilm}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="hitfilm"
 				key={11}
@@ -130,19 +130,19 @@ const tools = [
 	},
 	{
 		icon: (
-			<img src={html} alt="logo" className="tools-img" title="html" key={12} />
+			<img src={html} alt="tool" className="tools-img" title="html" key={12} />
 		),
 	},
 	{
 		icon: (
-			<img src={java} alt="logo" className="tools-img" title="java" key={13} />
+			<img src={java} alt="tool" className="tools-img" title="java" key={13} />
 		),
 	},
 	{
 		icon: (
 			<img
 				src={jetbrains}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="jetbrains"
 				key={14}
@@ -153,7 +153,7 @@ const tools = [
 		icon: (
 			<img
 				src={mongodb}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="mongodb"
 				key={15}
@@ -164,7 +164,7 @@ const tools = [
 		icon: (
 			<img
 				src={netlify}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="netlify"
 				key={16}
@@ -175,7 +175,7 @@ const tools = [
 		icon: (
 			<img
 				src={nodejs}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="nodejs"
 				key={17}
@@ -186,7 +186,7 @@ const tools = [
 		icon: (
 			<img
 				src={notepadpp}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="notepadpp"
 				key={18}
@@ -197,7 +197,7 @@ const tools = [
 		icon: (
 			<img
 				src={office}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="office"
 				key={19}
@@ -208,7 +208,7 @@ const tools = [
 		icon: (
 			<img
 				src={python}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="python"
 				key={29}
@@ -219,7 +219,7 @@ const tools = [
 		icon: (
 			<img
 				src={react}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="react"
 				key={21}
@@ -230,7 +230,7 @@ const tools = [
 		icon: (
 			<img
 				src={rstudio}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="rstudio"
 				key={22}
@@ -241,7 +241,7 @@ const tools = [
 		icon: (
 			<img
 				src={selenium}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="selenium"
 				key={23}
@@ -252,7 +252,7 @@ const tools = [
 		icon: (
 			<img
 				src={slack}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="slack"
 				key={24}
@@ -263,7 +263,7 @@ const tools = [
 		icon: (
 			<img
 				src={tableau}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="tableau"
 				key={25}
@@ -274,7 +274,7 @@ const tools = [
 		icon: (
 			<img
 				src={ubuntu}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="ubuntu"
 				key={26}
@@ -285,7 +285,7 @@ const tools = [
 		icon: (
 			<img
 				src={vercel}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="vercel"
 				key={27}
@@ -296,7 +296,7 @@ const tools = [
 		icon: (
 			<img
 				src={vs_code}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="vs_code"
 				key={28}
@@ -307,7 +307,7 @@ const tools = [
 		icon: (
 			<img
 				src={wakatime}
-				alt="logo"
+				alt="tool"
 				className="tools-img"
 				title="wakatime"
 				key={29}

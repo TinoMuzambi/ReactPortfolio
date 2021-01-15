@@ -4,12 +4,15 @@
 	}
 
 	.content {
+		background: none !important;
+		padding: 0 !important;
 		width: 100%;
 		display: flex;
 		flex-wrap: wrap;
+		row-gap: 1rem;
 
 		.tools-img {
-			width: 0%;
+			width: 20%;
 		}
 	}
 }
