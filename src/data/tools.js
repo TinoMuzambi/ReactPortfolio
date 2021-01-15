@@ -29,8 +29,6 @@ import vs_code from "./tools/vs_code.png";
 import wakatime from "./tools/wakatime.png";
 import yarn from "./tools/yarn.png";
 
-const tools = [
-	
-];
+const tools = [{ title: "Android", icon: android }];
 
 export default tools;
