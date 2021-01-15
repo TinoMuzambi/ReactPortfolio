@@ -2,13 +2,14 @@
 	.title {
 		margin-bottom: 2rem;
 	}
+
 	.content {
 		width: 100%;
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		display: flex;
+		flex-wrap: wrap;
 
 		.tools-img {
-			width: 100%;
+			width: 0%;
 		}
 	}
 }

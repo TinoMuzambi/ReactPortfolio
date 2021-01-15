@@ -31,103 +31,288 @@ import wakatime from "./tools/wakatime.png";
 
 const tools = [
 	{
-		title: "android",
-		icon: <img src={android} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={android}
+				alt="logo"
+				className="tools-img"
+				title="android"
+				key={0}
+			/>
+		),
 	},
-	{ title: "c", icon: <img src={c} alt="logo" className="tools-img" /> },
-	{ title: "cpp", icon: <img src={cpp} alt="logo" className="tools-img" /> },
-	{ title: "css", icon: <img src={css} alt="logo" className="tools-img" /> },
-	{ title: "gimp", icon: <img src={gimp} alt="logo" className="tools-img" /> },
-	{ title: "git", icon: <img src={git} alt="logo" className="tools-img" /> },
+	{ icon: <img src={c} alt="logo" className="tools-img" title="c" key={1} /> },
 	{
-		title: "github",
-		icon: <img src={github} alt="logo" className="tools-img" />,
-	},
-	{
-		title: "godaddy",
-		icon: <img src={godaddy} alt="logo" className="tools-img" />,
-	},
-	{
-		title: "golang",
-		icon: <img src={golang} alt="logo" className="tools-img" />,
+		icon: (
+			<img src={cpp} alt="logo" className="tools-img" title="cpp" key={2} />
+		),
 	},
 	{
-		title: "google",
-		icon: <img src={google} alt="logo" className="tools-img" />,
+		icon: (
+			<img src={css} alt="logo" className="tools-img" title="css" key={3} />
+		),
 	},
 	{
-		title: "heroku",
-		icon: <img src={heroku} alt="logo" className="tools-img" />,
+		icon: (
+			<img src={gimp} alt="logo" className="tools-img" title="gimp" key={4} />
+		),
 	},
 	{
-		title: "hitfilm",
-		icon: <img src={hitfilm} alt="logo" className="tools-img" />,
-	},
-	{ title: "html", icon: <img src={html} alt="logo" className="tools-img" /> },
-	{ title: "java", icon: <img src={java} alt="logo" className="tools-img" /> },
-	{
-		title: "jetbrains",
-		icon: <img src={jetbrains} alt="logo" className="tools-img" />,
+		icon: (
+			<img src={git} alt="logo" className="tools-img" title="git" key={5} />
+		),
 	},
 	{
-		title: "mongodb",
-		icon: <img src={mongodb} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={github}
+				alt="logo"
+				className="tools-img"
+				title="github"
+				key={6}
+			/>
+		),
 	},
 	{
-		title: "netlify",
-		icon: <img src={netlify} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={godaddy}
+				alt="logo"
+				className="tools-img"
+				title="godaddy"
+				key={7}
+			/>
+		),
 	},
 	{
-		title: "nodejs",
-		icon: <img src={nodejs} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={golang}
+				alt="logo"
+				className="tools-img"
+				title="golang"
+				key={8}
+			/>
+		),
 	},
 	{
-		title: "notepadpp",
-		icon: <img src={notepadpp} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={google}
+				alt="logo"
+				className="tools-img"
+				title="google"
+				key={9}
+			/>
+		),
 	},
 	{
-		title: "office",
-		icon: <img src={office} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={heroku}
+				alt="logo"
+				className="tools-img"
+				title="heroku"
+				key={10}
+			/>
+		),
 	},
 	{
-		title: "python",
-		icon: <img src={python} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={hitfilm}
+				alt="logo"
+				className="tools-img"
+				title="hitfilm"
+				key={11}
+			/>
+		),
 	},
 	{
-		title: "react",
-		icon: <img src={react} alt="logo" className="tools-img" />,
+		icon: (
+			<img src={html} alt="logo" className="tools-img" title="html" key={12} />
+		),
 	},
 	{
-		title: "rstudio",
-		icon: <img src={rstudio} alt="logo" className="tools-img" />,
+		icon: (
+			<img src={java} alt="logo" className="tools-img" title="java" key={13} />
+		),
 	},
 	{
-		title: "selenium",
-		icon: <img src={selenium} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={jetbrains}
+				alt="logo"
+				className="tools-img"
+				title="jetbrains"
+				key={14}
+			/>
+		),
 	},
 	{
-		title: "slack",
-		icon: <img src={slack} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={mongodb}
+				alt="logo"
+				className="tools-img"
+				title="mongodb"
+				key={15}
+			/>
+		),
 	},
 	{
-		title: "tableau",
-		icon: <img src={tableau} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={netlify}
+				alt="logo"
+				className="tools-img"
+				title="netlify"
+				key={16}
+			/>
+		),
 	},
 	{
-		title: "ubuntu",
-		icon: <img src={ubuntu} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={nodejs}
+				alt="logo"
+				className="tools-img"
+				title="nodejs"
+				key={17}
+			/>
+		),
 	},
 	{
-		title: "vercel",
-		icon: <img src={vercel} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={notepadpp}
+				alt="logo"
+				className="tools-img"
+				title="notepadpp"
+				key={18}
+			/>
+		),
 	},
 	{
-		title: "vs_code",
-		icon: <img src={vs_code} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={office}
+				alt="logo"
+				className="tools-img"
+				title="office"
+				key={19}
+			/>
+		),
 	},
 	{
-		title: "wakatime",
-		icon: <img src={wakatime} alt="logo" className="tools-img" />,
+		icon: (
+			<img
+				src={python}
+				alt="logo"
+				className="tools-img"
+				title="python"
+				key={29}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={react}
+				alt="logo"
+				className="tools-img"
+				title="react"
+				key={21}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={rstudio}
+				alt="logo"
+				className="tools-img"
+				title="rstudio"
+				key={22}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={selenium}
+				alt="logo"
+				className="tools-img"
+				title="selenium"
+				key={23}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={slack}
+				alt="logo"
+				className="tools-img"
+				title="slack"
+				key={24}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={tableau}
+				alt="logo"
+				className="tools-img"
+				title="tableau"
+				key={25}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={ubuntu}
+				alt="logo"
+				className="tools-img"
+				title="ubuntu"
+				key={26}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={vercel}
+				alt="logo"
+				className="tools-img"
+				title="vercel"
+				key={27}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={vs_code}
+				alt="logo"
+				className="tools-img"
+				title="vs_code"
+				key={28}
+			/>
+		),
+	},
+	{
+		icon: (
+			<img
+				src={wakatime}
+				alt="logo"
+				className="tools-img"
+				title="wakatime"
+				key={29}
+			/>
+		),
 	},
 ];
 
