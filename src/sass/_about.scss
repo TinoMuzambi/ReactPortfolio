@@ -43,6 +43,16 @@
 				height: 7rem;
 				width: 10rem;
 				object-fit: contain;
+				animation: colours 8s linear infinite alternate;
+			}
+
+			@keyframes colours {
+				from {
+					filter: hue-rotate(0);
+				}
+				to {
+					filter: hue-rotate(90deg);
+				}
 			}
 
 			.text {
