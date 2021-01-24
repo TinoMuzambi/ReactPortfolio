@@ -16,14 +16,20 @@ function App() {
 			preload.classList.add("preload-finish");
 		});
 
-		let offset;
+		let scrollOffset;
 		window.addEventListener("scroll", (e) => {
 			const scrollPos =
 				window.scrollY ||
 				window.scrollTop ||
 				document.getElementsByTagName("html")[0].scrollTop;
 
-			offset = (scrollPos / window.innerHeight) * 100;
+			scrollOffset = (scrollPos / window.innerHeight) * 100;
+
+			const transformButton = document.querySelector(".enter");
+			// transformButton.style.color = "blue";
+			let current = parseFloat(scrollOffset).toFixed(0);
+			console.log(current);
+			transformButton.style.transform = `translateX(${current}px)`;
 		});
 
 		return () => {

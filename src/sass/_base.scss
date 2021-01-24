@@ -77,8 +77,9 @@ $secondary-font: "Livvic", sans-serif;
 	position: absolute;
 	top: 40%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	// transform: translate(-50%, -50%);
 	animation: bounce 2s linear infinite alternate;
+	// transform: translateY(-50%);
 
 	.icon {
 		filter: invert(1);
