@@ -9,7 +9,9 @@ import { IoArrowDownCircle } from "react-icons/io5";
 
 function App() {
 	const getY = (currY) => {
-		return currY / 100;
+		return currY > 33
+			? ((window.innerHeight / 0.68) * 33 * 3) / 100
+			: ((window.innerHeight / 0.68) * currY * 3) / 100;
 	};
 
 	const updateEls = () => {
@@ -30,9 +32,7 @@ function App() {
 		items.forEach((el) => {
 			el.style.transform = `translate(${
 				(window.innerWidth / 2.3) * (current / 100)
-			}px,${(window.innerHeight / 0.68) * getY(current)}px) rotate(${
-				180 * (current / 100)
-			}deg`;
+			}px,${getY(current)}px) rotate(${180 * (current / 100)}deg`;
 		});
 
 		requestAnimationFrame(updateEls);
@@ -48,7 +48,6 @@ function App() {
 
 		// console.log("height", window.innerHeight);
 		// console.log("width", window.innerWidth);
-		window.addEventListener("scroll", updateEls);
 
 		return () => {
 			window.removeEventListener("load", () => {
@@ -56,7 +55,12 @@ function App() {
 
 				preload.classList.add("preload-finish");
 			});
+		};
+	}, []);
 
+	useEffect(() => {
+		window.addEventListener("scroll", updateEls);
+		return () => {
 			window.removeEventListener("scroll", updateEls);
 		};
 	}, []);
