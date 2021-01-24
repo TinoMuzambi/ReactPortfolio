@@ -20,6 +20,8 @@ function App() {
 		const transformButton = document.querySelector(".enter");
 		const transformSVG = document.querySelector(".enter .icon");
 		const items = [transformButton, transformSVG];
+		console.log("height", window.innerHeight);
+		console.log("width", window.innerWidth);
 		window.addEventListener("scroll", (e) => {
 			const scrollPos =
 				window.scrollY ||
@@ -32,8 +34,8 @@ function App() {
 			// console.log(current);
 			items.forEach((el) => {
 				el.style.transform = `translate(${
-					window.innerHeight * (current / 100)
-				}px,${window.innerWidth * (current / 100)}px) rotate(${
+					(window.innerWidth / 2.3) * (current / 100)
+				}px,${window.innerHeight * (current / 100)}px) rotate(${
 					180 * (current / 100)
 				}deg`;
 			});
