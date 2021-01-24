@@ -8,6 +8,32 @@ import Preload from "./pages/Preload";
 import { IoArrowDownCircle } from "react-icons/io5";
 
 function App() {
+	const updateEls = () => {
+		let scrollOffset;
+		const transformButton = document.querySelector(".enter");
+		const transformSVG = document.querySelector(".enter .icon");
+		const items = [transformButton, transformSVG];
+
+		const scrollPos =
+			window.scrollY ||
+			window.scrollTop ||
+			document.getElementsByTagName("html")[0].scrollTop;
+
+		scrollOffset = (scrollPos / window.innerHeight) * 100;
+
+		let current = parseFloat(scrollOffset).toFixed(0);
+		// console.log(current);
+		items.forEach((el) => {
+			el.style.transform = `translate(${
+				(window.innerWidth / 2.3) * (current / 100)
+			}px,${(window.innerHeight / 0.68) * (current / 100)}px) rotate(${
+				180 * (current / 100)
+			}deg`;
+		});
+
+		requestAnimationFrame(updateEls);
+	};
+
 	useEffect(() => {
 		window.addEventListener("load", () => {
 			// Get rid of preloader once everything's loaded
@@ -16,30 +42,9 @@ function App() {
 			preload.classList.add("preload-finish");
 		});
 
-		let scrollOffset;
-		const transformButton = document.querySelector(".enter");
-		const transformSVG = document.querySelector(".enter .icon");
-		const items = [transformButton, transformSVG];
 		console.log("height", window.innerHeight);
 		console.log("width", window.innerWidth);
-		window.addEventListener("scroll", (e) => {
-			const scrollPos =
-				window.scrollY ||
-				window.scrollTop ||
-				document.getElementsByTagName("html")[0].scrollTop;
-
-			scrollOffset = (scrollPos / window.innerHeight) * 100;
-
-			let current = parseFloat(scrollOffset).toFixed(0);
-			// console.log(current);
-			items.forEach((el) => {
-				el.style.transform = `translate(${
-					(window.innerWidth / 2.3) * (current / 100)
-				}px,${(window.innerHeight / 0.68) * (current / 100)}px) rotate(${
-					180 * (current / 100)
-				}deg`;
-			});
-		});
+		window.addEventListener("scroll", updateEls);
 
 		return () => {
 			window.removeEventListener("load", () => {
