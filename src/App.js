@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import "./css/App.min.css";
 import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
 import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
-// import { IoArrowUpCircle } from "react-icons/io5";
 import { IoArrowDownCircle } from "react-icons/io5";
 import { getX, getY, getCurrentScroll } from "./utils/scrollUtils";
 
@@ -12,13 +11,12 @@ function App() {
 	const buttonRef = useRef(null);
 	const [refreshCurrent, setRefreshCurrent] = useState(0);
 
-	const updateEls = () => {
+	const updateEls = useCallback(() => {
 		const transformButton = document.querySelector(".enter");
 		const transformSVG = document.querySelector(".enter .icon");
 		const items = [transformButton, transformSVG];
 
 		let current = getCurrentScroll();
-		// console.log(current);
 		items.forEach((el) => {
 			el.style.transform = `translate(${getX(current)}px,${getY(
 				current
@@ -26,7 +24,7 @@ function App() {
 		});
 
 		requestAnimationFrame(updateEls);
-	};
+	}, []);
 
 	useEffect(() => {
 		window.addEventListener("load", () => {
@@ -69,7 +67,7 @@ function App() {
 		return () => {
 			window.removeEventListener("scroll", updateEls);
 		};
-	}, []);
+	}, [updateEls]);
 
 	return (
 		<>
@@ -80,10 +78,6 @@ function App() {
 				<IoArrowDownCircle className="icon" />
 			</button>
 			<Holder />
-			{/* <IoArrowUpCircle
-				className="up-icon"
-				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-			/> */}
 		</>
 	);
 }
