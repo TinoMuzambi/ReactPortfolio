@@ -8,6 +8,10 @@ import Preload from "./pages/Preload";
 import { IoArrowDownCircle } from "react-icons/io5";
 
 function App() {
+	const getY = (currY) => {
+		return currY / 100;
+	};
+
 	const updateEls = () => {
 		let scrollOffset;
 		const transformButton = document.querySelector(".enter");
@@ -26,7 +30,7 @@ function App() {
 		items.forEach((el) => {
 			el.style.transform = `translate(${
 				(window.innerWidth / 2.3) * (current / 100)
-			}px,${(window.innerHeight / 0.68) * (current / 100)}px) rotate(${
+			}px,${(window.innerHeight / 0.68) * getY()}px) rotate(${
 				180 * (current / 100)
 			}deg`;
 		});
