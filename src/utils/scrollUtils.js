@@ -1,13 +1,16 @@
 export const getY = (currY) => {
+	// first number is vertical positioning. Higher number, higher position on screen.
+	// second number is speed of movement.
 	return currY > 33
-		? ((window.innerHeight / 0.68) * 33 * 3) / 100
-		: ((window.innerHeight / 0.68) * currY * 3) / 100;
+		? ((window.innerHeight / 0.64) * 33 * 3) / 100
+		: ((window.innerHeight / 0.64) * currY * 3) / 100;
 };
 
 export const getX = (currX) => {
+	// first number is horizontal positioning. Higher number, more left
 	return currX > 33
-		? (window.innerWidth / 2.15) * ((33 * 3) / 100)
-		: (window.innerWidth / 2.15) * ((currX * 3) / 100);
+		? (window.innerWidth / 2.58) * ((33 * 3) / 100)
+		: (window.innerWidth / 2.58) * ((currX * 3) / 100);
 };
 
 export const getCurrentScroll = () => {
