@@ -6,21 +6,10 @@ import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
 // import { IoArrowUpCircle } from "react-icons/io5";
 import { IoArrowDownCircle } from "react-icons/io5";
+import { getX, getY } from "./utils/scrollUtils";
 
 function App() {
 	const buttonRef = useRef(null);
-
-	const getY = (currY) => {
-		return currY > 33
-			? ((window.innerHeight / 0.68) * 33 * 3) / 100
-			: ((window.innerHeight / 0.68) * currY * 3) / 100;
-	};
-
-	const getX = (currX) => {
-		return currX > 33
-			? (window.innerWidth / 2.3) * ((33 * 3) / 100)
-			: (window.innerWidth / 2.3) * ((currX * 3) / 100);
-	};
 
 	const updateEls = () => {
 		let scrollOffset;
