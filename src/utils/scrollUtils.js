@@ -20,3 +20,18 @@ export const getCurrentScroll = () => {
 
 	return parseFloat(scrollOffset).toFixed(0);
 };
+
+export const updateEls = () => {
+	const transformButton = document.querySelector(".enter");
+	const transformSVG = document.querySelector(".enter .icon");
+	const items = [transformButton, transformSVG];
+
+	let current = getCurrentScroll();
+	items.forEach((el) => {
+		el.style.transform = `translate(${getX(current)}px,${getY(
+			current
+		)}px) rotate(${180 * (current / 100)}deg`;
+	});
+
+	requestAnimationFrame(updateEls);
+};

@@ -1,30 +1,16 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import "./css/App.min.css";
 import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
 import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
 import { IoArrowDownCircle } from "react-icons/io5";
-import { getX, getY, getCurrentScroll } from "./utils/scrollUtils";
+import { updateEls } from "./utils/scrollUtils";
 
 function App() {
+	let refreshCurrent = 0;
 	const buttonRef = useRef(null);
-	const [refreshCurrent, setRefreshCurrent] = useState(0);
-
-	const updateEls = useCallback(() => {
-		const transformButton = document.querySelector(".enter");
-		const transformSVG = document.querySelector(".enter .icon");
-		const items = [transformButton, transformSVG];
-
-		let current = getCurrentScroll();
-		items.forEach((el) => {
-			el.style.transform = `translate(${getX(current)}px,${getY(
-				current
-			)}px) rotate(${180 * (current / 100)}deg`;
-		});
-
-		requestAnimationFrame(updateEls);
-	}, []);
+	const currRef = useRef(refreshCurrent);
 
 	useEffect(() => {
 		window.addEventListener("load", () => {
@@ -51,14 +37,14 @@ function App() {
 					behavior: "smooth",
 				});
 			};
-			setRefreshCurrent(document.body.scrollHeight);
+			currRef.current = document.body.scrollHeight;
 		} else {
 			buttonRef.current.onclick = () =>
 				window.scrollTo({
 					top: 0,
 					behavior: "smooth",
 				});
-			setRefreshCurrent(0);
+			currRef.current = 0;
 		}
 	}, [refreshCurrent]);
 
@@ -67,7 +53,7 @@ function App() {
 		return () => {
 			window.removeEventListener("scroll", updateEls);
 		};
-	}, [updateEls]);
+	}, []);
 
 	return (
 		<>
