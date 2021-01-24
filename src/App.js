@@ -29,12 +29,13 @@ function App() {
 			scrollOffset = (scrollPos / window.innerHeight) * 100;
 
 			let current = parseFloat(scrollOffset).toFixed(0);
-			console.log(current);
+			// console.log(current);
 			items.forEach((el) => {
-				el.style.transform = `translate(${current * 10}%,${
-					current * 10
-				}%) rotate(${180 * (current / 100)}deg`;
-				// el.style.transform = ``;
+				el.style.transform = `translate(${
+					window.innerHeight * (current / 100)
+				}px,${window.innerWidth * (current / 100)}px) rotate(${
+					180 * (current / 100)
+				}deg`;
 			});
 		});
 
