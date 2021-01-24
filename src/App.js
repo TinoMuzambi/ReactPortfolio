@@ -15,6 +15,16 @@ function App() {
 			preload.classList.add("preload-finish");
 		});
 
+		let offset;
+		window.addEventListener("scroll", (e) => {
+			const scrollPos =
+				window.scrollY ||
+				window.scrollTop ||
+				document.getElementsByTagName("html")[0].scrollTop;
+
+			offset = (scrollPos / window.innerHeight) * 100;
+		});
+
 		return () => {
 			window.removeEventListener("load", () => {
 				const preload = document.querySelector(".preload");
