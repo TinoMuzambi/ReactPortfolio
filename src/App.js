@@ -46,8 +46,8 @@ function App() {
 			preload.classList.add("preload-finish");
 		});
 
-		console.log("height", window.innerHeight);
-		console.log("width", window.innerWidth);
+		// console.log("height", window.innerHeight);
+		// console.log("width", window.innerWidth);
 		window.addEventListener("scroll", updateEls);
 
 		return () => {
@@ -56,6 +56,8 @@ function App() {
 
 				preload.classList.add("preload-finish");
 			});
+
+			window.removeEventListener("scroll", updateEls);
 		};
 	}, []);
 
