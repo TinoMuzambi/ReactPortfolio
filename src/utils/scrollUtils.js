@@ -6,8 +6,8 @@ export const getY = (currY) => {
 
 export const getX = (currX) => {
 	return currX > 33
-		? (window.innerWidth / 2.3) * ((33 * 3) / 100)
-		: (window.innerWidth / 2.3) * ((currX * 3) / 100);
+		? (window.innerWidth / 2.15) * ((33 * 3) / 100)
+		: (window.innerWidth / 2.15) * ((currX * 3) / 100);
 };
 
 export const getCurrentScroll = () => {

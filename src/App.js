@@ -34,25 +34,6 @@ function App() {
 		};
 	}, []);
 
-	// useEffect(() => {
-	// 	if (refreshCurrent < 50) {
-	// 		buttonRef.current.onclick = () => {
-	// 			window.scrollTo({
-	// 				top: document.body.scrollHeight,
-	// 				behavior: "smooth",
-	// 			});
-	// 		};
-	// 		currRef.current = document.body.scrollHeight;
-	// 	} else {
-	// 		buttonRef.current.onclick = () =>
-	// 			window.scrollTo({
-	// 				top: 0,
-	// 				behavior: "smooth",
-	// 			});
-	// 		currRef.current = 0;
-	// 	}
-	// }, [refreshCurrent]);
-
 	useEffect(() => {
 		window.addEventListener("scroll", updateEls);
 		window.addEventListener("scroll", changeButtonScroll);

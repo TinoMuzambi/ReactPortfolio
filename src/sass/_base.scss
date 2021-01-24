@@ -55,27 +55,11 @@ $secondary-font: "Livvic", sans-serif;
 	border: solid 3px rgba($color: white, $alpha: 0.2);
 }
 
-.up-icon {
-	@include button;
-	font-size: 4rem;
-	position: fixed;
-	right: 2rem;
-	bottom: 2rem;
-	opacity: 0.7;
-	filter: invert(0.8);
-
-	@include mq(768px) {
-		font-size: 3rem;
-		right: 0rem;
-		bottom: 0.5rem;
-	}
-}
-
 .enter {
 	margin-top: 2rem;
 	@include button;
 	position: absolute;
-	top: 40%;
+	top: 35%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	overflow: visible;
@@ -86,6 +70,12 @@ $secondary-font: "Livvic", sans-serif;
 	.icon {
 		filter: invert(1);
 		font-size: 4rem;
+
+		@include mq(768px) {
+			font-size: 3rem;
+			right: 0rem;
+			bottom: 0.5rem;
+		}
 	}
 
 	@keyframes bounce {
