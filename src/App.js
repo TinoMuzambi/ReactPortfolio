@@ -54,6 +54,30 @@ function App() {
 			preload.classList.add("preload-finish");
 		});
 
+		const scrollPos =
+			window.scrollY ||
+			window.scrollTop ||
+			document.getElementsByTagName("html")[0].scrollTop;
+
+		const scrollOffset = (scrollPos / window.innerHeight) * 100;
+
+		let current = parseFloat(scrollOffset).toFixed(0);
+
+		if (current < 50) {
+			buttonRef.current.onclick = () => {
+				window.scrollTo({
+					top: document.body.scrollHeight,
+					behavior: "smooth",
+				});
+			};
+		} else {
+			buttonRef.current.onclick = () =>
+				window.scrollTo({
+					top: 0,
+					behavior: "smooth",
+				});
+		}
+
 		return () => {
 			window.removeEventListener("load", () => {
 				const preload = document.querySelector(".preload");
@@ -75,7 +99,7 @@ function App() {
 			<Preload /> {/* Preloader for showing before page loads. */}
 			<Globe />
 			<Hero />
-			<button className="enter">
+			<button className="enter" ref={buttonRef}>
 				<IoArrowDownCircle className="icon" />
 			</button>
 			<Holder />
