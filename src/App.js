@@ -6,25 +6,17 @@ import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
 // import { IoArrowUpCircle } from "react-icons/io5";
 import { IoArrowDownCircle } from "react-icons/io5";
-import { getX, getY } from "./utils/scrollUtils";
+import { getX, getY, getCurrentScroll } from "./utils/scrollUtils";
 
 function App() {
 	const buttonRef = useRef(null);
 
 	const updateEls = () => {
-		let scrollOffset;
 		const transformButton = document.querySelector(".enter");
 		const transformSVG = document.querySelector(".enter .icon");
 		const items = [transformButton, transformSVG];
 
-		const scrollPos =
-			window.scrollY ||
-			window.scrollTop ||
-			document.getElementsByTagName("html")[0].scrollTop;
-
-		scrollOffset = (scrollPos / window.innerHeight) * 100;
-
-		let current = parseFloat(scrollOffset).toFixed(0);
+		let current = getCurrentScroll();
 		// console.log(current);
 		items.forEach((el) => {
 			el.style.transform = `translate(${getX(current)}px,${getY(
