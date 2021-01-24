@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "./css/App.min.css";
 import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
@@ -8,10 +8,18 @@ import Preload from "./pages/Preload";
 import { IoArrowDownCircle } from "react-icons/io5";
 
 function App() {
+	const buttonRef = useRef(null);
+
 	const getY = (currY) => {
 		return currY > 33
 			? ((window.innerHeight / 0.68) * 33 * 3) / 100
 			: ((window.innerHeight / 0.68) * currY * 3) / 100;
+	};
+
+	const getX = (currX) => {
+		return currX > 33
+			? (window.innerWidth / 2.3) * ((33 * 3) / 100)
+			: (window.innerWidth / 2.3) * ((currX * 3) / 100);
 	};
 
 	const updateEls = () => {
@@ -30,9 +38,9 @@ function App() {
 		let current = parseFloat(scrollOffset).toFixed(0);
 		// console.log(current);
 		items.forEach((el) => {
-			el.style.transform = `translate(${
-				(window.innerWidth / 2.3) * (current / 100)
-			}px,${getY(current)}px) rotate(${180 * (current / 100)}deg`;
+			el.style.transform = `translate(${getX(current)}px,${getY(
+				current
+			)}px) rotate(${180 * (current / 100)}deg`;
 		});
 
 		requestAnimationFrame(updateEls);
@@ -45,9 +53,6 @@ function App() {
 
 			preload.classList.add("preload-finish");
 		});
-
-		// console.log("height", window.innerHeight);
-		// console.log("width", window.innerWidth);
 
 		return () => {
 			window.removeEventListener("load", () => {
@@ -70,15 +75,7 @@ function App() {
 			<Preload /> {/* Preloader for showing before page loads. */}
 			<Globe />
 			<Hero />
-			<button
-				className="enter"
-				onClick={() =>
-					window.scrollTo({
-						top: document.body.scrollHeight,
-						behavior: "smooth",
-					})
-				}
-			>
+			<button className="enter">
 				<IoArrowDownCircle className="icon" />
 			</button>
 			<Holder />
