@@ -17,6 +17,8 @@ function App() {
 		});
 
 		let scrollOffset;
+		const transformButton = document.querySelector(".enter");
+		transformButton.style.position = "absolute";
 		window.addEventListener("scroll", (e) => {
 			const scrollPos =
 				window.scrollY ||
@@ -25,7 +27,6 @@ function App() {
 
 			scrollOffset = (scrollPos / window.innerHeight) * 100;
 
-			const transformButton = document.querySelector(".enter");
 			// transformButton.style.color = "blue";
 			let current = parseFloat(scrollOffset).toFixed(0);
 			console.log(current);
