@@ -17,6 +17,9 @@ function App() {
 		});
 
 		let scrollOffset;
+		const transformButton = document.querySelector(".enter");
+		const transformSVG = document.querySelector(".enter .icon");
+		const items = [transformButton, transformSVG];
 		window.addEventListener("scroll", (e) => {
 			const scrollPos =
 				window.scrollY ||
@@ -25,10 +28,11 @@ function App() {
 
 			scrollOffset = (scrollPos / window.innerHeight) * 100;
 
-			const transformButton = document.querySelector(".enter .icon");
 			let current = parseFloat(scrollOffset).toFixed(0);
 			console.log(current);
-			transformButton.style.transform = `translateX(${current}px)`;
+			items.forEach((el) => {
+				el.style.transform = `translateX(${current * 10}px)`;
+			});
 		});
 
 		return () => {
