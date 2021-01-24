@@ -5,12 +5,10 @@ import Hero from "./components/Hero";
 import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
 import { IoArrowDownCircle } from "react-icons/io5";
-import { updateEls } from "./utils/scrollUtils";
+import { getCurrentScroll, updateEls } from "./utils/scrollUtils";
 
 function App() {
-	let refreshCurrent = 0;
 	const buttonRef = useRef(null);
-	const currRef = useRef(refreshCurrent);
 
 	useEffect(() => {
 		window.addEventListener("load", () => {
@@ -19,6 +17,13 @@ function App() {
 
 			preload.classList.add("preload-finish");
 		});
+
+		buttonRef.current.onclick = () => {
+			window.scrollTo({
+				top: document.body.scrollHeight,
+				behavior: "smooth",
+			});
+		};
 
 		return () => {
 			window.removeEventListener("load", () => {
@@ -29,7 +34,37 @@ function App() {
 		};
 	}, []);
 
+	// useEffect(() => {
+	// 	if (refreshCurrent < 50) {
+	// 		buttonRef.current.onclick = () => {
+	// 			window.scrollTo({
+	// 				top: document.body.scrollHeight,
+	// 				behavior: "smooth",
+	// 			});
+	// 		};
+	// 		currRef.current = document.body.scrollHeight;
+	// 	} else {
+	// 		buttonRef.current.onclick = () =>
+	// 			window.scrollTo({
+	// 				top: 0,
+	// 				behavior: "smooth",
+	// 			});
+	// 		currRef.current = 0;
+	// 	}
+	// }, [refreshCurrent]);
+
 	useEffect(() => {
+		window.addEventListener("scroll", updateEls);
+		window.addEventListener("scroll", changeButtonScroll);
+		return () => {
+			window.removeEventListener("scroll", updateEls);
+			window.removeEventListener("scroll", changeButtonScroll);
+		};
+	}, []);
+
+	const changeButtonScroll = () => {
+		const refreshCurrent = getCurrentScroll();
+
 		if (refreshCurrent < 50) {
 			buttonRef.current.onclick = () => {
 				window.scrollTo({
@@ -37,23 +72,14 @@ function App() {
 					behavior: "smooth",
 				});
 			};
-			currRef.current = document.body.scrollHeight;
 		} else {
 			buttonRef.current.onclick = () =>
 				window.scrollTo({
 					top: 0,
 					behavior: "smooth",
 				});
-			currRef.current = 0;
 		}
-	}, [refreshCurrent]);
-
-	useEffect(() => {
-		window.addEventListener("scroll", updateEls);
-		return () => {
-			window.removeEventListener("scroll", updateEls);
-		};
-	}, []);
+	};
 
 	return (
 		<>
