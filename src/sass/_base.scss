@@ -78,6 +78,8 @@ $secondary-font: "Livvic", sans-serif;
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	overflow: visible;
+	z-index: 10;
 	animation: bounce 2s linear infinite alternate;
 	// transform: translateY(-50%);
 

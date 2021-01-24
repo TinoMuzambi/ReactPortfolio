@@ -31,7 +31,10 @@ function App() {
 			let current = parseFloat(scrollOffset).toFixed(0);
 			console.log(current);
 			items.forEach((el) => {
-				el.style.transform = `translateX(${current * 10}px)`;
+				el.style.transform = `translate(${current * 10}%,${
+					current * 10
+				}%) rotate(${180 * (current / 100)}deg`;
+				// el.style.transform = ``;
 			});
 		});
 
