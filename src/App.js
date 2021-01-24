@@ -35,7 +35,7 @@ function App() {
 			items.forEach((el) => {
 				el.style.transform = `translate(${
 					(window.innerWidth / 2.3) * (current / 100)
-				}px,${window.innerHeight * (current / 100)}px) rotate(${
+				}px,${(window.innerHeight / 0.68) * (current / 100)}px) rotate(${
 					180 * (current / 100)
 				}deg`;
 			});
