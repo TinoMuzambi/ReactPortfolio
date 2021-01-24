@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./css/App.min.css";
 import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
@@ -10,6 +10,7 @@ import { getX, getY, getCurrentScroll } from "./utils/scrollUtils";
 
 function App() {
 	const buttonRef = useRef(null);
+	const [refreshCurrent, setRefreshCurrent] = useState(0);
 
 	const updateEls = () => {
 		const transformButton = document.querySelector(".enter");
@@ -35,30 +36,6 @@ function App() {
 			preload.classList.add("preload-finish");
 		});
 
-		const scrollPos =
-			window.scrollY ||
-			window.scrollTop ||
-			document.getElementsByTagName("html")[0].scrollTop;
-
-		const scrollOffset = (scrollPos / window.innerHeight) * 100;
-
-		let current = parseFloat(scrollOffset).toFixed(0);
-
-		if (current < 50) {
-			buttonRef.current.onclick = () => {
-				window.scrollTo({
-					top: document.body.scrollHeight,
-					behavior: "smooth",
-				});
-			};
-		} else {
-			buttonRef.current.onclick = () =>
-				window.scrollTo({
-					top: 0,
-					behavior: "smooth",
-				});
-		}
-
 		return () => {
 			window.removeEventListener("load", () => {
 				const preload = document.querySelector(".preload");
@@ -67,6 +44,25 @@ function App() {
 			});
 		};
 	}, []);
+
+	useEffect(() => {
+		if (refreshCurrent < 50) {
+			buttonRef.current.onclick = () => {
+				window.scrollTo({
+					top: document.body.scrollHeight,
+					behavior: "smooth",
+				});
+			};
+			setRefreshCurrent(document.body.scrollHeight);
+		} else {
+			buttonRef.current.onclick = () =>
+				window.scrollTo({
+					top: 0,
+					behavior: "smooth",
+				});
+			setRefreshCurrent(0);
+		}
+	}, [refreshCurrent]);
 
 	useEffect(() => {
 		window.addEventListener("scroll", updateEls);
