@@ -4,7 +4,8 @@ import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
 import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
-import { IoArrowUpCircle } from "react-icons/io5";
+// import { IoArrowUpCircle } from "react-icons/io5";
+import { IoArrowDownCircle } from "react-icons/io5";
 
 function App() {
 	useEffect(() => {
@@ -39,11 +40,22 @@ function App() {
 			<Preload /> {/* Preloader for showing before page loads. */}
 			<Globe />
 			<Hero />
+			<button
+				className="enter"
+				onClick={() =>
+					window.scrollTo({
+						top: document.body.scrollHeight,
+						behavior: "smooth",
+					})
+				}
+			>
+				<IoArrowDownCircle className="icon" />
+			</button>
 			<Holder />
-			<IoArrowUpCircle
+			{/* <IoArrowUpCircle
 				className="up-icon"
 				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-			/>
+			/> */}
 		</>
 	);
 }
