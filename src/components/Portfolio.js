@@ -1,11 +1,10 @@
 import React from "react";
 import projects from "../data/projects";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
-import { useSpring, animated } from "react-spring";
+import { motion } from "framer-motion";
+import { opacity, left, right } from "../data/variants";
 
 const Portfolio = () => {
-	const props = useSpring({ opacity: 1, from: { opacity: 0 } });
-
 	function shuffle(array) {
 		// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 		var currentIndex = array.length,
@@ -28,12 +27,32 @@ const Portfolio = () => {
 	}
 
 	return (
-		<animated.div className="portfolio" style={props}>
-			<h1 className="title">Portfolio</h1>
+		<div className="portfolio">
+			<motion.h1
+				className="title"
+				initial="start"
+				animate="end"
+				variants={opacity}
+			>
+				Portfolio
+			</motion.h1>
 
 			<div className="cards">
 				{shuffle(projects.slice(0, 6)).map((project, key) => (
-					<div className="mini-card" key={key}>
+					<motion.div
+						className="mini-card"
+						key={key}
+						initial="start"
+						animate="end"
+						variants={key % 2 === 0 ? left : right}
+						transition={{
+							ease: "easeInOut",
+							duration: 0.2,
+							type: "spring",
+							damping: 6,
+							stiffness: 80,
+						}}
+					>
 						<div className="lead">
 							<h2 className="title">
 								{project.link ? (
@@ -77,10 +96,10 @@ const Portfolio = () => {
 								<FaPython className="icon" title="python" />
 							)}
 						</div>
-					</div>
+					</motion.div>
 				))}
 			</div>
-		</animated.div>
+		</div>
 	);
 };
 

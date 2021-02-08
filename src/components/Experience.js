@@ -6,11 +6,20 @@ import {
 import "react-vertical-timeline-component/style.min.css";
 // import { FaBuilding } from "react-icons/fa";
 import experience from "../data/experience";
+import { opacity } from "../data/variants";
+import { motion } from "framer-motion";
 
 const Experience = () => {
 	return (
 		<div className="experience">
-			<h1 className="title">Experience</h1>
+			<motion.h1
+				className="title"
+				initial="start"
+				animate="end"
+				variants={opacity}
+			>
+				Experience
+			</motion.h1>
 
 			<VerticalTimeline className="timeline">
 				{experience.map((item, key) => (
