@@ -63,6 +63,22 @@ $secondary-font: "Livvic", sans-serif;
 	bottom: 2rem;
 	opacity: 0.7;
 	filter: invert(0.8);
+	animation: bounce 2s linear infinite alternate;
+
+	@keyframes bounce {
+		0% {
+			top: 0;
+		}
+		25% {
+			top: -10px;
+		}
+		50% {
+			top: 0px;
+		}
+		100% {
+			top: -10px;
+		}
+	}
 
 	@include mq(768px) {
 		font-size: 3rem;
