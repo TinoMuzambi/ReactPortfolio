@@ -11,23 +11,9 @@ import {
 import about from "../data/about";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
+import { opacity, left, right } from "../data/variants";
 
 const About = () => {
-	const left = {
-		start: { x: -1000 },
-		end: { x: 0 },
-	};
-
-	const right = {
-		start: { x: 1000 },
-		end: { x: 0 },
-	};
-
-	const opacity = {
-		start: { opacity: 0 },
-		end: { opacity: 1 },
-	};
-
 	return (
 		<div className="about">
 			<motion.h1

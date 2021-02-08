@@ -2,23 +2,9 @@ import React from "react";
 import projects from "../data/projects";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { opacity, left, right } from "../data/variants";
 
 const Portfolio = () => {
-	const left = {
-		start: { x: -1000 },
-		end: { x: 0 },
-	};
-
-	const right = {
-		start: { x: 1000 },
-		end: { x: 0 },
-	};
-
-	const opacity = {
-		start: { opacity: 0 },
-		end: { opacity: 1 },
-	};
-
 	function shuffle(array) {
 		// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 		var currentIndex = array.length,

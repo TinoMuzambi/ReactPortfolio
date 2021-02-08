@@ -1,14 +1,9 @@
 import React from "react";
 import tools from "../data/tools";
-import { up, down } from "../data/variants";
+import { up, down, opacity } from "../data/variants";
 import { motion } from "framer-motion";
 
 const Tools = () => {
-	const opacity = {
-		start: { opacity: 0 },
-		end: { opacity: 1 },
-	};
-
 	return (
 		<div className="tools">
 			<motion.h1

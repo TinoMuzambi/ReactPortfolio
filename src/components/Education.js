@@ -7,12 +7,9 @@ import "react-vertical-timeline-component/style.min.css";
 import { FaUniversity } from "react-icons/fa";
 import education from "../data/education";
 import { motion } from "framer-motion";
+import { opacity } from "../data/variants";
 
 const Education = () => {
-	const opacity = {
-		start: { opacity: 0 },
-		end: { opacity: 1 },
-	};
 	return (
 		<div className="education">
 			<motion.h1
