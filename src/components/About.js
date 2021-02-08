@@ -9,14 +9,25 @@ import {
 	FaMailBulk,
 } from "react-icons/fa";
 import { useSpring, animated } from "react-spring";
+import { motion } from "framer-motion";
 
 const About = () => {
 	const props = useSpring({ opacity: 1, from: { opacity: 0 } });
+	const variants = {
+		start: { x: -1000 },
+		end: { x: 0 },
+	};
 
 	return (
-		<animated.div className="about" style={props}>
+		<div className="about">
 			<h1 className="title">About</h1>
-			<div className="mini-card">
+			<motion.div
+				className="mini-card"
+				initial="start"
+				animate="end"
+				variants={variants}
+				transition={{ ease: "easeOut", duration: 0.2 }}
+			>
 				<h2 className="subtitle">Bio</h2>
 				<div className="inner">
 					<img src="/assets/about.png" alt="person" className="tag" />
@@ -28,7 +39,7 @@ const About = () => {
 						Science and am always looking to learn new things.
 					</p>
 				</div>
-			</div>
+			</motion.div>
 			<div className="mini-card">
 				<h2 className="subtitle">Hobbies</h2>
 				<div className="inner">
@@ -111,7 +122,7 @@ const About = () => {
 					</div>
 				</div>
 			</div>
-		</animated.div>
+		</div>
 	);
 };
 

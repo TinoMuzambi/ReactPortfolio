@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"framer-motion": "^3.3.0",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"react-globe.gl": "^2.13.0",
