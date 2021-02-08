@@ -150,6 +150,16 @@
 				.icon {
 					height: 4rem;
 					transform: rotate(20deg);
+					animation: rotate 2s linear infinite alternate;
+
+					@keyframes rotate {
+						from {
+							transform: rotateZ(20deg) scale(1);
+						}
+						to {
+							transform: rotateZ(30deg) scale(1.1);
+						}
+					}
 
 					@include mq(1100px) {
 						display: none;
