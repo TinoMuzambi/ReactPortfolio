@@ -14,6 +14,11 @@ const Portfolio = () => {
 		end: { x: 0 },
 	};
 
+	const opacity = {
+		start: { opacity: 0 },
+		end: { opacity: 1 },
+	};
+
 	function shuffle(array) {
 		// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 		var currentIndex = array.length,
@@ -37,7 +42,14 @@ const Portfolio = () => {
 
 	return (
 		<div className="portfolio">
-			<h1 className="title">Portfolio</h1>
+			<motion.h1
+				className="title"
+				initial="start"
+				animate="end"
+				variants={opacity}
+			>
+				Portfolio
+			</motion.h1>
 
 			<div className="cards">
 				{shuffle(projects.slice(0, 6)).map((project, key) => (

@@ -13,9 +13,21 @@ const Tools = () => {
 		end: { y: 0 },
 	};
 
+	const opacity = {
+		start: { opacity: 0 },
+		end: { opacity: 1 },
+	};
+
 	return (
 		<div className="tools">
-			<h1 className="title">Tools and Technologies</h1>
+			<motion.h1
+				className="title"
+				initial="start"
+				animate="end"
+				variants={opacity}
+			>
+				Tools and Technologies
+			</motion.h1>
 			<div className="content">
 				{tools.map((tool) =>
 					tool.link ? (

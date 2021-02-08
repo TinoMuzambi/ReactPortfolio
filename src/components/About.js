@@ -23,9 +23,21 @@ const About = () => {
 		end: { x: 0 },
 	};
 
+	const opacity = {
+		start: { opacity: 0 },
+		end: { opacity: 1 },
+	};
+
 	return (
 		<div className="about">
-			<h1 className="title">About</h1>
+			<motion.h1
+				className="title"
+				initial="start"
+				animate="end"
+				variants={opacity}
+			>
+				About
+			</motion.h1>
 			{about.map((item, key) => (
 				<motion.div
 					className="mini-card"
