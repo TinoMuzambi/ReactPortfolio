@@ -8,11 +8,10 @@ import {
 	FaGithub,
 	FaMailBulk,
 } from "react-icons/fa";
-import { useSpring, animated } from "react-spring";
+
 import { motion } from "framer-motion";
 
 const About = () => {
-	const props = useSpring({ opacity: 1, from: { opacity: 0 } });
 	const variants = {
 		start: { x: -1000 },
 		end: { x: 0 },
