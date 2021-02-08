@@ -8,7 +8,7 @@ const Hero = () => {
 				<h1 className="title">Welcome to my World.</h1>
 			</div>
 			<button
-				className="enter"
+				className="down"
 				onClick={() =>
 					window.scrollTo({
 						top: document.body.scrollHeight,
