@@ -13,8 +13,13 @@ import { motion } from "framer-motion";
 import parse from "html-react-parser";
 
 const About = () => {
-	const variants = {
+	const left = {
 		start: { x: -1000 },
+		end: { x: 0 },
+	};
+
+	const right = {
+		start: { x: 1000 },
 		end: { x: 0 },
 	};
 
@@ -27,8 +32,14 @@ const About = () => {
 					key={key}
 					initial="start"
 					animate="end"
-					variants={variants}
-					transition={{ ease: "easeOut", duration: 0.2 }}
+					variants={key % 2 === 0 ? left : right}
+					transition={{
+						ease: "easeInOut",
+						duration: 0.2,
+						type: "spring",
+						damping: 6,
+						stiffness: 80,
+					}}
 				>
 					<h2 className="subtitle">{item.title}</h2>
 					<div className="inner">
