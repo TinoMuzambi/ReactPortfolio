@@ -1,18 +1,9 @@
 import React from "react";
 import tools from "../data/tools";
+import { up, down } from "../data/variants";
 import { motion } from "framer-motion";
 
 const Tools = () => {
-	const left = {
-		start: { y: -1000 },
-		end: { y: 0 },
-	};
-
-	const right = {
-		start: { y: 1000 },
-		end: { y: 0 },
-	};
-
 	const opacity = {
 		start: { opacity: 0 },
 		end: { opacity: 1 },
@@ -39,7 +30,7 @@ const Tools = () => {
 							key={tool.id}
 							initial="start"
 							animate="end"
-							variants={tool.id % 2 === 0 ? left : right}
+							variants={tool.id % 2 === 0 ? up : down}
 							transition={{
 								ease: "easeInOut",
 								duration: 0.2,
@@ -61,7 +52,7 @@ const Tools = () => {
 							key={tool.id}
 							initial="start"
 							animate="end"
-							variants={tool.id % 2 === 0 ? left : right}
+							variants={tool.id % 2 === 0 ? up : down}
 							transition={{
 								ease: "easeInOut",
 								duration: 0.2,
