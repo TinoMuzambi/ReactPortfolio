@@ -129,7 +129,7 @@ const tools = [
 	},
 	{ id: 27, title: "VS Code", icon: vs_code },
 	{ id: 28, title: "Wakatime", icon: wakatime },
-	{ id: 29, title: "Yarn", icon: yarn },
+	{ id: 29, title: "Yarn", icon: yarn , link: "https://projects.tinomuzambi.com/tags/yarn"},
 ];
 
 export default tools;
