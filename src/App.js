@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./css/App.min.css";
 import Globe from "./components/WorldGlobe";
 import Hero from "./components/Hero";
@@ -7,12 +7,16 @@ import Preload from "./pages/Preload";
 import { IoArrowUpCircle } from "react-icons/io5";
 
 function App() {
+	const [preloadVisible, setPreloadVisible] = useState(true);
 	useEffect(() => {
 		window.addEventListener("load", () => {
 			// Get rid of preloader once everything's loaded
 			const preload = document.querySelector(".preload");
 
 			preload.classList.add("preload-finish");
+			setTimeout(() => {
+				setPreloadVisible(false);
+			}, 1000);
 		});
 
 		return () => {
@@ -20,18 +24,25 @@ function App() {
 				const preload = document.querySelector(".preload");
 
 				preload.classList.add("preload-finish");
+				setTimeout(() => {
+					setPreloadVisible(false);
+				}, 1000);
 			});
 		};
 	}, []);
 
 	return (
 		<>
+			{
+				preloadVisible && (
+					<Preload />
+				) /* Preloader for showing before page loads. */
+			}
 			<header>
 				<Globe />
 				<Hero />
 			</header>
 			<main>
-				<Preload /> {/* Preloader for showing before page loads. */}
 				<Holder />
 				<IoArrowUpCircle
 					className="up-icon"
