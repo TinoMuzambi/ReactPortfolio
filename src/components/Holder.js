@@ -62,7 +62,7 @@ const Holder = () => {
 	};
 
 	return (
-		<div className="holder">
+		<section className="holder">
 			<div className="card">
 				<div className="sidebar">
 					<div className="profile">
@@ -146,7 +146,7 @@ const Holder = () => {
 			</div>
 
 			<p className="rights">Copyright © Tino Muzambi 2019 - 2021</p>
-		</div>
+		</section>
 	);
 };
 
