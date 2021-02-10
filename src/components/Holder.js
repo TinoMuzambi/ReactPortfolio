@@ -136,13 +136,13 @@ const Holder = () => {
 						/>
 					</div>
 				</div>
-				<div className="content">
+				<article className="content">
 					{currentView === "about" && <About />}
 					{currentView === "edu" && <Education />}
 					{currentView === "exp" && <Experience />}
 					{currentView === "por" && <Portfolio />}
 					{currentView === "too" && <Tools />}
-				</div>
+				</article>
 			</div>
 
 			<footer>
