@@ -26,14 +26,18 @@ function App() {
 
 	return (
 		<>
-			<Preload /> {/* Preloader for showing before page loads. */}
-			<Globe />
-			<Hero />
-			<Holder />
-			<IoArrowUpCircle
-				className="up-icon"
-				onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-			/>
+			<header>
+				<Globe />
+				<Hero />
+			</header>
+			<main>
+				<Preload /> {/* Preloader for showing before page loads. */}
+				<Holder />
+				<IoArrowUpCircle
+					className="up-icon"
+					onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+				/>
+			</main>
 		</>
 	);
 }
