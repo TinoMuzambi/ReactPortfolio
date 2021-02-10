@@ -31,7 +31,7 @@ const Holder = () => {
 	useEffect(() => {
 		const getJoke = async () => {
 			const result = await fetch(
-				"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single"
+				"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single&safe-mode"
 			);
 			const data = await result.json();
 			setJoke(data.joke);
