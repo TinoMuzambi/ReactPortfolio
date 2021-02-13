@@ -44,7 +44,12 @@ const tools = [
 		icon: css,
 		link: "https://projects.tinomuzambi.com/tags/css",
 	},
-	{ id: 4, title: "Firebase", icon: firebase },
+	{
+		id: 4,
+		title: "Firebase",
+		icon: firebase,
+		link: "https://projects.tinomuzambi.com/tags/firebase",
+	},
 	{
 		id: 5,
 		title: "Flask",
@@ -129,7 +134,12 @@ const tools = [
 	},
 	{ id: 27, title: "VS Code", icon: vs_code },
 	{ id: 28, title: "Wakatime", icon: wakatime },
-	{ id: 29, title: "Yarn", icon: yarn , link: "https://projects.tinomuzambi.com/tags/yarn"},
+	{
+		id: 29,
+		title: "Yarn",
+		icon: yarn,
+		link: "https://projects.tinomuzambi.com/tags/yarn",
+	},
 ];
 
 export default tools;
