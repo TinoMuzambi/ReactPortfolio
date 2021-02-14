@@ -103,7 +103,12 @@ const tools = [
 		icon: netlify,
 		link: "https://projects.tinomuzambi.com/tags/netlify",
 	},
-	{ id: 18, title: "Nodejs", icon: nodejs },
+	{
+		id: 18,
+		title: "Nodejs",
+		icon: nodejs,
+		link: "https://projects.tinomuzambi.com/tags/nodejs",
+	},
 	{
 		id: 19,
 		title: "NPM",
