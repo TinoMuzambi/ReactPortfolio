@@ -97,7 +97,12 @@ const tools = [
 		icon: mongodb,
 		link: "https://projects.tinomuzambi.com/tags/mongodb",
 	},
-	{ id: 17, title: "Netlify", icon: netlify },
+	{
+		id: 17,
+		title: "Netlify",
+		icon: netlify,
+		link: "https://projects.tinomuzambi.com/tags/netlify",
+	},
 	{ id: 18, title: "Nodejs", icon: nodejs },
 	{
 		id: 19,
