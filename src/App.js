@@ -8,6 +8,7 @@ import { IoArrowUpCircle } from "react-icons/io5";
 
 function App() {
 	const [preloadVisible, setPreloadVisible] = useState(true);
+
 	useEffect(() => {
 		window.addEventListener("load", () => {
 			// Get rid of preloader once everything's loaded
