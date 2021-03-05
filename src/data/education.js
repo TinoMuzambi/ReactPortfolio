@@ -1,13 +1,13 @@
 const education = [
 	{
 		title: "Computer Science Honours",
-		institution: "Univesity of Cape Town",
+		institution: "University of Cape Town",
 		period: "2021 - current",
 		description: "TBA",
 	},
 	{
 		title: "BSc Computer Science",
-		institution: "Univesity of Cape Town",
+		institution: "University of Cape Town",
 		period: "2018 - 2020",
 		description:
 			"3 year Computer Science degree which covered several aspects of computing. In my time at UCT I was awarded the Dean's Merit List in 2018 and 2020 as well as joining Golden Key International Honour Society in 2019. I was also awarded the UCT Plus Gold award for 60 hours in an elected leadership role.",
