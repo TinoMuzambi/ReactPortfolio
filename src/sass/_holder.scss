@@ -134,6 +134,7 @@
 				);
 				padding: 1rem;
 				cursor: pointer;
+				white-space: pre-wrap;
 
 				@include mq(1300px) {
 					grid-template-columns: 60% 40%;
