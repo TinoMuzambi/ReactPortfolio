@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import About from "./About";
-import Education from "./Education";
-import Experience from "./Experience";
-import Portfolio from "./Portfolio";
-import Tools from "./Tools";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import {
 	FaInfoCircle,
 	FaSchool,
@@ -11,8 +8,12 @@ import {
 	FaCode,
 	FaToolbox,
 } from "react-icons/fa";
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
+
+import About from "./About";
+import Education from "./Education";
+import Experience from "./Experience";
+import Portfolio from "./Portfolio";
+import Tools from "./Tools";
 
 const Holder = () => {
 	const [joke, setJoke] = useState("");
@@ -66,7 +67,7 @@ const Holder = () => {
 			<div className="card">
 				<div className="sidebar">
 					<div className="profile">
-						<img src="/assets/me.jpg" alt="me" className="profile-img" />
+						<img src="/assets/outline.svg" alt="me" className="profile-img" />
 						<div className="info">
 							<h2 className="title">Tino Muzambi</h2>
 							<h3 className="subtitle">Full-Stack Web Developer</h3>
