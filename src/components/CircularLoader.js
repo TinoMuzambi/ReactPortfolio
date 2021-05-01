@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { useEffect } from "react";
 import { IoArrowUpCircle } from "react-icons/io5";
+
 import Holder from "./Holder";
 
 const CircularLoader = () => {
@@ -29,7 +30,6 @@ const CircularLoader = () => {
 				// need to set the transform origin in the center
 				gsap.set(this.DOM.circleText, { transformOrigin: "50% 50%" });
 				// hide on start
-				console.log(DOM.content, DOM.frame);
 				gsap.set(
 					[this.DOM.circleText, DOM.content.children, DOM.frame.children],
 					{
@@ -178,12 +178,11 @@ const CircularLoader = () => {
 
 		const intro = new Intro(document.querySelector(".circles"));
 
-		document.querySelector(".demo-3").classList.remove("loading");
 		intro.start();
 	}, []);
 
 	return (
-		<div className="body demo-3 loading">
+		<div className="body demo-3">
 			<main>
 				<svg
 					className="circles"
