@@ -858,6 +858,16 @@ a:visited {
   opacity: 0;
 }
 
+@media screen and (min-width: 53em) {
+  .body main .content {
+    height: 100vh;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: left;
+  }
+}
+
 .body main .enter {
   display: block;
   border: 0;
@@ -892,15 +902,5 @@ a:visited {
 
 .body main .enter .enter__text {
   position: relative;
-}
-
-@media screen and (min-width: 53em) {
-  .body main .body main .content {
-    height: 100vh;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    text-align: left;
-  }
 }
 /*# sourceMappingURL=App.min.css.map */
