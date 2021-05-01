@@ -94,6 +94,14 @@ $font-weight-circle-4: 300;
 			opacity: 0;
 		}
 
+		@media screen and (min-width: 53em) {
+			.content {
+				height: 100vh;
+				justify-content: center;
+				text-align: left;
+			}
+		}
+
 		.enter {
 			display: block;
 			border: 0;
@@ -129,18 +137,6 @@ $font-weight-circle-4: 300;
 
 			.enter__text {
 				position: relative;
-			}
-		}
-
-		@media screen and (min-width: 53em) {
-			.body {
-				main {
-					.content {
-						height: 100vh;
-						justify-content: center;
-						text-align: left;
-					}
-				}
 			}
 		}
 	}
