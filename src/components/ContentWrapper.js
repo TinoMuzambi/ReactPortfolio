@@ -44,7 +44,7 @@ const ContentWrapper = () => {
 					gsap.to(DOM.enterBackground, {
 						duration: 1.3,
 						ease: "expo",
-						scale: 1.4,
+						scale: isMobile ? 0.6 : 1.4,
 					});
 					gsap.to(this.DOM.circleText, {
 						duration: 0.5,
