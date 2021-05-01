@@ -5,8 +5,10 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow-x: hidden;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
 }
 
 html,
