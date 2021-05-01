@@ -24,6 +24,8 @@ $font-weight-circle-4: 300;
 
 .body {
 	margin: 0;
+	height: 100vh;
+	width: 100vw;
 	color: $color-text;
 	background-color: $color-bg;
 	font-family: sans-serif;
@@ -79,21 +81,12 @@ $font-weight-circle-4: 300;
 			}
 		}
 
-		.frame {
-			padding: 3rem 5vw;
-			text-align: center;
-			position: relative;
-			font-weight: 500;
-			will-change: transform;
-			opacity: 0;
-		}
-
 		.content {
 			display: flex;
 			flex-direction: column;
 			width: 100vw;
-			padding: 2rem;
-			height: calc(100vh - 13rem);
+			// padding: 2rem;
+			height: 100vh;
 			position: relative;
 			justify-content: flex-start;
 			align-items: center;
@@ -141,27 +134,6 @@ $font-weight-circle-4: 300;
 		@media screen and (min-width: 53em) {
 			.body {
 				main {
-					.frame {
-						position: fixed;
-						text-align: left;
-						z-index: 100;
-						top: 0;
-						left: 0;
-						display: grid;
-						align-content: space-between;
-						width: 100%;
-						max-width: none;
-						height: 100vh;
-						padding: 2rem;
-						pointer-events: none;
-						grid-template-columns: 50% 50%;
-						grid-template-rows: auto auto auto;
-						grid-template-areas:
-							"title links"
-							"... ..."
-							"... demos";
-					}
-
 					.content {
 						height: 100vh;
 						justify-content: center;

@@ -7,7 +7,6 @@ import Holder from "./Holder";
 const CircularLoader = () => {
 	useEffect(() => {
 		const DOM = {
-			frame: document.querySelector(".frame"),
 			content: document.querySelector(".content"),
 			enterCtrl: document.querySelector(".enter"),
 			enterBackground: document.querySelector(".enter__bg"),
@@ -30,12 +29,9 @@ const CircularLoader = () => {
 				// need to set the transform origin in the center
 				gsap.set(this.DOM.circleText, { transformOrigin: "50% 50%" });
 				// hide on start
-				gsap.set(
-					[this.DOM.circleText, DOM.content.children, DOM.frame.children],
-					{
-						opacity: 0,
-					}
-				);
+				gsap.set([this.DOM.circleText, DOM.content.children], {
+					opacity: 0,
+				});
 				// don't allow to hover
 				gsap.set(DOM.enterCtrl, { pointerEvents: "none" });
 
@@ -130,7 +126,7 @@ const CircularLoader = () => {
 				DOM.enterCtrl.removeEventListener("mouseleave", this.enterMouseLeaveEv);
 				gsap.set(DOM.enterCtrl, { pointerEvents: "none" });
 
-				gsap.set([DOM.frame, DOM.content], { opacity: 1 });
+				gsap.set([DOM.content], { opacity: 1 });
 
 				gsap
 					.timeline()
@@ -160,7 +156,7 @@ const CircularLoader = () => {
 						"start"
 					)
 					.to(
-						[DOM.content.children, DOM.frame.children],
+						[DOM.content.children],
 						{
 							duration: 0.8,
 							ease: "back.out",
@@ -250,9 +246,6 @@ const CircularLoader = () => {
 					</text>
 				</svg>
 
-				<div className="frame">
-					<p></p>
-				</div>
 				<div className="content">
 					<main>
 						<Holder />

@@ -10,6 +10,12 @@
   transition: all 0.2s;
 }
 
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 .hero, .holder, .holder .card .sidebar, .portfolio .cards .mini-card {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1037,6 +1043,8 @@
 
 .body {
   margin: 0;
+  height: 100vh;
+  width: 100vw;
   color: #292725;
   background-color: #dad4d1;
   font-family: sans-serif;
@@ -1092,15 +1100,6 @@
   fill: #272524;
 }
 
-.body main .frame {
-  padding: 3rem 5vw;
-  text-align: center;
-  position: relative;
-  font-weight: 500;
-  will-change: transform;
-  opacity: 0;
-}
-
 .body main .content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1110,8 +1109,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100vw;
-  padding: 2rem;
-  height: calc(100vh - 13rem);
+  height: 100vh;
   position: relative;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
@@ -1159,27 +1157,6 @@
 }
 
 @media screen and (min-width: 53em) {
-  .body main .body main .frame {
-    position: fixed;
-    text-align: left;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    display: -ms-grid;
-    display: grid;
-    -ms-flex-line-pack: justify;
-        align-content: space-between;
-    width: 100%;
-    max-width: none;
-    height: 100vh;
-    padding: 2rem;
-    pointer-events: none;
-    -ms-grid-columns: 50% 50%;
-        grid-template-columns: 50% 50%;
-    -ms-grid-rows: auto auto auto;
-        grid-template-rows: auto auto auto;
-        grid-template-areas: "title links" "... ..." "... demos";
-  }
   .body main .body main .content {
     height: 100vh;
     -webkit-box-pack: center;
