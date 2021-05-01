@@ -3,7 +3,7 @@
 		margin-bottom: 2rem;
 	}
 
-	.content {
+	.main-content {
 		background: none !important;
 		padding: 0 !important;
 		width: 100%;
@@ -19,6 +19,7 @@
 
 		.tools-img {
 			width: 20%;
+			transition: transform 0.2s;
 
 			&:hover {
 				transform: scale(0.9);

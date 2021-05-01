@@ -1,5 +1,6 @@
 .holder {
 	min-height: 100vh;
+	width: 100vw;
 	background-image: linear-gradient(
 			to bottom,
 			rgba($primary-color, 0.6),
@@ -173,12 +174,13 @@
 			}
 		}
 
-		.content {
+		.main-content {
 			height: 100%;
 			width: 100%;
 			background: rgba($color: white, $alpha: 0.2);
 			padding: 2rem 5rem;
 			position: relative;
+			text-align: left;
 
 			@include mq(768px) {
 				padding: 2rem;

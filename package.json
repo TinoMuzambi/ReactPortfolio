@@ -4,10 +4,11 @@
 	"private": true,
 	"dependencies": {
 		"framer-motion": "^3.3.0",
+		"gsap": "^3.6.1",
 		"html-react-parser": "^1.2.4",
 		"react": "^17.0.1",
+		"react-device-detect": "^1.17.0",
 		"react-dom": "^17.0.1",
-		"react-globe.gl": "^2.13.0",
 		"react-icons": "^4.1.0",
 		"react-scripts": "4.0.1",
 		"react-vertical-timeline-component": "^3.3.1",

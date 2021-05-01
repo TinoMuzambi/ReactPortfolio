@@ -18,7 +18,7 @@ const about = [
             href="https://blog.tinomuzambi.com"
             target="_blank"
             rel="noreferrer"
-            class="blog-link"
+            className="blog-link"
         >
             blog.tinomuzambi.com
         </a>

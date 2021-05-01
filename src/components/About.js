@@ -35,8 +35,8 @@ const About = () => {
 						ease: "easeInOut",
 						duration: 0.2,
 						type: "spring",
-						damping: 6,
-						stiffness: 80,
+						damping: 10,
+						stiffness: 50,
 					}}
 				>
 					<h2 className="subtitle">{item.title}</h2>

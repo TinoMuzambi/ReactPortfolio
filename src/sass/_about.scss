@@ -59,6 +59,10 @@
 				.blog-link {
 					color: white;
 
+					&:visited {
+						color: white;
+					}
+
 					&:hover {
 						color: $secondary-blue;
 					}
@@ -83,6 +87,7 @@
 					border-radius: 50%;
 					color: white;
 					border: 2px solid transparent;
+					transition: transform 0.2s;
 
 					@include mq(768px) {
 						padding: 0.5rem;
