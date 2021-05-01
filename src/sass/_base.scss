@@ -75,35 +75,3 @@ a {
 	border-radius: 30px;
 	border: solid 3px rgba($color: white, $alpha: 0.2);
 }
-
-.up-icon {
-	@include button;
-	font-size: 4rem;
-	position: fixed;
-	right: 2rem;
-	bottom: 2rem;
-	opacity: 0.7;
-	filter: invert(0.8);
-	animation: bounce 2s linear infinite alternate;
-
-	@keyframes bounce {
-		0% {
-			top: 0;
-		}
-		25% {
-			top: -10px;
-		}
-		50% {
-			top: 0px;
-		}
-		100% {
-			top: -10px;
-		}
-	}
-
-	@include mq(768px) {
-		font-size: 3rem;
-		right: 0rem;
-		bottom: 0.5rem;
-	}
-}
