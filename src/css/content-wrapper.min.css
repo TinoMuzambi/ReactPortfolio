@@ -3,8 +3,9 @@
   height: 100vh;
   width: 100vw;
   color: #292725;
-  background-color: #dad4d1;
-  font-family: sans-serif;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(55, 237, 83, 0.3)), to(rgba(16, 157, 232, 0.3)));
+  background: linear-gradient(rgba(55, 237, 83, 0.3), rgba(16, 157, 232, 0.3));
+  font-family: tenon, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -28,7 +29,7 @@
 .body main .circles .circles__text.circles__text--1 {
   font-size: 25vmin;
   font-size: clamp(170px, 25vmin, 180px);
-  font-family: serif;
+  font-family: ivymode, sans-serif !important;
   font-weight: 400;
   fill: #272524;
 }
@@ -36,7 +37,7 @@
 .body main .circles .circles__text.circles__text--2 {
   font-size: 17vmin;
   font-size: clamp(136px, 17vmin, 153px);
-  font-family: serif;
+  font-family: modesto-condensed, serif !important;
   font-weight: 300;
   fill: #272524;
 }
@@ -44,7 +45,7 @@
 .body main .circles .circles__text.circles__text--3 {
   font-size: 13.5vmin;
   font-size: clamp(110px, 13.5vmin, 120px);
-  font-family: serif;
+  font-family: minerva-modern, sans-serif !important;
   font-weight: 400;
   fill: #272524;
 }
@@ -52,7 +53,7 @@
 .body main .circles .circles__text.circles__text--4 {
   font-size: 9.5vmin;
   font-size: clamp(85px, 9.5vmin, 94px);
-  font-family: sans-serif;
+  font-family: niagara, serif !important;
   font-weight: 300;
   fill: #272524;
 }
@@ -90,7 +91,7 @@
   font-weight: 500;
   cursor: pointer;
   background: none;
-  color: #272524;
+  color: whitesmoke;
   padding: 0;
   opacity: 0;
   overflow-x: unset;
@@ -107,7 +108,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: #a99c90;
+  background: #504a44;
 }
 
 .body main .enter .enter__text {
