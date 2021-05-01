@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
+import { gsap } from "gsap";
 
 import Holder from "./Holder";
 
