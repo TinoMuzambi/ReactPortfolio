@@ -40,11 +40,11 @@ function App() {
 					<Preload />
 				) /* Preloader for showing before page loads. */
 			}
-			<header>
-				{/* <Globe />
-				<Hero /> */}
-				<CircularLoader />
-			</header>
+			{/* <header>
+				<Globe />
+				<Hero />
+			</header> */}
+			<CircularLoader />
 			{/* <main>
 				<Holder />
 				<IoArrowUpCircle
