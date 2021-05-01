@@ -1037,52 +1037,11 @@
 
 .body {
   margin: 0;
-  --color-text: #a5a5a5;
-  --color-bg: #191613;
-  --color-link: #d6af7c;
-  --color-link-hover: #fff;
-  --color-text-circle-1: #48423c;
-  --color-text-circle-2: #48423c;
-  --color-text-circle-3: #48423c;
-  --color-text-circle-4: #48423c;
-  --font-circle-1: sans-serif;
-  --font-weight-circle-1: 300;
-  --font-circle-2: serif;
-  --font-weight-circle-2: 400;
-  --font-circle-3: sans-serif;
-  --font-weight-circle-3: 400;
-  --font-circle-4: serif;
-  --font-weight-circle-4: 300;
-  --color-button: #d6ae7c;
-  --color-text-button: #1d1812;
-  --dim-button: 90px;
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  color: #292725;
+  background-color: #dad4d1;
   font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.demo-3 {
-  --color-text: #292725;
-  --color-bg: #dad4d1;
-  --color-link: #a99c90;
-  --color-link-hover: #292725;
-  --color-font-circle: #7b7772;
-  --color-button: #a99c90;
-  --color-text-button: #272524;
-  --color-text-circle-1: #272524;
-  --color-text-circle-2: #272524;
-  --color-text-circle-3: #272524;
-  --color-text-circle-4: #272524;
-  --font-circle-1: serif;
-  --font-weight-circle-1: 400;
-  --font-circle-2: serif;
-  --font-weight-circle-2: 300;
-  --font-circle-3: serif;
-  --font-weight-circle-3: 400;
-  --font-circle-4: sans-serif;
-  --font-weight-circle-4: 300;
 }
 
 /* Page Loader */
@@ -1102,7 +1061,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--color-bg);
+  background: #dad4d1;
 }
 
 .js body::after {
@@ -1122,7 +1081,7 @@
           justify-content: center;
   font-weight: 500;
   line-height: 1;
-  color: var(--color-link);
+  color: #a99c90;
 }
 
 .js .loading::before,
@@ -1146,16 +1105,16 @@
 .enter {
   display: block;
   border: 0;
-  width: var(--dim-button);
-  height: var(--dim-button);
+  width: 90px;
+  height: 90px;
   position: absolute;
-  left: calc(50% - var(--dim-button) / 2);
-  top: calc(50% - var(--dim-button) / 2);
+  left: calc(50% - $dim-button / 2);
+  top: calc(50% - $dim-button / 2);
   font: inherit;
   font-weight: 500;
   cursor: pointer;
   background: none;
-  color: var(--color-text-button);
+  color: #272524;
   padding: 0;
 }
 
@@ -1172,7 +1131,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: var(--color-button);
+  background: #a99c90;
 }
 
 .enter__text {
@@ -1221,15 +1180,10 @@
 .circles {
   pointer-events: none;
   position: fixed;
-  --dim: 186vmin;
-  width: var(--dim);
-  height: var(--dim);
-  top: calc(50% - var(--dim) / 2);
-  left: calc(50% - var(--dim) / 2);
-}
-
-.demo-3 .circles {
-  --dim: 206vmin;
+  width: 186vmin;
+  height: 186vmin;
+  top: calc(50% - $dim / 2);
+  left: calc(50% - $dim / 2);
 }
 
 .circles__text {
@@ -1242,33 +1196,33 @@
 .circles__text--1 {
   font-size: 25vmin;
   font-size: clamp(170px, 25vmin, 180px);
-  font-family: var(--font-circle-1);
-  font-weight: var(--font-weight-circle-1);
-  fill: var(--color-text-circle-1);
+  font-family: serif;
+  font-weight: 400;
+  fill: #272524;
 }
 
 .circles__text--2 {
   font-size: 17vmin;
   font-size: clamp(136px, 17vmin, 153px);
-  font-family: var(--font-circle-2);
-  font-weight: var(--font-weight-circle-2);
-  fill: var(--color-text-circle-2);
+  font-family: serif;
+  font-weight: 300;
+  fill: #272524;
 }
 
 .circles__text--3 {
   font-size: 13.5vmin;
   font-size: clamp(110px, 13.5vmin, 120px);
-  font-family: var(--font-circle-3);
-  font-weight: var(--font-weight-circle-3);
-  fill: var(--color-text-circle-3);
+  font-family: serif;
+  font-weight: 400;
+  fill: #272524;
 }
 
 .circles__text--4 {
   font-size: 9.5vmin;
   font-size: clamp(85px, 9.5vmin, 94px);
-  font-family: var(--font-circle-4);
-  font-weight: var(--font-weight-circle-4);
-  fill: var(--color-text-circle-4);
+  font-family: sans-serif;
+  font-weight: 300;
+  fill: #272524;
 }
 
 @media screen and (min-width: 53em) {
