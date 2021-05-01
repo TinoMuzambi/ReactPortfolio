@@ -1,13 +1,6 @@
 $primary-color: #37ed53;
-$secondary-color: #0cf277;
-$tertiary-color: #00dba7;
-$primary-blue: #0ce3f2;
 $secondary-blue: #109de8;
 
-$color-button: #d6ae7c;
-$color-text-button: #1d1812;
-
-$color-text: #292725;
 $color-bg: linear-gradient(rgba($primary-color, 1), rgba($secondary-blue, 1));
 $color-link: #a99c90;
 $color-link-hover: #292725;
@@ -43,12 +36,7 @@ $font-circle-4: niagara, serif;
 $font-weight-circle-4: 300;
 
 .body {
-	margin: 0;
-	height: 100vh;
-	width: 100vw;
-	color: $color-text;
 	background: $color-bg;
-	font-family: tenon, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
@@ -103,8 +91,6 @@ $font-weight-circle-4: 300;
 		.content {
 			display: flex;
 			flex-direction: column;
-			width: 100vw;
-			height: 100vh;
 			position: relative;
 			justify-content: flex-start;
 			align-items: center;
