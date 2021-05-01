@@ -999,7 +999,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.tools .content {
+.tools .main-content {
   background: none !important;
   padding: 0 !important;
   width: 100%;
@@ -1011,15 +1011,15 @@ body {
   row-gap: 1rem;
 }
 
-.tools .content a .tools-img {
+.tools .main-content a .tools-img {
   width: 100%;
 }
 
-.tools .content .tools-img {
+.tools .main-content .tools-img {
   width: 20%;
 }
 
-.tools .content .tools-img:hover {
+.tools .main-content .tools-img:hover {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
 }

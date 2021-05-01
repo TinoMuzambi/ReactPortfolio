@@ -14,7 +14,7 @@ const Tools = () => {
 			>
 				Tools and Technologies
 			</motion.h1>
-			<div className="content">
+			<div className="main-content">
 				{tools.map((tool) =>
 					tool.link ? (
 						<motion.a
