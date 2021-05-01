@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { useEffect } from "react";
-import { IoArrowUpCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
@@ -249,10 +248,6 @@ const ContentWrapper = () => {
 				<div className="content">
 					<main>
 						<Holder />
-						<IoArrowUpCircle
-							className="up-icon"
-							onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-						/>
 					</main>
 				</div>
 				<button className="enter">
