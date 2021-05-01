@@ -94,6 +94,7 @@
 					background: transparent;
 					border-radius: 1000px;
 					padding: 0.5rem;
+					font-weight: bold;
 
 					@include mq(768px) {
 						padding: 0.5rem;
