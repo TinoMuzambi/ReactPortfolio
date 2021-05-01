@@ -177,7 +177,7 @@ const ContentWrapper = () => {
 	}, []);
 
 	return (
-		<div className="body demo-3">
+		<section className="body demo-3">
 			<main>
 				<svg
 					className="circles"
@@ -246,16 +246,14 @@ const ContentWrapper = () => {
 				</svg>
 
 				<div className="content">
-					<main>
-						<Holder />
-					</main>
+					<Holder />
 				</div>
 				<button className="enter">
 					<div className="enter__bg"></div>
 					<span className="enter__text">Enter</span>
 				</button>
 			</main>
-		</div>
+		</section>
 	);
 };
 
