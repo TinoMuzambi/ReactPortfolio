@@ -19,6 +19,7 @@
 
 		.tools-img {
 			width: 20%;
+			transition: transform 0.2s;
 
 			&:hover {
 				transform: scale(0.9);

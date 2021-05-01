@@ -5,10 +5,6 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   overflow-x: hidden;
-  -webkit-transition: -webkit-transform 0.2s;
-  transition: -webkit-transform 0.2s;
-  transition: transform 0.2s;
-  transition: transform 0.2s, -webkit-transform 0.2s;
 }
 
 html,
@@ -576,6 +572,10 @@ a:visited {
   border-radius: 50%;
   color: white;
   border: 2px solid transparent;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
 }
 
 @media only screen and (max-width: 768px) {
@@ -812,6 +812,10 @@ a:visited {
 
 .tools .main-content .tools-img {
   width: 20%;
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
 }
 
 .tools .main-content .tools-img:hover {
