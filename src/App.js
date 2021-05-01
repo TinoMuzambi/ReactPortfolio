@@ -3,11 +3,9 @@ import Wrapper from "./components/ContentWrapper";
 
 function App() {
 	return (
-		<>
-			<main>
-				<Wrapper />
-			</main>
-		</>
+		<section>
+			<Wrapper />
+		</section>
 	);
 }
 
