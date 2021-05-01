@@ -182,7 +182,12 @@ const CircularLoader = () => {
 	return (
 		<div className="demo-3 loading">
 			<main>
-				<svg class="circles" width="100%" height="100%" viewBox="0 0 1400 1400">
+				<svg
+					className="circles"
+					width="100%"
+					height="100%"
+					viewBox="0 0 1400 1400"
+				>
 					<def>
 						<path
 							id="circle-1"
@@ -201,9 +206,9 @@ const CircularLoader = () => {
 							d="M567.5,700.5A133,133 0 1 1833.5,700.5A133,133 0 1 1567.5,700.5"
 						/>
 					</def>
-					<text class="circles__text circles__text--1">
+					<text className="circles__text circles__text--1">
 						<textPath
-							class="circles__text-path"
+							className="circles__text-path"
 							xlinkHref="#circle-1"
 							aria-label=""
 							textLength="2830"
@@ -211,9 +216,9 @@ const CircularLoader = () => {
 							Let life begin I've cleansed all my sins&nbsp;
 						</textPath>
 					</text>
-					<text class="circles__text circles__text--2">
+					<text className="circles__text circles__text--2">
 						<textPath
-							class="circles__text-path"
+							className="circles__text-path"
 							xlinkHref="#circle-2"
 							aria-label=""
 							textLength="2001"
@@ -221,9 +226,9 @@ const CircularLoader = () => {
 							Burn all the money absolve all the lies&nbsp;
 						</textPath>
 					</text>
-					<text class="circles__text circles__text--3">
+					<text className="circles__text circles__text--3">
 						<textPath
-							class="circles__text-path"
+							className="circles__text-path"
 							xlinkHref="#circle-3"
 							aria-label=""
 							textLength="1341"
@@ -231,9 +236,9 @@ const CircularLoader = () => {
 							We are caged in simulations&nbsp;
 						</textPath>
 					</text>
-					<text class="circles__text circles__text--4">
+					<text className="circles__text circles__text--4">
 						<textPath
-							class="circles__text-path"
+							className="circles__text-path"
 							xlinkHref="#circle-4"
 							aria-label=""
 							textLength="836"
@@ -252,9 +257,9 @@ const CircularLoader = () => {
 							/>
 						</main>
 					</div>
-					<button class="enter">
-						<div class="enter__bg"></div>
-						<span class="enter__text">Enter</span>
+					<button className="enter">
+						<div className="enter__bg"></div>
+						<span className="enter__text">Enter</span>
 					</button>
 				</div>
 			</main>
