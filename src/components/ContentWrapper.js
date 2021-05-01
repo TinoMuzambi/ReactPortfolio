@@ -259,7 +259,7 @@ const ContentWrapper = () => {
 				</div>
 				<button className="enter">
 					<div className="enter__bg"></div>
-					<span className="enter__text">Enter</span>
+					<span className="enter__text">Explore</span>
 				</button>
 			</main>
 		</section>
