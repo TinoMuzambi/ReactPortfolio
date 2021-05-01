@@ -431,7 +431,7 @@ body {
   font-size: 0.8rem;
 }
 
-.holder .card .content {
+.holder .card .main-content {
   height: 100%;
   width: 100%;
   background: rgba(255, 255, 255, 0.2);
@@ -440,7 +440,7 @@ body {
 }
 
 @media only screen and (max-width: 768px) {
-  .holder .card .content {
+  .holder .card .main-content {
     padding: 2rem;
   }
 }

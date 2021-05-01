@@ -137,7 +137,7 @@ const Holder = () => {
 						/>
 					</div>
 				</div>
-				<article className="content">
+				<article className="main-content">
 					{currentView === "about" && <About />}
 					{currentView === "edu" && <Education />}
 					{currentView === "exp" && <Experience />}
