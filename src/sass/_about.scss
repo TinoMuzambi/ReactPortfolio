@@ -5,6 +5,10 @@
 		width: 100%;
 	}
 
+	.title {
+		font-size: 1.5rem;
+	}
+
 	.mini-card {
 		@include mini-card;
 		padding: 1.2rem;

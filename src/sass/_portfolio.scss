@@ -1,6 +1,10 @@
 .portfolio {
 	width: 100%;
 
+	.title {
+		font-size: 1.5rem;
+	}
+
 	.cards {
 		display: flex;
 		flex-wrap: wrap;

@@ -380,6 +380,10 @@ a:visited {
   }
 }
 
+.about .title {
+  font-size: 1.5rem;
+}
+
 .about .mini-card {
   background: rgba(255, 255, 255, 0.4);
   margin-top: 2rem;
@@ -561,6 +565,10 @@ a:visited {
   }
 }
 
+.education .title {
+  font-size: 1.5rem;
+}
+
 .education .timeline {
   margin-top: 2rem;
 }
@@ -591,6 +599,10 @@ a:visited {
   .education .timeline .vertical-timeline-element-content {
     width: 80% !important;
   }
+}
+
+.experience .title {
+  font-size: 1.5rem;
 }
 
 .experience .timeline {
@@ -646,6 +658,10 @@ a:visited {
 
 .portfolio {
   width: 100%;
+}
+
+.portfolio .title {
+  font-size: 1.5rem;
 }
 
 .portfolio .cards {
@@ -732,6 +748,7 @@ a:visited {
 
 .tools .title {
   margin-bottom: 2rem;
+  font-size: 1.5rem;
 }
 
 .tools .main-content {
