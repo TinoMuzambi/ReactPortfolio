@@ -4,7 +4,7 @@ import { IoArrowUpCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
-const CircularLoader = () => {
+const ContentWrapper = () => {
 	useEffect(() => {
 		const DOM = {
 			content: document.querySelector(".content"),
@@ -264,4 +264,4 @@ const CircularLoader = () => {
 	);
 };
 
-export default CircularLoader;
+export default ContentWrapper;

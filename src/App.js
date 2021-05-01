@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./css/App.min.css";
 import Preload from "./pages/Preload";
-import CircularLoader from "./components/CircularLoader";
+import Wrapper from "./components/ContentWrapper";
 
 function App() {
 	const [preloadVisible, setPreloadVisible] = useState(true);
@@ -38,7 +38,7 @@ function App() {
 			}
 
 			<main>
-				<CircularLoader />
+				<Wrapper />
 			</main>
 		</>
 	);
