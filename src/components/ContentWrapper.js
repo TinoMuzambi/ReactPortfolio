@@ -1,5 +1,5 @@
-import { gsap } from "gsap";
 import { useEffect } from "react";
+import { gsap } from "gsap";
 
 import Holder from "./Holder";
 
@@ -75,8 +75,14 @@ const ContentWrapper = () => {
 						},
 					});
 				};
-				DOM.enterCtrl.addEventListener("mouseenter", this.enterMouseEnterEv);
-				DOM.enterCtrl.addEventListener("mouseleave", this.enterMouseLeaveEv);
+				if (window.Modernizr.hovermq) {
+					DOM.enterCtrl.addEventListener("mouseenter", this.enterMouseEnterEv);
+					DOM.enterCtrl.addEventListener("mouseleave", this.enterMouseLeaveEv);
+				} else {
+					setTimeout(() => {
+						this.enterMouseEnterEv();
+					}, 2000);
+				}
 
 				this.enterClickEv = () => this.enter();
 				DOM.enterCtrl.addEventListener("click", this.enterClickEv);
