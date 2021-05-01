@@ -81,7 +81,7 @@ const ContentWrapper = () => {
 				} else {
 					setTimeout(() => {
 						this.enterMouseEnterEv();
-					}, 2000);
+					}, 3000);
 				}
 
 				this.enterClickEv = () => this.enter();
