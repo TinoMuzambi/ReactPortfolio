@@ -14,7 +14,7 @@
         "../sass/_preload.scss",
         "../sass/_tools.scss",
         "../sass/_scrollbar.scss",
-        "../sass/_circular-loader.scss"
+        "../sass/content-wrapper.scss"
     ],
     "names": [],
     "file": "App.min.css"
