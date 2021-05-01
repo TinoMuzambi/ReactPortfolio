@@ -32,8 +32,8 @@ $font-weight-circle-4: 300;
 }
 
 /* Page Loader */
-.js body::before,
-.js body::after {
+.js .body::before,
+.js .body::after {
 	content: "";
 	position: fixed;
 	z-index: 1000;
@@ -42,7 +42,7 @@ $font-weight-circle-4: 300;
 	pointer-events: none;
 }
 
-.js body::before {
+.js .body::before {
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -50,7 +50,7 @@ $font-weight-circle-4: 300;
 	background: $color-bg;
 }
 
-.js body::after {
+.js .body::after {
 	content: "Loading";
 	top: 0;
 	left: 0;
