@@ -210,7 +210,7 @@ const ContentWrapper = () => {
 							aria-label=""
 							textLength="2830"
 						>
-							Let life begin I've cleansed all my sins&nbsp;
+							Hi, I'm Tino Muzambi.&nbsp;
 						</textPath>
 					</text>
 					<text className="circles__text circles__text--2">
@@ -220,7 +220,7 @@ const ContentWrapper = () => {
 							aria-label=""
 							textLength="2001"
 						>
-							Burn all the money absolve all the lies&nbsp;
+							Full-Stack Web Developer and Lover of Tech.&nbsp;
 						</textPath>
 					</text>
 					<text className="circles__text circles__text--3">
@@ -230,7 +230,7 @@ const ContentWrapper = () => {
 							aria-label=""
 							textLength="1341"
 						>
-							We are caged in simulations&nbsp;
+							Welcome to my portfolio site.&nbsp;
 						</textPath>
 					</text>
 					<text className="circles__text circles__text--4">
@@ -240,7 +240,7 @@ const ContentWrapper = () => {
 							aria-label=""
 							textLength="836"
 						>
-							But something has changed in us&nbsp;
+							Built with React, styled with Sass.&nbsp;
 						</textPath>
 					</text>
 				</svg>
