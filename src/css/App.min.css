@@ -437,6 +437,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   padding: 2rem 5rem;
   position: relative;
+  text-align: left;
 }
 
 @media only screen and (max-width: 768px) {
