@@ -50,7 +50,7 @@ const ContentWrapper = () => {
 						ease: "expo",
 						rotation: "+=120",
 						scale: 0.5,
-						opacity: 0.2,
+						opacity: 0.6,
 						stagger: {
 							amount: -0.15,
 						},
