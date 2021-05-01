@@ -14,6 +14,8 @@ html,
 body {
   height: 100vh;
   width: 100vw;
+  --dim: 206vmin;
+  --dim-button: 90px;
 }
 
 .hero, .holder, .holder .card .sidebar, .portfolio .cards .mini-card {
@@ -1055,10 +1057,10 @@ body {
 .body main .circles {
   pointer-events: none;
   position: fixed;
-  width: 206vmin;
-  height: 206vmin;
-  top: calc(50% - $dim / 2);
-  left: calc(50% - $dim / 2);
+  width: var(--dim);
+  height: var(--dim);
+  top: calc(50% - var(--dim) / 2);
+  left: calc(50% - var(--dim) / 2);
 }
 
 .body main .circles .circles__text {
@@ -1124,11 +1126,11 @@ body {
 .body main .enter {
   display: block;
   border: 0;
-  width: 90px;
-  height: 90px;
+  width: var(--dim-button);
+  height: var(--dim-button);
   position: absolute;
-  left: calc(50% - $dim-button / 2);
-  top: calc(50% - $dim-button / 2);
+  left: calc(50% - var(--dim-button) / 2);
+  top: calc(50% - var(--dim-button) / 2);
   font: inherit;
   font-weight: 500;
   cursor: pointer;

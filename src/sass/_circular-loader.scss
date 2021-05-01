@@ -1,6 +1,5 @@
 $color-button: #d6ae7c;
 $color-text-button: #1d1812;
-$dim-button: 90px;
 
 $color-text: #292725;
 $color-bg: #dad4d1;
@@ -36,11 +35,10 @@ $font-weight-circle-4: 300;
 		.circles {
 			pointer-events: none;
 			position: fixed;
-			$dim: 206vmin;
-			width: $dim;
-			height: $dim;
-			top: calc(50% - $dim / 2);
-			left: calc(50% - $dim / 2);
+			width: var(--dim);
+			height: var(--dim);
+			top: calc(50% - var(--dim) / 2);
+			left: calc(50% - var(--dim) / 2);
 
 			.circles__text {
 				text-transform: uppercase;
@@ -97,11 +95,11 @@ $font-weight-circle-4: 300;
 		.enter {
 			display: block;
 			border: 0;
-			width: $dim-button;
-			height: $dim-button;
+			width: var(--dim-button);
+			height: var(--dim-button);
 			position: absolute;
-			left: calc(50% - $dim-button / 2);
-			top: calc(50% - $dim-button / 2);
+			left: calc(50% - var(--dim-button) / 2);
+			top: calc(50% - var(--dim-button) / 2);
 			font: inherit;
 			font-weight: 500;
 			cursor: pointer;

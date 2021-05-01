@@ -22,6 +22,9 @@ html,
 body {
 	height: 100vh;
 	width: 100vw;
+
+	--dim: 206vmin;
+	--dim-button: 90px;
 }
 
 %flex {
