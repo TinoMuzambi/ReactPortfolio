@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import { useEffect } from "react";
+import { isMobile } from "react-device-detect";
 
 import Holder from "./Holder";
 
@@ -75,8 +76,14 @@ const ContentWrapper = () => {
 						},
 					});
 				};
-				DOM.enterCtrl.addEventListener("mouseenter", this.enterMouseEnterEv);
-				DOM.enterCtrl.addEventListener("mouseleave", this.enterMouseLeaveEv);
+				if (isMobile) {
+					setTimeout(() => {
+						this.enterMouseEnterEv();
+					}, 3000);
+				} else {
+					DOM.enterCtrl.addEventListener("mouseenter", this.enterMouseEnterEv);
+					DOM.enterCtrl.addEventListener("mouseleave", this.enterMouseLeaveEv);
+				}
 
 				this.enterClickEv = () => this.enter();
 				DOM.enterCtrl.addEventListener("click", this.enterClickEv);
