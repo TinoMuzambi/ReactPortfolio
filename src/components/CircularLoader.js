@@ -177,10 +177,9 @@ const CircularLoader = () => {
 		}
 
 		const intro = new Intro(document.querySelector(".circles"));
-		setTimeout(() => {
-			document.querySelector(".demo-3").classList.remove("loading");
-			intro.start();
-		}, 2000);
+
+		document.querySelector(".demo-3").classList.remove("loading");
+		intro.start();
 	}, []);
 
 	return (
@@ -251,21 +250,23 @@ const CircularLoader = () => {
 						</textPath>
 					</text>
 				</svg>
+
 				<div className="frame">
-					<div className="content">
-						<main>
-							<Holder />
-							<IoArrowUpCircle
-								className="up-icon"
-								onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-							/>
-						</main>
-					</div>
-					<button className="enter">
-						<div className="enter__bg"></div>
-						<span className="enter__text">Enter</span>
-					</button>
+					<p></p>
 				</div>
+				<div className="content">
+					<main>
+						<Holder />
+						<IoArrowUpCircle
+							className="up-icon"
+							onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+						/>
+					</main>
+				</div>
+				<button className="enter">
+					<div className="enter__bg"></div>
+					<span className="enter__text">Enter</span>
+				</button>
 			</main>
 		</div>
 	);

@@ -238,27 +238,7 @@
 			"... ..."
 			"... demos";
 	}
-	.frame__title {
-		margin: 0;
-		grid-area: title;
-	}
-	.frame__menu {
-		grid-area: menu;
-		justify-self: end;
-	}
-	.frame__links {
-		grid-area: links;
-		padding: 0;
-		justify-self: end;
-	}
-	.frame__demos {
-		margin: 0;
-		grid-area: demos;
-		justify-self: end;
-	}
-	.frame a {
-		pointer-events: auto;
-	}
+
 	.content {
 		height: 100vh;
 		justify-content: center;

@@ -1293,36 +1293,6 @@
         grid-template-rows: auto auto auto;
         grid-template-areas: "title links" "... ..." "... demos";
   }
-  .frame__title {
-    margin: 0;
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-    grid-area: title;
-  }
-  .frame__menu {
-    grid-area: menu;
-    -ms-grid-column-align: end;
-        justify-self: end;
-  }
-  .frame__links {
-    -ms-grid-row: 1;
-    -ms-grid-column: 2;
-    grid-area: links;
-    padding: 0;
-    -ms-grid-column-align: end;
-        justify-self: end;
-  }
-  .frame__demos {
-    margin: 0;
-    -ms-grid-row: 3;
-    -ms-grid-column: 2;
-    grid-area: demos;
-    -ms-grid-column-align: end;
-        justify-self: end;
-  }
-  .frame a {
-    pointer-events: auto;
-  }
   .content {
     height: 100vh;
     -webkit-box-pack: center;
