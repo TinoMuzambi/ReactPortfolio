@@ -239,7 +239,7 @@ const ContentWrapper = () => {
 							aria-label=""
 							textLength="1341"
 						>
-							Welcome to my portfolio site.&nbsp;
+							Welcome to my portfolio site .&nbsp;
 						</textPath>
 					</text>
 					<text className="circles__text circles__text--4">

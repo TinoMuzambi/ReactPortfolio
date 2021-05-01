@@ -110,8 +110,8 @@ $font-weight-circle-4: 300;
 			position: absolute;
 			left: calc(50% - var(--dim-button) / 2);
 			top: calc(50% - var(--dim-button) / 2);
-			font: inherit;
-			font-weight: 500;
+			font: $primary-font;
+			font-weight: 900;
 			cursor: pointer;
 			background: none;
 			color: $color-text-button;
@@ -137,6 +137,8 @@ $font-weight-circle-4: 300;
 
 			.enter__text {
 				position: relative;
+				font-size: 1.1rem;
+				color: $tertiary-color;
 			}
 		}
 	}
