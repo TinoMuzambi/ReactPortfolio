@@ -852,6 +852,7 @@ a:visited {
 
 .body main .circles {
   pointer-events: none;
+  z-index: 5;
   position: fixed;
   width: var(--dim);
   height: var(--dim);

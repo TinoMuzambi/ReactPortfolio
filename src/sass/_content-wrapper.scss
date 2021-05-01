@@ -43,6 +43,7 @@ $font-weight-circle-4: 300;
 	main {
 		.circles {
 			pointer-events: none;
+			z-index: 5;
 			position: fixed;
 			width: var(--dim);
 			height: var(--dim);

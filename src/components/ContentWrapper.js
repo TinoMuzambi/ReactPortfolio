@@ -7,6 +7,7 @@ import Holder from "./Holder";
 const ContentWrapper = () => {
 	useEffect(() => {
 		const DOM = {
+			holder: document.querySelector(".holder"),
 			content: document.querySelector(".content"),
 			enterCtrl: document.querySelector(".enter"),
 			enterBackground: document.querySelector(".enter__bg"),
@@ -33,7 +34,7 @@ const ContentWrapper = () => {
 					opacity: 0,
 				});
 				// don't allow to hover
-				gsap.set(DOM.enterCtrl, { pointerEvents: "none" });
+				gsap.set([DOM.holder, DOM.enterCtrl], { pointerEvents: "none" });
 
 				this.initEvents();
 			}
@@ -130,6 +131,7 @@ const ContentWrapper = () => {
 
 				DOM.enterCtrl.removeEventListener("mouseenter", this.enterMouseEnterEv);
 				DOM.enterCtrl.removeEventListener("mouseleave", this.enterMouseLeaveEv);
+				gsap.set(DOM.holder, { pointerEvents: "auto" });
 				gsap.set(DOM.enterCtrl, { pointerEvents: "none" });
 
 				gsap.set([DOM.content], { opacity: 1 });
