@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Holder from "./components/Holder";
 import Preload from "./pages/Preload";
 import { IoArrowUpCircle } from "react-icons/io5";
+import CircularLoader from "./components/CircularLoader";
 
 function App() {
 	const [preloadVisible, setPreloadVisible] = useState(true);
@@ -40,16 +41,17 @@ function App() {
 				) /* Preloader for showing before page loads. */
 			}
 			<header>
-				<Globe />
-				<Hero />
+				{/* <Globe />
+				<Hero /> */}
+				<CircularLoader />
 			</header>
-			<main>
+			{/* <main>
 				<Holder />
 				<IoArrowUpCircle
 					className="up-icon"
 					onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
 				/>
-			</main>
+			</main> */}
 		</>
 	);
 }

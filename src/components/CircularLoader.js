@@ -1,4 +1,184 @@
+import { gsap } from "gsap";
+import { useEffect } from "react";
+import { IoArrowUpCircle } from "react-icons/io5";
+import Holder from "./Holder";
+
+const DOM = {
+	frame: document.querySelector(".frame"),
+	content: document.querySelector(".content"),
+	enterCtrl: document.querySelector(".enter"),
+	enterBackground: document.querySelector(".enter__bg"),
+};
+
+export class Intro {
+	constructor(el) {
+		// the SVG element
+		this.DOM = { el: el };
+		// SVG texts
+		this.DOM.circleText = [
+			...this.DOM.el.querySelectorAll("text.circles__text"),
+		];
+		// total
+		this.circleTextTotal = this.DOM.circleText.length;
+
+		this.setup();
+	}
+	setup() {
+		// need to set the transform origin in the center
+		gsap.set(this.DOM.circleText, { transformOrigin: "50% 50%" });
+		// hide on start
+		console.log(DOM.content, DOM.frame);
+		gsap.set([this.DOM.circleText, DOM.content.children, DOM.frame.children], {
+			opacity: 0,
+		});
+		// don't allow to hover
+		gsap.set(DOM.enterCtrl, { pointerEvents: "none" });
+
+		this.initEvents();
+	}
+	initEvents() {
+		this.enterMouseEnterEv = () => {
+			gsap.killTweensOf([DOM.enterBackground, this.DOM.circleText]);
+
+			gsap.to(DOM.enterBackground, {
+				duration: 1.3,
+				ease: "expo",
+				scale: 1.4,
+			});
+			gsap.to(this.DOM.circleText, {
+				duration: 0.5,
+				ease: "expo",
+				rotation: "+=120",
+				scale: 0.5,
+				opacity: 0.2,
+				stagger: {
+					amount: -0.15,
+				},
+			});
+		};
+		this.enterMouseLeaveEv = () => {
+			//gsap.killTweensOf([DOM.enterBackground,this.DOM.circleText]);
+
+			gsap.to(DOM.enterBackground, {
+				duration: 2,
+				ease: "elastic.out(1, 0.4)",
+				scale: 1,
+			});
+			gsap.to(this.DOM.circleText, {
+				duration: 2,
+				ease: "elastic.out(1, 0.4)",
+				scale: 1,
+				rotation: "-=120",
+				opacity: 1,
+				stagger: {
+					amount: 0.15,
+				},
+			});
+		};
+		DOM.enterCtrl.addEventListener("mouseenter", this.enterMouseEnterEv);
+		DOM.enterCtrl.addEventListener("mouseleave", this.enterMouseLeaveEv);
+
+		this.enterClickEv = () => this.enter();
+		DOM.enterCtrl.addEventListener("click", this.enterClickEv);
+	}
+	start() {
+		this.startTL = gsap
+			.timeline()
+			.addLabel("start", 0)
+			// rotation for all texts
+			.to(
+				this.DOM.circleText,
+				{
+					duration: 3,
+					ease: "expo.inOut",
+					rotation: 90,
+					stagger: {
+						amount: 0.4,
+					},
+				},
+				"start"
+			)
+			// scale in the texts & enter button and fade them in
+			.to(
+				[this.DOM.circleText, DOM.enterCtrl],
+				{
+					duration: 3,
+					ease: "expo.inOut",
+					startAt: { opacity: 0, scale: 0.8 },
+					scale: 1,
+					opacity: 1,
+					stagger: {
+						amount: 0.4,
+					},
+				},
+				"start"
+			)
+			// at start+1 allow the hover over the enter ctrl
+			.add(() => {
+				gsap.set(DOM.enterCtrl, { pointerEvents: "auto" });
+			}, "start+=2");
+	}
+	enter() {
+		this.startTL.kill();
+
+		DOM.enterCtrl.removeEventListener("mouseenter", this.enterMouseEnterEv);
+		DOM.enterCtrl.removeEventListener("mouseleave", this.enterMouseLeaveEv);
+		gsap.set(DOM.enterCtrl, { pointerEvents: "none" });
+
+		gsap.set([DOM.frame, DOM.content], { opacity: 1 });
+
+		gsap
+			.timeline()
+			.addLabel("start", 0)
+			.to(
+				DOM.enterCtrl,
+				{
+					duration: 0.6,
+					ease: "back.in",
+					scale: 0.2,
+					opacity: 0,
+				},
+				"start"
+			)
+			.to(
+				this.DOM.circleText,
+				{
+					duration: 0.8,
+					ease: "back.in",
+					scale: 1.6,
+					opacity: 0,
+					rotation: "-=20",
+					stagger: {
+						amount: 0.3,
+					},
+				},
+				"start"
+			)
+			.to(
+				[DOM.content.children, DOM.frame.children],
+				{
+					duration: 0.8,
+					ease: "back.out",
+					startAt: { opacity: 0, scale: 0.8 },
+					scale: 1,
+					opacity: 1,
+					stagger: {
+						amount: 0.2,
+					},
+				},
+				"start+=1"
+			);
+	}
+}
 const CircularLoader = () => {
+	useEffect(() => {
+		const intro = new Intro(document.querySelector(".circles"));
+		setTimeout(() => {
+			document.querySelector(".demo-3").classList.remove("loading");
+			intro.start();
+		}, 2000);
+	}, []);
+
 	return (
 		<div className="demo-3 loading">
 			<main>
@@ -24,7 +204,7 @@ const CircularLoader = () => {
 					<text class="circles__text circles__text--1">
 						<textPath
 							class="circles__text-path"
-							xlink:href="#circle-1"
+							xlinkHref="#circle-1"
 							aria-label=""
 							textLength="2830"
 						>
@@ -34,7 +214,7 @@ const CircularLoader = () => {
 					<text class="circles__text circles__text--2">
 						<textPath
 							class="circles__text-path"
-							xlink:href="#circle-2"
+							xlinkHref="#circle-2"
 							aria-label=""
 							textLength="2001"
 						>
@@ -44,7 +224,7 @@ const CircularLoader = () => {
 					<text class="circles__text circles__text--3">
 						<textPath
 							class="circles__text-path"
-							xlink:href="#circle-3"
+							xlinkHref="#circle-3"
 							aria-label=""
 							textLength="1341"
 						>
@@ -54,7 +234,7 @@ const CircularLoader = () => {
 					<text class="circles__text circles__text--4">
 						<textPath
 							class="circles__text-path"
-							xlink:href="#circle-4"
+							xlinkHref="#circle-4"
 							aria-label=""
 							textLength="836"
 						>
@@ -62,6 +242,21 @@ const CircularLoader = () => {
 						</textPath>
 					</text>
 				</svg>
+				<div className="frame">
+					<div className="content">
+						<main>
+							<Holder />
+							<IoArrowUpCircle
+								className="up-icon"
+								onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+							/>
+						</main>
+					</div>
+					<button class="enter">
+						<div class="enter__bg"></div>
+						<span class="enter__text">Enter</span>
+					</button>
+				</div>
 			</main>
 		</div>
 	);
