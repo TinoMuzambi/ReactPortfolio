@@ -3,7 +3,8 @@ const education = [
 		title: "Computer Science Honours",
 		institution: "University of Cape Town",
 		period: "2021 - current",
-		description: "TBA",
+		description:
+			"Honours in Computer Science specialising in Big Data, Artificial Intelligence, Analytics and Functional Programming.",
 	},
 	{
 		title: "BSc Computer Science",
