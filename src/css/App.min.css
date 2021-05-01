@@ -18,6 +18,10 @@ body {
   --dim-button: 90px;
 }
 
+a:visited {
+  color: white;
+}
+
 .hero, .holder, .holder .card .sidebar, .portfolio .cards .mini-card {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -613,6 +617,10 @@ body {
 }
 
 .about .mini-card .inner .text .blog-link {
+  color: white;
+}
+
+.about .mini-card .inner .text .blog-link:visited {
   color: white;
 }
 

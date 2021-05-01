@@ -59,6 +59,10 @@
 				.blog-link {
 					color: white;
 
+					&:visited {
+						color: white;
+					}
+
 					&:hover {
 						color: $secondary-blue;
 					}

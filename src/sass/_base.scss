@@ -27,6 +27,12 @@ body {
 	--dim-button: 90px;
 }
 
+a {
+	&:visited {
+		color: white;
+	}
+}
+
 %flex {
 	display: flex;
 	align-items: center;
