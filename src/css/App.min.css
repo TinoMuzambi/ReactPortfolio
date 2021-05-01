@@ -925,6 +925,7 @@ a:visited {
   color: #272524;
   padding: 0;
   opacity: 0;
+  overflow-x: unset;
 }
 
 .body main .enter:focus, .body main .enter:hover, .body main .enter:active {

@@ -1,0 +1,126 @@
+.body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  color: #292725;
+  background-color: #dad4d1;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body main .circles {
+  pointer-events: none;
+  position: fixed;
+  width: var(--dim);
+  height: var(--dim);
+  top: calc(50% - var(--dim) / 2);
+  left: calc(50% - var(--dim) / 2);
+}
+
+.body main .circles .circles__text {
+  text-transform: uppercase;
+  -webkit-transform-origin: 700px 700px;
+          transform-origin: 700px 700px;
+  will-change: transform, opacity;
+}
+
+.body main .circles .circles__text.circles__text--1 {
+  font-size: 25vmin;
+  font-size: clamp(170px, 25vmin, 180px);
+  font-family: serif;
+  font-weight: 400;
+  fill: #272524;
+}
+
+.body main .circles .circles__text.circles__text--2 {
+  font-size: 17vmin;
+  font-size: clamp(136px, 17vmin, 153px);
+  font-family: serif;
+  font-weight: 300;
+  fill: #272524;
+}
+
+.body main .circles .circles__text.circles__text--3 {
+  font-size: 13.5vmin;
+  font-size: clamp(110px, 13.5vmin, 120px);
+  font-family: serif;
+  font-weight: 400;
+  fill: #272524;
+}
+
+.body main .circles .circles__text.circles__text--4 {
+  font-size: 9.5vmin;
+  font-size: clamp(85px, 9.5vmin, 94px);
+  font-family: sans-serif;
+  font-weight: 300;
+  fill: #272524;
+}
+
+.body main .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  opacity: 0;
+}
+
+.body main .enter {
+  display: block;
+  border: 0;
+  width: var(--dim-button);
+  height: var(--dim-button);
+  position: absolute;
+  left: calc(50% - var(--dim-button) / 2);
+  top: calc(50% - var(--dim-button) / 2);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  color: #272524;
+  padding: 0;
+  opacity: 0;
+  overflow-x: unset;
+}
+
+.body main .enter:focus, .body main .enter:hover, .body main .enter:active {
+  outline: none;
+}
+
+.body main .enter .enter__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #a99c90;
+}
+
+.body main .enter .enter__text {
+  position: relative;
+}
+
+@media screen and (min-width: 53em) {
+  .body main .body main .content {
+    height: 100vh;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: left;
+  }
+}
+/*# sourceMappingURL=content-wrapper.min.css.map */
