@@ -1,0 +1,88 @@
+.body {
+	margin: 0;
+	--color-text: #a5a5a5;
+	--color-bg: #191613;
+	--color-link: #d6af7c;
+	--color-link-hover: #fff;
+	--color-text-circle-1: #48423c;
+	--color-text-circle-2: #48423c;
+	--color-text-circle-3: #48423c;
+	--color-text-circle-4: #48423c;
+	--font-circle-1: sans-serif;
+	--font-weight-circle-1: 300;
+	--font-circle-2: serif;
+	--font-weight-circle-2: 400;
+	--font-circle-3: sans-serif;
+	--font-weight-circle-3: 400;
+	--font-circle-4: serif;
+	--font-weight-circle-4: 300;
+	--color-button: #d6ae7c;
+	--color-text-button: #1d1812;
+	--dim-button: 90px;
+	color: var(--color-text);
+	background-color: var(--color-bg);
+	font-family: sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.demo-3 {
+	--color-text: #292725;
+	--color-bg: #dad4d1;
+	--color-link: #a99c90;
+	--color-link-hover: #292725;
+	--color-font-circle: #7b7772;
+	--color-button: #a99c90;
+	--color-text-button: #272524;
+	--color-text-circle-1: #272524;
+	--color-text-circle-2: #272524;
+	--color-text-circle-3: #272524;
+	--color-text-circle-4: #272524;
+	--font-circle-1: modesto-condensed, serif;
+	--font-weight-circle-1: 400;
+	--font-circle-2: ambroise-firmin-std, serif;
+	--font-weight-circle-2: 300;
+	--font-circle-3: modesto-condensed, serif;
+	--font-weight-circle-3: 400;
+	--font-circle-4: niagara, sans-serif;
+	--font-weight-circle-4: 300;
+}
+
+/* Page Loader */
+.js body::before,
+.js body::after {
+	content: "";
+	position: fixed;
+	z-index: 1000;
+	transition: opacity 0.3s;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.js body::before {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--color-bg);
+}
+
+.js body::after {
+	content: "Loading";
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 500;
+	line-height: 1;
+	color: var(--color-link);
+}
+
+.js .loading::before,
+.js .loading::after {
+	opacity: 1;
+	pointer-events: auto;
+}
