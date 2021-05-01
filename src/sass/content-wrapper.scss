@@ -8,19 +8,31 @@ $color-button: #d6ae7c;
 $color-text-button: #1d1812;
 
 $color-text: #292725;
-$color-bg: linear-gradient(
-	rgba($primary-color, 0.3),
-	rgba($secondary-blue, 0.3)
-);
+$color-bg: linear-gradient(rgba($primary-color, 1), rgba($secondary-blue, 1));
 $color-link: #a99c90;
 $color-link-hover: #292725;
-$color-font-circle: #7b7772;
-$color-button: #504a44;
-$color-text-button: whitesmoke;
-$color-text-circle-1: #272524;
-$color-text-circle-2: #272524;
-$color-text-circle-3: #272524;
-$color-text-circle-4: #272524;
+$color-font-circle: #b6b0a9;
+$color-button: rgba(
+	$color: white,
+	$alpha: 0.8,
+);
+$color-text-button: #504a44;
+$color-text-circle-1: rgba(
+	$color: white,
+	$alpha: 0.8,
+);
+$color-text-circle-2: rgba(
+	$color: white,
+	$alpha: 0.8,
+);
+$color-text-circle-3: rgba(
+	$color: white,
+	$alpha: 0.8,
+);
+$color-text-circle-4: rgba(
+	$color: white,
+	$alpha: 0.8,
+);
 $font-circle-1: ivymode, sans-serif;
 $font-weight-circle-1: 400;
 $font-circle-2: modesto-condensed, serif;
