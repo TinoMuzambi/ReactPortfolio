@@ -20,15 +20,6 @@ const Holder = () => {
 	const [currentView, setView] = useState("about");
 	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
-	const contentStyle = {
-		borderRadius: "10px",
-		background:
-			"linear-gradient(to bottom, rgba(55, 237, 83, .6),rgba(16, 157, 232, .6))",
-		padding: "1rem",
-		color: "white",
-		border: "none",
-		textAlign: "center",
-	};
 
 	useEffect(() => {
 		const getJoke = async () => {
@@ -121,12 +112,7 @@ const Holder = () => {
 							Tools
 						</li>
 					</ul>
-					<Popup
-						open={open}
-						modal
-						contentStyle={contentStyle}
-						onClose={() => setOpen(false)}
-					>
+					<Popup open={open} modal onClose={() => setOpen(false)}>
 						<span className="modal"> {joke} </span>
 					</Popup>
 					<div className="joke" title={joke} onClick={() => setOpen(true)}>

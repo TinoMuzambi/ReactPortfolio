@@ -220,4 +220,15 @@
 }
 .popup-content {
 	animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+	box-shadow: 0 0 20px 0 rgba(255, 255, 255, 0.5) !important;
+	border-radius: 10px !important;
+	background: linear-gradient(
+		to bottom,
+		rgba(55, 237, 83, 0.6),
+		rgba(16, 157, 232, 0.6)
+	) !important;
+	padding: 1rem !important;
+	color: white !important;
+	border: none !important;
+	text-align: center !important;
 }
