@@ -100,12 +100,6 @@ $font-weight-circle-4: 300;
 				justify-content: center;
 				text-align: left;
 			}
-
-			.enter {
-				.enter__text {
-					font-size: 1.2rem;
-				}
-			}
 		}
 
 		.enter {
@@ -142,8 +136,17 @@ $font-weight-circle-4: 300;
 			}
 
 			.enter__text {
+				display: grid;
+				place-content: center;
 				position: relative;
 				color: $tertiary-color;
+				font-size: 3rem;
+			}
+
+			@media screen and (min-width: 53em) {
+				.enter__text {
+					font-size: 5rem;
+				}
 			}
 		}
 	}

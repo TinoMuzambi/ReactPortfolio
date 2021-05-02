@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { isMobile } from "react-device-detect";
 import { gsap } from "gsap";
+import { IoArrowDownCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
@@ -259,7 +260,9 @@ const ContentWrapper = () => {
 				</div>
 				<button className="enter">
 					<div className="enter__bg"></div>
-					<span className="enter__text">Explore</span>
+					<span className="enter__text">
+						<IoArrowDownCircle />
+					</span>
 				</button>
 			</main>
 		</section>

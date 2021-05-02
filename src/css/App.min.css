@@ -884,9 +884,6 @@ a:visited {
             justify-content: center;
     text-align: left;
   }
-  .body main .enter .enter__text {
-    font-size: 1.2rem;
-  }
 }
 
 .body main .enter {
@@ -922,7 +919,17 @@ a:visited {
 }
 
 .body main .enter .enter__text {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
   position: relative;
   color: #00dba7;
+  font-size: 3rem;
+}
+
+@media screen and (min-width: 53em) {
+  .body main .enter .enter__text {
+    font-size: 5rem;
+  }
 }
 /*# sourceMappingURL=App.min.css.map */
