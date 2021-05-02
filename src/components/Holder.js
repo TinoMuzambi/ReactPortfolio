@@ -22,7 +22,8 @@ const Holder = () => {
 	const [open, setOpen] = useState(false);
 	const contentStyle = {
 		borderRadius: "10px",
-		background: "linear-gradient(rgba(55, 237, 83, .6),rgba(16, 157, 232, .6))",
+		background:
+			"linear-gradient(to bottom, rgba(55, 237, 83, .6),rgba(16, 157, 232, .6))",
 		padding: "1rem",
 		color: "white",
 		border: "none",
