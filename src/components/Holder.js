@@ -21,9 +21,9 @@ const Holder = () => {
 	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
 	const contentStyle = {
-		background: "rgba(55, 237, 83, 1)",
-		padding: "1.5rem",
-		borderRadius: "1000px",
+		borderRadius: "10px",
+		background: "linear-gradient(rgba(55, 237, 83, .6),rgba(16, 157, 232, .6))",
+		padding: "1rem",
 		color: "white",
 		border: "none",
 		textAlign: "center",
