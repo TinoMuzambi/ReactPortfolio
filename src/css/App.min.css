@@ -884,6 +884,9 @@ a:visited {
             justify-content: center;
     text-align: left;
   }
+  .body main .enter .enter__text {
+    font-size: 1.2rem;
+  }
 }
 
 .body main .enter {
@@ -920,7 +923,6 @@ a:visited {
 
 .body main .enter .enter__text {
   position: relative;
-  font-size: 1.1rem;
   color: #00dba7;
 }
 /*# sourceMappingURL=App.min.css.map */
