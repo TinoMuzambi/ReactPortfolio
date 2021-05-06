@@ -25,6 +25,10 @@ body {
 
 	--dim: 206vmin;
 	--dim-button: 90px;
+
+	img {
+		pointer-events: none;
+	}
 }
 
 h1,

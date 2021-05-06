@@ -16,6 +16,11 @@ body {
   --dim-button: 90px;
 }
 
+html img,
+body img {
+  pointer-events: none;
+}
+
 h1,
 h2,
 p,
