@@ -64,6 +64,10 @@ a {
 	pointer-events: none;
 	transition: 1s ease;
 	z-index: 5;
+
+	@include mq(768px) {
+		content: none;
+	}
 }
 
 @mixin flexCenter {

@@ -237,37 +237,6 @@ a:visited {
   white-space: pre-wrap;
 }
 
-.holder .card .sidebar .joke::before {
-  position: absolute;
-  left: 0;
-  padding: 1rem;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(55, 237, 83, 0.9)), to(rgba(16, 157, 232, 0.9)));
-  background: linear-gradient(rgba(55, 237, 83, 0.9), rgba(16, 157, 232, 0.9));
-  color: white;
-  border-radius: 1rem;
-  -webkit-box-shadow: 0 0 10px 0 rgba(16, 157, 232, 0.7);
-          box-shadow: 0 0 10px 0 rgba(16, 157, 232, 0.7);
-  opacity: 0;
-  pointer-events: none;
-  -webkit-transition: 1s ease;
-  transition: 1s ease;
-  z-index: 5;
-  bottom: 10rem;
-  left: 5rem;
-  max-width: 15rem;
-  content: attr(data-joke);
-}
-
-@media only screen and (max-width: 768px) {
-  .holder .card .sidebar .joke::before {
-    content: none;
-  }
-}
-
-.holder .card .sidebar .joke:hover::before {
-  opacity: 1;
-}
-
 @media only screen and (max-width: 1300px) {
   .holder .card .sidebar .joke {
     -ms-grid-columns: 60% 40%;
