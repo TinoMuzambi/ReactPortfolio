@@ -28,10 +28,12 @@
 				padding: 0.3rem;
 				bottom: 0;
 				font-size: 0.7rem;
+				transform: translateY(-1rem);
 			}
 
 			&:hover {
 				&::after {
+					transform: translateY(0);
 					opacity: 1;
 				}
 			}
