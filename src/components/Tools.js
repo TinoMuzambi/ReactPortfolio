@@ -40,11 +40,10 @@ const Tools = () => {
 							/>
 						</motion.a>
 					) : (
-						<span className="tools-img" data-tool={tool.title}>
+						<span className="tools-img" data-tool={tool.title} key={tool.id}>
 							<img
 								src={tool.icon}
 								alt={tool.title}
-								key={tool.id}
 								initial="start"
 								animate="end"
 								variants={tool.id % 2 === 0 ? up : down}
