@@ -14,27 +14,28 @@ const ContentWrapper = () => {
 			enterBackground: document.querySelector(".enter__bg"),
 		};
 
+		// Class for controlling gsap animation.
 		class Intro {
 			constructor(el) {
-				// the SVG element
+				// SVG element
 				this.DOM = { el: el };
 				// SVG texts
 				this.DOM.circleText = [
 					...this.DOM.el.querySelectorAll("text.circles__text"),
 				];
-				// total
+				// Set total length according to text length.
 				this.circleTextTotal = this.DOM.circleText.length;
 
 				this.setup();
 			}
 			setup() {
-				// need to set the transform origin in the center
+				// Set the transform origin in the center
 				gsap.set(this.DOM.circleText, { transformOrigin: "50% 50%" });
-				// hide on start
+				// Hide initially.
 				gsap.set([this.DOM.circleText, DOM.content.children], {
 					opacity: 0,
 				});
-				// don't allow to hover
+				// Don't allow hover
 				gsap.set([DOM.holder, DOM.enterCtrl], { pointerEvents: "none" });
 
 				this.initEvents();
@@ -60,8 +61,6 @@ const ContentWrapper = () => {
 					});
 				};
 				this.enterMouseLeaveEv = () => {
-					//gsap.killTweensOf([DOM.enterBackground,this.DOM.circleText]);
-
 					gsap.to(DOM.enterBackground, {
 						duration: 2,
 						ease: "elastic.out(1, 0.4)",
@@ -78,6 +77,7 @@ const ContentWrapper = () => {
 						},
 					});
 				};
+				// On mobile, simulate hover after 3s.
 				if (isMobile) {
 					setTimeout(() => {
 						this.enterMouseEnterEv();
@@ -94,7 +94,7 @@ const ContentWrapper = () => {
 				this.startTL = gsap
 					.timeline()
 					.addLabel("start", 0)
-					// rotation for all texts
+					// Rotation for all text.
 					.to(
 						this.DOM.circleText,
 						{
@@ -107,7 +107,7 @@ const ContentWrapper = () => {
 						},
 						"start"
 					)
-					// scale in the texts & enter button and fade them in
+					// Scale in the text & enter button and fade them in.
 					.to(
 						[this.DOM.circleText, DOM.enterCtrl],
 						{
@@ -122,14 +122,14 @@ const ContentWrapper = () => {
 						},
 						"start"
 					)
-					// at start+1 allow the hover over the enter ctrl
+					// At start+1 allow the hover over the enter ctrl
 					.add(() => {
 						gsap.set(DOM.enterCtrl, { pointerEvents: "auto" });
 					}, "start+=2");
 			}
 			enter() {
+				// Cleanup
 				this.startTL.kill();
-
 				DOM.enterCtrl.removeEventListener("mouseenter", this.enterMouseEnterEv);
 				DOM.enterCtrl.removeEventListener("mouseleave", this.enterMouseLeaveEv);
 				gsap.set(DOM.holder, { pointerEvents: "auto" });
@@ -181,8 +181,8 @@ const ContentWrapper = () => {
 			}
 		}
 
+		// Initiate gsap landing.
 		const intro = new Intro(document.querySelector(".circles"));
-
 		intro.start();
 	}, []);
 
