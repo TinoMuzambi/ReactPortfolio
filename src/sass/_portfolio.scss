@@ -64,10 +64,22 @@
 					&::after {
 						content: attr(data-lang);
 						@include titleBox;
-						font-size: 0.5rem;
+
 						bottom: 0;
 						padding: 0.3rem;
 						transform: translateY(-1rem);
+
+						@include mq(2560px) {
+							font-size: 2rem;
+						}
+
+						@include mq(1440px) {
+							font-size: 1.2rem;
+						}
+
+						@include mq(1024px) {
+							font-size: 0.5rem;
+						}
 					}
 
 					&:hover {

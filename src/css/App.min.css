@@ -778,7 +778,6 @@ a:visited {
   -webkit-transition: 1s ease;
   transition: 1s ease;
   z-index: 5;
-  font-size: 0.5rem;
   bottom: 0;
   padding: 0.3rem;
   -webkit-transform: translateY(-1rem);
@@ -788,6 +787,24 @@ a:visited {
 @media only screen and (max-width: 768px) {
   .portfolio .cards .mini-card .icons .icon::after {
     content: none;
+  }
+}
+
+@media only screen and (max-width: 2560px) {
+  .portfolio .cards .mini-card .icons .icon::after {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .portfolio .cards .mini-card .icons .icon::after {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .portfolio .cards .mini-card .icons .icon::after {
+    font-size: 0.5rem;
   }
 }
 
@@ -842,7 +859,6 @@ a:visited {
   z-index: 5;
   padding: 0.3rem;
   bottom: 0;
-  font-size: 0.7rem;
   -webkit-transform: translateY(-1rem);
           transform: translateY(-1rem);
 }
@@ -851,6 +867,27 @@ a:visited {
   .tools .main-content .tools-img .tools-img::after,
   .tools .main-content .tools-img::after {
     content: none;
+  }
+}
+
+@media only screen and (max-width: 2560px) {
+  .tools .main-content .tools-img .tools-img::after,
+  .tools .main-content .tools-img::after {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .tools .main-content .tools-img .tools-img::after,
+  .tools .main-content .tools-img::after {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .tools .main-content .tools-img .tools-img::after,
+  .tools .main-content .tools-img::after {
+    font-size: 0.7rem;
   }
 }
 
