@@ -115,7 +115,7 @@ const Holder = () => {
 					<Popup open={open} modal onClose={() => setOpen(false)}>
 						<span className="modal"> {joke} </span>
 					</Popup>
-					<div className="joke" data-joke={joke} onClick={() => setOpen(true)}>
+					<div className="joke" onClick={() => setOpen(true)}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
 						<img
 							src="https://image.flaticon.com/icons/png/512/3409/3409731.png"
