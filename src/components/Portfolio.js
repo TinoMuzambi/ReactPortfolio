@@ -83,17 +83,25 @@ const Portfolio = () => {
 
 						<div className="icons">
 							{project.keywords.includes("react") && (
-								<FaReact className="icon" title="react" />
+								<span className="icon" data-lang="React">
+									<FaReact className="icon" />
+								</span>
 							)}
 							{project.keywords.includes("html") && (
-								<FaHtml5 className="icon" title="html5" />
+								<span className="icon" data-lang="HTML5">
+									<FaHtml5 />
+								</span>
 							)}
 							{(project.keywords.includes("css") ||
 								project.keywords.includes("sass")) && (
-								<FaCss3Alt className="icon" title="css3" />
+								<span className="icon" data-lang="CSS3">
+									<FaCss3Alt />
+								</span>
 							)}
 							{project.keywords.includes("python") && (
-								<FaPython className="icon" title="python" />
+								<span className="icon" data-lang="Python">
+									<FaPython />
+								</span>
 							)}
 						</div>
 					</motion.div>

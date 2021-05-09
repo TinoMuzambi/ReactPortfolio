@@ -59,6 +59,31 @@
 				.icon {
 					font-size: 3rem;
 					color: $secondary-blue;
+					position: relative;
+
+					&::after {
+						content: attr(data-lang);
+						width: max-content;
+						padding: 0.3rem;
+						background: linear-gradient(
+							rgba($primary-color, 0.6),
+							rgba($secondary-blue, 0.6)
+						);
+						border-radius: 1rem;
+						position: absolute;
+						bottom: 0rem;
+						left: 0;
+						font-size: 0.7rem;
+						color: $white;
+						opacity: 0;
+						transition: 0.5s;
+					}
+
+					&:hover {
+						&::after {
+							opacity: 1;
+						}
+					}
 				}
 			}
 		}
