@@ -49,6 +49,23 @@ a {
 	align-items: center;
 }
 
+@mixin titleBox {
+	position: absolute;
+	left: 0;
+	padding: 1rem;
+	background: linear-gradient(
+		rgba($primary-color, 0.9),
+		rgba($secondary-blue, 0.9)
+	);
+	color: white;
+	border-radius: 1rem;
+	box-shadow: 0 0 10px 0 rgba($color: $secondary-blue, $alpha: 0.7);
+	opacity: 0;
+	pointer-events: none;
+	transition: 1s ease;
+	z-index: 5;
+}
+
 @mixin flexCenter {
 	@extend %flex;
 	justify-content: center;

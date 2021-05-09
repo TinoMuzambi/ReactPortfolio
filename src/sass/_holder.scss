@@ -137,6 +137,25 @@
 				padding: 1rem;
 				cursor: pointer;
 				white-space: pre-wrap;
+				// position: relative;
+
+				&::before {
+					@include titleBox();
+					bottom: 10rem;
+					left: 5rem;
+					max-width: 15rem;
+					content: attr(data-joke);
+
+					@include mq(768px) {
+						content: none;
+					}
+				}
+
+				&:hover {
+					&::before {
+						opacity: 1;
+					}
+				}
 
 				@include mq(1300px) {
 					grid-template-columns: 60% 40%;
