@@ -40,19 +40,20 @@ const Tools = () => {
 							/>
 						</motion.a>
 					) : (
-						<span className="tools-img" data-tool={tool.title} key={tool.id}>
-							<img
-								src={tool.icon}
-								alt={tool.title}
-								initial="start"
-								animate="end"
-								variants={tool.id % 2 === 0 ? up : down}
-								transition={{
-									ease: "easeInOut",
-									duration: 0.2,
-								}}
-							></img>
-						</span>
+						<motion.span
+							className="tools-img"
+							data-tool={tool.title}
+							key={tool.id}
+							initial="start"
+							animate="end"
+							variants={tool.id % 2 === 0 ? up : down}
+							transition={{
+								ease: "easeInOut",
+								duration: 0.2,
+							}}
+						>
+							<img src={tool.icon} alt={tool.title}></img>
+						</motion.span>
 					)
 				)}
 			</div>

@@ -891,6 +891,12 @@ a:visited {
   }
 }
 
+.tools .main-content .tools-img .tools-img:hover,
+.tools .main-content .tools-img:hover {
+  -webkit-transform: scale(0.9) !important;
+          transform: scale(0.9) !important;
+}
+
 .tools .main-content .tools-img .tools-img:hover::after,
 .tools .main-content .tools-img:hover::after {
   -webkit-transform: translateY(0);
@@ -908,11 +914,6 @@ a:visited {
 
 .tools .main-content .tools-img img {
   width: 100%;
-}
-
-.tools .main-content .tools-img:hover {
-  -webkit-transform: scale(0.9);
-          transform: scale(0.9);
 }
 
 /* width */
