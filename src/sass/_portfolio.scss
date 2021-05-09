@@ -68,6 +68,10 @@
 						bottom: 0;
 						padding: 0.3rem;
 						transform: translateY(-1rem);
+
+						@include mq(768px) {
+							content: none;
+						}
 					}
 
 					&:hover {

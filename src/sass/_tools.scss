@@ -29,6 +29,10 @@
 				bottom: 0;
 				font-size: 0.7rem;
 				transform: translateY(-1rem);
+
+				@include mq(768px) {
+					content: none;
+				}
 			}
 
 			&:hover {

@@ -816,6 +816,12 @@ a:visited {
           transform: translateY(-1rem);
 }
 
+@media only screen and (max-width: 768px) {
+  .portfolio .cards .mini-card .icons .icon::after {
+    content: none;
+  }
+}
+
 .portfolio .cards .mini-card .icons .icon:hover::after {
   opacity: 1;
   -webkit-transform: translateY(0);
@@ -870,6 +876,13 @@ a:visited {
   font-size: 0.7rem;
   -webkit-transform: translateY(-1rem);
           transform: translateY(-1rem);
+}
+
+@media only screen and (max-width: 768px) {
+  .tools .main-content .tools-img .tools-img::after,
+  .tools .main-content .tools-img::after {
+    content: none;
+  }
 }
 
 .tools .main-content .tools-img .tools-img:hover::after,

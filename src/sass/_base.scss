@@ -57,7 +57,7 @@ a {
 		rgba($primary-color, 0.9),
 		rgba($secondary-blue, 0.9)
 	);
-	color: white;
+	color: $white;
 	border-radius: 1rem;
 	box-shadow: 0 0 10px 0 rgba($color: $secondary-blue, $alpha: 0.7);
 	opacity: 0;
