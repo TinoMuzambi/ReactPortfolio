@@ -34,7 +34,7 @@ const Tools = () => {
 							<img
 								src={tool.icon}
 								alt={tool.title}
-								title={tool.title}
+								data-tool={tool.title}
 								className="tools-img"
 							/>
 						</motion.a>
@@ -42,7 +42,7 @@ const Tools = () => {
 						<motion.img
 							src={tool.icon}
 							alt={tool.title}
-							title={tool.title}
+							data-tool={tool.title}
 							className="tools-img"
 							key={tool.id}
 							initial="start"
