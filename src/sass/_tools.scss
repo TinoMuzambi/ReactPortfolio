@@ -18,9 +18,34 @@
 			}
 		}
 
+		.tools-img .tools-img,
+		.tools-img {
+			position: relative;
+			pointer-events: all;
+
+			&::after {
+				content: attr(data-tool);
+				@include titleBox;
+				width: max-content;
+				padding: 0.3rem;
+				bottom: 0;
+				font-size: 0.7rem;
+			}
+
+			&:hover {
+				&::after {
+					opacity: 1;
+				}
+			}
+		}
+
 		.tools-img {
 			width: 20%;
 			transition: transform 0.2s;
+
+			img {
+				width: 100%;
+			}
 
 			&:hover {
 				transform: scale(0.9);
