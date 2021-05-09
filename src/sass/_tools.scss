@@ -21,12 +21,10 @@
 		.tools-img .tools-img,
 		.tools-img {
 			position: relative;
-			pointer-events: all;
 
 			&::after {
 				content: attr(data-tool);
 				@include titleBox;
-				width: max-content;
 				padding: 0.3rem;
 				bottom: 0;
 				font-size: 0.7rem;
