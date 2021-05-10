@@ -1,0 +1,91 @@
+.portfolio {
+	width: 100%;
+
+	.title {
+		font-size: 1.5rem;
+	}
+
+	.cards {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+
+		.mini-card {
+			@include mini-card;
+			@include flexCenter;
+			justify-content: flex-start;
+			gap: 1rem;
+			width: 45%;
+
+			@include mq(1023px) {
+				width: 100%;
+			}
+
+			a {
+				color: white;
+			}
+
+			.lead {
+				height: 16rem;
+
+				@include mq(1023px) {
+					height: unset;
+				}
+
+				.title {
+					@include mq(1023px) {
+						font-size: 1.2rem;
+					}
+				}
+
+				.text {
+					padding-top: 1rem;
+				}
+
+				.text-g {
+					text-align: center;
+				}
+
+				a {
+					color: white !important;
+				}
+			}
+
+			.icons {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+
+				.icon {
+					font-size: 3rem;
+					color: $secondary-blue;
+					position: relative;
+
+					&::after {
+						content: attr(data-lang);
+						@include titleBox;
+
+						bottom: 0;
+						padding: 0.3rem;
+						transform: translateY(-1rem);
+
+						@include mq(2560px) {
+							font-size: 0.7rem;
+						}
+
+						@include mq(1024px) {
+							font-size: 0.5rem;
+						}
+					}
+
+					&:hover {
+						&::after {
+							opacity: 1;
+							transform: translateY(0);
+						}
+					}
+				}
+			}
+		}
+	}
+}

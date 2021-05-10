@@ -1,0 +1,49 @@
+.experience {
+	.title {
+		font-size: 1.5rem;
+	}
+
+	.timeline {
+		margin-top: 2rem;
+
+		.vertical-timeline {
+			padding: 1rem !important;
+			overflow: visible !important;
+		}
+
+		.timeline-image {
+			width: 3rem;
+			height: 3rem;
+			object-fit: contain;
+
+			@include mq(1170px) {
+				width: 2rem;
+				height: 2rem;
+			}
+		}
+
+		.date {
+			font-weight: lighter;
+
+			@include mq(1170px) {
+				display: none;
+			}
+		}
+
+		.round {
+			@include mq(1170px) {
+				margin-left: 0.3rem;
+			}
+		}
+
+		@include mq(1170px) {
+			width: 100% !important;
+		}
+
+		.vertical-timeline-element-content {
+			@include mq(1170px) {
+				width: 80% !important;
+			}
+		}
+	}
+}

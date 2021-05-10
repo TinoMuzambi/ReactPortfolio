@@ -1,0 +1,64 @@
+.tools {
+	.title {
+		margin-bottom: 2rem;
+		font-size: 1.5rem;
+	}
+
+	.main-content {
+		background: none !important;
+		padding: 0 !important;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		row-gap: 1rem;
+
+		a {
+			.tools-img {
+				width: 100%;
+			}
+		}
+
+		.tools-img .tools-img,
+		.tools-img {
+			position: relative;
+
+			&::after {
+				content: attr(data-tool);
+				@include titleBox;
+				padding: 0.3rem;
+				bottom: 0;
+				transform: translateY(-1rem);
+
+				@include mq(2560px) {
+					font-size: 2rem;
+				}
+
+				@include mq(1440px) {
+					font-size: 1.2rem;
+				}
+
+				@include mq(1024px) {
+					font-size: 0.7rem;
+				}
+			}
+
+			&:hover {
+				transform: scale(0.9) !important;
+
+				&::after {
+					transform: translateY(0);
+					opacity: 1;
+				}
+			}
+		}
+
+		.tools-img {
+			width: 20%;
+			transition: transform 0.2s;
+
+			img {
+				width: 100%;
+			}
+		}
+	}
+}
