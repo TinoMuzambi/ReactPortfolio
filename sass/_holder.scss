@@ -6,7 +6,7 @@
 			rgba($primary-color, 0.6),
 			rgba($primary-blue, 0.6) 60%
 		),
-		url("sky.png");
+		url("/sky.png");
 	@include flexCenter;
 	color: white;
 	position: relative;
