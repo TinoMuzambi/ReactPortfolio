@@ -35,3 +35,13 @@ export const getProjects = async () => {
 
 	return projects;
 };
+
+export const getAbout = () => {
+	const Storyblok = new StoryblokClient({
+		accessToken: process.env.REACT_APP_STORYBLOK_KEY,
+		cache: {
+			clear: "auto",
+			type: "memory",
+		},
+	});
+};
