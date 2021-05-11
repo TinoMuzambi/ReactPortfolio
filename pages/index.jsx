@@ -2,11 +2,11 @@ import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
 import { getProjects, getAbout, getEducation } from "../utils/fetch";
 
-export default function Home({ projects, about }) {
+export default function Home({ projects, about, education }) {
 	return (
 		<>
 			<Meta />
-			<Wrapper projects={projects} about={about} />
+			<Wrapper projects={projects} about={about} education={education} />
 		</>
 	);
 }
