@@ -8,6 +8,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"axios": "^0.21.1",
 		"framer-motion": "^4.1.13",
 		"gsap": "^3.6.1",
 		"html-react-parser": "^1.2.6",
