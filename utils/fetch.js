@@ -122,7 +122,7 @@ export const getTools = async () => {
 	let tools = [];
 
 	await StoryblokTino.get("cdn/stories?starts_with=tools/", {
-		sort_by: "position:desc",
+		sort_by: "content.title:asc",
 		per_page: "100",
 	})
 		.then((response) => {
