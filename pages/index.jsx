@@ -1,6 +1,12 @@
 import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
-import { getProjects, getAbout, getEducation, getTools } from "../utils/fetch";
+import {
+	getProjects,
+	getAbout,
+	getEducation,
+	getTools,
+	getExperience,
+} from "../utils/fetch";
 
 export default function Home({ projects, about, education, tools }) {
 	return (
@@ -17,11 +23,12 @@ export default function Home({ projects, about, education, tools }) {
 }
 
 export const getServerSideProps = async () => {
-	let projects, about, education, tools;
+	let projects, about, education, tools, experience;
 	const getData = async () => {
 		projects = await getProjects();
 		about = await getAbout();
 		education = await getEducation();
+		experience = await getExperience();
 		tools = await getTools();
 	};
 
@@ -32,6 +39,7 @@ export const getServerSideProps = async () => {
 			projects,
 			about,
 			education,
+			experience,
 			tools,
 		},
 	};

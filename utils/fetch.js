@@ -110,6 +110,7 @@ export const getExperience = async () => {
 				};
 			});
 			experience = prettyExperience;
+			console.log(experience);
 		})
 		.catch((error) => {
 			console.error(error);
@@ -136,7 +137,6 @@ export const getTools = async () => {
 				};
 			});
 			tools = prettyTools;
-			console.log(tools);
 		})
 		.catch((error) => {
 			console.error(error);
