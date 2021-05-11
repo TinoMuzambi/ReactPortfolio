@@ -15,17 +15,10 @@ export default function Home({
 	experience,
 	tools,
 }) {
-	const data = { projects, about, education, experience, tools };
 	return (
 		<>
 			<Meta />
-			<Wrapper
-				projects={projects}
-				about={about}
-				education={education}
-				experience={experience}
-				tools={tools}
-			/>
+			<Wrapper data={{ projects, about, education, experience, tools }} />
 		</>
 	);
 }
