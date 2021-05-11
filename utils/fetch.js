@@ -48,7 +48,7 @@ export const getAbout = async () => {
 	let about = [];
 
 	await Storyblok.get("cdn/stories?starts_with=about/", {
-		sort_by: "published_at:desc",
+		sort_by: "position:desc",
 	})
 		.then((response) => {
 			const strictlyAbout = response.data.stories;

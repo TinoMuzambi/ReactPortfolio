@@ -2,11 +2,11 @@ import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
 import { getProjects, getAbout } from "../utils/fetch";
 
-export default function Home({ projects }) {
+export default function Home({ projects, about }) {
 	return (
 		<>
 			<Meta />
-			<Wrapper projects={projects} />
+			<Wrapper projects={projects} about={about} />
 		</>
 	);
 }
@@ -23,6 +23,7 @@ export const getServerSideProps = async () => {
 	return {
 		props: {
 			projects,
+			about,
 		},
 	};
 };

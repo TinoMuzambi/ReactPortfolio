@@ -8,12 +8,12 @@ import {
 	FaGithub,
 	FaMailBulk,
 } from "react-icons/fa";
-import about from "../data/about";
+// import about from "../data/about";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import { opacity, left, right } from "../data/variants";
 
-const About = () => {
+const About = ({ about }) => {
 	return (
 		<div className="about">
 			<motion.h1
