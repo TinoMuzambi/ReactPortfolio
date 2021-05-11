@@ -5,7 +5,7 @@ import { IoArrowDownCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
-const ContentWrapper = ({ projects, about, education }) => {
+const ContentWrapper = ({ projects, about, education, tools }) => {
 	useEffect(() => {
 		const DOM = {
 			holder: document.querySelector(".holder"),
@@ -256,7 +256,12 @@ const ContentWrapper = ({ projects, about, education }) => {
 				</svg>
 
 				<div className="content">
-					<Holder projects={projects} about={about} education={education} />
+					<Holder
+						projects={projects}
+						about={about}
+						education={education}
+						tools={tools}
+					/>
 				</div>
 				<button className="enter">
 					<div className="enter__bg"></div>

@@ -15,7 +15,7 @@ import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import Tools from "./Tools";
 
-const Holder = ({ projects, about, education }) => {
+const Holder = ({ projects, about, education, tools }) => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setView] = useState("about");
 	const [loading, setLoading] = useState(true);
@@ -129,7 +129,7 @@ const Holder = ({ projects, about, education }) => {
 					{currentView === "edu" && <Education education={education} />}
 					{currentView === "exp" && <Experience />}
 					{currentView === "por" && <Portfolio projects={projects} />}
-					{currentView === "too" && <Tools />}
+					{currentView === "too" && <Tools tools={tools} />}
 				</article>
 			</div>
 

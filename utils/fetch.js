@@ -97,6 +97,7 @@ export const getTools = async () => {
 
 	await StoryblokTino.get("cdn/stories?starts_with=tools/", {
 		sort_by: "position:desc",
+		per_page: "100",
 	})
 		.then((response) => {
 			const strictlyTools = response.data.stories;

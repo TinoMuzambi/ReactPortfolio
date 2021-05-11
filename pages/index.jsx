@@ -6,7 +6,12 @@ export default function Home({ projects, about, education, tools }) {
 	return (
 		<>
 			<Meta />
-			<Wrapper projects={projects} about={about} education={education} />
+			<Wrapper
+				projects={projects}
+				about={about}
+				education={education}
+				tools={tools}
+			/>
 		</>
 	);
 }
