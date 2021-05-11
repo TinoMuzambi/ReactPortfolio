@@ -1,6 +1,7 @@
 import React from "react";
-import { up, down, opacity } from "../data/variants";
 import { motion } from "framer-motion";
+
+import { up, down, opacity } from "../data/variants";
 
 const Tools = ({ tools }) => {
 	return (
