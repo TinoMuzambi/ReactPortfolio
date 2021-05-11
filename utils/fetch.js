@@ -102,10 +102,10 @@ export const getTools = async () => {
 			const strictlyTools = response.data.stories;
 			const prettyTools = strictlyTools.map((tool) => {
 				return {
+					id: tool.content.id,
 					title: tool.content.title,
-					institution: tool.content.institution,
-					period: tool.content.period,
-					description: tool.content.description,
+					icon: tool.content.icon,
+					link: tool.content?.link,
 				};
 			});
 			tools = prettyTools;
