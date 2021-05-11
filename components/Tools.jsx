@@ -1,9 +1,9 @@
 import React from "react";
-import tools from "../data/tools";
-import { up, down, opacity } from "../data/variants";
 import { motion } from "framer-motion";
 
-const Tools = () => {
+import { up, down, opacity } from "../data/variants";
+
+const Tools = ({ tools }) => {
 	return (
 		<div className="tools">
 			<motion.h1

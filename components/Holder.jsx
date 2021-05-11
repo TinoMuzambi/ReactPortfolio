@@ -15,7 +15,7 @@ import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import Tools from "./Tools";
 
-const Holder = () => {
+const Holder = ({ data }) => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setView] = useState("about");
 	const [loading, setLoading] = useState(true);
@@ -125,16 +125,16 @@ const Holder = () => {
 					</div>
 				</div>
 				<article className="main-content">
-					{currentView === "about" && <About />}
-					{currentView === "edu" && <Education />}
-					{currentView === "exp" && <Experience />}
-					{currentView === "por" && <Portfolio />}
-					{currentView === "too" && <Tools />}
+					{currentView === "about" && <About about={data.about} />}
+					{currentView === "edu" && <Education education={data.education} />}
+					{currentView === "exp" && <Experience experience={data.experience} />}
+					{currentView === "por" && <Portfolio projects={data.projects} />}
+					{currentView === "too" && <Tools tools={data.tools} />}
 				</article>
 			</div>
 
 			<footer>
-				<p className="rights">Copyright &copy; Tino Muzambi 2019 - 2021</p>
+				<p className="rights">Copyright © Tino Muzambi 2019 - 2021</p>
 			</footer>
 		</section>
 	);

@@ -5,11 +5,11 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { FaUniversity } from "react-icons/fa";
-import education from "../data/education";
 import { motion } from "framer-motion";
+
 import { opacity } from "../data/variants";
 
-const Education = () => {
+const Education = ({ education }) => {
 	return (
 		<div className="education">
 			<motion.h1

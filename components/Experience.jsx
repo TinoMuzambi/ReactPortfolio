@@ -4,12 +4,11 @@ import {
 	VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-// import { FaBuilding } from "react-icons/fa";
-import experience from "../data/experience";
-import { opacity } from "../data/variants";
 import { motion } from "framer-motion";
 
-const Experience = () => {
+import { opacity } from "../data/variants";
+
+const Experience = ({ experience }) => {
 	return (
 		<div className="experience">
 			<motion.h1
@@ -40,7 +39,7 @@ const Experience = () => {
 							alignItems: "center",
 							justifyContent: "center",
 						}}
-						icon={item.icon}
+						icon={<img src={item.icon} alt="experience item" />}
 						iconClassName="round"
 						visible={true}
 					>
