@@ -15,6 +15,7 @@ export default function Home({
 	experience,
 	tools,
 }) {
+	const data = { projects, about, education, experience, tools };
 	return (
 		<>
 			<Meta />
