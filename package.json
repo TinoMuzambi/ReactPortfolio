@@ -8,6 +8,7 @@
 		"start": "next start"
 	},
 	"dependencies": {
+		"axios": "^0.21.1",
 		"framer-motion": "^4.1.13",
 		"gsap": "^3.6.1",
 		"html-react-parser": "^1.2.6",
@@ -18,6 +19,7 @@
 		"react-icons": "^4.2.0",
 		"react-vertical-timeline-component": "^3.3.3",
 		"reactjs-popup": "^2.0.4",
-		"sass": "^1.32.12"
+		"sass": "^1.32.12",
+		"storyblok-js-client": "^4.0.9"
 	}
 }
