@@ -110,7 +110,6 @@ export const getExperience = async () => {
 				};
 			});
 			experience = prettyExperience;
-			console.log(experience);
 		})
 		.catch((error) => {
 			console.error(error);
