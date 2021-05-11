@@ -1,4 +1,4 @@
-const experience = [
+[
 	{
 		title: "Chairperson of the Science Postgraduate Students' Council",
 		institution: "Univesity of Cape Town",
@@ -76,5 +76,3 @@ const experience = [
 		),
 	},
 ];
-
-export default experience;
