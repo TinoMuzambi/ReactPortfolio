@@ -59,11 +59,36 @@ export const getAbout = async () => {
 				};
 			});
 			about = prettyAbout;
-			console.log(about);
 		})
 		.catch((error) => {
 			console.error(error);
 		});
 
 	return about;
+};
+
+export const getEducation = async () => {
+	let education = [];
+
+	await StoryblokTino.get("cdn/stories?starts_with=education/", {
+		sort_by: "position:desc",
+	})
+		.then((response) => {
+			const strictlyEducation = response.data.stories;
+			const prettyEducation = strictlyEducation.map((i) => {
+				return {
+					title: i.content.title,
+					institution: i.content.institution,
+					period: i.content.period,
+					description: i.content.description,
+				};
+			});
+			education = prettyEducation;
+			console.log(education);
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+
+	return education;
 };
