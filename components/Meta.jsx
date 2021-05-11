@@ -47,7 +47,7 @@ Meta.defaultProps = {
 	description:
 		"Hi, I'm Tino Muzambi. Full-Stack Web Developer and Lover of Tech. Welcome to my portfolio site. Built with React, styled with Sass.",
 	image: "https://a.storyblok.com/f/105639/512x512/03489159d5/logo512.png",
-	url: "https://ellezeka.com",
+	url: "https://tinomuzambi.com",
 };
 
 export default Meta;
