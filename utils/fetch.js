@@ -36,18 +36,17 @@ export const getProjects = async () => {
 	return projects;
 };
 
+const StoryblokTino = new StoryblokClient({
+	accessToken: process.env.REACT_APP_STORYBLOK_KEY2,
+	cache: {
+		clear: "auto",
+		type: "memory",
+	},
+});
 export const getAbout = async () => {
-	const Storyblok = new StoryblokClient({
-		accessToken: process.env.REACT_APP_STORYBLOK_KEY2,
-		cache: {
-			clear: "auto",
-			type: "memory",
-		},
-	});
-
 	let about = [];
 
-	await Storyblok.get("cdn/stories?starts_with=about/", {
+	await StoryblokTino.get("cdn/stories?starts_with=about/", {
 		sort_by: "position:desc",
 	})
 		.then((response) => {
