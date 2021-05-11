@@ -5,7 +5,7 @@ import { IoArrowDownCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
-const ContentWrapper = ({ projects, about, education, tools }) => {
+const ContentWrapper = ({ projects, about, education, experience, tools }) => {
 	useEffect(() => {
 		const DOM = {
 			holder: document.querySelector(".holder"),
@@ -260,6 +260,7 @@ const ContentWrapper = ({ projects, about, education, tools }) => {
 						projects={projects}
 						about={about}
 						education={education}
+						experience={experience}
 						tools={tools}
 					/>
 				</div>

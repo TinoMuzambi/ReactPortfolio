@@ -8,7 +8,13 @@ import {
 	getExperience,
 } from "../utils/fetch";
 
-export default function Home({ projects, about, education, tools }) {
+export default function Home({
+	projects,
+	about,
+	education,
+	experience,
+	tools,
+}) {
 	return (
 		<>
 			<Meta />
@@ -16,6 +22,7 @@ export default function Home({ projects, about, education, tools }) {
 				projects={projects}
 				about={about}
 				education={education}
+				experience={experience}
 				tools={tools}
 			/>
 		</>
