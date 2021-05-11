@@ -1,6 +1,6 @@
 import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
-import { getProjects, getAbout } from "../utils/fetch";
+import { getProjects, getAbout, getEducation } from "../utils/fetch";
 
 export default function Home({ projects, about }) {
 	return (
@@ -12,10 +12,11 @@ export default function Home({ projects, about }) {
 }
 
 export const getServerSideProps = async () => {
-	let projects, about;
+	let projects, about, education;
 	const getData = async () => {
 		projects = await getProjects();
 		about = await getAbout();
+		education = await getEducation();
 	};
 
 	await getData();
@@ -24,6 +25,7 @@ export const getServerSideProps = async () => {
 		props: {
 			projects,
 			about,
+			education,
 		},
 	};
 };
