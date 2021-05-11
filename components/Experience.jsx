@@ -40,7 +40,7 @@ const Experience = () => {
 							alignItems: "center",
 							justifyContent: "center",
 						}}
-						icon={item.icon}
+						icon={<img src={item.icon} alt="experience item" />}
 						iconClassName="round"
 						visible={true}
 					>
