@@ -1,6 +1,6 @@
 import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
-import { getProjects } from "../utils/fetch";
+import { getProjects, getAbout } from "../utils/fetch";
 
 export default function Home({ projects }) {
 	return (
@@ -12,9 +12,10 @@ export default function Home({ projects }) {
 }
 
 export const getServerSideProps = async () => {
-	let projects;
+	let projects, about;
 	const getData = async () => {
 		projects = await getProjects();
+		about = await getAbout();
 	};
 
 	await getData();

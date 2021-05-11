@@ -36,12 +36,26 @@ export const getProjects = async () => {
 	return projects;
 };
 
-export const getAbout = () => {
+export const getAbout = async () => {
 	const Storyblok = new StoryblokClient({
-		accessToken: process.env.REACT_APP_STORYBLOK_KEY,
+		accessToken: process.env.REACT_APP_STORYBLOK_KEY2,
 		cache: {
 			clear: "auto",
 			type: "memory",
 		},
 	});
+
+	let about = [];
+
+	await Storyblok.get("cdn/stories?starts_with=about/", {
+		sort_by: "published_at:desc",
+	})
+		.then((response) => {
+			console.log(response.data.stories);
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+
+	return about;
 };
