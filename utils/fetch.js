@@ -1,14 +1,14 @@
 import StoryblokClient from "storyblok-js-client";
 
-const Storyblok = new StoryblokClient({
-	accessToken: process.env.REACT_APP_STORYBLOK_KEY,
-	cache: {
-		clear: "auto",
-		type: "memory",
-	},
-});
-
 export const getProjects = async () => {
+	const Storyblok = new StoryblokClient({
+		accessToken: process.env.REACT_APP_STORYBLOK_KEY,
+		cache: {
+			clear: "auto",
+			type: "memory",
+		},
+	});
+
 	let projects = [];
 
 	await Storyblok.get("cdn/stories?starts_with=projects/", {
