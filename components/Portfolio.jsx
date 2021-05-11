@@ -1,10 +1,23 @@
-import React from "react";
-import projects from "../data/projects";
+import React, { useEffect, useState } from "react";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
 import { motion } from "framer-motion";
+
+import { getProjects } from "../utils/fetch";
 import { opacity, left, right } from "../data/variants";
 
 const Portfolio = () => {
+	const [projects, setProjects] = useState([]);
+	const [fetching, setFetching] = useState(true);
+
+	useEffect(() => {
+		const getData = async () => {
+			const data = await getProjects();
+			setProjects(data);
+			setFetching(false);
+		};
+		getData();
+	}, []);
+
 	function shuffle(array) {
 		// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 		var currentIndex = array.length,
@@ -25,6 +38,8 @@ const Portfolio = () => {
 
 		return array;
 	}
+
+	if (fetching) return null;
 
 	return (
 		<div className="portfolio">
