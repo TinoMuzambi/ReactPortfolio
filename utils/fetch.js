@@ -51,7 +51,16 @@ export const getAbout = async () => {
 		sort_by: "published_at:desc",
 	})
 		.then((response) => {
-			console.log(response.data.stories);
+			const strictlyAbout = response.data.stories;
+			const prettyAbout = strictlyAbout.map((i) => {
+				return {
+					title: i.content.title,
+					image: i.content.image,
+					text: i.content.text,
+				};
+			});
+			about = prettyAbout;
+			console.log(about);
 		})
 		.catch((error) => {
 			console.error(error);
