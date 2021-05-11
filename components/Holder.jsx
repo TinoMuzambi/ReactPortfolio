@@ -134,7 +134,7 @@ const Holder = ({ data }) => {
 			</div>
 
 			<footer>
-				<p className="rights">Copyright &copy; Tino Muzambi 2019 - 2021</p>
+				<p className="rights">Copyright © Tino Muzambi 2019 - 2021</p>
 			</footer>
 		</section>
 	);
