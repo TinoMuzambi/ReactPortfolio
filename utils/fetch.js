@@ -92,6 +92,32 @@ export const getEducation = async () => {
 	return education;
 };
 
+export const getExperience = async () => {
+	let experience = [];
+
+	await StoryblokTino.get("cdn/stories?starts_with=experience/", {
+		sort_by: "position:desc",
+	})
+		.then((response) => {
+			const strictlyExperience = response.data.stories;
+			const prettyExperience = strictlyExperience.map((i) => {
+				return {
+					title: i.content.title,
+					institution: i.content.institution,
+					period: i.content.period,
+					description: i.content.description,
+					icon: i.content.icon,
+				};
+			});
+			experience = prettyExperience;
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+
+	return experience;
+};
+
 export const getTools = async () => {
 	let tools = [];
 
