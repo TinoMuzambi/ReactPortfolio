@@ -64,9 +64,12 @@
 					&::after {
 						content: attr(data-lang);
 						@include titleBox;
-
 						bottom: 0;
 						padding: 0.3rem;
+						max-width: 2.4rem;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 						transform: translateY(-1rem);
 
 						@include mq(2560px) {
