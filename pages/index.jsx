@@ -23,7 +23,7 @@ export default function Home({
 	);
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 	let projects, about, education, tools, experience;
 	const getData = async () => {
 		projects = await getProjects();
