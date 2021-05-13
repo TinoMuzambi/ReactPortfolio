@@ -1,5 +1,6 @@
 import React from "react";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
+import { SiJavascript } from "react-icons/si";
 import { motion } from "framer-motion";
 
 import { opacity, left, right } from "../data/variants";
@@ -103,6 +104,12 @@ const Portfolio = ({ projects }) => {
 									<FaPython />
 								</span>
 							)}
+							{!project.keywords.includes("react") &&
+								project.keywords.includes("javascript") && (
+									<span className="icon" data-lang="JavaScript">
+										<SiJavascript />
+									</span>
+								)}
 						</div>
 					</motion.div>
 				))}
