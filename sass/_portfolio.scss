@@ -15,7 +15,6 @@
 			@include flexCenter;
 			justify-content: flex-start;
 			gap: 1rem;
-			width: 45%;
 
 			@include mq(1023px) {
 				width: 100%;
@@ -26,7 +25,7 @@
 			}
 
 			.lead {
-				height: 16rem;
+				// height: 16rem;
 
 				@include mq(1023px) {
 					height: unset;

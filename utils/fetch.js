@@ -16,6 +16,7 @@ export const getProjects = async () => {
 	})
 		.then((response) => {
 			const strictlyProjects = response.data.stories;
+			console.log(strictlyProjects);
 			const prettyprojects = strictlyProjects.map((project) => {
 				return {
 					name: project.content.name,
@@ -25,6 +26,7 @@ export const getProjects = async () => {
 					link: project.content.link,
 					github: project.content.github,
 					keywords: project.content.keywords.split("\n"),
+					image: project.content?.image || null,
 				};
 			});
 			projects = prettyprojects;

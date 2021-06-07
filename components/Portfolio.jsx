@@ -55,6 +55,7 @@ const Portfolio = ({ projects }) => {
 						}}
 					>
 						<div className="lead">
+							<img src={project.image} alt={project.title} />
 							<h2 className="title">
 								{project.link ? (
 									<a
