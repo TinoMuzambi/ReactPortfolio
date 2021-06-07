@@ -55,7 +55,6 @@ const Portfolio = ({ projects }) => {
 						}}
 					>
 						<div className="lead">
-							<img src={project.image} alt={project.title} />
 							<h2 className="title">
 								{project.link ? (
 									<a
@@ -69,6 +68,13 @@ const Portfolio = ({ projects }) => {
 									project.title
 								)}
 							</h2>
+							<div className="screenshot-holder">
+								<img
+									src={project.image}
+									alt={project.title}
+									className="screenshot"
+								/>
+							</div>
 							<p className="text">{project.content[0]}</p>
 						</div>
 						{project.github && (

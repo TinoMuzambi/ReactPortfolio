@@ -25,7 +25,22 @@
 			}
 
 			.lead {
-				// height: 16rem;
+				.screenshot-holder {
+					overflow: hidden;
+					margin: 2rem 0;
+
+					.screenshot {
+						height: 16rem;
+						object-fit: contain;
+						width: 100%;
+						transition: 1s ease;
+						pointer-events: all;
+
+						&:hover {
+							transform: scale(1.2);
+						}
+					}
+				}
 
 				@include mq(1023px) {
 					height: unset;
