@@ -39,11 +39,11 @@
 						&:hover {
 							transform: scale(1.2);
 						}
-					}
-				}
 
-				@include mq(1023px) {
-					height: unset;
+						@include mq(1023px) {
+							height: unset;
+						}
+					}
 				}
 
 				.title {
