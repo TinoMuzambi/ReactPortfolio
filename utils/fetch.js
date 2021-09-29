@@ -16,7 +16,7 @@ export const getProjects = async () => {
 	})
 		.then((response) => {
 			const strictlyProjects = response.data.stories;
-			console.log(strictlyProjects);
+
 			const prettyprojects = strictlyProjects.map((project) => {
 				return {
 					name: project.content.name,
