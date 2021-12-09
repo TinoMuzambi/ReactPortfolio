@@ -1,6 +1,6 @@
 import React from "react";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
-import { SiJavascript } from "react-icons/si";
+import { SiJavascript, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
 
 import { opacity, left, right } from "../data/variants";
@@ -109,6 +109,11 @@ const Portfolio = ({ projects }) => {
 							{project.keywords.includes("python") && (
 								<span className="icon" data-lang="Python">
 									<FaPython />
+								</span>
+							)}
+							{project.keywords.includes("typescript") && (
+								<span className="icon" data-lang="TypeScript">
+									<SiTypescript />
 								</span>
 							)}
 							{!project.keywords.includes("react") &&

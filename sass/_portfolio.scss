@@ -15,10 +15,7 @@
 			@include flexCenter;
 			justify-content: flex-start;
 			gap: 1rem;
-
-			@include mq(1023px) {
-				width: 100%;
-			}
+			width: 100%;
 
 			a {
 				color: white;

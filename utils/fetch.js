@@ -98,7 +98,7 @@ export const getExperience = async () => {
 	let experience = [];
 
 	await StoryblokTino.get("cdn/stories?starts_with=experience/", {
-		sort_by: "position:desc",
+		sort_by: "published_at:desc",
 	})
 		.then((response) => {
 			const strictlyExperience = response.data.stories;

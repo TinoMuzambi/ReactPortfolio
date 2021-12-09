@@ -17,6 +17,11 @@ $secondary-font: "Livvic", sans-serif;
 	overflow-x: hidden;
 }
 
+::selection {
+	background: white;
+	color: black;
+}
+
 html,
 body {
 	height: 100vh;

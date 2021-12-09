@@ -250,7 +250,7 @@ const ContentWrapper = ({ data }) => {
 							aria-label=""
 							textLength="836"
 						>
-							Built with React, styled with Sass.&nbsp;
+							Built with Next.js, styled with Sass.&nbsp;
 						</textPath>
 					</text>
 				</svg>
