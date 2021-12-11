@@ -11,6 +11,7 @@ import {
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 import { opacity, left, right } from "../data/variants";
+import ContactForm from "./ContactForm";
 
 const About = ({ about }) => {
 	return (
@@ -102,6 +103,9 @@ const About = ({ about }) => {
 					</div>
 				</motion.div>
 			))}
+			<motion.div className="mini-card">
+				<ContactForm />
+			</motion.div>
 		</div>
 	);
 };
