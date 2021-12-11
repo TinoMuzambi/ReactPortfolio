@@ -3,33 +3,28 @@ import nodemailer from "nodemailer";
 import { getHtml } from "../../../utils";
 
 export default async (req, res) => {
-	const { to, fromName, commentText, url, title } = req.body;
+	const { to, fromName, messageText, url, title } = req.body;
 
 	let transporter = nodemailer.createTransport({
 		service: "gmail",
 		auth: {
-			user: "recommentsweb@gmail.com",
+			user: "tinomuzambi@gmail.com",
 			pass: process.env.GMAIL_PASS,
 		},
 	});
 
 	const options = {
-		from: "recommentsweb@gmail.com",
+		from: "tinomuzambi@gmail.com",
 		to: to,
-		subject: "ReComments | New reply to your comment",
-		text: `${fromName} replied to your comment on ReComments. They said: "${commentText}". Paste this url ${url} in the search box on ReComments to continue the conversation.`,
+		subject: "TinoMuzambi | New form submission",
+		text: `${fromName} sent you a message from tinomuzambi.com. They said: "${messageText}".`,
 		html: getHtml(
-			"New Comment",
+			"New Message",
 			`
-				<h1>New reply to your comment on <a href="https://recomments.tinomuzambi.com" target="_blank">ReComments</a></h1>
-				<p><b>${fromName}</b> replied to your comment on <a href="https://recomments.tinomuzambi.com" target="_blank">ReComments</a> on "${title}".</p>
+				<h1>New message on <a href="https://tinomuzambi.com" target="_blank">ReComments</a></h1>
+				<p><b>${fromName}</b> sent you a message.</p>
 				<p>They said:</p>
-				<blockquote>${commentText}</blockquote>
-				<p>Paste this url <a href=${url} target="_blank">${url}</a> in the search box on <a href="https://recomments.tinomuzambi.com" target="_blank">ReComments</a> to continue the conversation.</p>
-				
-				<div class="unsub">
-					<a href="https://recomments.tinomuzambi.com/api/users/emails?subscribe=false&email=${to}">Unsubscribe from these emails</a>
-				</div>
+				<blockquote>${messageText}</blockquote>
 			`
 		),
 	};
