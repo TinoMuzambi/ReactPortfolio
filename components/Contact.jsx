@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 
 import { right } from "../data/variants";
+import ContactForm from "./ContactForm";
 
-const ContactForm = () => {
+const Contact = () => {
 	return (
 		<motion.div
 			className="mini-card"
@@ -30,4 +31,4 @@ const ContactForm = () => {
 	);
 };
 
-export default ContactForm;
+export default Contact;
