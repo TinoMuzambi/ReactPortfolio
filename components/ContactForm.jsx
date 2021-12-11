@@ -4,7 +4,19 @@ import { opacity, left, right } from "../data/variants";
 
 const ContactForm = () => {
 	return (
-		<motion.div className="mini-card">
+		<motion.div
+			className="mini-card"
+			initial="start"
+			animate="end"
+			variants={key % 2 === 0 ? left : right}
+			transition={{
+				ease: "easeInOut",
+				duration: 0.2,
+				type: "spring",
+				damping: 10,
+				stiffness: 50,
+			}}
+		>
 			<h2 className="subtitle">Contact Me</h2>
 			<div className="inner">
 				<img
