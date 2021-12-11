@@ -2,12 +2,12 @@ export const getHtml = (title, html) => {
 	// Get html for sending email.
 	return `
 		<head>
-			<title>${title} | ReComments</title>
+			<title>${title} | TinoMuzambi</title>
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 		</head>
 		<header>
-			<img src="https://a.storyblok.com/f/114267/1080x1080/b66aa450e5/recomments.png" alt="logo"/>
+			<img src="https://a.storyblok.com/f/105639/512x512/03489159d5/logo512.png" alt="logo"/>
 		</header>
 		<main>
 			${html}
@@ -34,7 +34,7 @@ export const getHtml = (title, html) => {
 			}
 
 			b {
-				color:  #ffa500;
+				color:  rgb(90,138,159);
 			}
 
 			blockquote {
@@ -56,7 +56,7 @@ export const getHtml = (title, html) => {
 
 			.bar {
 				margin: 1rem 0;
-				background: #ffa500;
+				background: rgb(90,138,159);
 				height: 2rem;
 				width: 100%
 			}
