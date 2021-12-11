@@ -1,8 +1,15 @@
+import { useState } from "react";
+
 import { motion } from "framer-motion";
 
-import { opacity, left, right } from "../data/variants";
+import { right } from "../data/variants";
 
 const ContactForm = () => {
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [subject, setSubject] = useState("");
+	const [message, setMessage] = useState("");
+
 	return (
 		<motion.div
 			className="mini-card"
