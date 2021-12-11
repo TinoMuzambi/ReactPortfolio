@@ -10,7 +10,9 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
+
 import { opacity, left, right } from "../data/variants";
+import Contact from "./Contact";
 
 const About = ({ about }) => {
 	return (
@@ -102,6 +104,8 @@ const About = ({ about }) => {
 					</div>
 				</motion.div>
 			))}
+
+			<Contact />
 		</div>
 	);
 };
