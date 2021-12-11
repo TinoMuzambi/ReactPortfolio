@@ -6,8 +6,12 @@ const ContactForm = () => {
 	const [subject, setSubject] = useState("");
 	const [message, setMessage] = useState("");
 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
+
 	return (
-		<form className="form">
+		<form className="form" onSubmit={handleSubmit}>
 			<div className="input-group">
 				<label htmlFor="name">Name:</label>
 				<input
