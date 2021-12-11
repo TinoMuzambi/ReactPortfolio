@@ -11,13 +11,22 @@ const ContactForm = () => {
 		e.preventDefault();
 		const body = { name, email, subject, message };
 		const requestEmail = async () => {
-			await fetch(`${BASE_URL}/api/email`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(body),
-			});
+			try {
+				await fetch(`${BASE_URL}/api/email`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(body),
+				});
+				setName("");
+				setEmail("");
+				setSubject("");
+				setMessage("");
+				alert("Message sent!");
+			} catch (error) {
+				alert("Something went wrong, please try again.");
+			}
 		};
 		requestEmail();
 	};
