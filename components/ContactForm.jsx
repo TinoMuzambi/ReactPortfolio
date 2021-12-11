@@ -32,6 +32,7 @@ const ContactForm = () => {
 					id="name"
 					value={name}
 					onChange={(e) => setName(e.target.value)}
+					required
 				/>
 			</div>
 			<div className="input-group">
@@ -42,6 +43,7 @@ const ContactForm = () => {
 					id="email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
+					required
 				/>
 			</div>
 			<div className="input-group">
@@ -52,6 +54,7 @@ const ContactForm = () => {
 					id="subject"
 					value={subject}
 					onChange={(e) => setSubject(e.target.value)}
+					required
 				/>
 			</div>
 			<div className="input-group">
@@ -61,6 +64,7 @@ const ContactForm = () => {
 					id="message"
 					value={message}
 					onChange={(e) => setMessage(e.target.value)}
+					required
 				/>
 			</div>
 			<div className="input-group">
