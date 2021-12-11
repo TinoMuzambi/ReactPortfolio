@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BASE_URL } from "../utils";
 
 const ContactForm = () => {
 	const [name, setName] = useState("");
@@ -8,6 +9,14 @@ const ContactForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		const body = { name, email, subject, message };
+		const requestEmail = async () => {
+			await fetch(`${BASE_URL}/api/email`, {
+				method: "POST",
+				body: JSON.stringify(body),
+			});
+		};
+		requestEmail();
 	};
 
 	return (
