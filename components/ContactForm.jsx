@@ -47,6 +47,9 @@ const ContactForm = () => {
 					onChange={(e) => setMessage(e.target.value)}
 				/>
 			</div>
+			<div class="input-group">
+				<input type="submit" value="Send" />
+			</div>
 		</form>
 	);
 };
