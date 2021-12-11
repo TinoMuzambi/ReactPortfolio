@@ -5,14 +5,7 @@ import { opacity, left, right } from "../data/variants";
 const ContactForm = () => {
 	return (
 		<motion.div className="mini-card">
-			<motion.h1
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
-				Contact Me
-			</motion.h1>
+			<h2 className="subtitle">Contact Me</h2>
 			<div className="inner">
 				<img
 					src="https://a.storyblok.com/f/105639/512x512/0fdffa11eb/hobbies.png"
