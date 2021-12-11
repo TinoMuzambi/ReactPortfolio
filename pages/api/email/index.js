@@ -22,7 +22,7 @@ export default async (req, res) => {
 		html: getHtml(
 			"New Message",
 			`
-				<h1>New message on <a href="https://tinomuzambi.com" target="_blank">ReComments</a></h1>
+				<h1>New message on <a href="https://tinomuzambi.com" target="_blank">TinoMuzambi</a></h1>
 				<p><b>${name}</b> sent you a message.</p>
 				<p>They said:</p>
 				<blockquote>${message}</blockquote>
