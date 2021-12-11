@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import { getHtml } from "../../../utils";
 
 export default async (req, res) => {
-	const { to, fromName, messageText, url, title } = req.body;
+	const { to, fromName, messageText, subject } = req.body;
 
 	let transporter = nodemailer.createTransport({
 		service: "gmail",
