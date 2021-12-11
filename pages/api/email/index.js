@@ -3,7 +3,7 @@ import nodemailer from "nodemailer";
 import { getHtml } from "../../../utils";
 
 export default async (req, res) => {
-	const { to, fromName, messageText, subject } = req.body;
+	const { email, name, message, subject } = req.body;
 
 	let transporter = nodemailer.createTransport({
 		service: "gmail",
@@ -15,16 +15,17 @@ export default async (req, res) => {
 
 	const options = {
 		from: "tinomuzambi@gmail.com",
-		to: to,
-		subject: "TinoMuzambi | New form submission",
-		text: `${fromName} sent you a message from tinomuzambi.com. They said: "${messageText}".`,
+		to: "tino@tinomuzambi.com",
+		replyTo: email,
+		subject: `${subject} | Form Submission from TinoMuzambi`,
+		text: `${name} sent you a message from tinomuzambi.com. They said: "${message}".`,
 		html: getHtml(
 			"New Message",
 			`
 				<h1>New message on <a href="https://tinomuzambi.com" target="_blank">ReComments</a></h1>
-				<p><b>${fromName}</b> sent you a message.</p>
+				<p><b>${name}</b> sent you a message.</p>
 				<p>They said:</p>
-				<blockquote>${messageText}</blockquote>
+				<blockquote>${message}</blockquote>
 			`
 		),
 	};
