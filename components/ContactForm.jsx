@@ -1,6 +1,6 @@
 const ContactForm = () => {
 	return (
-		<div>
+		<motion.div className="mini-card">
 			<h2 className="subtitle">Contact Me</h2>
 			<div className="inner">
 				<img
@@ -26,7 +26,7 @@ const ContactForm = () => {
 					</div>
 				</form>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

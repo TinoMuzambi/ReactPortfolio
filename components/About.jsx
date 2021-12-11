@@ -103,9 +103,8 @@ const About = ({ about }) => {
 					</div>
 				</motion.div>
 			))}
-			<motion.div className="mini-card">
-				<ContactForm />
-			</motion.div>
+
+			<ContactForm />
 		</div>
 	);
 };
