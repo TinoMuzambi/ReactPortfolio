@@ -8,7 +8,7 @@ const ContactForm = () => {
 			className="mini-card"
 			initial="start"
 			animate="end"
-			variants={key % 2 === 0 ? left : right}
+			variants={right}
 			transition={{
 				ease: "easeInOut",
 				duration: 0.2,
@@ -22,6 +22,7 @@ const ContactForm = () => {
 				<img
 					src="https://a.storyblok.com/f/105639/512x512/0fdffa11eb/hobbies.png"
 					alt="contact"
+					className="tag"
 				/>
 				<form className="form">
 					<div className="input-group">
