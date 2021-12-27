@@ -33,7 +33,7 @@ const Experience = ({ experience }) => {
 						}}
 						date={item.period}
 						iconStyle={{
-							background: "#109de8",
+							background: "#0ce3f2aa",
 							marginTop: "1rem",
 							display: "flex",
 							alignItems: "center",
