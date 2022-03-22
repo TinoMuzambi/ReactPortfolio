@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import {
@@ -59,10 +60,12 @@ const Holder = ({ data }) => {
 			<div className="card">
 				<div className="sidebar">
 					<div className="profile">
-						<img
+						<Image
 							src="https://a.storyblok.com/f/114267/1376x1376/fe9da0057b/img_0361.jpg"
 							alt="me"
 							className="profile-img"
+							width={100}
+							height={100}
 						/>
 						<div className="info">
 							<h2 className="title">Tino Muzambi</h2>
