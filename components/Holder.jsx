@@ -59,7 +59,11 @@ const Holder = ({ data }) => {
 			<div className="card">
 				<div className="sidebar">
 					<div className="profile">
-						<img src="/assets/outline.svg" alt="me" className="profile-img" />
+						<img
+							src="https://a.storyblok.com/f/114267/1376x1376/fe9da0057b/img_0361.jpg"
+							alt="me"
+							className="profile-img"
+						/>
 						<div className="info">
 							<h2 className="title">Tino Muzambi</h2>
 							<h3 className="subtitle">Full-Stack Web Developer</h3>
