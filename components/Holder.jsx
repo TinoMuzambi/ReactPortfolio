@@ -118,7 +118,7 @@ const Holder = ({ data }) => {
 					<div className="joke" onClick={() => setOpen(true)}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
 						<img
-							src="https://image.flaticon.com/icons/png/512/3409/3409731.png"
+							src="https://a.storyblok.com/f/114267/512x512/38cf5dc47b/doubt.png"
 							alt="man"
 							className="icon"
 						/>
