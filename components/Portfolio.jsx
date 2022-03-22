@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { FaReact, FaPython, FaHtml5, FaCss3Alt, FaAws } from "react-icons/fa";
 import { SiJavascript, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
@@ -51,10 +52,13 @@ const Portfolio = ({ projects }) => {
 									)}
 								</h2>
 								<div className="screenshot-holder">
-									<img
+									<Image
 										src={project.image}
 										alt={project.title}
 										className="screenshot"
+										height={256}
+										width={570}
+										objectFit="contain"
 									/>
 								</div>
 								<p className="text">{project.content[0]}</p>
