@@ -125,11 +125,12 @@ const Holder = ({ data }) => {
 					</Popup>
 					<div className="joke" onClick={() => setOpen(true)}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
-						<img
+						<Image
 							src="https://a.storyblok.com/f/114267/512x512/38cf5dc47b/doubt.png"
 							alt="man"
 							className="icon"
 							height={64}
+							width={64}
 						/>
 					</div>
 				</div>

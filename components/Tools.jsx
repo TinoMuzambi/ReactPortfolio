@@ -55,7 +55,12 @@ const Tools = ({ tools }) => {
 								duration: 0.2,
 							}}
 						>
-							<img src={tool.icon} alt={tool.title}></img>
+							<Image
+								src={tool.icon}
+								alt={tool.title}
+								width={480}
+								height={480}
+							/>
 						</motion.span>
 					)
 				)}
