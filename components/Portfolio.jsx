@@ -1,5 +1,5 @@
 import React from "react";
-import { FaReact, FaPython, FaHtml5, FaCss3Alt } from "react-icons/fa";
+import { FaReact, FaPython, FaHtml5, FaCss3Alt, FaAws } from "react-icons/fa";
 import { SiJavascript, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
 
@@ -73,6 +73,11 @@ const Portfolio = ({ projects }) => {
 							{project.keywords.includes("react") && (
 								<span className="icon" data-lang="React">
 									<FaReact className="icon" />
+								</span>
+							)}
+							{project.keywords.includes("aws") && (
+								<span className="icon" data-lang="AWS">
+									<FaAws className="icon" />
 								</span>
 							)}
 							{project.keywords.includes("html") && (
