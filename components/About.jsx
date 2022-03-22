@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
 	FaFacebook,
 	FaTwitter,
@@ -42,7 +43,13 @@ const About = ({ about }) => {
 				>
 					<h2 className="subtitle">{item.title}</h2>
 					<div className="inner">
-						<img src={item.image} alt="person" className="tag" />
+						<Image
+							src={item.image}
+							alt="person"
+							className="tag"
+							width={160}
+							height={112}
+						/>
 						{/* Icons made by <a href="https://www.flaticon.com/authors/payungkead" title="Payungkead">Payungkead</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> */}
 						{item.text ? (
 							<p className="text">{parse(item.text)}</p>

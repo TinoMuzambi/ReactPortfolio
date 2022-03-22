@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import {
@@ -59,7 +60,14 @@ const Holder = ({ data }) => {
 			<div className="card">
 				<div className="sidebar">
 					<div className="profile">
-						<img src="/assets/outline.svg" alt="me" className="profile-img" />
+						<Image
+							src="https://a.storyblok.com/f/114267/1376x1376/fe9da0057b/img_0361.jpg"
+							alt="me"
+							className="profile-img"
+							width={100}
+							height={100}
+							objectFit="contain"
+						/>
 						<div className="info">
 							<h2 className="title">Tino Muzambi</h2>
 							<h3 className="subtitle">Full-Stack Web Developer</h3>
@@ -117,10 +125,12 @@ const Holder = ({ data }) => {
 					</Popup>
 					<div className="joke" onClick={() => setOpen(true)}>
 						<p className="text">{loading ? "Joke loading..." : joke}</p>
-						<img
+						<Image
 							src="https://a.storyblok.com/f/114267/512x512/38cf5dc47b/doubt.png"
 							alt="man"
 							className="icon"
+							height={64}
+							width={64}
 						/>
 					</div>
 				</div>
@@ -134,7 +144,7 @@ const Holder = ({ data }) => {
 			</div>
 
 			<footer>
-				<p className="rights">Copyright © Tino Muzambi 2019 - 2021</p>
+				<p className="rights">Copyright © Tino Muzambi 2019 - 2022</p>
 			</footer>
 		</section>
 	);

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { right } from "../data/variants";
@@ -20,10 +21,12 @@ const Contact = () => {
 		>
 			<h2 className="subtitle">Contact Me</h2>
 			<div className="inner">
-				<img
+				<Image
 					src="https://a.storyblok.com/f/105639/512x512/0fdffa11eb/hobbies.png"
 					alt="contact"
 					className="tag"
+					width={160}
+					height={112}
 				/>
 				<ContactForm />
 			</div>

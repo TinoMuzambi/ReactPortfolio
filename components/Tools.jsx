@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { up, down, opacity } from "../data/variants";
@@ -32,11 +33,13 @@ const Tools = ({ tools }) => {
 								duration: 0.2,
 							}}
 						>
-							<img
+							<Image
 								src={tool.icon}
 								alt={tool.title}
 								data-tool={tool.title}
 								className="tools-img"
+								width={480}
+								height={480}
 							/>
 						</motion.a>
 					) : (
@@ -52,7 +55,12 @@ const Tools = ({ tools }) => {
 								duration: 0.2,
 							}}
 						>
-							<img src={tool.icon} alt={tool.title}></img>
+							<Image
+								src={tool.icon}
+								alt={tool.title}
+								width={480}
+								height={480}
+							/>
 						</motion.span>
 					)
 				)}

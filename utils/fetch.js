@@ -12,7 +12,7 @@ export const getProjects = async () => {
 	let projects = [];
 
 	await Storyblok.get("cdn/stories?starts_with=projects/", {
-		sort_by: "published_at:desc",
+		sort_by: "created_at:desc",
 	})
 		.then((response) => {
 			const strictlyProjects = response.data.stories;
@@ -27,6 +27,7 @@ export const getProjects = async () => {
 					github: project.content.github,
 					keywords: project.content.keywords.split("\n"),
 					image: project.content?.image || null,
+					featured: project.content.featured || false,
 				};
 			});
 			projects = prettyprojects;

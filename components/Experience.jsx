@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
 	VerticalTimeline,
 	VerticalTimelineElement,
@@ -39,7 +40,15 @@ const Experience = ({ experience }) => {
 							alignItems: "center",
 							justifyContent: "center",
 						}}
-						icon={<img src={item.icon} alt="experience item" />}
+						icon={
+							<Image
+								src={item.icon}
+								alt="experience item"
+								width={48}
+								height={48}
+								objectFit="contain"
+							/>
+						}
 						iconClassName="round"
 						visible={true}
 					>
