@@ -66,6 +66,7 @@ const Holder = ({ data }) => {
 							className="profile-img"
 							width={100}
 							height={100}
+							objectFit="contain"
 						/>
 						<div className="info">
 							<h2 className="title">Tino Muzambi</h2>
