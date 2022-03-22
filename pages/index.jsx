@@ -15,6 +15,7 @@ export default function Home({
 	experience,
 	tools,
 }) {
+	console.log(projects);
 	return (
 		<>
 			<Meta />

@@ -19,97 +19,99 @@ const Portfolio = ({ projects }) => {
 			</motion.h1>
 
 			<div className="cards">
-				{shuffle(projects.slice(0, 6)).map((project, key) => (
-					<motion.div
-						className="mini-card"
-						key={key}
-						initial="start"
-						animate="end"
-						variants={key % 2 === 0 ? left : right}
-						transition={{
-							ease: "easeInOut",
-							duration: 0.2,
-							type: "spring",
-							damping: 10,
-							stiffness: 50,
-						}}
-					>
-						<div className="lead">
-							<h2 className="title">
-								{project.link ? (
+				{shuffle(projects.slice(0, 6))
+					.filter((project) => project.featured)
+					.map((project, key) => (
+						<motion.div
+							className="mini-card"
+							key={key}
+							initial="start"
+							animate="end"
+							variants={key % 2 === 0 ? left : right}
+							transition={{
+								ease: "easeInOut",
+								duration: 0.2,
+								type: "spring",
+								damping: 10,
+								stiffness: 50,
+							}}
+						>
+							<div className="lead">
+								<h2 className="title">
+									{project.link ? (
+										<a
+											target="_blank"
+											rel="noopener noreferrer"
+											href={project.link}
+										>
+											{project.title}
+										</a>
+									) : (
+										project.title
+									)}
+								</h2>
+								<div className="screenshot-holder">
+									<img
+										src={project.image}
+										alt={project.title}
+										className="screenshot"
+									/>
+								</div>
+								<p className="text">{project.content[0]}</p>
+							</div>
+							{project.github && (
+								<p className="text-g">
 									<a
 										target="_blank"
 										rel="noopener noreferrer"
-										href={project.link}
+										href={project.github}
 									>
-										{project.title}
+										GitHub
 									</a>
-								) : (
-									project.title
-								)}
-							</h2>
-							<div className="screenshot-holder">
-								<img
-									src={project.image}
-									alt={project.title}
-									className="screenshot"
-								/>
-							</div>
-							<p className="text">{project.content[0]}</p>
-						</div>
-						{project.github && (
-							<p className="text-g">
-								<a
-									target="_blank"
-									rel="noopener noreferrer"
-									href={project.github}
-								>
-									GitHub
-								</a>
-							</p>
-						)}
+								</p>
+							)}
 
-						<div className="icons">
-							{project.keywords.includes("react") && (
-								<span className="icon" data-lang="React">
-									<FaReact className="icon" />
-								</span>
-							)}
-							{project.keywords.includes("aws") && (
-								<span className="icon" data-lang="AWS">
-									<FaAws className="icon" />
-								</span>
-							)}
-							{project.keywords.includes("html") && (
-								<span className="icon" data-lang="HTML5">
-									<FaHtml5 />
-								</span>
-							)}
-							{(project.keywords.includes("css") ||
-								project.keywords.includes("sass")) && (
-								<span className="icon" data-lang="CSS3">
-									<FaCss3Alt />
-								</span>
-							)}
-							{project.keywords.includes("python") && (
-								<span className="icon" data-lang="Python">
-									<FaPython />
-								</span>
-							)}
-							{project.keywords.includes("typescript") && (
-								<span className="icon" data-lang="TypeScript">
-									<SiTypescript />
-								</span>
-							)}
-							{!project.keywords.includes("react") &&
-								project.keywords.includes("javascript") && (
-									<span className="icon" data-lang="JavaScript">
-										<SiJavascript />
+							<div className="icons">
+								{project.keywords.includes("react") && (
+									<span className="icon" data-lang="React">
+										<FaReact className="icon" />
 									</span>
 								)}
-						</div>
-					</motion.div>
-				))}
+								{project.keywords.includes("aws") && (
+									<span className="icon" data-lang="AWS">
+										<FaAws className="icon" />
+									</span>
+								)}
+								{project.keywords.includes("html") && (
+									<span className="icon" data-lang="HTML5">
+										<FaHtml5 />
+									</span>
+								)}
+								{(project.keywords.includes("css") ||
+									project.keywords.includes("sass")) && (
+									<span className="icon" data-lang="CSS3">
+										<FaCss3Alt />
+									</span>
+								)}
+								{project.keywords.includes("python") && (
+									<span className="icon" data-lang="Python">
+										<FaPython />
+									</span>
+								)}
+								{project.keywords.includes("typescript") && (
+									<span className="icon" data-lang="TypeScript">
+										<SiTypescript />
+									</span>
+								)}
+								{!project.keywords.includes("react") &&
+									project.keywords.includes("javascript") && (
+										<span className="icon" data-lang="JavaScript">
+											<SiJavascript />
+										</span>
+									)}
+							</div>
+						</motion.div>
+					))}
 			</div>
 		</div>
 	);
