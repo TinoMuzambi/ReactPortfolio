@@ -27,6 +27,7 @@ export const getProjects = async () => {
 					github: project.content.github,
 					keywords: project.content.keywords.split("\n"),
 					image: project.content?.image || null,
+					featured: project.content.featured || false,
 				};
 			});
 			projects = prettyprojects;
