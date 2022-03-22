@@ -19,7 +19,7 @@ const Portfolio = ({ projects }) => {
 			</motion.h1>
 
 			<div className="cards">
-				{shuffle(projects.slice(0, 6))
+				{shuffle(projects)
 					.filter((project) => project.featured)
 					.map((project, key) => (
 						<motion.div
