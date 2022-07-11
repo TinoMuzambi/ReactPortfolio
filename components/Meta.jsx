@@ -1,34 +1,64 @@
 import Head from "next/head";
 
+import { elipsise } from "../utils";
+
 const Meta = ({ title, description, keywords, url, image }) => {
 	return (
 		<Head>
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<meta name="theme-color" content="#000000" />
-			<meta name="keywords" content={keywords} />
-			<meta name="description" content={description} />
+			<meta
+				name="viewport"
+				content="width=device-width, initial-scale=1"
+				key="viewport"
+			/>
+			<meta name="theme-color" content="#000000" key="theme-colour" />
+			<meta name="keywords" content={keywords} key="keywords" />
+			<meta
+				name="description"
+				content={elipsise(description || "", 300)}
+				key="name-description"
+			/>
 
 			{/* <!-- Google / Search Engine Tags --> */}
-			<meta itemProp="name" content={title} />
-			<meta itemProp="description" content={description} />
-			<meta itemProp="image" content={image} />
+			<meta itemProp="name" content={title} key="item-name" />
+			<meta
+				itemProp="description"
+				content={elipsise(description || "", 300)}
+				key="item-description"
+			/>
+			<meta itemProp="image" content={image} key="item-image" />
 
 			{/* <!-- Facebook Meta Tags --> */}
-			<meta property="og:url" content={url} />
-			<meta property="og:type" content="website" />
-			<meta property="og:title" content={title} />
-			<meta property="og:description" content={description} />
-			<meta property="og:image" content={image} />
+			<meta property="og:url" content={url} key="og-url" />
+			<meta property="og:type" content="website" key="og-type" />
+			<meta property="og:title" content={title} key="og-title" />
+			<meta
+				property="og:description"
+				content={elipsise(description || "", 300)}
+				key="og-description"
+			/>
+			<meta property="og:image" content={image} key="og-image" />
 
 			{/* <!-- Twitter Meta Tags --> */}
-			<meta name="twitter:card" content="summary_large_image" />
-			<meta name="twitter:title" content={title} />
-			<meta name="twitter:description" content={description} />
-			<meta name="twitter:image" content={image} />
+			<meta
+				name="twitter:card"
+				content="summary_large_image"
+				key="twitter-card"
+			/>
+			<meta name="twitter:title" content={title} key="twitter-title" />
+			<meta
+				name="twitter:description"
+				content={elipsise(description || "", 200)}
+				key="twitter-description"
+			/>
+			<meta name="twitter:image" content={image} key="twitter-image" />
 
 			<meta charSet="utf-8" />
 			<link rel="icon" href="/favicon.ico" />
-			<meta name="TinoMuzambi" content="My personal website." />
+			<meta
+				name={title}
+				content={elipsise(description || "", 300)}
+				key="name"
+			/>
 			<link rel="apple-touch-icon" href="/logo192.png" />
 			<link rel="manifest" href="/manifest.json" />
 			<title>{title}</title>
