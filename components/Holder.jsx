@@ -144,7 +144,9 @@ const Holder = ({ data }) => {
 			</div>
 
 			<footer>
-				<p className="rights">Copyright © Tino Muzambi 2019 - 2022</p>
+				<p className="rights">
+					Copyright © Tino Muzambi 2019 - {new Date().getFullYear()}
+				</p>
 			</footer>
 		</section>
 	);
