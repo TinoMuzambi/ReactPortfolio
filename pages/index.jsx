@@ -43,5 +43,6 @@ export const getStaticProps = async () => {
 			experience,
 			tools,
 		},
+		revalidate: 60,
 	};
 };
