@@ -13,6 +13,13 @@ export const CONTACT_LIMITS = Object.freeze({
 const MAX_REQUEST_BYTES = 16 * 1024;
 const EMAIL_PATTERN = /^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const HEADER_LINE_BREAK = /[\r\n]/;
+const HTML_ENTITIES = Object.freeze({
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	'"': "&quot;",
+	"'": "&#39;",
+});
 
 export const config = {
 	api: {
@@ -23,17 +30,7 @@ export const config = {
 };
 
 export const escapeHtml = (value) =>
-	value.replace(/[&<>"']/g, (character) => {
-		const entities = {
-			"&": "&amp;",
-			"<": "&lt;",
-			">": "&gt;",
-			'"': "&quot;",
-			"'": "&#39;",
-		};
-
-		return entities[character];
-	});
+	value.replace(/[&<>"']/g, (character) => HTML_ENTITIES[character]);
 
 const isRecord = (value) => {
 	if (!value || typeof value !== "object" || Array.isArray(value)) return false;
@@ -44,7 +41,7 @@ const isRecord = (value) => {
 const readString = (body, field, { required = true } = {}) => {
 	const value = body[field];
 
-	if (!required && value === undefined) return "";
+	if (!required && value == null) return "";
 	if (typeof value !== "string") {
 		throw new TypeError(`${field} must be a string`);
 	}
@@ -91,6 +88,18 @@ export const createRateLimiter = ({
 	maxEntries = 10000,
 } = {}) => {
 	const attempts = new Map();
+	const entryLimit = Math.max(1, maxEntries);
+
+	const touch = (key, entry) => {
+		attempts.delete(key);
+		attempts.set(key, entry);
+
+		// Refreshing insertion order makes this a bounded LRU map: a client that
+		// continues making attempts cannot reset its quota through key churn.
+		if (attempts.size > entryLimit) {
+			attempts.delete(attempts.keys().next().value);
+		}
+	};
 
 	return {
 		consume(key) {
@@ -102,6 +111,7 @@ export const createRateLimiter = ({
 			}
 
 			if (entry.count >= limit) {
+				touch(key, entry);
 				return {
 					allowed: false,
 					retryAfter: Math.max(1, Math.ceil((entry.resetAt - currentTime) / 1000)),
@@ -109,13 +119,7 @@ export const createRateLimiter = ({
 			}
 
 			entry.count += 1;
-			attempts.set(key, entry);
-
-			// This bounds memory in a warm function instance. It is deliberately only a
-			// best-effort serverless guard; durable, global limits belong at the edge.
-			if (attempts.size > maxEntries) {
-				attempts.delete(attempts.keys().next().value);
-			}
+			touch(key, entry);
 
 			return { allowed: true, retryAfter: 0 };
 		},
@@ -127,13 +131,13 @@ const getHeader = (req, name) => {
 	return Array.isArray(value) ? value[0] : value;
 };
 
-export const getClientKey = (req) => {
-	const forwardedFor = getHeader(req, "x-forwarded-for");
-	const address =
-		(typeof forwardedFor === "string" && forwardedFor.split(",")[0].trim()) ||
-		getHeader(req, "x-real-ip") ||
-		req.socket?.remoteAddress ||
-		"unknown";
+export const getClientKey = (req, env = process.env) => {
+	const vercelForwardedFor = getHeader(req, "x-vercel-forwarded-for");
+	const trustedForwardedAddress =
+		env.VERCEL === "1" && typeof vercelForwardedFor === "string"
+			? vercelForwardedFor.split(",")[0].trim()
+			: "";
+	const address = trustedForwardedAddress || req.socket?.remoteAddress || "unknown";
 
 	return String(address).slice(0, 100);
 };
@@ -182,14 +186,6 @@ export const createEmailHandler = ({
 			return res.status(413).json({ success: false, error: "Request is too large." });
 		}
 
-		const rateLimit = rateLimiter.consume(getClientKey(req));
-		if (!rateLimit.allowed) {
-			res.setHeader("Retry-After", String(rateLimit.retryAfter));
-			return res
-				.status(429)
-				.json({ success: false, error: "Too many requests. Please try again later." });
-		}
-
 		let submission;
 		try {
 			submission = validateContactSubmission(req.body);
@@ -199,14 +195,25 @@ export const createEmailHandler = ({
 				.json({ success: false, error: "Invalid form submission." });
 		}
 
-		// Treat a filled honeypot as success so automated senders get no useful signal.
-		if (submission.website) return res.status(200).json({ success: true });
+		if (submission.website) {
+			return res
+				.status(400)
+				.json({ success: false, error: "Invalid form submission." });
+		}
 
 		if (!env.GMAIL_PASS) {
 			logger.error("Contact email is not configured: GMAIL_PASS is missing.");
 			return res
 				.status(503)
 				.json({ success: false, error: "Message service is unavailable." });
+		}
+
+		const rateLimit = rateLimiter.consume(getClientKey(req, env));
+		if (!rateLimit.allowed) {
+			res.setHeader("Retry-After", String(rateLimit.retryAfter));
+			return res
+				.status(429)
+				.json({ success: false, error: "Too many requests. Please try again later." });
 		}
 
 		try {

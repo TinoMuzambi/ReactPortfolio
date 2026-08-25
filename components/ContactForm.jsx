@@ -1,4 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+export const CONTACT_REQUEST_TIMEOUT_MS = 10_000;
 
 const HONEYPOT_STYLE = {
 	position: "absolute",
@@ -17,6 +19,14 @@ const ContactForm = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [status, setStatus] = useState({ type: "idle", message: "" });
 	const submittingRef = useRef(false);
+	const requestControllerRef = useRef(null);
+
+	useEffect(
+		() => () => {
+			requestControllerRef.current?.abort();
+		},
+		[]
+	);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -25,6 +35,12 @@ const ContactForm = () => {
 		submittingRef.current = true;
 		setIsSubmitting(true);
 		setStatus({ type: "pending", message: "Sending your message…" });
+		const controller = new AbortController();
+		requestControllerRef.current = controller;
+		const timeoutId = setTimeout(
+			() => controller.abort(),
+			CONTACT_REQUEST_TIMEOUT_MS
+		);
 
 		try {
 			const response = await fetch("/api/email", {
@@ -33,6 +49,7 @@ const ContactForm = () => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({ name, email, subject, message, website }),
+				signal: controller.signal,
 			});
 
 			if (!response.ok) throw new Error("Contact request failed");
@@ -46,13 +63,24 @@ const ContactForm = () => {
 		} catch {
 			setStatus({
 				type: "error",
-				message: "Something went wrong. Your message was kept; please try again.",
+				message: controller.signal.aborted
+					? "Sending timed out. Your message was kept; please try again."
+					: "Something went wrong. Your message was kept; please try again.",
 			});
 		} finally {
+			clearTimeout(timeoutId);
+			if (requestControllerRef.current === controller) {
+				requestControllerRef.current = null;
+			}
 			submittingRef.current = false;
 			setIsSubmitting(false);
 		}
 	};
+
+	const statusClassName =
+		status.type === "success" || status.type === "error"
+			? `form-status form-status--${status.type}`
+			: "form-status";
 
 	return (
 		<form className="form" onSubmit={handleSubmit} aria-busy={isSubmitting}>
@@ -124,7 +152,7 @@ const ContactForm = () => {
 				/>
 			</div>
 			<p
-				className={`form-status form-status--${status.type}`}
+				className={statusClassName}
 				role="status"
 				aria-live="polite"
 				aria-atomic="true"
