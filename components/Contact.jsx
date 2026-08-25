@@ -19,11 +19,11 @@ const Contact = () => {
 				stiffness: 50,
 			}}
 		>
-			<h2 className="subtitle">Contact Me</h2>
+			<h3 className="subtitle">Contact Me</h3>
 			<div className="inner">
 				<Image
 					src="https://a.storyblok.com/f/105639/512x512/0fdffa11eb/hobbies.png"
-					alt="contact"
+					alt="Illustration for contacting Tino Muzambi"
 					className="tag"
 					width={160}
 					height={112}

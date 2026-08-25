@@ -12,19 +12,20 @@ import { opacity } from "../data/variants";
 const Experience = ({ experience }) => {
 	return (
 		<div className="experience">
-			<motion.h1
+			<motion.h2
+				id="experience-heading"
 				className="title"
 				initial="start"
 				animate="end"
 				variants={opacity}
 			>
 				Experience
-			</motion.h1>
+			</motion.h2>
 
 			<VerticalTimeline className="timeline">
-				{experience.map((item, key) => (
+				{experience.map((item) => (
 					<VerticalTimelineElement
-						key={key}
+						key={`${item.institution}|${item.title}|${item.period}`}
 						className="vertical-timeline-element--work"
 						contentStyle={{
 							background: " rgba(55, 237, 83, 0.4)",
@@ -43,7 +44,7 @@ const Experience = ({ experience }) => {
 						icon={
 							<Image
 								src={item.icon}
-								alt="experience item"
+								alt={`${item.institution || item.title} logo`}
 								width={48}
 								height={48}
 								style={{ objectFit: "contain" }}

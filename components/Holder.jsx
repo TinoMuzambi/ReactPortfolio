@@ -16,6 +16,23 @@ import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import Tools from "./Tools";
 
+const NAV_ITEMS = [
+	{ id: "about", label: "About", Icon: FaInfoCircle },
+	{ id: "education", label: "Education", Icon: FaSchool },
+	{ id: "experience", label: "Experience", Icon: FaBuilding },
+	{ id: "portfolio", label: "Portfolio", Icon: FaCode },
+	{ id: "tools", label: "Tools", Icon: FaToolbox },
+];
+
+const LEGACY_VIEW_IDS = {
+	edu: "education",
+	exp: "experience",
+	por: "portfolio",
+	too: "tools",
+};
+
+const isView = (view) => NAV_ITEMS.some(({ id }) => id === view);
+
 const Holder = ({ data }) => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setView] = useState("about");
@@ -23,121 +40,188 @@ const Holder = ({ data }) => {
 	const [open, setOpen] = useState(false);
 
 	useEffect(() => {
-		const getJoke = async () => {
-			const result = await fetch(
-				"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single&safe-mode"
-			);
-			const data = await result.json();
-			setJoke(data.joke);
+		const controller = new AbortController();
+		let mounted = true;
 
-			setLoading(false);
+		const getJoke = async () => {
+			try {
+				const result = await fetch(
+					"https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist,explicit,nsfw&type=single&safe-mode",
+					{ signal: controller.signal }
+				);
+				if (!result.ok) throw new Error("Joke service returned an error");
+				const response = await result.json();
+				if (typeof response.joke !== "string" || !response.joke.trim()) {
+					throw new Error("Joke service returned an invalid response");
+				}
+				if (mounted) setJoke(response.joke);
+			} catch (error) {
+				if (mounted && error?.name !== "AbortError") {
+					setJoke("");
+				}
+			} finally {
+				if (mounted) setLoading(false);
+			}
 		};
+
 		getJoke();
 
-		const localView = window.localStorage.getItem("tino-last-viewed");
-		if (localView) {
-			queueMicrotask(() => setView(localView));
-		}
+		return () => {
+			mounted = false;
+			controller.abort();
+		};
 	}, []);
 
 	useEffect(() => {
-		const localView = window.localStorage.getItem("tino-last-viewed");
-		if (!localView) {
-			window.localStorage.setItem("tino-last-viewed", currentView);
-		}
-	}, [currentView]);
+		const syncView = () => {
+			const hashView = window.location.hash.slice(1).toLowerCase();
+			let storedView = "";
+			try {
+				storedView = window.localStorage.getItem("tino-last-viewed") || "";
+			} catch {
+				// Hash navigation and the default About view still work without storage.
+			}
+			storedView = LEGACY_VIEW_IDS[storedView] || storedView;
+
+			if (isView(hashView)) setView(hashView);
+			else if (isView(storedView)) setView(storedView);
+		};
+
+		syncView();
+		window.addEventListener("hashchange", syncView);
+		return () => window.removeEventListener("hashchange", syncView);
+	}, []);
 
 	const setCurrentView = (view) => {
-		// Save last view to localstorage. And open that view when component loads.
 		setView(view);
-		window.localStorage.setItem("tino-last-viewed", view);
+		try {
+			window.localStorage.setItem("tino-last-viewed", view);
+		} catch {
+			// Selecting a panel must not depend on browser storage.
+		}
 	};
+
+	const jokeStatus = loading
+		? "Joke loading…"
+		: joke || "Joke unavailable right now.";
 
 	return (
 		<section className="holder">
 			<div className="card">
-				<div className="sidebar">
+				<aside className="sidebar">
 					<div className="profile">
 						<Image
 							src="https://a.storyblok.com/f/114267/1376x1376/fe9da0057b/img_0361.jpg"
-							alt="me"
+							alt="Portrait of Tino Muzambi"
 							className="profile-img"
 							width={100}
 							height={100}
 							style={{ objectFit: "contain" }}
 						/>
 						<div className="info">
-							<h2 className="title">Tino Muzambi</h2>
-							<h3 className="subtitle">Full-Stack Web Developer</h3>
+							<h1 className="title">Tino Muzambi</h1>
+							<p className="subtitle">Full-Stack Web Developer</p>
 						</div>
 					</div>
-					<ul className="items">
-						<li
-							className={`item ${currentView === "about" && "active"}`}
-							onClick={() => setCurrentView("about")}
-						>
-							<span>
-								<FaInfoCircle className="icon" />
-							</span>
-							About
-						</li>
-						<li
-							className={`item ${currentView === "edu" && "active"}`}
-							onClick={() => setCurrentView("edu")}
-						>
-							<span>
-								<FaSchool className="icon" />
-							</span>
-							Education
-						</li>
-						<li
-							className={`item ${currentView === "exp" && "active"}`}
-							onClick={() => setCurrentView("exp")}
-						>
-							<span>
-								<FaBuilding className="icon" />
-							</span>
-							Experience
-						</li>
-						<li
-							className={`item ${currentView === "por" && "active"}`}
-							onClick={() => setCurrentView("por")}
-						>
-							<span>
-								<FaCode className="icon" />
-							</span>
-							Portfolio
-						</li>
-						<li
-							className={`item ${currentView === "too" && "active"}`}
-							onClick={() => setCurrentView("too")}
-						>
-							<span>
-								<FaToolbox className="icon" />
-							</span>
-							Tools
-						</li>
-					</ul>
+					<nav aria-label="Portfolio sections">
+						<ul className="items">
+							{NAV_ITEMS.map(({ id, label, Icon }) => (
+								<li key={id}>
+									<a
+										className={`item ${currentView === id ? "active" : ""}`}
+										href={`#${id}`}
+										onClick={() => setCurrentView(id)}
+										aria-current={currentView === id ? "page" : undefined}
+									>
+										<span aria-hidden="true">
+											<Icon className="icon" focusable="false" />
+										</span>
+										{label}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
 					<Popup open={open} modal onClose={() => setOpen(false)}>
-						<span className="modal"> {joke} </span>
+						<div
+							className="modal"
+							role="dialog"
+							aria-modal="true"
+							aria-labelledby="joke-dialog-title"
+						>
+							<h2 id="joke-dialog-title">A quick joke</h2>
+							<p>{joke}</p>
+							<button type="button" onClick={() => setOpen(false)}>
+								Close
+							</button>
+						</div>
 					</Popup>
-					<div className="joke" onClick={() => setOpen(true)}>
-						<p className="text">{loading ? "Joke loading..." : joke}</p>
+					<button
+						type="button"
+						className="joke"
+						onClick={() => setOpen(true)}
+						disabled={loading || !joke}
+						aria-haspopup="dialog"
+					>
+						<span className="text" aria-live="polite">
+							{jokeStatus}
+						</span>
 						<Image
 							src="https://a.storyblok.com/f/114267/512x512/38cf5dc47b/doubt.png"
-							alt="man"
+							alt=""
+							aria-hidden="true"
 							className="icon"
 							height={64}
 							width={64}
 						/>
-					</div>
-				</div>
+					</button>
+				</aside>
 				<article className="main-content">
-					{currentView === "about" && <About about={data.about} />}
-					{currentView === "edu" && <Education education={data.education} />}
-					{currentView === "exp" && <Experience experience={data.experience} />}
-					{currentView === "por" && <Portfolio projects={data.projects} />}
-					{currentView === "too" && <Tools tools={data.tools} />}
+					<section
+						id="about"
+						className={`content-panel ${
+							currentView === "about" ? "active" : ""
+						}`}
+						aria-labelledby="about-heading"
+					>
+						<About about={data.about || []} />
+					</section>
+					<section
+						id="education"
+						className={`content-panel ${
+							currentView === "education" ? "active" : ""
+						}`}
+						aria-labelledby="education-heading"
+					>
+						<Education education={data.education || []} />
+					</section>
+					<section
+						id="experience"
+						className={`content-panel ${
+							currentView === "experience" ? "active" : ""
+						}`}
+						aria-labelledby="experience-heading"
+					>
+						<Experience experience={data.experience || []} />
+					</section>
+					<section
+						id="portfolio"
+						className={`content-panel ${
+							currentView === "portfolio" ? "active" : ""
+						}`}
+						aria-labelledby="portfolio-heading"
+					>
+						<Portfolio projects={data.projects || []} />
+					</section>
+					<section
+						id="tools"
+						className={`content-panel ${
+							currentView === "tools" ? "active" : ""
+						}`}
+						aria-labelledby="tools-heading"
+					>
+						<Tools tools={data.tools || []} />
+					</section>
 				</article>
 			</div>
 

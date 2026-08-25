@@ -12,19 +12,20 @@ import { opacity } from "../data/variants";
 const Education = ({ education }) => {
 	return (
 		<div className="education">
-			<motion.h1
+			<motion.h2
+				id="education-heading"
 				className="title"
 				initial="start"
 				animate="end"
 				variants={opacity}
 			>
 				Education
-			</motion.h1>
+			</motion.h2>
 
 			<VerticalTimeline className="timeline">
-				{education.map((item, key) => (
+				{education.map((item) => (
 					<VerticalTimelineElement
-						key={key}
+						key={`${item.institution}|${item.title}|${item.period}`}
 						className="vertical-timeline-element--work"
 						contentStyle={{
 							background: " rgba(55, 237, 83, 0.4)",
@@ -39,7 +40,7 @@ const Education = ({ education }) => {
 							marginTop: "1rem",
 						}}
 						iconClassName="round"
-						icon={<FaUniversity />}
+						icon={<FaUniversity aria-hidden="true" focusable="false" />}
 						visible={true}
 					>
 						<h3 className="vertical-timeline-element-title">{item.title}</h3>

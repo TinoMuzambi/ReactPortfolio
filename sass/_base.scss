@@ -14,7 +14,6 @@ $secondary-font: "Livvic", sans-serif;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	overflow-x: hidden;
 }
 
 ::selection {
@@ -24,15 +23,38 @@ $secondary-font: "Livvic", sans-serif;
 
 html,
 body {
-	height: 100vh;
-	width: 100vw;
+	min-height: 100%;
+	width: 100%;
 	font-family: $primary-font;
+	overflow-x: hidden;
 
 	--dim: 206vmin;
 	--dim-button: 90px;
 
 	img {
 		pointer-events: none;
+	}
+}
+
+:focus-visible {
+	outline: 3px solid $white;
+	outline-offset: 4px;
+}
+
+.skip-link {
+	position: fixed;
+	top: 0.75rem;
+	left: 0.75rem;
+	padding: 0.75rem 1rem;
+	background: #102a3a;
+	color: $white;
+	border-radius: 0.5rem;
+	transform: translateY(-200%);
+	transition: transform 0.2s ease;
+	z-index: 20;
+
+	&:focus {
+		transform: translateY(0);
 	}
 }
 
@@ -83,13 +105,28 @@ a {
 
 @mixin button {
 	background: none;
-	outline: none;
 	border: none;
 	cursor: pointer;
 
 	&:hover {
 		transform: scale(0.9);
 		opacity: 0.9;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		scroll-behavior: auto !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+
+	.intro-decoration,
+	.enter {
+		display: none !important;
 	}
 }
 

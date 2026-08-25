@@ -5,30 +5,43 @@ import { SiJavascript, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
 
 import { opacity, left, right } from "../data/variants";
-import { shuffle } from "../utils";
+
+export const getProjectKey = (project) =>
+	[
+		project.shortname,
+		project.name,
+		project.title,
+		project.github,
+		project.link,
+	]
+		.filter(Boolean)
+		.join("|");
 
 const Portfolio = ({ projects }) => {
+	const featuredProjects = projects.filter((project) => project.featured);
+
 	return (
 		<div className="portfolio">
-			<motion.h1
+			<motion.h2
+				id="portfolio-heading"
 				className="title"
 				initial="start"
 				animate="end"
 				variants={opacity}
 			>
 				Portfolio
-			</motion.h1>
+			</motion.h2>
 
 			<div className="cards">
-				{shuffle(projects)
-					.filter((project) => project.featured)
-					.map((project, key) => (
+				{featuredProjects.map((project, position) => {
+					const keywords = project.keywords || [];
+					return (
 						<motion.div
 							className="mini-card"
-							key={key}
+							key={getProjectKey(project)}
 							initial="start"
 							animate="end"
-							variants={key % 2 === 0 ? left : right}
+							variants={position % 2 === 0 ? left : right}
 							transition={{
 								ease: "easeInOut",
 								duration: 0.2,
@@ -38,7 +51,7 @@ const Portfolio = ({ projects }) => {
 							}}
 						>
 							<div className="lead">
-								<h2 className="title">
+								<h3 className="title">
 									{project.link ? (
 										<a
 											target="_blank"
@@ -50,18 +63,18 @@ const Portfolio = ({ projects }) => {
 									) : (
 										project.title
 									)}
-								</h2>
+								</h3>
 								<div className="screenshot-holder">
 									<Image
 										src={project.image}
-										alt={project.title}
+										alt={`Screenshot of ${project.title}`}
 										className="screenshot"
 										height={256}
 										width={570}
 										style={{ objectFit: "contain" }}
 									/>
 								</div>
-								<p className="text">{project.content[0]}</p>
+								<p className="text">{project.content?.[0]}</p>
 							</div>
 							{project.github && (
 								<p className="text-g">
@@ -76,46 +89,54 @@ const Portfolio = ({ projects }) => {
 							)}
 
 							<div className="icons">
-								{project.keywords.includes("react") && (
-									<span className="icon" data-lang="React">
-										<FaReact className="icon" />
+								{keywords.includes("react") && (
+									<span className="icon" data-lang="React" aria-label="React">
+										<FaReact className="icon" aria-hidden="true" />
 									</span>
 								)}
-								{project.keywords.includes("aws") && (
-									<span className="icon" data-lang="AWS">
-										<FaAws className="icon" />
+								{keywords.includes("aws") && (
+									<span className="icon" data-lang="AWS" aria-label="AWS">
+										<FaAws className="icon" aria-hidden="true" />
 									</span>
 								)}
-								{project.keywords.includes("html") && (
-									<span className="icon" data-lang="HTML5">
-										<FaHtml5 />
+								{keywords.includes("html") && (
+									<span className="icon" data-lang="HTML5" aria-label="HTML5">
+										<FaHtml5 aria-hidden="true" />
 									</span>
 								)}
-								{(project.keywords.includes("css") ||
-									project.keywords.includes("sass")) && (
-									<span className="icon" data-lang="CSS3">
-										<FaCss3Alt />
+								{(keywords.includes("css") || keywords.includes("sass")) && (
+									<span className="icon" data-lang="CSS3" aria-label="CSS3">
+										<FaCss3Alt aria-hidden="true" />
 									</span>
 								)}
-								{project.keywords.includes("python") && (
-									<span className="icon" data-lang="Python">
-										<FaPython />
+								{keywords.includes("python") && (
+									<span className="icon" data-lang="Python" aria-label="Python">
+										<FaPython aria-hidden="true" />
 									</span>
 								)}
-								{project.keywords.includes("typescript") && (
-									<span className="icon" data-lang="TypeScript">
-										<SiTypescript />
+								{keywords.includes("typescript") && (
+									<span
+										className="icon"
+										data-lang="TypeScript"
+										aria-label="TypeScript"
+									>
+										<SiTypescript aria-hidden="true" />
 									</span>
 								)}
-								{!project.keywords.includes("react") &&
-									project.keywords.includes("javascript") && (
-										<span className="icon" data-lang="JavaScript">
-											<SiJavascript />
+								{!keywords.includes("react") &&
+									keywords.includes("javascript") && (
+										<span
+											className="icon"
+											data-lang="JavaScript"
+											aria-label="JavaScript"
+										>
+											<SiJavascript aria-hidden="true" />
 										</span>
 									)}
 							</div>
 						</motion.div>
-					))}
+					);
+				})}
 			</div>
 		</div>
 	);
