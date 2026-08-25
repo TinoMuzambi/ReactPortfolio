@@ -46,7 +46,7 @@ const Experience = ({ experience }) => {
 								alt="experience item"
 								width={48}
 								height={48}
-								objectFit="contain"
+								style={{ objectFit: "contain" }}
 							/>
 						}
 						iconClassName="round"

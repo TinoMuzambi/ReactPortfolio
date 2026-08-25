@@ -58,7 +58,7 @@ const Portfolio = ({ projects }) => {
 										className="screenshot"
 										height={256}
 										width={570}
-										objectFit="contain"
+										style={{ objectFit: "contain" }}
 									/>
 								</div>
 								<p className="text">{project.content[0]}</p>

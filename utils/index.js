@@ -91,9 +91,22 @@ export function shuffle(array) {
 }
 
 /**
- * Appends a limit to the end of text and substrings to the specified limit.
- * @param text The text to add an ellips to.
- * @param limit The point at which the text is cut off.
- * @returns A string cut off at the limit and with an ellips appended to the end.
+ * Adds an ellipsis when text exceeds the specified limit.
+ * @param text The text to shorten.
+ * @param limit The maximum returned string length.
+ * @returns The original text or a shortened string ending in an ellipsis.
  */
-export const elipsise = (text, limit) => `${text.substring(0, limit - 7)}...`;
+export const ellipsize = (text, limit) => {
+	if (text.length <= limit) {
+		return text;
+	}
+
+	if (limit <= 3) {
+		return ".".repeat(Math.max(0, limit));
+	}
+
+	return `${text.substring(0, limit - 3)}...`;
+};
+
+// Keep the historical misspelling available for existing consumers.
+export const elipsise = ellipsize;

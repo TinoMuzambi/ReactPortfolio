@@ -1,12 +1,6 @@
 import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
-import {
-	getProjects,
-	getAbout,
-	getEducation,
-	getTools,
-	getExperience,
-} from "../utils/fetch";
+import { getPortfolioData } from "../utils/fetch";
 
 export default function Home({
 	projects,
@@ -24,25 +18,10 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
-	let projects, about, education, tools, experience;
-	const getData = async () => {
-		projects = await getProjects();
-		about = await getAbout();
-		education = await getEducation();
-		experience = await getExperience();
-		tools = await getTools();
-	};
-
-	await getData();
+	const data = await getPortfolioData();
 
 	return {
-		props: {
-			projects,
-			about,
-			education,
-			experience,
-			tools,
-		},
+		props: data,
 		revalidate: 60,
 	};
 };
