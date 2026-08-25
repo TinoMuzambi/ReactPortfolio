@@ -6,19 +6,24 @@ import { motion } from "framer-motion";
 
 import { opacity, left, right } from "../data/variants";
 
-export const getProjectKey = (project) =>
-	[
+export const getProjectKey = (project, position = 0) => {
+	const identity = [
+		project.id,
 		project.shortname,
 		project.name,
 		project.title,
 		project.github,
 		project.link,
 	]
-		.filter(Boolean)
+		.filter((value) => value !== undefined && value !== null && value !== "")
 		.join("|");
 
-const Portfolio = ({ projects }) => {
+	return identity || `project-${position}`;
+};
+
+const Portfolio = ({ projects, isActive = true }) => {
 	const featuredProjects = projects.filter((project) => project.featured);
+	const animationState = isActive ? "end" : "start";
 
 	return (
 		<div className="portfolio">
@@ -26,7 +31,7 @@ const Portfolio = ({ projects }) => {
 				id="portfolio-heading"
 				className="title"
 				initial="start"
-				animate="end"
+				animate={animationState}
 				variants={opacity}
 			>
 				Portfolio
@@ -38,9 +43,9 @@ const Portfolio = ({ projects }) => {
 					return (
 						<motion.div
 							className="mini-card"
-							key={getProjectKey(project)}
+							key={getProjectKey(project, position)}
 							initial="start"
-							animate="end"
+							animate={animationState}
 							variants={position % 2 === 0 ? left : right}
 							transition={{
 								ease: "easeInOut",
@@ -64,16 +69,18 @@ const Portfolio = ({ projects }) => {
 										project.title
 									)}
 								</h3>
-								<div className="screenshot-holder">
-									<Image
-										src={project.image}
-										alt={`Screenshot of ${project.title}`}
-										className="screenshot"
-										height={256}
-										width={570}
-										style={{ objectFit: "contain" }}
-									/>
-								</div>
+								{project.image && (
+									<div className="screenshot-holder">
+										<Image
+											src={project.image}
+											alt={`Screenshot of ${project.title}`}
+											className="screenshot"
+											height={256}
+											width={570}
+											style={{ objectFit: "contain" }}
+										/>
+									</div>
+								)}
 								<p className="text">{project.content?.[0]}</p>
 							</div>
 							{project.github && (

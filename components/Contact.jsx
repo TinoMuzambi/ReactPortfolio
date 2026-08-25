@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { right } from "../data/variants";
 import ContactForm from "./ContactForm";
 
-const Contact = () => {
+const Contact = ({ isActive = true }) => {
 	return (
 		<motion.div
 			className="mini-card"
 			initial="start"
-			animate="end"
+			animate={isActive ? "end" : "start"}
 			variants={right}
 			transition={{
 				ease: "easeInOut",

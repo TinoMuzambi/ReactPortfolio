@@ -15,14 +15,16 @@ import parse from "html-react-parser";
 import { opacity, left, right } from "../data/variants";
 import Contact from "./Contact";
 
-const About = ({ about }) => {
+const About = ({ about, isActive = true }) => {
+	const animationState = isActive ? "end" : "start";
+
 	return (
 		<div className="about">
 			<motion.h2
 				id="about-heading"
 				className="title"
 				initial="start"
-				animate="end"
+				animate={animationState}
 				variants={opacity}
 			>
 				About
@@ -32,7 +34,7 @@ const About = ({ about }) => {
 					className="mini-card"
 					key={`${item.title}|${item.image}`}
 					initial="start"
-					animate="end"
+					animate={animationState}
 					variants={position % 2 === 0 ? left : right}
 					transition={{
 						ease: "easeInOut",
@@ -123,7 +125,7 @@ const About = ({ about }) => {
 				</motion.div>
 			))}
 
-			<Contact />
+			<Contact isActive={isActive} />
 		</div>
 	);
 };

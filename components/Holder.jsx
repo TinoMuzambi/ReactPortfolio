@@ -31,14 +31,24 @@ const LEGACY_VIEW_IDS = {
 	too: "tools",
 };
 
+export const normalizeViewId = (view) => LEGACY_VIEW_IDS[view] || view;
+
 export const isSupportedView = (view) =>
 	NAV_ITEMS.some(({ id }) => id === view);
 
 export const getStoredView = (storage) => {
 	try {
 		const storedView = storage.getItem("tino-last-viewed") || "";
-		const normalizedView = LEGACY_VIEW_IDS[storedView] || storedView;
+		const normalizedView = normalizeViewId(storedView);
 		return isSupportedView(normalizedView) ? normalizedView : "about";
+	} catch {
+		return "about";
+	}
+};
+
+const getBrowserStoredView = () => {
+	try {
+		return getStoredView(window.localStorage);
 	} catch {
 		return "about";
 	}
@@ -84,18 +94,36 @@ const Holder = ({ data }) => {
 	}, []);
 
 	useEffect(() => {
-		const syncView = () => {
-			const hashView = window.location.hash.slice(1).toLowerCase();
-			const storedView = getStoredView(window.localStorage);
+		const syncView = ({ useStoredFallback = false } = {}) => {
+			const rawHashView = window.location.hash.slice(1).toLowerCase();
+			const hashView = normalizeViewId(rawHashView);
 
 			if (isSupportedView(hashView)) setView(hashView);
-			else setView(storedView);
+			else if (useStoredFallback && !rawHashView) setView(getBrowserStoredView());
+			else setView("about");
 		};
 
-		syncView();
-		window.addEventListener("hashchange", syncView);
-		return () => window.removeEventListener("hashchange", syncView);
+		const handleHashChange = () => syncView();
+		syncView({ useStoredFallback: true });
+		window.addEventListener("hashchange", handleHashChange);
+		return () => window.removeEventListener("hashchange", handleHashChange);
 	}, []);
+
+	useEffect(() => {
+		if (!open) return undefined;
+		// reactjs-popup owns the focus-managed role="dialog" wrapper but does not
+		// expose ARIA attributes for it, so label that wrapper from its title.
+		const title = document.getElementById("joke-dialog-title");
+		const dialog = title?.closest('[role="dialog"]');
+		if (!dialog) return undefined;
+
+		dialog.setAttribute("aria-labelledby", "joke-dialog-title");
+		dialog.setAttribute("aria-modal", "true");
+		return () => {
+			dialog.removeAttribute("aria-labelledby");
+			dialog.removeAttribute("aria-modal");
+		};
+	}, [open]);
 
 	const setCurrentView = (view) => {
 		setView(view);
@@ -148,12 +176,7 @@ const Holder = ({ data }) => {
 						</ul>
 					</nav>
 					<Popup open={open} modal onClose={() => setOpen(false)}>
-						<div
-							className="modal"
-							role="dialog"
-							aria-modal="true"
-							aria-labelledby="joke-dialog-title"
-						>
+						<div className="modal">
 							<h2 id="joke-dialog-title">A quick joke</h2>
 							<p>{joke}</p>
 							<button type="button" onClick={() => setOpen(false)}>
@@ -189,7 +212,10 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="about-heading"
 					>
-						<About about={data.about || []} />
+						<About
+							about={data.about || []}
+							isActive={currentView === "about"}
+						/>
 					</section>
 					<section
 						id="education"
@@ -198,7 +224,10 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="education-heading"
 					>
-						<Education education={data.education || []} />
+						<Education
+							education={data.education || []}
+							isActive={currentView === "education"}
+						/>
 					</section>
 					<section
 						id="experience"
@@ -207,7 +236,10 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="experience-heading"
 					>
-						<Experience experience={data.experience || []} />
+						<Experience
+							experience={data.experience || []}
+							isActive={currentView === "experience"}
+						/>
 					</section>
 					<section
 						id="portfolio"
@@ -216,7 +248,10 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="portfolio-heading"
 					>
-						<Portfolio projects={data.projects || []} />
+						<Portfolio
+							projects={data.projects || []}
+							isActive={currentView === "portfolio"}
+						/>
 					</section>
 					<section
 						id="tools"
@@ -225,7 +260,10 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="tools-heading"
 					>
-						<Tools tools={data.tools || []} />
+						<Tools
+							tools={data.tools || []}
+							isActive={currentView === "tools"}
+						/>
 					</section>
 				</article>
 			</div>

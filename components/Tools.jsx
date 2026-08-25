@@ -4,20 +4,22 @@ import { motion } from "framer-motion";
 
 import { up, down, opacity } from "../data/variants";
 
-const Tools = ({ tools }) => {
+const Tools = ({ tools, isActive = true }) => {
+	const animationState = isActive ? "end" : "start";
+
 	return (
 		<div className="tools">
 			<motion.h2
 				id="tools-heading"
 				className="title"
 				initial="start"
-				animate="end"
+				animate={animationState}
 				variants={opacity}
 			>
 				Tools and Technologies
 			</motion.h2>
 			<div className="main-content">
-				{tools.map((tool) =>
+				{tools.map((tool, position) =>
 					tool.link ? (
 						<motion.a
 							href={tool.link}
@@ -25,11 +27,11 @@ const Tools = ({ tools }) => {
 							rel="noopener noreferrer"
 							aria-label={`Learn more about ${tool.title}`}
 							className="tools-img"
-							key={tool.id || tool.title}
+							key={tool.id}
 							data-tool={tool.title}
 							initial="start"
-							animate="end"
-							variants={tool.id % 2 === 0 ? up : down}
+							animate={animationState}
+							variants={position % 2 === 0 ? up : down}
 							transition={{
 								ease: "easeInOut",
 								duration: 0.2,
@@ -49,10 +51,10 @@ const Tools = ({ tools }) => {
 						<motion.span
 							className="tools-img"
 							data-tool={tool.title}
-							key={tool.id || tool.title}
+							key={tool.id}
 							initial="start"
-							animate="end"
-							variants={tool.id % 2 === 0 ? up : down}
+							animate={animationState}
+							variants={position % 2 === 0 ? up : down}
 							transition={{
 								ease: "easeInOut",
 								duration: 0.2,

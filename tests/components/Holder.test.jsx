@@ -27,6 +27,9 @@ vi.mock("framer-motion", async () => {
 			get: (_target, element) =>
 				ReactModule.forwardRef(function MotionElement(props, ref) {
 					const elementProps = { ...props, ref };
+					if (elementProps.animate) {
+						elementProps["data-animation-state"] = elementProps.animate;
+					}
 					["initial", "animate", "variants", "transition"].forEach((name) =>
 						delete elementProps[name]
 					);
@@ -63,8 +66,14 @@ vi.mock("react-vertical-timeline-component", async () => {
 vi.mock("reactjs-popup", async () => {
 	const ReactModule = await import("react");
 	return {
-		default: function MockPopup({ children, open }) {
-			return open ? ReactModule.createElement("div", null, children) : null;
+		default: function MockPopup({ children, modal, open }) {
+			return open
+				? ReactModule.createElement(
+						"div",
+						{ role: modal ? "dialog" : undefined },
+						children
+					)
+				: null;
 		},
 	};
 });
@@ -183,6 +192,92 @@ describe("Holder", () => {
 			"aria-current",
 			"page"
 		);
+	});
+
+	it.each([
+		["#edu", "education"],
+		["#exp", "experience"],
+		["#por", "portfolio"],
+		["#too", "tools"],
+	])("normalizes the legacy %s hash", async (hash, sectionId) => {
+		window.history.replaceState({}, "", `/${hash}`);
+		const { container } = render(<Holder data={data} />);
+
+		await waitFor(() =>
+			expect(container.querySelector(`#${sectionId}`)).toHaveClass("active")
+		);
+	});
+
+	it("restores About when navigation returns to a hashless entry", async () => {
+		window.localStorage.setItem("tino-last-viewed", "tools");
+		window.history.replaceState({}, "", "/#portfolio");
+		const { container } = render(<Holder data={data} />);
+		await waitFor(() =>
+			expect(container.querySelector("#portfolio")).toHaveClass("active")
+		);
+
+		window.history.replaceState({}, "", "/");
+		window.dispatchEvent(new HashChangeEvent("hashchange"));
+
+		await waitFor(() =>
+			expect(container.querySelector("#about")).toHaveClass("active")
+		);
+		expect(container.querySelector("#tools")).not.toHaveClass("active");
+	});
+
+	it("falls back to About when the localStorage getter is blocked", () => {
+		const storageDescriptor = Object.getOwnPropertyDescriptor(
+			window,
+			"localStorage"
+		);
+
+		try {
+			Object.defineProperty(window, "localStorage", {
+				configurable: true,
+				get: () => {
+					throw new DOMException("Blocked", "SecurityError");
+				},
+			});
+			const { container } = render(<Holder data={data} />);
+			expect(container.querySelector("#about")).toHaveClass("active");
+		} finally {
+			Object.defineProperty(window, "localStorage", storageDescriptor);
+		}
+	});
+
+	it("replays panel motion when a section becomes active", () => {
+		render(<Holder data={data} />);
+		let aboutHeading = document.getElementById("about-heading");
+		let portfolioHeading = document.getElementById("portfolio-heading");
+
+		expect(aboutHeading).toHaveAttribute("data-animation-state", "end");
+		expect(portfolioHeading).toHaveAttribute("data-animation-state", "start");
+
+		fireEvent.click(screen.getByRole("link", { name: "Portfolio" }));
+		aboutHeading = document.getElementById("about-heading");
+		portfolioHeading = document.getElementById("portfolio-heading");
+
+		expect(aboutHeading).toHaveAttribute("data-animation-state", "start");
+		expect(portfolioHeading).toHaveAttribute("data-animation-state", "end");
+	});
+
+	it("labels the popup's single focus-managed dialog", async () => {
+		fetch.mockResolvedValueOnce({
+			ok: true,
+			json: vi.fn().mockResolvedValue({ joke: "A tested joke" }),
+		});
+		render(<Holder data={data} />);
+
+		fireEvent.click(
+			await screen.findByRole("button", { name: "A tested joke" })
+		);
+
+		const dialog = await screen.findByRole("dialog", {
+			name: "A quick joke",
+		});
+		expect(screen.getAllByRole("dialog")).toHaveLength(1);
+		expect(dialog).toHaveAttribute("aria-modal", "true");
+		expect(dialog).toHaveAttribute("aria-labelledby", "joke-dialog-title");
 	});
 
 	it("shows a safe fallback when the joke service fails", async () => {

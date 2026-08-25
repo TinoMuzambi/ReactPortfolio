@@ -9,14 +9,14 @@ import { motion } from "framer-motion";
 
 import { opacity } from "../data/variants";
 
-const Experience = ({ experience }) => {
+const Experience = ({ experience, isActive = true }) => {
 	return (
 		<div className="experience">
 			<motion.h2
 				id="experience-heading"
 				className="title"
 				initial="start"
-				animate="end"
+				animate={isActive ? "end" : "start"}
 				variants={opacity}
 			>
 				Experience

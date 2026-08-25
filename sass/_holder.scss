@@ -184,7 +184,7 @@
 			}
 		}
 
-		.main-content {
+		> .main-content {
 			height: 100%;
 			width: 100%;
 			background: rgba($color: white, $alpha: 0.2);
@@ -209,7 +209,7 @@
 			}
 		}
 
-		.main-content:has(.content-panel:target)
+		> .main-content:has(.content-panel:target)
 			.content-panel.active:not(:target) {
 			display: none;
 		}

@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { IoArrowDownCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
 const INTRO_STORAGE_KEY = "tino-intro-seen";
+const getCircleText = (circlesElement) =>
+	circlesElement?.querySelectorAll("text.circles__text");
 
 const ContentWrapper = ({ data }) => {
 	const [introActive, setIntroActive] = useState(true);
@@ -13,7 +15,7 @@ const ContentWrapper = ({ data }) => {
 	const enterBackgroundRef = useRef(null);
 	const contentRef = useRef(null);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!introActive) return undefined;
 
 		const reducedMotion = window.matchMedia?.(
@@ -28,13 +30,16 @@ const ContentWrapper = ({ data }) => {
 		}
 
 		if (introSeen || reducedMotion?.matches) {
-			const dismissTimer = window.setTimeout(() => setIntroActive(false), 0);
-			return () => window.clearTimeout(dismissTimer);
+			let cancelled = false;
+			queueMicrotask(() => {
+				if (!cancelled) setIntroActive(false);
+			});
+			return () => {
+				cancelled = true;
+			};
 		}
 
-		const circleText = circlesRef.current?.querySelectorAll(
-			"text.circles__text"
-		);
+		const circleText = getCircleText(circlesRef.current);
 		const enterControl = enterRef.current;
 		const enterBackground = enterBackgroundRef.current;
 		if (!circleText?.length) return undefined;
@@ -59,11 +64,9 @@ const ContentWrapper = ({ data }) => {
 
 		return () => {
 			startTimeline?.kill();
-			gsap.killTweensOf?.([
-				circleText,
-				enterControl,
-				enterBackground,
-			]);
+			gsap.killTweensOf?.(circleText);
+			gsap.killTweensOf?.(enterControl);
+			gsap.killTweensOf?.(enterBackground);
 			reducedMotion?.removeEventListener?.("change", handleMotionPreference);
 		};
 	}, [introActive]);
@@ -80,37 +83,43 @@ const ContentWrapper = ({ data }) => {
 
 	const animateEnter = () => {
 		if (!introActive) return;
-		gsap.killTweensOf?.([enterBackgroundRef.current, circlesRef.current]);
+		const circleText = getCircleText(circlesRef.current);
+		gsap.killTweensOf?.(enterBackgroundRef.current);
+		gsap.killTweensOf?.(circleText);
 		gsap.to?.(enterBackgroundRef.current, {
 			duration: 0.8,
 			ease: "expo",
 			scale: 1.25,
 		});
-		gsap.to?.(circlesRef.current?.querySelectorAll("text.circles__text"), {
+		gsap.to?.(circleText, {
 			duration: 0.5,
 			ease: "expo",
-			rotation: "+=30",
+			rotation: 120,
 			opacity: 0.65,
 		});
 	};
 
 	const resetEnter = () => {
 		if (!introActive) return;
+		const circleText = getCircleText(circlesRef.current);
+		gsap.killTweensOf?.(enterBackgroundRef.current);
+		gsap.killTweensOf?.(circleText);
 		gsap.to?.(enterBackgroundRef.current, {
 			duration: 0.8,
 			ease: "elastic.out(1, 0.4)",
 			scale: 1,
 		});
-		gsap.to?.(circlesRef.current?.querySelectorAll("text.circles__text"), {
+		gsap.to?.(circleText, {
 			duration: 0.8,
 			ease: "elastic.out(1, 0.4)",
+			rotation: 90,
 			opacity: 1,
 		});
 	};
 
 	return (
 		<section className="body demo-3">
-			<a className="skip-link" href="#about" onClick={dismissIntro}>
+			<a className="skip-link" href="#portfolio-content" onClick={dismissIntro}>
 				Skip intro and view portfolio
 			</a>
 			<main>

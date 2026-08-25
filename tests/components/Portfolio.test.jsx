@@ -87,5 +87,29 @@ describe("Portfolio", () => {
 	it("derives stable keys from project identity instead of render position", () => {
 		expect(getProjectKey(projects[0])).toBe("first|First Project");
 		expect(getProjectKey(projects[2])).toBe("second|Second Project");
+		expect(getProjectKey({ id: 0 }, 4)).toBe("0");
+		expect(getProjectKey({}, 0)).toBe("project-0");
+		expect(getProjectKey({}, 1)).toBe("project-1");
+	});
+
+	it("renders a featured project safely when its image is absent", () => {
+		render(
+			<Portfolio
+				projects={[
+					{
+						shortname: "text-only",
+						title: "Text-only Project",
+						content: ["Still useful without a screenshot"],
+						featured: true,
+					},
+				]}
+			/>
+		);
+
+		expect(
+			screen.getByRole("heading", { name: "Text-only Project" })
+		).toBeInTheDocument();
+		expect(screen.getByText("Still useful without a screenshot")).toBeVisible();
+		expect(screen.queryByRole("img")).not.toBeInTheDocument();
 	});
 });
