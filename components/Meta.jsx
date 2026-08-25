@@ -2,7 +2,23 @@ import Head from "next/head";
 
 import { elipsise } from "../utils";
 
-const Meta = ({ title, description, keywords, url, image }) => {
+const DEFAULT_META = {
+	title: "Tino Muzambi",
+	keywords:
+		"full-stack, web developer, tino muzambi, tech, software, computer science",
+	description:
+		"Hi, I'm Tino Muzambi. Full-Stack Web Developer and Lover of Tech. Welcome to my portfolio site. Built with React, styled with Sass.",
+	image: "https://a.storyblok.com/f/105639/512x512/03489159d5/logo512.png",
+	url: "https://tinomuzambi.com",
+};
+
+const Meta = ({
+	title = DEFAULT_META.title,
+	description = DEFAULT_META.description,
+	keywords = DEFAULT_META.keywords,
+	url = DEFAULT_META.url,
+	image = DEFAULT_META.image,
+} = {}) => {
 	return (
 		<Head>
 			<meta
@@ -68,16 +84,6 @@ const Meta = ({ title, description, keywords, url, image }) => {
 			<link rel="preconnect" href="https://www.google-analytics.com" />
 		</Head>
 	);
-};
-
-Meta.defaultProps = {
-	title: "Tino Muzambi",
-	keywords:
-		"full-stack, web developer, tino muzambi, tech, software, computer science",
-	description:
-		"Hi, I'm Tino Muzambi. Full-Stack Web Developer and Lover of Tech. Welcome to my portfolio site. Built with React, styled with Sass.",
-	image: "https://a.storyblok.com/f/105639/512x512/03489159d5/logo512.png",
-	url: "https://tinomuzambi.com",
 };
 
 export default Meta;

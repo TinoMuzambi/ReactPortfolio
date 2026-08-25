@@ -36,15 +36,13 @@ const Holder = ({ data }) => {
 
 		const localView = window.localStorage.getItem("tino-last-viewed");
 		if (localView) {
-			setView(localView);
+			queueMicrotask(() => setView(localView));
 		}
 	}, []);
 
 	useEffect(() => {
 		const localView = window.localStorage.getItem("tino-last-viewed");
-		if (localView) {
-			setView(localView);
-		} else {
+		if (!localView) {
 			window.localStorage.setItem("tino-last-viewed", currentView);
 		}
 	}, [currentView]);
@@ -66,7 +64,7 @@ const Holder = ({ data }) => {
 							className="profile-img"
 							width={100}
 							height={100}
-							objectFit="contain"
+							style={{ objectFit: "contain" }}
 						/>
 						<div className="info">
 							<h2 className="title">Tino Muzambi</h2>

@@ -220,7 +220,7 @@ const ContentWrapper = ({ data }) => {
 							aria-label=""
 							textLength="2830"
 						>
-							Hi, I'm Tino Muzambi.&nbsp;
+							Hi, I&apos;m Tino Muzambi.&nbsp;
 						</textPath>
 					</text>
 					<text className="circles__text circles__text--2">
