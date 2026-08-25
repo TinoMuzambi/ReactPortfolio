@@ -40,4 +40,23 @@ describe("Storyblok collection queries", () => {
 			expect.objectContaining({ starts_with: collection })
 		);
 	});
+
+	it.each([
+		["projects", getProjects],
+		["about", getAbout],
+		["education", getEducation],
+		["experience", getExperience],
+		["tools", getTools],
+	])("returns an empty %s collection when Storyblok fails", async (_name, load) => {
+		const error = new Error("Storyblok unavailable");
+		const consoleError = vi
+			.spyOn(console, "error")
+			.mockImplementation(() => {});
+		clientGet.mockRejectedValueOnce(error);
+
+		await expect(load()).resolves.toEqual([]);
+		expect(consoleError).toHaveBeenCalledWith(error);
+
+		consoleError.mockRestore();
+	});
 });
