@@ -1,38 +1,61 @@
-import { useState } from "react";
-import { BASE_URL } from "../utils";
+import { useRef, useState } from "react";
+
+const HONEYPOT_STYLE = {
+	position: "absolute",
+	left: "-10000px",
+	width: "1px",
+	height: "1px",
+	overflow: "hidden",
+};
 
 const ContactForm = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [subject, setSubject] = useState("");
 	const [message, setMessage] = useState("");
+	const [website, setWebsite] = useState("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [status, setStatus] = useState({ type: "idle", message: "" });
+	const submittingRef = useRef(false);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const body = { name, email, subject, message };
-		const requestEmail = async () => {
-			try {
-				await fetch(`${BASE_URL}/api/email`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(body),
-				});
-				setName("");
-				setEmail("");
-				setSubject("");
-				setMessage("");
-				alert("Message sent!");
-			} catch (error) {
-				alert("Something went wrong, please try again.");
-			}
-		};
-		requestEmail();
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		if (submittingRef.current) return;
+
+		submittingRef.current = true;
+		setIsSubmitting(true);
+		setStatus({ type: "pending", message: "Sending your message…" });
+
+		try {
+			const response = await fetch("/api/email", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ name, email, subject, message, website }),
+			});
+
+			if (!response.ok) throw new Error("Contact request failed");
+
+			setName("");
+			setEmail("");
+			setSubject("");
+			setMessage("");
+			setWebsite("");
+			setStatus({ type: "success", message: "Message sent successfully." });
+		} catch {
+			setStatus({
+				type: "error",
+				message: "Something went wrong. Your message was kept; please try again.",
+			});
+		} finally {
+			submittingRef.current = false;
+			setIsSubmitting(false);
+		}
 	};
 
 	return (
-		<form className="form" onSubmit={handleSubmit}>
+		<form className="form" onSubmit={handleSubmit} aria-busy={isSubmitting}>
 			<div className="input-group">
 				<label htmlFor="name">Name:</label>
 				<input
@@ -40,7 +63,8 @@ const ContactForm = () => {
 					name="name"
 					id="name"
 					value={name}
-					onChange={(e) => setName(e.target.value)}
+					onChange={(event) => setName(event.target.value)}
+					maxLength={100}
 					required
 				/>
 			</div>
@@ -51,7 +75,8 @@ const ContactForm = () => {
 					name="email"
 					id="email"
 					value={email}
-					onChange={(e) => setEmail(e.target.value)}
+					onChange={(event) => setEmail(event.target.value)}
+					maxLength={254}
 					required
 				/>
 			</div>
@@ -62,7 +87,8 @@ const ContactForm = () => {
 					name="subject"
 					id="subject"
 					value={subject}
-					onChange={(e) => setSubject(e.target.value)}
+					onChange={(event) => setSubject(event.target.value)}
+					maxLength={150}
 					required
 				/>
 			</div>
@@ -72,13 +98,39 @@ const ContactForm = () => {
 					name="message"
 					id="message"
 					value={message}
-					onChange={(e) => setMessage(e.target.value)}
+					onChange={(event) => setMessage(event.target.value)}
+					maxLength={5000}
 					required
 				/>
 			</div>
-			<div className="input-group">
-				<input type="submit" value="Send" />
+			<div aria-hidden="true" style={HONEYPOT_STYLE}>
+				<label htmlFor="website">Website:</label>
+				<input
+					type="text"
+					name="website"
+					id="website"
+					value={website}
+					onChange={(event) => setWebsite(event.target.value)}
+					maxLength={200}
+					tabIndex={-1}
+					autoComplete="off"
+				/>
 			</div>
+			<div className="input-group">
+				<input
+					type="submit"
+					value={isSubmitting ? "Sending…" : "Send"}
+					disabled={isSubmitting}
+				/>
+			</div>
+			<p
+				className={`form-status form-status--${status.type}`}
+				role="status"
+				aria-live="polite"
+				aria-atomic="true"
+			>
+				{status.message}
+			</p>
 		</form>
 	);
 };
