@@ -11,7 +11,8 @@ export const getProjects = async () => {
 
 	let projects = [];
 
-	await Storyblok.get("cdn/stories?starts_with=projects/", {
+	await Storyblok.get("cdn/stories", {
+		starts_with: "projects/",
 		sort_by: "created_at:desc",
 	})
 		.then((response) => {
@@ -49,7 +50,8 @@ const StoryblokTino = new StoryblokClient({
 export const getAbout = async () => {
 	let about = [];
 
-	await StoryblokTino.get("cdn/stories?starts_with=about/", {
+	await StoryblokTino.get("cdn/stories", {
+		starts_with: "about/",
 		sort_by: "position:desc",
 	})
 		.then((response) => {
@@ -73,7 +75,8 @@ export const getAbout = async () => {
 export const getEducation = async () => {
 	let education = [];
 
-	await StoryblokTino.get("cdn/stories?starts_with=education/", {
+	await StoryblokTino.get("cdn/stories", {
+		starts_with: "education/",
 		sort_by: "position:desc",
 	})
 		.then((response) => {
@@ -98,7 +101,8 @@ export const getEducation = async () => {
 export const getExperience = async () => {
 	let experience = [];
 
-	await StoryblokTino.get("cdn/stories?starts_with=experience/", {
+	await StoryblokTino.get("cdn/stories", {
+		starts_with: "experience/",
 		sort_by: "published_at:desc",
 	})
 		.then((response) => {
@@ -124,7 +128,8 @@ export const getExperience = async () => {
 export const getTools = async () => {
 	let tools = [];
 
-	await StoryblokTino.get("cdn/stories?starts_with=tools/", {
+	await StoryblokTino.get("cdn/stories", {
+		starts_with: "tools/",
 		sort_by: "content.title:asc",
 		per_page: "100",
 	})
