@@ -52,6 +52,8 @@ vercel env pull .env.local --environment=development
 
 Despite their historical `REACT_APP_` names, the Storyblok tokens are consumed during server-side static generation. Server credentials are read directly from `process.env`; they are not exposed through `next.config.js`.
 
+CI sets `CMS_USE_FIXTURES=true` only for its deterministic production-build check. Normal development, preview, production, and ISR builds fail fast when credentials, collections, or required CMS fields are missing, which preserves the last successful render instead of caching an empty page. Do not configure the fixture flag in Vercel.
+
 ## Project structure
 
 ```text
