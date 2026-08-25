@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
 	CONTACT_LIMITS,
 	buildMailOptions,
+	config,
 	createEmailHandler,
 	createRateLimiter,
 	escapeHtml,
@@ -101,6 +102,16 @@ describe("contact submission validation", () => {
 });
 
 describe("email API handler", () => {
+	it("limits the Next.js body parser before request bodies are parsed", () => {
+		expect(config).toEqual({
+			api: {
+				bodyParser: {
+					sizeLimit: "16kb",
+				},
+			},
+		});
+	});
+
 	it("accepts POST only", async () => {
 		const { createTransport, handler } = createHandler();
 		const response = createResponse();

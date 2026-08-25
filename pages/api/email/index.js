@@ -14,6 +14,14 @@ const MAX_REQUEST_BYTES = 16 * 1024;
 const EMAIL_PATTERN = /^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const HEADER_LINE_BREAK = /[\r\n]/;
 
+export const config = {
+	api: {
+		bodyParser: {
+			sizeLimit: "16kb",
+		},
+	},
+};
+
 export const escapeHtml = (value) =>
 	value.replace(/[&<>"']/g, (character) => {
 		const entities = {
