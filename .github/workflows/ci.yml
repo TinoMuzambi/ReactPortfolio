@@ -42,3 +42,5 @@ jobs:
 
       - name: Build
         run: yarn build
+        env:
+          CMS_USE_FIXTURES: "true"

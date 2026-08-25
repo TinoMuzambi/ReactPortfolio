@@ -41,6 +41,26 @@
 			&:hover {
 				transform: scale(0.95);
 			}
+
+			&:disabled {
+				cursor: wait;
+				opacity: 0.65;
+				transform: none;
+			}
 		}
+	}
+
+	.form-status {
+		min-height: 1.5rem;
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.form-status--success {
+		color: #e6ffea;
+	}
+
+	.form-status--error {
+		color: #ffe3e3;
 	}
 }
