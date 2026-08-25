@@ -10,12 +10,5 @@ export default defineConfig([
 			"@next/next/next-script-for-ga": "off",
 		},
 	},
-	{
-		files: ["pages/api/email/index.js"],
-		rules: {
-			// Preserve the legacy endpoint until its validation/security refactor.
-			"import/no-anonymous-default-export": "off",
-		},
-	},
 	globalIgnores([".next/**", "coverage/**", "out/**"]),
 ]);
