@@ -16,6 +16,19 @@ import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import Tools from "./Tools";
 
+const VIEW_IDS = ["about", "edu", "exp", "por", "too"];
+
+export const isSupportedView = (view) => VIEW_IDS.includes(view);
+
+export const getStoredView = (storage) => {
+	try {
+		const storedView = storage.getItem("tino-last-viewed");
+		return isSupportedView(storedView) ? storedView : "about";
+	} catch {
+		return "about";
+	}
+};
+
 const Holder = ({ data }) => {
 	const [joke, setJoke] = useState("");
 	const [currentView, setView] = useState("about");
@@ -34,23 +47,33 @@ const Holder = ({ data }) => {
 		};
 		getJoke();
 
-		const localView = window.localStorage.getItem("tino-last-viewed");
-		if (localView) {
-			queueMicrotask(() => setView(localView));
+		const localView = getStoredView(window.localStorage);
+		if (localView !== "about") {
+			// Restore the external preference immediately after hydration.
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setView(localView);
 		}
 	}, []);
 
 	useEffect(() => {
-		const localView = window.localStorage.getItem("tino-last-viewed");
-		if (!localView) {
-			window.localStorage.setItem("tino-last-viewed", currentView);
+		try {
+			const localView = window.localStorage.getItem("tino-last-viewed");
+			if (!isSupportedView(localView)) {
+				window.localStorage.setItem("tino-last-viewed", currentView);
+			}
+		} catch {
+			// Navigation remains usable when storage is unavailable.
 		}
 	}, [currentView]);
 
 	const setCurrentView = (view) => {
 		// Save last view to localstorage. And open that view when component loads.
 		setView(view);
-		window.localStorage.setItem("tino-last-viewed", view);
+		try {
+			window.localStorage.setItem("tino-last-viewed", view);
+		} catch {
+			// Navigation remains usable when storage is unavailable.
+		}
 	};
 
 	return (

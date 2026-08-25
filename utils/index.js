@@ -96,7 +96,7 @@ export function shuffle(array) {
  * @param limit The maximum returned string length.
  * @returns The original text or a shortened string ending in an ellipsis.
  */
-export const elipsise = (text, limit) => {
+export const ellipsize = (text, limit) => {
 	if (text.length <= limit) {
 		return text;
 	}
@@ -107,3 +107,6 @@ export const elipsise = (text, limit) => {
 
 	return `${text.substring(0, limit - 3)}...`;
 };
+
+// Keep the historical misspelling available for existing consumers.
+export const elipsise = ellipsize;

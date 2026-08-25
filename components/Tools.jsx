@@ -40,6 +40,7 @@ const Tools = ({ tools }) => {
 								className="tools-img"
 								width={480}
 								height={480}
+								style={{ height: "auto", width: "100%" }}
 							/>
 						</motion.a>
 					) : (
@@ -60,6 +61,7 @@ const Tools = ({ tools }) => {
 								alt={tool.title}
 								width={480}
 								height={480}
+								style={{ height: "auto", width: "100%" }}
 							/>
 						</motion.span>
 					)
