@@ -3,7 +3,12 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
 	createCmsFixtures,
 	createStoryblokClient,
+	getAbout,
+	getEducation,
+	getExperience,
 	getPortfolioData,
+	getProjects,
+	getTools,
 	loadCollection,
 	normalizeAbout,
 	normalizeProject,
@@ -57,6 +62,45 @@ describe("Storyblok normalizers", () => {
 });
 
 describe("Storyblok collection loading", () => {
+	it.each([
+		[
+			"projects",
+			getProjects,
+			{ starts_with: "projects/", sort_by: "created_at:desc" },
+		],
+		[
+			"about",
+			getAbout,
+			{ starts_with: "about/", sort_by: "position:desc" },
+		],
+		[
+			"education",
+			getEducation,
+			{ starts_with: "education/", sort_by: "position:desc" },
+		],
+		[
+			"experience",
+			getExperience,
+			{ starts_with: "experience/", sort_by: "published_at:desc" },
+		],
+		[
+			"tools",
+			getTools,
+			{
+				starts_with: "tools/",
+				sort_by: "content.title:asc",
+				per_page: "100",
+			},
+		],
+	])("preserves the complete %s query contract", async (_name, load, params) => {
+		const client = {
+			get: vi.fn().mockRejectedValue(new Error("stop after request capture")),
+		};
+
+		await expect(load(client)).rejects.toThrow("stop after request capture");
+		expect(client.get).toHaveBeenCalledWith("cdn/stories", params);
+	});
+
 	it("uses a shared endpoint contract and normalizes stories", async () => {
 		const normalize = vi.fn((item) => item.content.title);
 		const client = {
