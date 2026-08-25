@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { elipsise, shuffle } from "../utils";
+import { ellipsize, elipsise, shuffle } from "../utils";
 
-describe("elipsise", () => {
+describe("ellipsize", () => {
 	it("leaves text within the limit unchanged", () => {
 		expect(elipsise("short description", 30)).toBe("short description");
 	});
@@ -16,6 +16,10 @@ describe("elipsise", () => {
 
 	it("honors limits shorter than an ellipsis", () => {
 		expect(elipsise("long", 2)).toBe("..");
+	});
+
+	it("keeps the misspelled export as a backward-compatible alias", () => {
+		expect(elipsise).toBe(ellipsize);
 	});
 });
 

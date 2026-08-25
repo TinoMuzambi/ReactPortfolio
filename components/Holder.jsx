@@ -31,7 +31,18 @@ const LEGACY_VIEW_IDS = {
 	too: "tools",
 };
 
-const isView = (view) => NAV_ITEMS.some(({ id }) => id === view);
+export const isSupportedView = (view) =>
+	NAV_ITEMS.some(({ id }) => id === view);
+
+export const getStoredView = (storage) => {
+	try {
+		const storedView = storage.getItem("tino-last-viewed") || "";
+		const normalizedView = LEGACY_VIEW_IDS[storedView] || storedView;
+		return isSupportedView(normalizedView) ? normalizedView : "about";
+	} catch {
+		return "about";
+	}
+};
 
 const Holder = ({ data }) => {
 	const [joke, setJoke] = useState("");
@@ -75,16 +86,10 @@ const Holder = ({ data }) => {
 	useEffect(() => {
 		const syncView = () => {
 			const hashView = window.location.hash.slice(1).toLowerCase();
-			let storedView = "";
-			try {
-				storedView = window.localStorage.getItem("tino-last-viewed") || "";
-			} catch {
-				// Hash navigation and the default About view still work without storage.
-			}
-			storedView = LEGACY_VIEW_IDS[storedView] || storedView;
+			const storedView = getStoredView(window.localStorage);
 
-			if (isView(hashView)) setView(hashView);
-			else if (isView(storedView)) setView(storedView);
+			if (isSupportedView(hashView)) setView(hashView);
+			else setView(storedView);
 		};
 
 		syncView();
