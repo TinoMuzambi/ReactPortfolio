@@ -28,10 +28,11 @@ const Portfolio = ({ projects, isActive = true }) => {
 	return (
 		<div className="portfolio">
 			<motion.h2
+				key={isActive ? "portfolio-active" : "portfolio-inactive"}
 				id="portfolio-heading"
 				className="title"
 				initial="start"
-				animate={animationState}
+				animate="end"
 				variants={opacity}
 			>
 				Portfolio

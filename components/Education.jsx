@@ -13,10 +13,11 @@ const Education = ({ education, isActive = true }) => {
 	return (
 		<div className="education">
 			<motion.h2
+				key={isActive ? "education-active" : "education-inactive"}
 				id="education-heading"
 				className="title"
 				initial="start"
-				animate={isActive ? "end" : "start"}
+				animate="end"
 				variants={opacity}
 			>
 				Education

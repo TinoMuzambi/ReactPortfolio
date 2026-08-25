@@ -13,10 +13,11 @@ const Experience = ({ experience, isActive = true }) => {
 	return (
 		<div className="experience">
 			<motion.h2
+				key={isActive ? "experience-active" : "experience-inactive"}
 				id="experience-heading"
 				className="title"
 				initial="start"
-				animate={isActive ? "end" : "start"}
+				animate="end"
 				variants={opacity}
 			>
 				Experience

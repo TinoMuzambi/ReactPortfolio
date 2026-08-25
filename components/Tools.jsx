@@ -10,10 +10,11 @@ const Tools = ({ tools, isActive = true }) => {
 	return (
 		<div className="tools">
 			<motion.h2
+				key={isActive ? "tools-active" : "tools-inactive"}
 				id="tools-heading"
 				className="title"
 				initial="start"
-				animate={animationState}
+				animate="end"
 				variants={opacity}
 			>
 				Tools and Technologies

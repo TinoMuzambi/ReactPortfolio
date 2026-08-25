@@ -21,10 +21,11 @@ const About = ({ about, isActive = true }) => {
 	return (
 		<div className="about">
 			<motion.h2
+				key={isActive ? "about-active" : "about-inactive"}
 				id="about-heading"
 				className="title"
 				initial="start"
-				animate={animationState}
+				animate="end"
 				variants={opacity}
 			>
 				About

@@ -21,20 +21,25 @@ vi.mock("next/image", () => ({
 
 vi.mock("framer-motion", async () => {
 	const ReactModule = await import("react");
+	const motionElements = {};
 	const motion = new Proxy(
 		{},
 		{
-			get: (_target, element) =>
-				ReactModule.forwardRef(function MotionElement(props, ref) {
-					const elementProps = { ...props, ref };
-					if (elementProps.animate) {
-						elementProps["data-animation-state"] = elementProps.animate;
+			get: (_target, element) => {
+				motionElements[element] ||= ReactModule.forwardRef(
+					function MotionElement(props, ref) {
+						const elementProps = { ...props, ref };
+						if (elementProps.animate) {
+							elementProps["data-animation-state"] = elementProps.animate;
+						}
+						["initial", "animate", "variants", "transition"].forEach(
+							(name) => delete elementProps[name]
+						);
+						return ReactModule.createElement(element, elementProps);
 					}
-					["initial", "animate", "variants", "transition"].forEach((name) =>
-						delete elementProps[name]
-					);
-					return ReactModule.createElement(element, elementProps);
-				}),
+				);
+				return motionElements[element];
+			},
 		}
 	);
 	return { motion };
@@ -247,18 +252,25 @@ describe("Holder", () => {
 
 	it("replays panel motion when a section becomes active", () => {
 		render(<Holder data={data} />);
-		let aboutHeading = document.getElementById("about-heading");
-		let portfolioHeading = document.getElementById("portfolio-heading");
+		const initialAboutHeading = document.getElementById("about-heading");
+		const initialPortfolioHeading = document.getElementById("portfolio-heading");
 
-		expect(aboutHeading).toHaveAttribute("data-animation-state", "end");
-		expect(portfolioHeading).toHaveAttribute("data-animation-state", "start");
+		expect(initialAboutHeading).toHaveAttribute("data-animation-state", "end");
+		expect(initialPortfolioHeading).toHaveAttribute(
+			"data-animation-state",
+			"end"
+		);
 
 		fireEvent.click(screen.getByRole("link", { name: "Portfolio" }));
-		aboutHeading = document.getElementById("about-heading");
-		portfolioHeading = document.getElementById("portfolio-heading");
+		const replayedAboutHeading = document.getElementById("about-heading");
+		const replayedPortfolioHeading = document.getElementById("portfolio-heading");
 
-		expect(aboutHeading).toHaveAttribute("data-animation-state", "start");
-		expect(portfolioHeading).toHaveAttribute("data-animation-state", "end");
+		expect(replayedAboutHeading).not.toBe(initialAboutHeading);
+		expect(replayedPortfolioHeading).not.toBe(initialPortfolioHeading);
+		expect(replayedPortfolioHeading).toHaveAttribute(
+			"data-animation-state",
+			"end"
+		);
 	});
 
 	it("labels the popup's single focus-managed dialog", async () => {
