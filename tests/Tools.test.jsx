@@ -19,6 +19,13 @@ vi.mock("framer-motion", () => ({
 			);
 			return <h1 {...elementProps}>{children}</h1>;
 		},
+		h2: ({ children, ...props }) => {
+			const elementProps = { ...props };
+			["initial", "animate", "variants"].forEach(
+				(name) => delete elementProps[name]
+			);
+			return <h2 {...elementProps}>{children}</h2>;
+		},
 		a: ({ children, ...props }) => {
 			const elementProps = { ...props };
 			["initial", "animate", "variants", "transition"].forEach(
