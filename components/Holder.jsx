@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -109,21 +109,16 @@ const Holder = ({ data }) => {
 		return () => window.removeEventListener("hashchange", handleHashChange);
 	}, []);
 
-	useEffect(() => {
-		if (!open) return undefined;
+	const labelJokeDialog = useCallback((content) => {
+		if (!content) return;
 		// reactjs-popup owns the focus-managed role="dialog" wrapper but does not
 		// expose ARIA attributes for it, so label that wrapper from its title.
-		const title = document.getElementById("joke-dialog-title");
-		const dialog = title?.closest('[role="dialog"]');
-		if (!dialog) return undefined;
+		const dialog = content.closest('[role="dialog"]');
+		if (!dialog) return;
 
 		dialog.setAttribute("aria-labelledby", "joke-dialog-title");
 		dialog.setAttribute("aria-modal", "true");
-		return () => {
-			dialog.removeAttribute("aria-labelledby");
-			dialog.removeAttribute("aria-modal");
-		};
-	}, [open]);
+	}, []);
 
 	const setCurrentView = (view) => {
 		setView(view);
@@ -176,7 +171,7 @@ const Holder = ({ data }) => {
 						</ul>
 					</nav>
 					<Popup open={open} modal onClose={() => setOpen(false)}>
-						<div className="modal">
+						<div ref={labelJokeDialog} className="modal">
 							<h2 id="joke-dialog-title">A quick joke</h2>
 							<p>{joke}</p>
 							<button type="button" onClick={() => setOpen(false)}>
