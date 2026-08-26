@@ -15,7 +15,6 @@
 			border-radius: 30px;
 			padding: 0.5rem 1rem;
 			border: none;
-			outline: none;
 			margin: 0.3rem 0 0.5rem 0;
 			font: inherit;
 			background: rgba(211, 211, 211, 0.7);
@@ -25,6 +24,11 @@
 			&:hover,
 			&:focus {
 				box-shadow: 0 0 6px 1px rgba($color: $secondary-blue, $alpha: 0.3);
+			}
+
+			&:focus-visible {
+				outline: 3px solid $white;
+				outline-offset: 2px;
 			}
 		}
 
@@ -41,6 +45,26 @@
 			&:hover {
 				transform: scale(0.95);
 			}
+
+			&:disabled {
+				cursor: wait;
+				opacity: 0.65;
+				transform: none;
+			}
 		}
+	}
+
+	.form-status {
+		min-height: 1.5rem;
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.form-status--success {
+		color: #e6ffea;
+	}
+
+	.form-status--error {
+		color: #ffe3e3;
 	}
 }

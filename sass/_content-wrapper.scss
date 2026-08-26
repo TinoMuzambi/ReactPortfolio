@@ -37,6 +37,21 @@ $font-weight-circle-4: 300;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+	// The server-rendered portfolio remains the no-JavaScript fallback. A
+	// layout effect adds intro-ready before paint only when the intro can run.
+	&.intro-active:not(.intro-ready) {
+		.intro-decoration,
+		.enter {
+			display: none;
+		}
+	}
+
+	&.intro-active.intro-ready:not(.intro-exiting) .content {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
 	main {
 		.circles {
 			pointer-events: none;
@@ -93,7 +108,7 @@ $font-weight-circle-4: 300;
 			justify-content: flex-start;
 			align-items: center;
 			text-align: center;
-			opacity: 0;
+			opacity: 1;
 		}
 
 		@media screen and (min-width: 53em) {
@@ -120,11 +135,12 @@ $font-weight-circle-4: 300;
 			padding: 0;
 			opacity: 0;
 			overflow-x: unset;
+			z-index: 6;
 
-			&:focus,
-			&:hover,
-			&:active {
-				outline: none;
+			&:focus-visible {
+				outline: 4px solid $white;
+				outline-offset: 6px;
+				border-radius: 50%;
 			}
 
 			.enter__bg {

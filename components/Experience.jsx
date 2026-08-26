@@ -5,26 +5,18 @@ import {
 	VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { motion } from "framer-motion";
-
-import { opacity } from "../data/variants";
 
 const Experience = ({ experience }) => {
 	return (
 		<div className="experience">
-			<motion.h1
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="experience-heading" className="title">
 				Experience
-			</motion.h1>
+			</h2>
 
 			<VerticalTimeline className="timeline">
-				{experience.map((item, key) => (
+				{experience.map((item) => (
 					<VerticalTimelineElement
-						key={key}
+						key={`${item.institution}|${item.title}|${item.period}`}
 						className="vertical-timeline-element--work"
 						contentStyle={{
 							background: " rgba(55, 237, 83, 0.4)",
@@ -32,7 +24,6 @@ const Experience = ({ experience }) => {
 							marginTop: "2rem",
 							width: "42%",
 						}}
-						date={item.period}
 						iconStyle={{
 							background: "#0ce3f2aa",
 							marginTop: "1rem",
@@ -43,7 +34,7 @@ const Experience = ({ experience }) => {
 						icon={
 							<Image
 								src={item.icon}
-								alt="experience item"
+								alt={`${item.institution || item.title} logo`}
 								width={48}
 								height={48}
 								style={{ objectFit: "contain" }}

@@ -5,26 +5,18 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { FaUniversity } from "react-icons/fa";
-import { motion } from "framer-motion";
-
-import { opacity } from "../data/variants";
 
 const Education = ({ education }) => {
 	return (
 		<div className="education">
-			<motion.h1
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="education-heading" className="title">
 				Education
-			</motion.h1>
+			</h2>
 
 			<VerticalTimeline className="timeline">
-				{education.map((item, key) => (
+				{education.map((item) => (
 					<VerticalTimelineElement
-						key={key}
+						key={`${item.institution}|${item.title}|${item.period}`}
 						className="vertical-timeline-element--work"
 						contentStyle={{
 							background: " rgba(55, 237, 83, 0.4)",
@@ -32,14 +24,13 @@ const Education = ({ education }) => {
 							marginTop: "2rem",
 							width: "42%",
 						}}
-						date={item.period}
 						iconStyle={{
 							background: "#0ce3f2",
 							color: "#fff",
 							marginTop: "1rem",
 						}}
 						iconClassName="round"
-						icon={<FaUniversity />}
+						icon={<FaUniversity aria-hidden="true" focusable="false" />}
 						visible={true}
 					>
 						<h3 className="vertical-timeline-element-title">{item.title}</h3>

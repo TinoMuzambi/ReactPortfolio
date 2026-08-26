@@ -44,7 +44,8 @@
 				}
 			}
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				transform: scale(0.9) !important;
 
 				&::after {
