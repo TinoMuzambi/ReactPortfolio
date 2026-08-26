@@ -1,4 +1,9 @@
 import React from "react";
+import type {
+	HTMLAttributes,
+	ImgHTMLAttributes,
+	ReactNode,
+} from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import {
 	act,
@@ -10,32 +15,50 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import Holder from "../../components/Holder";
+import type { PortfolioData } from "../../types/portfolio";
 
 vi.mock("next/image", () => ({
-	default: function MockImage(props) {
-		const imageProps = { ...props };
-		delete imageProps.objectFit;
-		return React.createElement("img", imageProps);
+	default: function MockImage(props: ImgHTMLAttributes<HTMLImageElement>) {
+		return React.createElement("img", props);
 	},
 }));
 
 vi.mock("framer-motion", async () => {
 	const ReactModule = await import("react");
-	const motionElements = {};
+	type MotionProps = Record<string, unknown> & {
+		animate?: unknown;
+		children?: ReactNode;
+	};
+	const motionElements: Record<
+		string,
+		React.ForwardRefExoticComponent<
+			MotionProps & React.RefAttributes<HTMLElement>
+		>
+	> = {};
 	const motion = new Proxy(
-		{},
+		{} as Record<string, unknown>,
 		{
 			get: (_target, element) => {
+				if (typeof element !== "string") return undefined;
 				motionElements[element] ||= ReactModule.forwardRef(
-					function MotionElement(props, ref) {
-						const elementProps = { ...props, ref };
+					function MotionElement(
+						props: MotionProps,
+						ref: React.ForwardedRef<HTMLElement>
+					) {
+							const elementProps: Record<string, unknown> = {
+								...props,
+								ref,
+							};
 						if (elementProps.animate) {
 							elementProps["data-animation-state"] = elementProps.animate;
 						}
 						["initial", "animate", "variants", "transition"].forEach(
 							(name) => delete elementProps[name]
 						);
-						return ReactModule.createElement(element, elementProps);
+						return ReactModule.createElement(
+							element,
+							elementProps as HTMLAttributes<HTMLElement>
+						);
 					}
 				);
 				return motionElements[element];
@@ -48,7 +71,10 @@ vi.mock("framer-motion", async () => {
 vi.mock("react-vertical-timeline-component", async () => {
 	const ReactModule = await import("react");
 	return {
-		VerticalTimeline: function MockTimeline({ children, ...props }) {
+		VerticalTimeline: function MockTimeline({
+			children,
+			...props
+		}: { children?: ReactNode } & HTMLAttributes<HTMLDivElement>) {
 			return ReactModule.createElement("div", props, children);
 		},
 		VerticalTimelineElement: function MockTimelineElement({
@@ -56,6 +82,11 @@ vi.mock("react-vertical-timeline-component", async () => {
 			icon,
 			date,
 			className,
+		}: {
+			children?: ReactNode;
+			icon?: ReactNode;
+			date?: ReactNode;
+			className?: string;
 		}) {
 			return ReactModule.createElement(
 				"div",
@@ -71,7 +102,15 @@ vi.mock("react-vertical-timeline-component", async () => {
 vi.mock("reactjs-popup", async () => {
 	const ReactModule = await import("react");
 	return {
-		default: function MockPopup({ children, modal, open }) {
+		default: function MockPopup({
+			children,
+			modal,
+			open,
+		}: {
+			children?: ReactNode;
+			modal?: boolean;
+			open?: boolean;
+		}) {
 			return open
 				? ReactModule.createElement(
 						"div",
@@ -83,7 +122,7 @@ vi.mock("reactjs-popup", async () => {
 	};
 });
 
-const data = {
+const data: PortfolioData = {
 	about: [
 		{
 			title: "A little about me",
@@ -127,9 +166,10 @@ const data = {
 	],
 };
 
-const pendingFetch = vi.fn((_url, { signal }) => {
-	pendingFetch.signal = signal;
-	return new Promise(() => {});
+let pendingSignal: AbortSignal | undefined;
+const pendingFetch = vi.fn((_url: string, { signal }: RequestInit) => {
+	pendingSignal = signal ?? undefined;
+	return new Promise<Response>(() => {});
 });
 
 describe("Holder", () => {
@@ -137,7 +177,7 @@ describe("Holder", () => {
 		window.localStorage.clear();
 		window.history.replaceState({}, "", "/");
 		pendingFetch.mockClear();
-		pendingFetch.signal = undefined;
+		pendingSignal = undefined;
 		vi.stubGlobal("fetch", pendingFetch);
 	});
 
@@ -262,7 +302,9 @@ describe("Holder", () => {
 			const { container } = render(<Holder data={data} />);
 			expect(container.querySelector("#about")).toHaveClass("active");
 		} finally {
-			Object.defineProperty(window, "localStorage", storageDescriptor);
+			if (storageDescriptor) {
+				Object.defineProperty(window, "localStorage", storageDescriptor);
+			}
 		}
 	});
 
@@ -270,6 +312,9 @@ describe("Holder", () => {
 		render(<Holder data={data} />);
 		const initialAboutHeading = document.getElementById("about-heading");
 		const initialPortfolioHeading = document.getElementById("portfolio-heading");
+		if (!initialAboutHeading || !initialPortfolioHeading) {
+			throw new Error("Expected both portfolio headings to render");
+		}
 
 		expect(initialAboutHeading.closest(".content-panel")).toHaveClass("active");
 		expect(initialPortfolioHeading.closest(".content-panel")).not.toHaveClass(
@@ -291,10 +336,10 @@ describe("Holder", () => {
 	});
 
 	it("labels the popup's single focus-managed dialog", async () => {
-		fetch.mockResolvedValueOnce({
+		pendingFetch.mockResolvedValueOnce({
 			ok: true,
 			json: vi.fn().mockResolvedValue({ joke: "A tested joke" }),
-		});
+		} as unknown as Response);
 		render(<Holder data={data} />);
 
 		fireEvent.click(
@@ -310,7 +355,7 @@ describe("Holder", () => {
 	});
 
 	it("shows a safe fallback when the joke service fails", async () => {
-		fetch.mockResolvedValueOnce({ ok: false });
+		pendingFetch.mockResolvedValueOnce({ ok: false } as Response);
 		render(<Holder data={data} />);
 
 		const jokeButton = await screen.findByRole("button", {
@@ -321,10 +366,10 @@ describe("Holder", () => {
 
 	it("aborts the joke request when the component unmounts", () => {
 		const { unmount } = render(<Holder data={data} />);
-		expect(pendingFetch.signal).toBeDefined();
+		expect(pendingSignal).toBeDefined();
 
 		act(() => unmount());
 
-		expect(pendingFetch.signal.aborted).toBe(true);
+		expect(pendingSignal?.aborted).toBe(true);
 	});
 });

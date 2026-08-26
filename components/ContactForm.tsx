@@ -1,14 +1,26 @@
 import { useEffect, useRef, useState } from "react";
+import type { CSSProperties, FormEvent } from "react";
 
 export const CONTACT_REQUEST_TIMEOUT_MS = 10_000;
 
-const HONEYPOT_STYLE = {
+const HONEYPOT_STYLE: CSSProperties = {
 	position: "absolute",
 	left: "-10000px",
 	width: "1px",
 	height: "1px",
 	overflow: "hidden",
 };
+
+type FormStatus = {
+	type: "idle" | "pending" | "success" | "error";
+	message: string;
+};
+
+class ContactRequestError extends Error {
+	constructor(readonly status: number) {
+		super("Contact request failed");
+	}
+}
 
 const ContactForm = () => {
 	const [name, setName] = useState("");
@@ -17,9 +29,12 @@ const ContactForm = () => {
 	const [message, setMessage] = useState("");
 	const [website, setWebsite] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [status, setStatus] = useState({ type: "idle", message: "" });
+	const [status, setStatus] = useState<FormStatus>({
+		type: "idle",
+		message: "",
+	});
 	const submittingRef = useRef(false);
-	const requestControllerRef = useRef(null);
+	const requestControllerRef = useRef<AbortController | null>(null);
 
 	useEffect(
 		() => () => {
@@ -28,7 +43,7 @@ const ContactForm = () => {
 		[]
 	);
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (submittingRef.current) return;
 
@@ -53,9 +68,7 @@ const ContactForm = () => {
 			});
 
 			if (!response.ok) {
-				const error = new Error("Contact request failed");
-				error.status = response.status;
-				throw error;
+				throw new ContactRequestError(response.status);
 			}
 
 			setName("");
@@ -65,7 +78,8 @@ const ContactForm = () => {
 			setWebsite("");
 			setStatus({ type: "success", message: "Message sent successfully." });
 		} catch (error) {
-			const serviceUnavailable = error?.status === 503;
+			const serviceUnavailable =
+				error instanceof ContactRequestError && error.status === 503;
 			setStatus({
 				type: "error",
 				message: controller.signal.aborted

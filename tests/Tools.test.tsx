@@ -1,48 +1,60 @@
 import React from "react";
+import type { HTMLAttributes, ImgHTMLAttributes, ReactNode } from "react";
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import Tools from "../components/Tools";
 
 vi.mock("next/image", () => ({
-	default: function MockImage(props) {
+	default: function MockImage(props: ImgHTMLAttributes<HTMLImageElement>) {
 		return React.createElement("img", props);
 	},
 }));
 
+type MotionMockProps = {
+	children?: ReactNode;
+	initial?: unknown;
+	animate?: unknown;
+	variants?: { start?: { y?: number } };
+	transition?: unknown;
+} & Record<string, unknown>;
+
+const htmlProps = (props: Record<string, unknown>) =>
+	props as HTMLAttributes<HTMLElement>;
+
 vi.mock("framer-motion", () => ({
 	motion: {
-		h1: ({ children, ...props }) => {
+		h1: ({ children, ...props }: MotionMockProps) => {
 			const elementProps = { ...props };
 			["initial", "animate", "variants"].forEach(
 				(name) => delete elementProps[name]
 			);
-			return <h1 {...elementProps}>{children}</h1>;
+			return <h1 {...htmlProps(elementProps)}>{children}</h1>;
 		},
-		h2: ({ children, ...props }) => {
+		h2: ({ children, ...props }: MotionMockProps) => {
 			const elementProps = { ...props };
 			["initial", "animate", "variants"].forEach(
 				(name) => delete elementProps[name]
 			);
-			return <h2 {...elementProps}>{children}</h2>;
+			return <h2 {...htmlProps(elementProps)}>{children}</h2>;
 		},
-		a: ({ children, ...props }) => {
+		a: ({ children, ...props }: MotionMockProps) => {
 			const elementProps = { ...props };
 			elementProps["data-motion-direction"] =
 				elementProps.variants?.start?.y === 1000 ? "up" : "down";
 			["initial", "animate", "variants", "transition"].forEach(
 				(name) => delete elementProps[name]
 			);
-			return <a {...elementProps}>{children}</a>;
+			return <a {...htmlProps(elementProps)}>{children}</a>;
 		},
-		span: ({ children, ...props }) => {
+		span: ({ children, ...props }: MotionMockProps) => {
 			const elementProps = { ...props };
 			elementProps["data-motion-direction"] =
 				elementProps.variants?.start?.y === 1000 ? "up" : "down";
 			["initial", "animate", "variants", "transition"].forEach(
 				(name) => delete elementProps[name]
 			);
-			return <span {...elementProps}>{children}</span>;
+			return <span {...htmlProps(elementProps)}>{children}</span>;
 		},
 	},
 }));

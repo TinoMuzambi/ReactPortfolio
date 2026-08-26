@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 import { right } from "../data/variants";
 import ContactForm from "./ContactForm";
 
-const Contact = ({ isActive = true }) => {
+interface ContactProps {
+	isActive?: boolean;
+}
+
+const Contact = ({ isActive = true }: ContactProps) => {
 	return (
 		<motion.div
 			className="mini-card"

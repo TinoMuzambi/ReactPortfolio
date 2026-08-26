@@ -3,7 +3,7 @@ export const BASE_URL =
 		? "https://tinomuzambi.com"
 		: "http://localhost:3000";
 
-export const getHtml = (title, html) => {
+export const getHtml = (title: string, html: string) => {
 	// Get html for sending email.
 	return `
 		<head>
@@ -69,7 +69,7 @@ export const getHtml = (title, html) => {
 	`;
 };
 
-export function shuffle(array) {
+export function shuffle<T>(array: T[]): T[] {
 	// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 	var currentIndex = array.length,
 		temporaryValue,
@@ -96,7 +96,7 @@ export function shuffle(array) {
  * @param limit The maximum returned string length.
  * @returns The original text or a shortened string ending in an ellipsis.
  */
-export const ellipsize = (text, limit) => {
+export const ellipsize = (text: string, limit: number): string => {
 	if (text.length <= limit) {
 		return text;
 	}

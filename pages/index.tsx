@@ -1,14 +1,9 @@
 import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
+import type { PortfolioData } from "../types/portfolio";
 import { getPortfolioData } from "../utils/fetch";
 
-export default function Home({
-	projects,
-	about,
-	education,
-	experience,
-	tools,
-}) {
+export default function Home({ projects, about, education, experience, tools }: PortfolioData) {
 	return (
 		<>
 			<Meta />

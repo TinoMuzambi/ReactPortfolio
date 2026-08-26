@@ -14,12 +14,13 @@ import {
 	normalizeProject,
 	normalizeTool,
 } from "../../utils/fetch";
+import type { PortfolioData } from "../../types/portfolio";
 
 afterEach(() => {
 	vi.unstubAllEnvs();
 });
 
-const story = (content, name = "example") => ({
+const story = (content: Record<string, unknown>, name = "example") => ({
 	name,
 	full_slug: `collection/${name}`,
 	content,
@@ -89,7 +90,7 @@ describe("Storyblok collection loading", () => {
 			{
 				starts_with: "tools/",
 				sort_by: "content.title:asc",
-				per_page: "100",
+				per_page: 100,
 			},
 		],
 	])("preserves the complete %s query contract", async (_name, load, params) => {
@@ -102,7 +103,16 @@ describe("Storyblok collection loading", () => {
 	});
 
 	it("uses a shared endpoint contract and normalizes stories", async () => {
-		const normalize = vi.fn((item) => item.content.title);
+		const normalize = vi.fn((item: unknown) => {
+			if (!item || typeof item !== "object" || !("content" in item)) {
+				throw new TypeError("Expected a story");
+			}
+			const content = item.content;
+			if (!content || typeof content !== "object" || !("title" in content)) {
+				throw new TypeError("Expected story content");
+			}
+			return content.title;
+		});
 		const client = {
 			get: vi.fn().mockResolvedValue({
 				data: { stories: [story({ title: "One" })] },
@@ -166,11 +176,20 @@ describe("Storyblok collection loading", () => {
 	});
 
 	it("requires an access token before constructing a client", () => {
-		const Client = vi.fn();
+		const constructed = vi.fn();
+		class Client {
+			constructor() {
+				constructed();
+			}
+
+			get(): Promise<unknown> {
+				return Promise.resolve({});
+			}
+		}
 		expect(() => createStoryblokClient("", Client)).toThrow(
 			"Storyblok access token is missing"
 		);
-		expect(Client).not.toHaveBeenCalled();
+		expect(constructed).not.toHaveBeenCalled();
 	});
 });
 
@@ -192,8 +211,39 @@ describe("portfolio data loading", () => {
 	});
 
 	it("starts all five collection requests concurrently and preserves the data shape", async () => {
-		const calls = [];
-		const resolvers = {};
+		const calls: string[] = [];
+		const fixtures = createCmsFixtures();
+		const deferredLoader = <T,>(name: string) => {
+			let resolve!: (value: T[]) => void;
+			const promise = new Promise<T[]>((promiseResolve) => {
+				resolve = promiseResolve;
+			});
+			return {
+				load: vi.fn(() => {
+					calls.push(name);
+					return promise;
+				}),
+				resolve,
+			};
+		};
+		const projects = deferredLoader<PortfolioData["projects"][number]>(
+			"getProjects"
+		);
+		const about = deferredLoader<PortfolioData["about"][number]>("getAbout");
+		const education = deferredLoader<PortfolioData["education"][number]>(
+			"getEducation"
+		);
+		const experience = deferredLoader<PortfolioData["experience"][number]>(
+			"getExperience"
+		);
+		const tools = deferredLoader<PortfolioData["tools"][number]>("getTools");
+		const loaders = {
+			getProjects: projects.load,
+			getAbout: about.load,
+			getEducation: education.load,
+			getExperience: experience.load,
+			getTools: tools.load,
+		};
 		const collectionNames = [
 			"getProjects",
 			"getAbout",
@@ -201,41 +251,27 @@ describe("portfolio data loading", () => {
 			"getExperience",
 			"getTools",
 		];
-		const loaders = Object.fromEntries(
-			collectionNames.map((name) => [
-				name,
-				vi.fn(
-					() =>
-						new Promise((resolve) => {
-							calls.push(name);
-							resolvers[name] = resolve;
-						})
-				),
-			])
-		);
 
 		const loading = getPortfolioData(loaders);
 		expect(calls).toEqual(collectionNames);
-		collectionNames.forEach((name) => resolvers[name]([name]));
+		projects.resolve(fixtures.projects);
+		about.resolve(fixtures.about);
+		education.resolve(fixtures.education);
+		experience.resolve(fixtures.experience);
+		tools.resolve(fixtures.tools);
 
-		await expect(loading).resolves.toEqual({
-			projects: ["getProjects"],
-			about: ["getAbout"],
-			education: ["getEducation"],
-			experience: ["getExperience"],
-			tools: ["getTools"],
-		});
+		await expect(loading).resolves.toEqual(fixtures);
 	});
 
 	it("propagates a collection failure instead of returning partial props", async () => {
-		const success = vi.fn().mockResolvedValue(["content"]);
+		const fixtures = createCmsFixtures();
 		await expect(
 			getPortfolioData({
-				getProjects: success,
-				getAbout: success,
+				getProjects: vi.fn().mockResolvedValue(fixtures.projects),
+				getAbout: vi.fn().mockResolvedValue(fixtures.about),
 				getEducation: vi.fn().mockRejectedValue(new Error("education broken")),
-				getExperience: success,
-				getTools: success,
+				getExperience: vi.fn().mockResolvedValue(fixtures.experience),
+				getTools: vi.fn().mockResolvedValue(fixtures.tools),
 			})
 		).rejects.toThrow("education broken");
 	});

@@ -4,7 +4,14 @@ import { motion } from "framer-motion";
 
 import { up, down } from "../data/variants";
 
-const Tools = ({ tools, isActive = true }) => {
+import type { Tool } from "../types/portfolio";
+
+interface ToolsProps {
+	tools: Tool[];
+	isActive?: boolean;
+}
+
+const Tools = ({ tools, isActive = true }: ToolsProps) => {
 	const animationState = isActive ? "end" : "start";
 
 	return (

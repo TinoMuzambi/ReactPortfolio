@@ -1,20 +1,26 @@
 import React from "react";
+import Image from "next/image";
 import {
 	VerticalTimeline,
 	VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { FaUniversity } from "react-icons/fa";
 
-const Education = ({ education }) => {
+import type { ExperienceItem } from "../types/portfolio";
+
+interface ExperienceProps {
+	experience: ExperienceItem[];
+}
+
+const Experience = ({ experience }: ExperienceProps) => {
 	return (
-		<div className="education">
-			<h2 id="education-heading" className="title">
-				Education
+		<div className="experience">
+			<h2 id="experience-heading" className="title">
+				Experience
 			</h2>
 
 			<VerticalTimeline className="timeline">
-				{education.map((item) => (
+				{experience.map((item) => (
 					<VerticalTimelineElement
 						key={`${item.institution}|${item.title}|${item.period}`}
 						className="vertical-timeline-element--work"
@@ -25,12 +31,22 @@ const Education = ({ education }) => {
 							width: "42%",
 						}}
 						iconStyle={{
-							background: "#0ce3f2",
-							color: "#fff",
+							background: "#0ce3f2aa",
 							marginTop: "1rem",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
 						}}
+						icon={
+							<Image
+								src={item.icon}
+								alt={`${item.institution || item.title} logo`}
+								width={48}
+								height={48}
+								style={{ objectFit: "contain" }}
+							/>
+						}
 						iconClassName="round"
-						icon={<FaUniversity aria-hidden="true" focusable="false" />}
 						visible={true}
 					>
 						<h3 className="vertical-timeline-element-title">{item.title}</h3>
@@ -48,4 +64,4 @@ const Education = ({ education }) => {
 	);
 };
 
-export default Education;
+export default Experience;

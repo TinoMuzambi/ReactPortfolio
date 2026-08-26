@@ -10,11 +10,14 @@ import {
 	FaToolbox,
 } from "react-icons/fa";
 
+import type { PortfolioData } from "../types/portfolio";
 import About from "./About";
 import Education from "./Education";
 import Experience from "./Experience";
 import Portfolio from "./Portfolio";
 import Tools from "./Tools";
+
+type ViewId = "about" | "education" | "experience" | "portfolio" | "tools";
 
 const NAV_ITEMS = [
 	{ id: "about", label: "About", Icon: FaInfoCircle },
@@ -22,21 +25,22 @@ const NAV_ITEMS = [
 	{ id: "experience", label: "Experience", Icon: FaBuilding },
 	{ id: "portfolio", label: "Portfolio", Icon: FaCode },
 	{ id: "tools", label: "Tools", Icon: FaToolbox },
-];
+] as const;
 
-const LEGACY_VIEW_IDS = {
+const LEGACY_VIEW_IDS: Record<string, ViewId> = {
 	edu: "education",
 	exp: "experience",
 	por: "portfolio",
 	too: "tools",
 };
 
-export const normalizeViewId = (view) => LEGACY_VIEW_IDS[view] || view;
+export const normalizeViewId = (view: string): string =>
+	LEGACY_VIEW_IDS[view] || view;
 
-export const isSupportedView = (view) =>
+export const isSupportedView = (view: string): view is ViewId =>
 	NAV_ITEMS.some(({ id }) => id === view);
 
-export const getStoredView = (storage) => {
+export const getStoredView = (storage: Pick<Storage, "getItem">): ViewId => {
 	try {
 		const storedView = storage.getItem("tino-last-viewed") || "";
 		const normalizedView = normalizeViewId(storedView);
@@ -54,9 +58,13 @@ const getBrowserStoredView = () => {
 	}
 };
 
-const Holder = ({ data }) => {
+interface HolderProps {
+	data: Partial<PortfolioData>;
+}
+
+const Holder = ({ data }: HolderProps) => {
 	const [joke, setJoke] = useState("");
-	const [currentView, setView] = useState("about");
+	const [currentView, setView] = useState<ViewId>("about");
 	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
 
@@ -77,7 +85,7 @@ const Holder = ({ data }) => {
 				}
 				if (mounted) setJoke(response.joke);
 			} catch (error) {
-				if (mounted && error?.name !== "AbortError") {
+				if (!(error instanceof DOMException && error.name === "AbortError") && mounted) {
 					setJoke("");
 				}
 			} finally {
@@ -94,7 +102,7 @@ const Holder = ({ data }) => {
 	}, []);
 
 	useEffect(() => {
-		const syncView = ({ useStoredFallback = false } = {}) => {
+		const syncView = ({ useStoredFallback = false }: { useStoredFallback?: boolean } = {}) => {
 			const rawHashView = window.location.hash.slice(1).toLowerCase();
 			const hashView = normalizeViewId(rawHashView);
 
@@ -115,7 +123,7 @@ const Holder = ({ data }) => {
 		return () => window.removeEventListener("hashchange", handleHashChange);
 	}, []);
 
-	const labelJokeDialog = useCallback((content) => {
+	const labelJokeDialog = useCallback((content: HTMLDivElement | null) => {
 		if (!content) return;
 		// reactjs-popup owns the focus-managed role="dialog" wrapper but does not
 		// expose ARIA attributes for it, so label that wrapper from its title.
@@ -126,7 +134,7 @@ const Holder = ({ data }) => {
 		dialog.setAttribute("aria-modal", "true");
 	}, []);
 
-	const setCurrentView = (view) => {
+	const setCurrentView = (view: ViewId) => {
 		setView(view);
 		try {
 			window.localStorage.setItem("tino-last-viewed", view);

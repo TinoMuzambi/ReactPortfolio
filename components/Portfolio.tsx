@@ -5,8 +5,11 @@ import { SiJavascript, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
 
 import { left, right } from "../data/variants";
+import type { Project } from "../types/portfolio";
 
-export const getProjectKey = (project, position = 0) => {
+type ProjectIdentity = Partial<Project> & { id?: string | number };
+
+export const getProjectKey = (project: ProjectIdentity, position = 0) => {
 	const identity = [
 		project.id,
 		project.shortname,
@@ -21,7 +24,12 @@ export const getProjectKey = (project, position = 0) => {
 	return identity || `project-${position}`;
 };
 
-const Portfolio = ({ projects, isActive = true }) => {
+interface PortfolioProps {
+	projects: Project[];
+	isActive?: boolean;
+}
+
+const Portfolio = ({ projects, isActive = true }: PortfolioProps) => {
 	const featuredProjects = projects.filter((project) => project.featured);
 	const animationState = isActive ? "end" : "start";
 

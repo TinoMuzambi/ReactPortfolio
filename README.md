@@ -5,6 +5,7 @@
 ## Technology
 
 - Next.js 16 and React 19
+- Strict TypeScript across application code, API routes, configuration, and tests
 - Sass for component-oriented styles
 - Storyblok for portfolio, profile, education, experience, and tools content
 - GSAP and Framer Motion for the introduction and view transitions
@@ -12,7 +13,7 @@
 - Vitest, jsdom, and Testing Library for automated tests
 - ESLint with Next.js Core Web Vitals rules
 
-The project intentionally remains on the Pages Router. `pages/index.jsx` builds the public page and revalidates it every 60 seconds, while `pages/api/email/index.js` implements the server-side contact endpoint.
+The project intentionally remains on the Pages Router. `pages/index.tsx` builds the public page and revalidates it every 60 seconds, while `pages/api/email/index.ts` implements the server-side contact endpoint.
 
 ## Requirements
 
@@ -46,14 +47,14 @@ vercel env pull .env.local --environment=development
 
 | Name | Used by | Required for |
 | --- | --- | --- |
-| `REACT_APP_STORYBLOK_KEY` | `utils/fetch.js` | Portfolio project content |
-| `REACT_APP_STORYBLOK_KEY2` | `utils/fetch.js` | About, education, experience, and tools content |
-| `GMAIL_APP_PASSWORD` | `pages/api/email/index.js` | Contact-form email delivery (preferred; store as a sensitive value) |
-| `GMAIL_PASS` | `pages/api/email/index.js` | Backward-compatible Gmail app-password fallback |
-| `GMAIL_USER` | `pages/api/email/index.js` | Optional authenticated sender override |
-| `CONTACT_EMAIL_TO` | `pages/api/email/index.js` | Optional contact recipient override |
+| `REACT_APP_STORYBLOK_KEY` | `utils/fetch.ts` | Portfolio project content |
+| `REACT_APP_STORYBLOK_KEY2` | `utils/fetch.ts` | About, education, experience, and tools content |
+| `GMAIL_APP_PASSWORD` | `pages/api/email/index.ts` | Contact-form email delivery (preferred; store as a sensitive value) |
+| `GMAIL_PASS` | `pages/api/email/index.ts` | Backward-compatible Gmail app-password fallback |
+| `GMAIL_USER` | `pages/api/email/index.ts` | Optional authenticated sender override |
+| `CONTACT_EMAIL_TO` | `pages/api/email/index.ts` | Optional contact recipient override |
 
-Despite their historical `REACT_APP_` names, the Storyblok tokens are consumed during server-side static generation. Server credentials are read directly from `process.env`; they are not exposed through `next.config.js`.
+Despite their historical `REACT_APP_` names, the Storyblok tokens are consumed during server-side static generation. Server credentials are read directly from `process.env`; they are not exposed through `next.config.ts`.
 
 CI sets `CMS_USE_FIXTURES=true` only for its deterministic production-build check. Normal development, preview, production, and ISR builds fail fast when credentials, collection responses, or required fields are malformed, which preserves the last successful render instead of caching invalid data. A valid empty Storyblok folder renders an empty section instead of blocking a cold deployment. Do not configure the fixture flag in Vercel.
 
@@ -83,6 +84,7 @@ The home page obtains Storyblok data in `getStaticProps`, then passes normalized
 | `yarn build` | Create a production build |
 | `yarn start` | Serve a completed production build |
 | `yarn lint` | Run ESLint and fail on warnings |
+| `yarn typecheck` | Run the strict TypeScript compiler without emitting files |
 | `yarn test` | Run the Vitest suite once |
 | `yarn test:watch` | Run Vitest in watch mode |
 
@@ -90,11 +92,12 @@ Run the same quality gate as CI before opening a pull request:
 
 ```sh
 yarn lint
+yarn typecheck
 yarn test
 yarn build
 ```
 
-Tests use jsdom and load DOM matchers plus automatic Testing Library cleanup from `tests/setup.js`. Place test files under `tests/` with a `.test.js`, `.test.jsx`, `.spec.js`, or `.spec.jsx` suffix.
+Tests use jsdom and load DOM matchers plus automatic Testing Library cleanup from `tests/setup.ts`. Place test files under `tests/` with a `.test.ts`, `.test.tsx`, `.spec.ts`, or `.spec.tsx` suffix.
 
 ## Pull requests
 
@@ -106,7 +109,7 @@ Keep pull requests focused and independently mergeable. Every PR should include:
 - before-and-after screenshots for visible UI changes; and
 - deployment, migration, or environment-variable notes when applicable.
 
-The GitHub Actions workflow runs dependency installation from the lockfile, linting, tests, and a production build for every pull request and every push to `main`.
+The GitHub Actions workflow runs dependency installation from the lockfile, linting, strict type-checking, tests, and a production build for every pull request and every push to `main`.
 
 ## Deployment
 
