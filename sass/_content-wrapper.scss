@@ -37,6 +37,21 @@ $font-weight-circle-4: 300;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
+	// The server-rendered portfolio remains the no-JavaScript fallback. A
+	// layout effect adds intro-ready before paint only when the intro can run.
+	&.intro-active:not(.intro-ready) {
+		.intro-decoration,
+		.enter {
+			display: none;
+		}
+	}
+
+	&.intro-active.intro-ready .content {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
 	main {
 		.circles {
 			pointer-events: none;

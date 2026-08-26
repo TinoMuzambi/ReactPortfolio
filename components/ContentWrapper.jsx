@@ -10,13 +10,21 @@ const getCircleText = (circlesElement) =>
 
 const ContentWrapper = ({ data }) => {
 	const [introActive, setIntroActive] = useState(true);
+	const [introReady, setIntroReady] = useState(false);
 	const circlesRef = useRef(null);
 	const enterRef = useRef(null);
 	const enterBackgroundRef = useRef(null);
 	const contentRef = useRef(null);
+	const focusContentAfterIntroRef = useRef(false);
 
 	useLayoutEffect(() => {
-		if (!introActive) return undefined;
+		if (!introActive) {
+			if (focusContentAfterIntroRef.current) {
+				focusContentAfterIntroRef.current = false;
+				contentRef.current?.focus();
+			}
+			return undefined;
+		}
 
 		const reducedMotion = window.matchMedia?.(
 			"(prefers-reduced-motion: reduce)"
@@ -38,6 +46,11 @@ const ContentWrapper = ({ data }) => {
 				cancelled = true;
 			};
 		}
+
+		let cancelled = false;
+		queueMicrotask(() => {
+			if (!cancelled) setIntroReady(true);
+		});
 
 		const circleText = getCircleText(circlesRef.current);
 		const enterControl = enterRef.current;
@@ -63,6 +76,7 @@ const ContentWrapper = ({ data }) => {
 		reducedMotion?.addEventListener?.("change", handleMotionPreference);
 
 		return () => {
+			cancelled = true;
 			startTimeline?.kill();
 			gsap.killTweensOf?.(circleText);
 			gsap.killTweensOf?.(enterControl);
@@ -77,8 +91,9 @@ const ContentWrapper = ({ data }) => {
 		} catch {
 			// Dismissing the intro must not depend on browser storage.
 		}
+		focusContentAfterIntroRef.current = true;
 		setIntroActive(false);
-		contentRef.current?.focus();
+		setIntroReady(false);
 	};
 
 	const animateEnter = () => {
@@ -118,7 +133,11 @@ const ContentWrapper = ({ data }) => {
 	};
 
 	return (
-		<section className="body demo-3">
+		<section
+			className={`body demo-3${introActive ? " intro-active" : ""}${
+				introActive && introReady ? " intro-ready" : ""
+			}`}
+		>
 			<a className="skip-link" href="#portfolio-content" onClick={dismissIntro}>
 				Skip intro and view portfolio
 			</a>

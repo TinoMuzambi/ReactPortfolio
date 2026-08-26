@@ -55,14 +55,30 @@ describe("ContentWrapper", () => {
 
 	afterEach(() => {
 		vi.restoreAllMocks();
+		vi.unstubAllGlobals();
 	});
 
-	it("keeps content available and provides keyboard-operable intro controls", () => {
+	it("keeps content as the fallback until the intro is ready", () => {
+		vi.stubGlobal("queueMicrotask", vi.fn());
 		render(<ContentWrapper data={{}} />);
 
 		const content = screen.getByTestId("portfolio-holder").parentElement;
+		const wrapper = content.closest("section");
+		expect(content).toBeInTheDocument();
+		expect(wrapper).toHaveClass("intro-active");
+		expect(wrapper).not.toHaveClass("intro-ready");
+	});
+
+	it("isolates the ready intro from content and provides keyboard controls", async () => {
+		render(<ContentWrapper data={{}} />);
+
+		const content = screen.getByTestId("portfolio-holder").parentElement;
+		const wrapper = content.closest("section");
 		const enter = screen.getByRole("button", { name: "Enter portfolio" });
 		expect(content).toBeInTheDocument();
+		await waitFor(() =>
+			expect(wrapper).toHaveClass("intro-active", "intro-ready")
+		);
 		expect(screen.getByRole("link", { name: /skip intro/i })).toHaveAttribute(
 			"href",
 			"#portfolio-content"
@@ -73,6 +89,7 @@ describe("ContentWrapper", () => {
 		expect(
 			screen.queryByRole("button", { name: "Enter portfolio" })
 		).not.toBeInTheDocument();
+		expect(wrapper).not.toHaveClass("intro-active", "intro-ready");
 		expect(content).toHaveFocus();
 		expect(window.localStorage.getItem("tino-intro-seen")).toBe("true");
 	});
