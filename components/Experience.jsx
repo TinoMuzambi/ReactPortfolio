@@ -48,9 +48,6 @@ const Experience = ({ experience }) => {
 						<h4 className="vertical-timeline-element-subtitle">
 							{item.institution}
 						</h4>
-						<h5 className="vertical-timeline-element-subtitle date">
-							{item.period}
-						</h5>
 						<p>{item.description}</p>
 					</VerticalTimelineElement>
 				))}
