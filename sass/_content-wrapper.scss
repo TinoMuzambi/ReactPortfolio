@@ -46,7 +46,7 @@ $font-weight-circle-4: 300;
 		}
 	}
 
-	&.intro-active.intro-ready .content {
+	&.intro-active.intro-ready:not(.intro-exiting) .content {
 		opacity: 0;
 		visibility: hidden;
 		pointer-events: none;
@@ -57,8 +57,6 @@ $font-weight-circle-4: 300;
 			pointer-events: none;
 			z-index: 5;
 			position: fixed;
-			opacity: 0.55;
-			mix-blend-mode: soft-light;
 			width: var(--dim);
 			height: var(--dim);
 			top: calc(50% - var(--dim) / 2);
@@ -122,30 +120,22 @@ $font-weight-circle-4: 300;
 		}
 
 		.enter {
-			display: grid;
-			place-content: center;
+			display: block;
 			border: 0;
-			width: calc(var(--dim-button) + 2rem);
-			height: calc(var(--dim-button) + 2rem);
-			position: fixed;
-			left: calc(50% - (var(--dim-button) + 2rem) / 2);
-			top: calc(50% - (var(--dim-button) + 2rem) / 2);
+			width: var(--dim-button);
+			height: var(--dim-button);
+			position: absolute;
+			left: calc(50% - var(--dim-button) / 2);
+			top: calc(50% - var(--dim-button) / 2);
 			font: $primary-font;
 			font-weight: 900;
 			cursor: pointer;
 			background: none;
 			color: $color-text-button;
 			padding: 0;
-			opacity: 1;
-			overflow: visible;
+			opacity: 0;
+			overflow-x: unset;
 			z-index: 6;
-
-			&:hover,
-			&:active {
-				.enter__bg {
-					box-shadow: 0 0 0 5px rgba($white, 0.45);
-				}
-			}
 
 			&:focus-visible {
 				outline: 4px solid $white;
@@ -164,24 +154,16 @@ $font-weight-circle-4: 300;
 			}
 
 			.enter__text {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				flex-direction: column;
+				display: grid;
+				place-content: center;
 				position: relative;
 				color: $tertiary-color;
-				font-size: 2.5rem;
-			}
-
-			.enter__label {
-				font-size: 0.75rem;
-				line-height: 1.1;
-				color: $color-text-button;
+				font-size: 3rem;
 			}
 
 			@media screen and (min-width: 53em) {
 				.enter__text {
-					font-size: 3.5rem;
+					font-size: 5rem;
 				}
 			}
 		}

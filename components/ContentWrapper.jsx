@@ -1,21 +1,67 @@
 import { useLayoutEffect, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { gsap } from "gsap";
 import { IoArrowDownCircle } from "react-icons/io5";
 
 import Holder from "./Holder";
 
-const INTRO_STORAGE_KEY = "tino-intro-seen";
 const getCircleText = (circlesElement) =>
 	circlesElement?.querySelectorAll("text.circles__text");
+const getContentChildren = (contentElement) => contentElement?.children;
+
+const killIntroTweens = (circleText, enterControl, enterBackground) => {
+	gsap.killTweensOf?.(circleText);
+	gsap.killTweensOf?.(enterControl);
+	gsap.killTweensOf?.(enterBackground);
+};
+
+const animateIntroHover = (circleText, enterBackground) => {
+	gsap.killTweensOf?.(enterBackground);
+	gsap.killTweensOf?.(circleText);
+	gsap.to?.(enterBackground, {
+		duration: 1.3,
+		ease: "expo",
+		scale: isMobile ? 0.6 : 1.4,
+	});
+	gsap.to?.(circleText, {
+		duration: 0.5,
+		ease: "expo",
+		rotation: 210,
+		scale: 0.5,
+		opacity: 0.6,
+		stagger: { amount: -0.15 },
+	});
+};
+
+const resetIntroHover = (circleText, enterBackground) => {
+	gsap.killTweensOf?.(enterBackground);
+	gsap.killTweensOf?.(circleText);
+	gsap.to?.(enterBackground, {
+		duration: 2,
+		ease: "elastic.out(1, 0.4)",
+		scale: 1,
+	});
+	gsap.to?.(circleText, {
+		duration: 2,
+		ease: "elastic.out(1, 0.4)",
+		rotation: 90,
+		scale: 1,
+		opacity: 1,
+		stagger: { amount: 0.15 },
+	});
+};
 
 const ContentWrapper = ({ data }) => {
 	const [introActive, setIntroActive] = useState(true);
 	const [introReady, setIntroReady] = useState(false);
+	const [introExiting, setIntroExiting] = useState(false);
 	const circlesRef = useRef(null);
 	const enterRef = useRef(null);
 	const enterBackgroundRef = useRef(null);
 	const contentRef = useRef(null);
 	const focusContentAfterIntroRef = useRef(false);
+	const startTimelineRef = useRef(null);
+	const exitTimelineRef = useRef(null);
 
 	useLayoutEffect(() => {
 		if (!introActive) {
@@ -29,15 +75,8 @@ const ContentWrapper = ({ data }) => {
 		const reducedMotion = window.matchMedia?.(
 			"(prefers-reduced-motion: reduce)"
 		);
-		let introSeen = false;
 
-		try {
-			introSeen = window.localStorage.getItem(INTRO_STORAGE_KEY) === "true";
-		} catch {
-			// Storage can be disabled. The intro remains optional through its button.
-		}
-
-		if (introSeen || reducedMotion?.matches) {
+		if (reducedMotion?.matches) {
 			let cancelled = false;
 			queueMicrotask(() => {
 				if (!cancelled) setIntroActive(false);
@@ -48,26 +87,73 @@ const ContentWrapper = ({ data }) => {
 		}
 
 		let cancelled = false;
-		queueMicrotask(() => {
-			if (!cancelled) setIntroReady(true);
-		});
-
 		const circleText = getCircleText(circlesRef.current);
 		const enterControl = enterRef.current;
 		const enterBackground = enterBackgroundRef.current;
-		if (!circleText?.length) return undefined;
+		const contentChildren = getContentChildren(contentRef.current);
+		const holder = contentRef.current?.querySelector(".holder");
+		let mobileHoverTimer;
 
-		let startTimeline;
+		const bypassUnavailableIntro = () => {
+			queueMicrotask(() => {
+				if (!cancelled) setIntroActive(false);
+			});
+		};
+
+		if (!circleText?.length || !enterControl || !contentChildren?.length) {
+			bypassUnavailableIntro();
+			return () => {
+				cancelled = true;
+			};
+		}
+
 		try {
 			gsap.set(circleText, { transformOrigin: "50% 50%" });
-			startTimeline = gsap.timeline().to(circleText, {
-				duration: 3,
-				ease: "expo.inOut",
-				rotation: 90,
-				stagger: { amount: 0.4 },
+			gsap.set([circleText, contentChildren], { opacity: 0 });
+			gsap.set([holder, enterControl], { pointerEvents: "none" });
+
+			startTimelineRef.current = gsap
+				.timeline()
+				.addLabel("start", 0)
+				.to(
+					circleText,
+					{
+						duration: 3,
+						ease: "expo.inOut",
+						rotation: 90,
+						stagger: { amount: 0.4 },
+					},
+					"start"
+				)
+				.to(
+					[circleText, enterControl],
+					{
+						duration: 3,
+						ease: "expo.inOut",
+						startAt: { opacity: 0, scale: 0.8 },
+						scale: 1,
+						opacity: 1,
+						stagger: { amount: 0.4 },
+					},
+					"start"
+				)
+				.add(
+					() => gsap.set(enterControl, { pointerEvents: "auto" }),
+					"start+=2"
+				);
+
+			if (isMobile) {
+				mobileHoverTimer = window.setTimeout(
+					() => animateIntroHover(circleText, enterBackground),
+					3000
+				);
+			}
+
+			queueMicrotask(() => {
+				if (!cancelled) setIntroReady(true);
 			});
 		} catch {
-			// The portfolio and enter control are visible before animation runs.
+			bypassUnavailableIntro();
 		}
 
 		const handleMotionPreference = (event) => {
@@ -77,68 +163,118 @@ const ContentWrapper = ({ data }) => {
 
 		return () => {
 			cancelled = true;
-			startTimeline?.kill();
-			gsap.killTweensOf?.(circleText);
-			gsap.killTweensOf?.(enterControl);
-			gsap.killTweensOf?.(enterBackground);
+			window.clearTimeout(mobileHoverTimer);
+			startTimelineRef.current?.kill();
+			exitTimelineRef.current?.kill();
+			killIntroTweens(circleText, enterControl, enterBackground);
+			gsap.set?.(contentChildren, { opacity: 1, scale: 1 });
+			gsap.set?.(holder, { pointerEvents: "auto" });
+			startTimelineRef.current = null;
+			exitTimelineRef.current = null;
 			reducedMotion?.removeEventListener?.("change", handleMotionPreference);
 		};
 	}, [introActive]);
 
-	const dismissIntro = () => {
-		try {
-			window.localStorage.setItem(INTRO_STORAGE_KEY, "true");
-		} catch {
-			// Dismissing the intro must not depend on browser storage.
-		}
-		focusContentAfterIntroRef.current = true;
+	const completeIntro = () => {
 		setIntroActive(false);
 		setIntroReady(false);
+		setIntroExiting(false);
+	};
+
+	const skipIntro = () => {
+		focusContentAfterIntroRef.current = true;
+		startTimelineRef.current?.kill();
+		exitTimelineRef.current?.kill();
+		const contentChildren = getContentChildren(contentRef.current);
+		const holder = contentRef.current?.querySelector(".holder");
+		gsap.set?.(contentChildren, { opacity: 1, scale: 1 });
+		gsap.set?.(holder, { pointerEvents: "auto" });
+		completeIntro();
+	};
+
+	const exitIntro = () => {
+		if (!introActive || introExiting) return;
+
+		const circleText = getCircleText(circlesRef.current);
+		const enterControl = enterRef.current;
+		const enterBackground = enterBackgroundRef.current;
+		const contentChildren = getContentChildren(contentRef.current);
+		const holder = contentRef.current?.querySelector(".holder");
+		if (!circleText?.length || !enterControl || !contentChildren?.length) {
+			skipIntro();
+			return;
+		}
+
+		focusContentAfterIntroRef.current = true;
+		setIntroExiting(true);
+		startTimelineRef.current?.kill();
+		killIntroTweens(circleText, enterControl, enterBackground);
+		gsap.set?.(holder, { pointerEvents: "auto" });
+		gsap.set?.(enterControl, { pointerEvents: "none" });
+		gsap.set?.(contentRef.current, { opacity: 1 });
+
+		try {
+			exitTimelineRef.current = gsap
+				.timeline({ onComplete: completeIntro })
+				.addLabel("start", 0)
+				.to(
+					enterControl,
+					{
+						duration: 0.6,
+						ease: "back.in",
+						scale: 0.2,
+						opacity: 0,
+					},
+					"start"
+				)
+				.to(
+					circleText,
+					{
+						duration: 0.8,
+						ease: "back.in",
+						scale: 1.6,
+						opacity: 0,
+						rotation: "-=20",
+						stagger: { amount: 0.3 },
+					},
+					"start"
+				)
+				.to(
+					contentChildren,
+					{
+						duration: 0.8,
+						ease: "back.out",
+						startAt: { opacity: 0, scale: 0.8 },
+						scale: 1,
+						opacity: 1,
+						stagger: { amount: 0.2 },
+					},
+					"start+=1"
+				);
+		} catch {
+			skipIntro();
+		}
 	};
 
 	const animateEnter = () => {
-		if (!introActive) return;
+		if (!introActive || !introReady || introExiting) return;
 		const circleText = getCircleText(circlesRef.current);
-		gsap.killTweensOf?.(enterBackgroundRef.current);
-		gsap.killTweensOf?.(circleText);
-		gsap.to?.(enterBackgroundRef.current, {
-			duration: 0.8,
-			ease: "expo",
-			scale: 1.25,
-		});
-		gsap.to?.(circleText, {
-			duration: 0.5,
-			ease: "expo",
-			rotation: 120,
-			opacity: 0.65,
-		});
+		animateIntroHover(circleText, enterBackgroundRef.current);
 	};
 
 	const resetEnter = () => {
-		if (!introActive) return;
+		if (!introActive || !introReady || introExiting) return;
 		const circleText = getCircleText(circlesRef.current);
-		gsap.killTweensOf?.(enterBackgroundRef.current);
-		gsap.killTweensOf?.(circleText);
-		gsap.to?.(enterBackgroundRef.current, {
-			duration: 0.8,
-			ease: "elastic.out(1, 0.4)",
-			scale: 1,
-		});
-		gsap.to?.(circleText, {
-			duration: 0.8,
-			ease: "elastic.out(1, 0.4)",
-			rotation: 90,
-			opacity: 1,
-		});
+		resetIntroHover(circleText, enterBackgroundRef.current);
 	};
 
 	return (
 		<section
 			className={`body demo-3${introActive ? " intro-active" : ""}${
 				introActive && introReady ? " intro-ready" : ""
-			}`}
+			}${introExiting ? " intro-exiting" : ""}`}
 		>
-			<a className="skip-link" href="#portfolio-content" onClick={dismissIntro}>
+			<a className="skip-link" href="#portfolio-content" onClick={skipIntro}>
 				Skip intro and view portfolio
 			</a>
 			<main>
@@ -173,7 +309,7 @@ const ContentWrapper = ({ data }) => {
 							</defs>
 							<text className="circles__text circles__text--1">
 								<textPath href="#circle-1" textLength="2830">
-									Hi, I&apos;m Tino Muzambi.&nbsp;
+									{"Hi, I'm Tino Muzambi.\u00a0 \t\t\t"}
 								</textPath>
 							</text>
 							<text className="circles__text circles__text--2">
@@ -183,7 +319,7 @@ const ContentWrapper = ({ data }) => {
 							</text>
 							<text className="circles__text circles__text--3">
 								<textPath href="#circle-3" textLength="1341">
-									Welcome to my portfolio site.&nbsp;
+									Welcome to my portfolio site .&nbsp;
 								</textPath>
 							</text>
 							<text className="circles__text circles__text--4">
@@ -196,17 +332,17 @@ const ContentWrapper = ({ data }) => {
 							ref={enterRef}
 							type="button"
 							className="enter"
-							onClick={dismissIntro}
+							onClick={exitIntro}
 							onMouseEnter={animateEnter}
 							onMouseLeave={resetEnter}
 							onFocus={animateEnter}
 							onBlur={resetEnter}
+							aria-label="Enter portfolio"
 							aria-controls="portfolio-content"
 						>
 							<span ref={enterBackgroundRef} className="enter__bg" />
 							<span className="enter__text">
 								<IoArrowDownCircle aria-hidden="true" focusable="false" />
-								<span className="enter__label">Enter portfolio</span>
 							</span>
 						</button>
 					</>
