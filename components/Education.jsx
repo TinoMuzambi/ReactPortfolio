@@ -24,7 +24,6 @@ const Education = ({ education }) => {
 							marginTop: "2rem",
 							width: "42%",
 						}}
-						date={item.period}
 						iconStyle={{
 							background: "#0ce3f2",
 							color: "#fff",
@@ -38,6 +37,9 @@ const Education = ({ education }) => {
 						<h4 className="vertical-timeline-element-subtitle">
 							{item.institution}
 						</h4>
+						<h5 className="vertical-timeline-element-subtitle date">
+							{item.period}
+						</h5>
 						<p>{item.description}</p>
 					</VerticalTimelineElement>
 				))}

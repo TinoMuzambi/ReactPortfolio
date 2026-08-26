@@ -27,7 +27,7 @@ vi.mock("react-vertical-timeline-component", async () => {
 				"article",
 				{ className },
 				icon,
-				ReactModule.createElement("time", null, date),
+				date ? ReactModule.createElement("time", null, date) : null,
 				children
 			);
 		},
@@ -35,7 +35,7 @@ vi.mock("react-vertical-timeline-component", async () => {
 });
 
 describe("timeline sections", () => {
-	it("shows an education period once in the timeline gutter", () => {
+	it("shows an education period once inside its card", () => {
 		render(
 			<Education
 				education={[
@@ -50,10 +50,11 @@ describe("timeline sections", () => {
 		);
 
 		expect(screen.getAllByText("2018–2021")).toHaveLength(1);
-		expect(screen.getByText("2018–2021").tagName).toBe("TIME");
+		expect(screen.getByText("2018–2021")).toHaveClass("date");
+		expect(screen.getByText("2018–2021").tagName).toBe("H5");
 	});
 
-	it("shows an experience period once in the timeline gutter", () => {
+	it("shows an experience period once inside its card", () => {
 		render(
 			<Experience
 				experience={[
@@ -69,6 +70,7 @@ describe("timeline sections", () => {
 		);
 
 		expect(screen.getAllByText("2021–present")).toHaveLength(1);
-		expect(screen.getByText("2021–present").tagName).toBe("TIME");
+		expect(screen.getByText("2021–present")).toHaveClass("date");
+		expect(screen.getByText("2021–present").tagName).toBe("H5");
 	});
 });
