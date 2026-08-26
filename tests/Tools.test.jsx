@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import Tools from "../components/Tools";
 
@@ -28,6 +28,8 @@ vi.mock("framer-motion", () => ({
 		},
 		a: ({ children, ...props }) => {
 			const elementProps = { ...props };
+			elementProps["data-motion-direction"] =
+				elementProps.variants?.start?.y === 1000 ? "up" : "down";
 			["initial", "animate", "variants", "transition"].forEach(
 				(name) => delete elementProps[name]
 			);
@@ -35,6 +37,8 @@ vi.mock("framer-motion", () => ({
 		},
 		span: ({ children, ...props }) => {
 			const elementProps = { ...props };
+			elementProps["data-motion-direction"] =
+				elementProps.variants?.start?.y === 1000 ? "up" : "down";
 			["initial", "animate", "variants", "transition"].forEach(
 				(name) => delete elementProps[name]
 			);
@@ -42,6 +46,10 @@ vi.mock("framer-motion", () => ({
 		},
 	},
 }));
+
+afterEach(() => {
+	vi.restoreAllMocks();
+});
 
 describe("Tools", () => {
 	it("lets linked and unlinked logos retain their natural aspect ratios", () => {
@@ -66,5 +74,35 @@ describe("Tools", () => {
 		for (const logo of screen.getAllByRole("img")) {
 			expect(logo).toHaveStyle({ height: "auto", width: "100%" });
 		}
+	});
+
+	it("uses render position for motion parity with string and zero IDs", () => {
+		const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+		const { container } = render(
+			<Tools
+				tools={[
+					{
+						id: "Zero ID",
+						title: "String ID",
+						icon: "https://example.com/string.png",
+						link: "https://example.com/string",
+					},
+					{
+						id: 0,
+						title: "Zero ID",
+						icon: "https://example.com/zero.png",
+					},
+				]}
+			/>
+		);
+		const tiles = container.querySelectorAll(
+			".tools > .main-content > .tools-img"
+		);
+
+		expect(tiles[0]).toHaveAttribute("data-motion-direction", "up");
+		expect(tiles[1]).toHaveAttribute("data-motion-direction", "down");
+		expect(
+			errorSpy.mock.calls.some((call) => call.join(" ").includes("same key"))
+		).toBe(false);
 	});
 });

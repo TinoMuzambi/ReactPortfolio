@@ -17,6 +17,7 @@
 			@include flexCenter;
 			justify-content: flex-start;
 			gap: 1rem;
+			min-width: 0;
 			width: 100%;
 
 			a {
@@ -24,25 +25,31 @@
 			}
 
 			.lead {
+				min-width: 0;
+				width: 100%;
+
 				.screenshot-holder {
 					overflow: hidden;
 					margin: 2rem 0;
+					max-width: 100%;
 
 					.screenshot {
+						display: block;
+						height: auto;
+						max-width: 100%;
 						transition: 1s ease;
+						width: 100%;
 						pointer-events: all;
 
 						&:hover {
 							transform: scale(1.2);
 						}
-
-						@include mq(1023px) {
-							height: unset;
-						}
 					}
 				}
 
 				.title {
+					overflow-wrap: anywhere;
+
 					@include mq(1023px) {
 						font-size: 1.2rem;
 					}
@@ -64,6 +71,7 @@
 			.icons {
 				display: flex;
 				align-items: center;
+				flex-wrap: wrap;
 				gap: 1rem;
 
 				.icon {

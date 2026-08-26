@@ -12,27 +12,24 @@ import {
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 
-import { opacity, left, right } from "../data/variants";
+import { left, right } from "../data/variants";
 import Contact from "./Contact";
 
-const About = ({ about }) => {
+const About = ({ about, isActive = true }) => {
+	const animationState = isActive ? "end" : "start";
+
 	return (
 		<div className="about">
-			<motion.h1
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="about-heading" className="title">
 				About
-			</motion.h1>
-			{about.map((item, key) => (
+			</h2>
+			{about.map((item, position) => (
 				<motion.div
 					className="mini-card"
-					key={key}
+					key={`${item.title}|${item.image}`}
 					initial="start"
-					animate="end"
-					variants={key % 2 === 0 ? left : right}
+					animate={animationState}
+					variants={position % 2 === 0 ? left : right}
 					transition={{
 						ease: "easeInOut",
 						duration: 0.2,
@@ -41,11 +38,11 @@ const About = ({ about }) => {
 						stiffness: 50,
 					}}
 				>
-					<h2 className="subtitle">{item.title}</h2>
+					<h3 className="subtitle">{item.title}</h3>
 					<div className="inner">
 						<Image
 							src={item.image}
-							alt="person"
+							alt={`Illustration for ${item.title}`}
 							className="tag"
 							width={160}
 							height={112}
@@ -59,7 +56,8 @@ const About = ({ about }) => {
 									href="https://bit.ly/TinoFacebook"
 									className="link"
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
+									aria-label="Tino Muzambi on Facebook"
 								>
 									<FaFacebook className="icon" />
 								</a>
@@ -67,7 +65,8 @@ const About = ({ about }) => {
 									href="https://bit.ly/TinoLinkedIn"
 									className="link"
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
+									aria-label="Tino Muzambi on LinkedIn"
 								>
 									<FaLinkedin className="icon" />
 								</a>
@@ -75,7 +74,8 @@ const About = ({ about }) => {
 									href="https://bit.ly/TinoTwitter"
 									className="link"
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
+									aria-label="Tino Muzambi on Twitter"
 								>
 									<FaTwitter className="icon" />
 								</a>
@@ -83,7 +83,8 @@ const About = ({ about }) => {
 									href="https://bit.ly/TinoInstagram"
 									className="link"
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
+									aria-label="Tino Muzambi on Instagram"
 								>
 									<FaInstagram className="icon" />
 								</a>
@@ -91,7 +92,8 @@ const About = ({ about }) => {
 									href="https://bit.ly/TinoYouTube"
 									className="link"
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
+									aria-label="Tino Muzambi on YouTube"
 								>
 									<FaYoutube className="icon" />
 								</a>
@@ -99,11 +101,16 @@ const About = ({ about }) => {
 									href="https://bit.ly/TinoGitHub"
 									className="link"
 									target="_blank"
-									rel="noreferrer"
+									rel="noopener noreferrer"
+									aria-label="Tino Muzambi on GitHub"
 								>
 									<FaGithub className="icon" />
 								</a>
-								<a href="mailto:tino@tinomuzambi.com" className="link">
+								<a
+									href="mailto:tino@tinomuzambi.com"
+									className="link"
+									aria-label="Email Tino Muzambi"
+								>
 									<FaMailBulk className="icon" />
 								</a>
 							</div>
@@ -112,7 +119,7 @@ const About = ({ about }) => {
 				</motion.div>
 			))}
 
-			<Contact />
+			<Contact isActive={isActive} />
 		</div>
 	);
 };
