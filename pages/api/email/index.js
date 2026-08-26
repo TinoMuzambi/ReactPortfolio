@@ -159,6 +159,21 @@ export const buildMailOptions = ({ email, name, message, subject }) => ({
 	),
 });
 
+export const getMailConfig = (env = process.env) => {
+	const password = env.GMAIL_APP_PASSWORD || env.GMAIL_PASS;
+
+	if (typeof password !== "string" || password.trim().length === 0) return null;
+
+	return {
+		user: env.GMAIL_USER || "tinomuzambi@gmail.com",
+		password: password.replace(/\s/g, ""),
+		to: env.CONTACT_EMAIL_TO || "tino@tinomuzambi.com",
+	};
+};
+
+const getDeliveryFailureStatus = (error) =>
+	error?.code === "EAUTH" || error?.responseCode === 535 ? 503 : 502;
+
 export const createEmailHandler = ({
 	createTransport = nodemailer.createTransport,
 	rateLimiter = createRateLimiter(),
@@ -166,6 +181,8 @@ export const createEmailHandler = ({
 	logger = console,
 } = {}) =>
 	async function emailHandler(req, res) {
+		res.setHeader("Cache-Control", "no-store");
+
 		if (req.method !== "POST") {
 			res.setHeader("Allow", "POST");
 			return res.status(405).json({ success: false, error: "Method not allowed." });
@@ -201,8 +218,11 @@ export const createEmailHandler = ({
 				.json({ success: false, error: "Invalid form submission." });
 		}
 
-		if (!env.GMAIL_PASS) {
-			logger.error("Contact email is not configured: GMAIL_PASS is missing.");
+		const mailConfig = getMailConfig(env);
+		if (!mailConfig) {
+			logger.error(
+				"Contact email is not configured: GMAIL_APP_PASSWORD or GMAIL_PASS is missing."
+			);
 			return res
 				.status(503)
 				.json({ success: false, error: "Message service is unavailable." });
@@ -220,19 +240,25 @@ export const createEmailHandler = ({
 			const transporter = createTransport({
 				service: "gmail",
 				auth: {
-					user: "tinomuzambi@gmail.com",
-					pass: env.GMAIL_PASS,
+					user: mailConfig.user,
+					pass: mailConfig.password,
 				},
 			});
-			await transporter.sendMail(buildMailOptions(submission));
+			await transporter.sendMail({
+				...buildMailOptions(submission),
+				from: mailConfig.user,
+				to: mailConfig.to,
+			});
 			return res.status(200).json({ success: true });
 		} catch (error) {
 			logger.error(
 				"Contact email delivery failed.",
-				error instanceof Error ? error.message : "Unknown error"
+				error && typeof error === "object"
+					? { code: error.code, responseCode: error.responseCode }
+					: { code: "UNKNOWN" }
 			);
 			return res
-				.status(502)
+				.status(getDeliveryFailureStatus(error))
 				.json({ success: false, error: "Message could not be delivered." });
 		}
 	};

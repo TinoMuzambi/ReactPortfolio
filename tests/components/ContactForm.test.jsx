@@ -81,6 +81,21 @@ describe("ContactForm", () => {
 		);
 	});
 
+	it("offers the direct email address when delivery is unavailable", async () => {
+		vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 503 }));
+		render(<ContactForm />);
+		fillForm();
+
+		fireEvent.click(screen.getByDisplayValue("Send"));
+
+		const feedback = await screen.findByText(/tino@tinomuzambi\.com/);
+		expect(feedback).toHaveTextContent("temporarily unavailable");
+		expect(feedback).toHaveClass("form-status--error");
+		expect(screen.getByLabelText("Message:")).toHaveValue(
+			"Can we work together?"
+		);
+	});
+
 	it("prevents duplicate submissions while the first request is pending", async () => {
 		let resolveRequest;
 		const fetchMock = vi.fn(

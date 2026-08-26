@@ -48,13 +48,16 @@ vercel env pull .env.local --environment=development
 | --- | --- | --- |
 | `REACT_APP_STORYBLOK_KEY` | `utils/fetch.js` | Portfolio project content |
 | `REACT_APP_STORYBLOK_KEY2` | `utils/fetch.js` | About, education, experience, and tools content |
-| `GMAIL_PASS` | `pages/api/email/index.js` | Contact-form email delivery |
+| `GMAIL_APP_PASSWORD` | `pages/api/email/index.js` | Contact-form email delivery (preferred; store as a sensitive value) |
+| `GMAIL_PASS` | `pages/api/email/index.js` | Backward-compatible Gmail app-password fallback |
+| `GMAIL_USER` | `pages/api/email/index.js` | Optional authenticated sender override |
+| `CONTACT_EMAIL_TO` | `pages/api/email/index.js` | Optional contact recipient override |
 
 Despite their historical `REACT_APP_` names, the Storyblok tokens are consumed during server-side static generation. Server credentials are read directly from `process.env`; they are not exposed through `next.config.js`.
 
 CI sets `CMS_USE_FIXTURES=true` only for its deterministic production-build check. Normal development, preview, production, and ISR builds fail fast when credentials, collection responses, or required fields are malformed, which preserves the last successful render instead of caching invalid data. A valid empty Storyblok folder renders an empty section instead of blocking a cold deployment. Do not configure the fixture flag in Vercel.
 
-The contact endpoint configures a 16 KiB parser limit, defensively checks declared body sizes, validates and escapes submissions, uses a honeypot, and applies a bounded best-effort rate limit to delivery attempts. On Vercel, the limiter uses the platform-owned forwarded address; self-hosted development uses the socket address instead of trusting caller-supplied proxy headers. The limiter protects each warm serverless instance; use shared edge or datastore-backed rate limiting if globally durable abuse protection becomes necessary.
+The contact endpoint configures a 16 KiB parser limit, defensively checks declared body sizes, validates and escapes submissions, uses a honeypot, and applies a bounded best-effort rate limit to delivery attempts. Gmail authentication must use an app password, not the account password; whitespace copied from Google's grouped app-password display is removed before authentication. On Vercel, the limiter uses the platform-owned forwarded address; self-hosted development uses the socket address instead of trusting caller-supplied proxy headers. The limiter protects each warm serverless instance; use shared edge or datastore-backed rate limiting if globally durable abuse protection becomes necessary.
 
 ## Project structure
 

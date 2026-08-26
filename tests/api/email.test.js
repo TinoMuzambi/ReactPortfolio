@@ -8,6 +8,7 @@ import {
 	createRateLimiter,
 	escapeHtml,
 	getClientKey,
+	getMailConfig,
 	validateContactSubmission,
 } from "../../pages/api/email";
 
@@ -74,6 +75,22 @@ describe("contact submission validation", () => {
 		).toEqual({ ...validBody, website: "" });
 	});
 
+	it("normalizes copied Gmail app passwords and supports mail overrides", () => {
+		expect(
+			getMailConfig({
+				GMAIL_APP_PASSWORD: "abcd efgh\tijkl mnop",
+				GMAIL_PASS: "legacy-password",
+				GMAIL_USER: "sender@example.com",
+				CONTACT_EMAIL_TO: "recipient@example.com",
+			})
+		).toEqual({
+			user: "sender@example.com",
+			password: "abcdefghijklmnop",
+			to: "recipient@example.com",
+		});
+		expect(getMailConfig({})).toBeNull();
+	});
+
 	it.each([
 		[null, "non-object body"],
 		[{ ...validBody, name: 42 }, "non-string field"],
@@ -121,6 +138,7 @@ describe("email API handler", () => {
 
 		expect(response.statusCode).toBe(405);
 		expect(response.headers.Allow).toBe("POST");
+		expect(response.headers["Cache-Control"]).toBe("no-store");
 		expect(createTransport).not.toHaveBeenCalled();
 	});
 
@@ -219,6 +237,29 @@ describe("email API handler", () => {
 		expect(JSON.stringify(response.body)).not.toContain("SMTP secret detail");
 		expect(JSON.stringify(response.body)).not.toContain("app-password");
 		expect(logger.error).toHaveBeenCalled();
+	});
+
+	it("reports rejected Gmail credentials as an unavailable service", async () => {
+		const authError = Object.assign(new Error("provider detail"), {
+			code: "EAUTH",
+			responseCode: 535,
+		});
+		const sendMail = vi.fn().mockRejectedValue(authError);
+		const createTransport = vi.fn(() => ({ sendMail }));
+		const { handler, logger } = createHandler({ createTransport });
+		const response = createResponse();
+
+		await handler(createRequest(), response);
+
+		expect(response.statusCode).toBe(503);
+		expect(response.body).toEqual({
+			success: false,
+			error: "Message could not be delivered.",
+		});
+		expect(logger.error).toHaveBeenCalledWith(
+			"Contact email delivery failed.",
+			{ code: "EAUTH", responseCode: 535 }
+		);
 	});
 
 	it("reports an unavailable service when the server secret is absent", async () => {

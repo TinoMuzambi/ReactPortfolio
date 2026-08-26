@@ -52,7 +52,11 @@ const ContactForm = () => {
 				signal: controller.signal,
 			});
 
-			if (!response.ok) throw new Error("Contact request failed");
+			if (!response.ok) {
+				const error = new Error("Contact request failed");
+				error.status = response.status;
+				throw error;
+			}
 
 			setName("");
 			setEmail("");
@@ -60,12 +64,15 @@ const ContactForm = () => {
 			setMessage("");
 			setWebsite("");
 			setStatus({ type: "success", message: "Message sent successfully." });
-		} catch {
+		} catch (error) {
+			const serviceUnavailable = error?.status === 503;
 			setStatus({
 				type: "error",
 				message: controller.signal.aborted
 					? "Sending timed out. Your message was kept; please try again."
-					: "Something went wrong. Your message was kept; please try again.",
+					: serviceUnavailable
+						? "Email delivery is temporarily unavailable. Your message was kept; please email tino@tinomuzambi.com or try again."
+						: "Something went wrong. Your message was kept; please try again.",
 			});
 		} finally {
 			clearTimeout(timeoutId);
