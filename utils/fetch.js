@@ -121,9 +121,6 @@ const readStories = (response, collection) => {
 	if (!Array.isArray(stories)) {
 		throw new TypeError(`${collection} response is missing data.stories`);
 	}
-	if (stories.length === 0) {
-		throw new TypeError(`${collection} returned no stories`);
-	}
 	return stories;
 };
 

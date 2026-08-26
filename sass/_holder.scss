@@ -50,15 +50,35 @@
 				justify-content: space-evenly;
 				height: 9rem;
 
+				@include mq(1100px) {
+					flex-direction: column;
+					gap: 0.25rem;
+				}
+
 				@include mq(768px) {
 					flex-direction: column;
 				}
 
 				.profile-img {
 					border-radius: 50%;
+
+					@include mq(1100px) {
+						height: 4rem;
+						width: 4rem;
+					}
 				}
 
 				.title {
+					font-size: 1.5rem;
+
+					@include mq(1300px) {
+						font-size: 1.25rem;
+					}
+
+					@include mq(1100px) {
+						font-size: 1rem;
+					}
+
 					@include mq(768px) {
 						font-size: 0.9rem;
 					}
@@ -66,6 +86,10 @@
 
 				.subtitle {
 					font-family: $secondary-font;
+
+					@include mq(1100px) {
+						font-size: 0.75rem;
+					}
 
 					@include mq(768px) {
 						font-size: 0.8rem;

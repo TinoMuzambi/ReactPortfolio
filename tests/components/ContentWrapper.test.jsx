@@ -131,6 +131,21 @@ describe("ContentWrapper", () => {
 		);
 	});
 
+	it("uses clean literal intro copy without formatting whitespace", () => {
+		const { container } = render(<ContentWrapper data={{}} />);
+
+		expect(
+			[...container.querySelectorAll("textPath")].map(
+				(element) => element.textContent
+			)
+		).toEqual([
+			"Hi, I'm Tino Muzambi.\u00a0",
+			"Full-Stack Web Developer and Lover of Tech.\u00a0",
+			"Welcome to my portfolio site.\u00a0",
+			"Built with Next.js, styled with Sass.\u00a0",
+		]);
+	});
+
 	it("matches the production exit before handing focus to content", async () => {
 		render(<ContentWrapper data={{}} />);
 

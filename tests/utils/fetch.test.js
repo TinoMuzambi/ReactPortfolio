@@ -123,20 +123,23 @@ describe("Storyblok collection loading", () => {
 		});
 	});
 
-	it("fails loudly when Storyblok returns an empty or malformed response", async () => {
+	it("allows an intentionally empty Storyblok collection", async () => {
 		const emptyClient = {
 			get: vi.fn().mockResolvedValue({ data: { stories: [] } }),
 		};
+		const normalize = vi.fn();
+
 		await expect(
 			loadCollection({
 				client: emptyClient,
 				collection: "projects",
-				normalize: normalizeProject,
+				normalize,
 			})
-		).rejects.toThrow(
-			"Unable to load projects from Storyblok: projects returned no stories"
-		);
+		).resolves.toEqual([]);
+		expect(normalize).not.toHaveBeenCalled();
+	});
 
+	it("fails loudly when Storyblok returns a malformed response", async () => {
 		const malformedClient = { get: vi.fn().mockResolvedValue({ data: {} }) };
 		await expect(
 			loadCollection({

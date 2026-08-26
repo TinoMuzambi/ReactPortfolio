@@ -230,6 +230,22 @@ describe("Holder", () => {
 		expect(container.querySelector("#tools")).not.toHaveClass("active");
 	});
 
+	it("preserves the restored panel when the skip link targets content", async () => {
+		window.localStorage.setItem("tino-last-viewed", "tools");
+		const { container } = render(<Holder data={data} />);
+		await waitFor(() =>
+			expect(container.querySelector("#tools")).toHaveClass("active")
+		);
+
+		window.history.replaceState({}, "", "/#portfolio-content");
+		window.dispatchEvent(new HashChangeEvent("hashchange"));
+
+		await waitFor(() =>
+			expect(container.querySelector("#tools")).toHaveClass("active")
+		);
+		expect(container.querySelector("#about")).not.toHaveClass("active");
+	});
+
 	it("falls back to About when the localStorage getter is blocked", () => {
 		const storageDescriptor = Object.getOwnPropertyDescriptor(
 			window,

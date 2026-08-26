@@ -309,22 +309,22 @@ const ContentWrapper = ({ data }) => {
 							</defs>
 							<text className="circles__text circles__text--1">
 								<textPath href="#circle-1" textLength="2830">
-									{"Hi, I'm Tino Muzambi.\u00a0 \t\t\t"}
+									{"Hi, I'm Tino Muzambi.\u00a0"}
 								</textPath>
 							</text>
 							<text className="circles__text circles__text--2">
 								<textPath href="#circle-2" textLength="2001">
-									Full-Stack Web Developer and Lover of Tech.&nbsp;
+									{"Full-Stack Web Developer and Lover of Tech.\u00a0"}
 								</textPath>
 							</text>
 							<text className="circles__text circles__text--3">
 								<textPath href="#circle-3" textLength="1341">
-									Welcome to my portfolio site .&nbsp;
+									{"Welcome to my portfolio site.\u00a0"}
 								</textPath>
 							</text>
 							<text className="circles__text circles__text--4">
 								<textPath href="#circle-4" textLength="836">
-									Built with Next.js, styled with Sass.&nbsp;
+									{"Built with Next.js, styled with Sass.\u00a0"}
 								</textPath>
 							</text>
 						</svg>

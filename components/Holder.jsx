@@ -98,9 +98,15 @@ const Holder = ({ data }) => {
 			const rawHashView = window.location.hash.slice(1).toLowerCase();
 			const hashView = normalizeViewId(rawHashView);
 
-			if (isSupportedView(hashView)) setView(hashView);
-			else if (useStoredFallback && !rawHashView) setView(getBrowserStoredView());
-			else setView("about");
+			if (isSupportedView(hashView)) {
+				setView(hashView);
+			} else if (rawHashView === "portfolio-content") {
+				if (useStoredFallback) setView(getBrowserStoredView());
+			} else if (useStoredFallback && !rawHashView) {
+				setView(getBrowserStoredView());
+			} else {
+				setView("about");
+			}
 		};
 
 		const handleHashChange = () => syncView();
