@@ -224,10 +224,7 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="education-heading"
 					>
-						<Education
-							education={data.education || []}
-							isActive={currentView === "education"}
-						/>
+						<Education education={data.education || []} />
 					</section>
 					<section
 						id="experience"
@@ -236,10 +233,7 @@ const Holder = ({ data }) => {
 						}`}
 						aria-labelledby="experience-heading"
 					>
-						<Experience
-							experience={data.experience || []}
-							isActive={currentView === "experience"}
-						/>
+						<Experience experience={data.experience || []} />
 					</section>
 					<section
 						id="portfolio"

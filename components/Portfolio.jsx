@@ -4,7 +4,7 @@ import { FaReact, FaPython, FaHtml5, FaCss3Alt, FaAws } from "react-icons/fa";
 import { SiJavascript, SiTypescript } from "react-icons/si";
 import { motion } from "framer-motion";
 
-import { opacity, left, right } from "../data/variants";
+import { left, right } from "../data/variants";
 
 export const getProjectKey = (project, position = 0) => {
 	const identity = [
@@ -27,16 +27,9 @@ const Portfolio = ({ projects, isActive = true }) => {
 
 	return (
 		<div className="portfolio">
-			<motion.h2
-				key={isActive ? "portfolio-active" : "portfolio-inactive"}
-				id="portfolio-heading"
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="portfolio-heading" className="title">
 				Portfolio
-			</motion.h2>
+			</h2>
 
 			<div className="cards">
 				{featuredProjects.map((project, position) => {

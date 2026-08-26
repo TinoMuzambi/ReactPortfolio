@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import parse from "html-react-parser";
 
-import { opacity, left, right } from "../data/variants";
+import { left, right } from "../data/variants";
 import Contact from "./Contact";
 
 const About = ({ about, isActive = true }) => {
@@ -20,16 +20,9 @@ const About = ({ about, isActive = true }) => {
 
 	return (
 		<div className="about">
-			<motion.h2
-				key={isActive ? "about-active" : "about-inactive"}
-				id="about-heading"
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="about-heading" className="title">
 				About
-			</motion.h2>
+			</h2>
 			{about.map((item, position) => (
 				<motion.div
 					className="mini-card"

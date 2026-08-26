@@ -203,9 +203,17 @@
 			display: none;
 			scroll-margin-top: 1rem;
 
+			> div > .title {
+				opacity: 1;
+			}
+
 			&.active,
 			&:target {
 				display: block;
+
+				> div > .title {
+					animation: panel-heading-enter 0.3s ease-out both;
+				}
 			}
 		}
 
@@ -224,6 +232,17 @@
 			bottom: 0.1rem;
 			width: inherit;
 		}
+	}
+}
+
+@keyframes panel-heading-enter {
+	from {
+		opacity: 0;
+		transform: translateY(0.75rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
 

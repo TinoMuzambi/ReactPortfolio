@@ -250,26 +250,27 @@ describe("Holder", () => {
 		}
 	});
 
-	it("replays panel motion when a section becomes active", () => {
+	it("switches the active panel without remounting its heading content", () => {
 		render(<Holder data={data} />);
 		const initialAboutHeading = document.getElementById("about-heading");
 		const initialPortfolioHeading = document.getElementById("portfolio-heading");
 
-		expect(initialAboutHeading).toHaveAttribute("data-animation-state", "end");
-		expect(initialPortfolioHeading).toHaveAttribute(
-			"data-animation-state",
-			"end"
+		expect(initialAboutHeading.closest(".content-panel")).toHaveClass("active");
+		expect(initialPortfolioHeading.closest(".content-panel")).not.toHaveClass(
+			"active"
 		);
 
 		fireEvent.click(screen.getByRole("link", { name: "Portfolio" }));
-		const replayedAboutHeading = document.getElementById("about-heading");
-		const replayedPortfolioHeading = document.getElementById("portfolio-heading");
 
-		expect(replayedAboutHeading).not.toBe(initialAboutHeading);
-		expect(replayedPortfolioHeading).not.toBe(initialPortfolioHeading);
-		expect(replayedPortfolioHeading).toHaveAttribute(
-			"data-animation-state",
-			"end"
+		expect(document.getElementById("about-heading")).toBe(initialAboutHeading);
+		expect(document.getElementById("portfolio-heading")).toBe(
+			initialPortfolioHeading
+		);
+		expect(initialAboutHeading.closest(".content-panel")).not.toHaveClass(
+			"active"
+		);
+		expect(initialPortfolioHeading.closest(".content-panel")).toHaveClass(
+			"active"
 		);
 	});
 

@@ -2,23 +2,16 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import { up, down, opacity } from "../data/variants";
+import { up, down } from "../data/variants";
 
 const Tools = ({ tools, isActive = true }) => {
 	const animationState = isActive ? "end" : "start";
 
 	return (
 		<div className="tools">
-			<motion.h2
-				key={isActive ? "tools-active" : "tools-inactive"}
-				id="tools-heading"
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="tools-heading" className="title">
 				Tools and Technologies
-			</motion.h2>
+			</h2>
 			<div className="main-content">
 				{tools.map((tool, position) =>
 					tool.link ? (

@@ -5,23 +5,13 @@ import {
 	VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { motion } from "framer-motion";
 
-import { opacity } from "../data/variants";
-
-const Experience = ({ experience, isActive = true }) => {
+const Experience = ({ experience }) => {
 	return (
 		<div className="experience">
-			<motion.h2
-				key={isActive ? "experience-active" : "experience-inactive"}
-				id="experience-heading"
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="experience-heading" className="title">
 				Experience
-			</motion.h2>
+			</h2>
 
 			<VerticalTimeline className="timeline">
 				{experience.map((item) => (

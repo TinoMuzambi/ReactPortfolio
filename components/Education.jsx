@@ -5,23 +5,13 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { FaUniversity } from "react-icons/fa";
-import { motion } from "framer-motion";
 
-import { opacity } from "../data/variants";
-
-const Education = ({ education, isActive = true }) => {
+const Education = ({ education }) => {
 	return (
 		<div className="education">
-			<motion.h2
-				key={isActive ? "education-active" : "education-inactive"}
-				id="education-heading"
-				className="title"
-				initial="start"
-				animate="end"
-				variants={opacity}
-			>
+			<h2 id="education-heading" className="title">
 				Education
-			</motion.h2>
+			</h2>
 
 			<VerticalTimeline className="timeline">
 				{education.map((item) => (
