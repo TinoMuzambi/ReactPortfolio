@@ -17,10 +17,32 @@ type FormStatus = {
 };
 
 class ContactRequestError extends Error {
-	constructor(readonly status: number) {
+	constructor(
+		readonly status: number,
+		readonly contactEmail: string
+	) {
 		super("Contact request failed");
 	}
 }
+
+const readContactEmail = async (response: Response): Promise<string> => {
+	if (typeof response.json !== "function") return "";
+
+	try {
+		const body: unknown = await response.json();
+		const contactEmail =
+			body && typeof body === "object" && "contactEmail" in body
+				? body.contactEmail
+				: undefined;
+		const normalizedEmail =
+			typeof contactEmail === "string" ? contactEmail.trim() : "";
+		return /^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+			? normalizedEmail
+			: "";
+	} catch {
+		return "";
+	}
+};
 
 const ContactForm = () => {
 	const [name, setName] = useState("");
@@ -68,7 +90,10 @@ const ContactForm = () => {
 			});
 
 			if (!response.ok) {
-				throw new ContactRequestError(response.status);
+				throw new ContactRequestError(
+					response.status,
+					await readContactEmail(response)
+				);
 			}
 
 			setName("");
@@ -80,12 +105,17 @@ const ContactForm = () => {
 		} catch (error) {
 			const serviceUnavailable =
 				error instanceof ContactRequestError && error.status === 503;
+			const contactEmail =
+				error instanceof ContactRequestError ? error.contactEmail : "";
+			const unavailableAdvice = contactEmail
+				? `please email ${contactEmail} or try again.`
+				: "please try again.";
 			setStatus({
 				type: "error",
 				message: controller.signal.aborted
 					? "Sending timed out. Your message was kept; please try again."
 					: serviceUnavailable
-						? "Email delivery is temporarily unavailable. Your message was kept; please email tino@tinomuzambi.com or try again."
+						? `Email delivery is temporarily unavailable. Your message was kept; ${unavailableAdvice}`
 						: "Something went wrong. Your message was kept; please try again.",
 			});
 		} finally {

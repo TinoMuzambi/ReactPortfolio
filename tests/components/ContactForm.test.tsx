@@ -82,18 +82,49 @@ describe("ContactForm", () => {
 	});
 
 	it("offers the direct email address when delivery is unavailable", async () => {
-		vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, status: 503 }));
+		vi.stubGlobal(
+			"fetch",
+			vi.fn().mockResolvedValue({
+				ok: false,
+				status: 503,
+				json: vi.fn().mockResolvedValue({
+					contactEmail: "fallback@example.com",
+				}),
+			})
+		);
 		render(<ContactForm />);
 		fillForm();
 
 		fireEvent.click(screen.getByDisplayValue("Send"));
 
-		const feedback = await screen.findByText(/tino@tinomuzambi\.com/);
+		const feedback = await screen.findByText(/fallback@example\.com/);
 		expect(feedback).toHaveTextContent("temporarily unavailable");
+		expect(feedback).not.toHaveTextContent("tino@tinomuzambi.com");
 		expect(feedback).toHaveClass("form-status--error");
 		expect(screen.getByLabelText("Message:")).toHaveValue(
 			"Can we work together?"
 		);
+	});
+
+	it("does not trust an invalid fallback address from an error response", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn().mockResolvedValue({
+				ok: false,
+				status: 503,
+				json: vi.fn().mockResolvedValue({ contactEmail: "not-an-email" }),
+			})
+		);
+		render(<ContactForm />);
+		fillForm();
+
+		fireEvent.click(screen.getByDisplayValue("Send"));
+
+		const feedback = await screen.findByText(/temporarily unavailable/);
+		expect(feedback).toHaveTextContent(
+			"Your message was kept; please try again."
+		);
+		expect(feedback).not.toHaveTextContent("not-an-email");
 	});
 
 	it("prevents duplicate submissions while the first request is pending", async () => {
