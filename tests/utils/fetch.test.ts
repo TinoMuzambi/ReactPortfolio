@@ -212,7 +212,53 @@ describe("portfolio data loading", () => {
 
 	it("starts all five collection requests concurrently and preserves the data shape", async () => {
 		const calls: string[] = [];
-		const fixtures = createCmsFixtures();
+		const loaderResults = {
+			projects: [
+				{
+					name: "projects-loader",
+					shortname: "projects-loader",
+					title: "Projects loader",
+					content: ["projects-loader-result"],
+					link: "https://example.com/project",
+					github: "https://github.com/example/project",
+					keywords: ["typescript"],
+					image: "/projects-loader.png",
+					featured: false,
+				},
+			],
+			about: [
+				{
+					title: "About loader",
+					image: "/about-loader.png",
+					text: "about-loader-result",
+				},
+			],
+			education: [
+				{
+					title: "Education loader",
+					institution: "education-loader",
+					period: "2026",
+					description: "education-loader-result",
+				},
+			],
+			experience: [
+				{
+					title: "Experience loader",
+					institution: "experience-loader",
+					period: "2026",
+					description: "experience-loader-result",
+					icon: "/experience-loader.png",
+				},
+			],
+			tools: [
+				{
+					id: "tools-loader",
+					title: "Tools loader",
+					icon: "/tools-loader.png",
+					link: "https://example.com/tool",
+				},
+			],
+		} satisfies PortfolioData;
 		const deferredLoader = <T,>(name: string) => {
 			let resolve!: (value: T[]) => void;
 			const promise = new Promise<T[]>((promiseResolve) => {
@@ -254,13 +300,13 @@ describe("portfolio data loading", () => {
 
 		const loading = getPortfolioData(loaders);
 		expect(calls).toEqual(collectionNames);
-		projects.resolve(fixtures.projects);
-		about.resolve(fixtures.about);
-		education.resolve(fixtures.education);
-		experience.resolve(fixtures.experience);
-		tools.resolve(fixtures.tools);
+		projects.resolve(loaderResults.projects);
+		about.resolve(loaderResults.about);
+		education.resolve(loaderResults.education);
+		experience.resolve(loaderResults.experience);
+		tools.resolve(loaderResults.tools);
 
-		await expect(loading).resolves.toEqual(fixtures);
+		await expect(loading).resolves.toEqual(loaderResults);
 	});
 
 	it("propagates a collection failure instead of returning partial props", async () => {
