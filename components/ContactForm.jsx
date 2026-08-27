@@ -10,6 +10,21 @@ const HONEYPOT_STYLE = {
 	overflow: "hidden",
 };
 
+const readContactEmail = async (response) => {
+	if (typeof response.json !== "function") return "";
+
+	try {
+		const body = await response.json();
+		const contactEmail = body?.contactEmail?.trim();
+		return typeof contactEmail === "string" &&
+			/^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)
+			? contactEmail
+			: "";
+	} catch {
+		return "";
+	}
+};
+
 const ContactForm = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -55,6 +70,7 @@ const ContactForm = () => {
 			if (!response.ok) {
 				const error = new Error("Contact request failed");
 				error.status = response.status;
+				error.contactEmail = await readContactEmail(response);
 				throw error;
 			}
 
@@ -66,12 +82,15 @@ const ContactForm = () => {
 			setStatus({ type: "success", message: "Message sent successfully." });
 		} catch (error) {
 			const serviceUnavailable = error?.status === 503;
+			const unavailableAdvice = error?.contactEmail
+				? `please email ${error.contactEmail} or try again.`
+				: "please try again.";
 			setStatus({
 				type: "error",
 				message: controller.signal.aborted
 					? "Sending timed out. Your message was kept; please try again."
 					: serviceUnavailable
-						? "Email delivery is temporarily unavailable. Your message was kept; please email tino@tinomuzambi.com or try again."
+						? `Email delivery is temporarily unavailable. Your message was kept; ${unavailableAdvice}`
 						: "Something went wrong. Your message was kept; please try again.",
 			});
 		} finally {

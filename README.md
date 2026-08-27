@@ -51,7 +51,7 @@ vercel env pull .env.local --environment=development
 | `GMAIL_APP_PASSWORD` | `pages/api/email/index.js` | Contact-form email delivery (preferred; store as a sensitive value) |
 | `GMAIL_PASS` | `pages/api/email/index.js` | Backward-compatible Gmail app-password fallback |
 | `GMAIL_USER` | `pages/api/email/index.js` | Optional authenticated sender override |
-| `CONTACT_EMAIL_TO` | `pages/api/email/index.js` | Optional contact recipient override |
+| `CONTACT_EMAIL_TO` | `pages/api/email/index.js` | Optional delivery recipient and direct-email fallback returned during a 503 response |
 
 Despite their historical `REACT_APP_` names, the Storyblok tokens are consumed during server-side static generation. Server credentials are read directly from `process.env`; they are not exposed through `next.config.js`.
 

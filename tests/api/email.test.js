@@ -2,12 +2,14 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
 	CONTACT_LIMITS,
+	DEFAULT_CONTACT_EMAIL,
 	buildMailOptions,
 	config,
 	createEmailHandler,
 	createRateLimiter,
 	escapeHtml,
 	getClientKey,
+	getFallbackContactEmail,
 	getMailConfig,
 	validateContactSubmission,
 } from "../../pages/api/email";
@@ -80,8 +82,8 @@ describe("contact submission validation", () => {
 			getMailConfig({
 				GMAIL_APP_PASSWORD: "abcd efgh\tijkl mnop",
 				GMAIL_PASS: "legacy-password",
-				GMAIL_USER: "sender@example.com",
-				CONTACT_EMAIL_TO: "recipient@example.com",
+				GMAIL_USER: "  sender@example.com  ",
+				CONTACT_EMAIL_TO: "  recipient@example.com  ",
 			})
 		).toEqual({
 			user: "sender@example.com",
@@ -89,6 +91,39 @@ describe("contact submission validation", () => {
 			to: "recipient@example.com",
 		});
 		expect(getMailConfig({})).toBeNull();
+	});
+
+	it("falls back to a legacy password when the preferred value is blank", () => {
+		expect(
+			getMailConfig({
+				GMAIL_APP_PASSWORD: " \t ",
+				GMAIL_PASS: "legacy password",
+				GMAIL_USER: "   ",
+				CONTACT_EMAIL_TO: "   ",
+			})
+		).toEqual({
+			user: "tinomuzambi@gmail.com",
+			password: "legacypassword",
+			to: DEFAULT_CONTACT_EMAIL,
+		});
+	});
+
+	it("rejects invalid configured addresses and exposes only a valid fallback", () => {
+		expect(
+			getMailConfig({ GMAIL_PASS: "app-password", GMAIL_USER: "not-an-email" })
+		).toBeNull();
+		expect(
+			getMailConfig({
+				GMAIL_PASS: "app-password",
+				CONTACT_EMAIL_TO: "not-an-email",
+			})
+		).toBeNull();
+		expect(getFallbackContactEmail({ CONTACT_EMAIL_TO: "not-an-email" })).toBe(
+			DEFAULT_CONTACT_EMAIL
+		);
+		expect(
+			getFallbackContactEmail({ CONTACT_EMAIL_TO: "  fallback@example.com  " })
+		).toBe("fallback@example.com");
 	});
 
 	it.each([
@@ -225,8 +260,10 @@ describe("email API handler", () => {
 		);
 	});
 
-	it("does not expose mail errors or secrets to the client", async () => {
-		const sendMail = vi.fn().mockRejectedValue(new Error("SMTP secret detail"));
+	it("logs a redacted diagnostic without exposing errors or secrets to the client", async () => {
+		const sendMail = vi
+			.fn()
+			.mockRejectedValue(new Error("SMTP secret detail app-password"));
 		const createTransport = vi.fn(() => ({ sendMail }));
 		const { handler, logger } = createHandler({ createTransport });
 		const response = createResponse();
@@ -236,7 +273,14 @@ describe("email API handler", () => {
 		expect(response.statusCode).toBe(502);
 		expect(JSON.stringify(response.body)).not.toContain("SMTP secret detail");
 		expect(JSON.stringify(response.body)).not.toContain("app-password");
-		expect(logger.error).toHaveBeenCalled();
+		expect(logger.error).toHaveBeenCalledWith(
+			"Contact email delivery failed.",
+			{
+				code: "UNKNOWN",
+				responseCode: null,
+				message: "SMTP secret detail [REDACTED]",
+			}
+		);
 	});
 
 	it("reports rejected Gmail credentials as an unavailable service", async () => {
@@ -246,7 +290,13 @@ describe("email API handler", () => {
 		});
 		const sendMail = vi.fn().mockRejectedValue(authError);
 		const createTransport = vi.fn(() => ({ sendMail }));
-		const { handler, logger } = createHandler({ createTransport });
+		const { handler, logger } = createHandler({
+			createTransport,
+			env: {
+				GMAIL_PASS: "app-password",
+				CONTACT_EMAIL_TO: "fallback@example.com",
+			},
+		});
 		const response = createResponse();
 
 		await handler(createRequest(), response);
@@ -255,10 +305,11 @@ describe("email API handler", () => {
 		expect(response.body).toEqual({
 			success: false,
 			error: "Message could not be delivered.",
+			contactEmail: "fallback@example.com",
 		});
 		expect(logger.error).toHaveBeenCalledWith(
 			"Contact email delivery failed.",
-			{ code: "EAUTH", responseCode: 535 }
+			{ code: "EAUTH", responseCode: 535, message: "provider detail" }
 		);
 	});
 
@@ -270,6 +321,11 @@ describe("email API handler", () => {
 		await handler(createRequest(), response);
 
 		expect(response.statusCode).toBe(503);
+		expect(response.body).toEqual({
+			success: false,
+			error: "Message service is unavailable.",
+			contactEmail: DEFAULT_CONTACT_EMAIL,
+		});
 		expect(createTransport).not.toHaveBeenCalled();
 		expect(rateLimiter.consume).not.toHaveBeenCalled();
 	});
