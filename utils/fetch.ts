@@ -1,19 +1,39 @@
 import StoryblokClient from "storyblok-js-client";
+import type { ISbConfig, ISbStoriesParams } from "storyblok-js-client";
 
-const CLIENT_OPTIONS = {
+import type {
+	AboutItem,
+	ExperienceItem,
+	PortfolioData,
+	Project,
+	TimelineItem,
+	Tool,
+} from "../types/portfolio";
+
+const CLIENT_OPTIONS: Pick<ISbConfig, "cache"> = {
 	cache: {
 		clear: "auto",
 		type: "memory",
 	},
 };
 
-const isRecord = (value) =>
+type UnknownRecord = Record<string, unknown>;
+
+interface StoryblokClientLike {
+	get(path: string, params: ISbStoriesParams): Promise<unknown>;
+}
+
+type StoryblokClientConstructor = new (config: ISbConfig) => StoryblokClientLike;
+
+const isRecord = (value: unknown): value is UnknownRecord =>
 	Boolean(value) && typeof value === "object" && !Array.isArray(value);
 
-const storyContext = (collection, story, index) =>
-	`${collection}[${story?.full_slug || story?.name || index}]`;
+const storyContext = (collection: string, story: unknown, index: number) => {
+	const identity = isRecord(story) && (story.full_slug || story.name);
+	return `${collection}[${typeof identity === "string" ? identity : index}]`;
+};
 
-const getContent = (story, context) => {
+const getContent = (story: unknown, context: string): UnknownRecord => {
 	if (!isRecord(story)) throw new TypeError(`${context} must be an object`);
 	if (!isRecord(story.content)) {
 		throw new TypeError(`${context}.content must be an object`);
@@ -21,7 +41,11 @@ const getContent = (story, context) => {
 	return story.content;
 };
 
-const requiredString = (content, field, context) => {
+const requiredString = (
+	content: UnknownRecord,
+	field: string,
+	context: string
+): string => {
 	const value = content[field];
 	if (typeof value !== "string" || value.trim().length === 0) {
 		throw new TypeError(`${context}.content.${field} must be a non-empty string`);
@@ -29,7 +53,11 @@ const requiredString = (content, field, context) => {
 	return value;
 };
 
-const optionalString = (content, field, context) => {
+const optionalString = (
+	content: UnknownRecord,
+	field: string,
+	context: string
+): string | null => {
 	const value = content[field];
 	if (value === undefined || value === null || value === "") return null;
 	if (typeof value !== "string") {
@@ -38,7 +66,7 @@ const optionalString = (content, field, context) => {
 	return value;
 };
 
-export const normalizeProject = (story, index = 0) => {
+export const normalizeProject = (story: unknown, index = 0): Project => {
 	const context = storyContext("projects", story, index);
 	const content = getContent(story, context);
 	const featured = content.featured ?? false;
@@ -60,7 +88,7 @@ export const normalizeProject = (story, index = 0) => {
 	};
 };
 
-export const normalizeAbout = (story, index = 0) => {
+export const normalizeAbout = (story: unknown, index = 0): AboutItem => {
 	const context = storyContext("about", story, index);
 	const content = getContent(story, context);
 
@@ -71,7 +99,7 @@ export const normalizeAbout = (story, index = 0) => {
 	};
 };
 
-export const normalizeEducation = (story, index = 0) => {
+export const normalizeEducation = (story: unknown, index = 0): TimelineItem => {
 	const context = storyContext("education", story, index);
 	const content = getContent(story, context);
 
@@ -83,7 +111,7 @@ export const normalizeEducation = (story, index = 0) => {
 	};
 };
 
-export const normalizeExperience = (story, index = 0) => {
+export const normalizeExperience = (story: unknown, index = 0): ExperienceItem => {
 	const context = storyContext("experience", story, index);
 	const content = getContent(story, context);
 
@@ -96,7 +124,7 @@ export const normalizeExperience = (story, index = 0) => {
 	};
 };
 
-export const normalizeTool = (story, index = 0) => {
+export const normalizeTool = (story: unknown, index = 0): Tool => {
 	const context = storyContext("tools", story, index);
 	const content = getContent(story, context);
 	const id = content.id;
@@ -116,26 +144,34 @@ export const normalizeTool = (story, index = 0) => {
 	};
 };
 
-const readStories = (response, collection) => {
-	const stories = response?.data?.stories;
+const readStories = (response: unknown, collection: string): unknown[] => {
+	const stories =
+		isRecord(response) && isRecord(response.data) ? response.data.stories : undefined;
 	if (!Array.isArray(stories)) {
 		throw new TypeError(`${collection} response is missing data.stories`);
 	}
 	return stories;
 };
 
-const errorMessage = (error) => {
+const errorMessage = (error: unknown): string => {
 	if (error instanceof Error) return error.message;
 	if (typeof error === "string") return error;
 	return "Unknown Storyblok error";
 };
 
-export const loadCollection = async ({
+interface LoadCollectionOptions<T> {
+	client: StoryblokClientLike;
+	collection: string;
+	params?: ISbStoriesParams;
+	normalize: (story: unknown, index: number) => T;
+}
+
+export const loadCollection = async <T>({
 	client,
 	collection,
-	params,
+	params = {},
 	normalize,
-}) => {
+}: LoadCollectionOptions<T>): Promise<T[]> => {
 	try {
 		const response = await client.get("cdn/stories", {
 			starts_with: `${collection}/`,
@@ -151,15 +187,18 @@ export const loadCollection = async ({
 	}
 };
 
-export const createStoryblokClient = (accessToken, Client = StoryblokClient) => {
+export const createStoryblokClient = (
+	accessToken: string | undefined,
+	Client: StoryblokClientConstructor = StoryblokClient
+): StoryblokClientLike => {
 	if (typeof accessToken !== "string" || accessToken.trim().length === 0) {
 		throw new Error("Storyblok access token is missing");
 	}
 	return new Client({ accessToken, ...CLIENT_OPTIONS });
 };
 
-let projectsClient;
-let profileClient;
+let projectsClient: StoryblokClientLike | undefined;
+let profileClient: StoryblokClientLike | undefined;
 
 const getProjectsClient = () => {
 	if (!projectsClient) {
@@ -227,11 +266,11 @@ export const getTools = (client = getProfileClient()) =>
 	loadCollection({
 		client,
 		collection: "tools",
-		params: { sort_by: "content.title:asc", per_page: "100" },
+		params: { sort_by: "content.title:asc", per_page: 100 },
 		normalize: normalizeTool,
 	});
 
-export const createCmsFixtures = () => ({
+export const createCmsFixtures = (): PortfolioData => ({
 	projects: [
 		{
 			name: "CI portfolio fixture",
@@ -279,7 +318,17 @@ export const createCmsFixtures = () => ({
 	],
 });
 
-export const getPortfolioData = async (loaders = {}) => {
+type PortfolioLoaders = Partial<{
+	getProjects: () => Promise<Project[]>;
+	getAbout: () => Promise<AboutItem[]>;
+	getEducation: () => Promise<TimelineItem[]>;
+	getExperience: () => Promise<ExperienceItem[]>;
+	getTools: () => Promise<Tool[]>;
+}>;
+
+export const getPortfolioData = async (
+	loaders: PortfolioLoaders = {}
+): Promise<PortfolioData> => {
 	if (process.env.CMS_USE_FIXTURES === "true") return createCmsFixtures();
 
 	const loadProjects = loaders.getProjects || getProjects;

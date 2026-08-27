@@ -3,19 +3,29 @@ import { isMobile } from "react-device-detect";
 import { gsap } from "gsap";
 import { IoArrowDownCircle } from "react-icons/io5";
 
+import type { PortfolioData } from "../types/portfolio";
 import Holder from "./Holder";
 
-const getCircleText = (circlesElement) =>
-	circlesElement?.querySelectorAll("text.circles__text");
-const getContentChildren = (contentElement) => contentElement?.children;
+const getCircleText = (circlesElement: SVGSVGElement | null) =>
+	circlesElement?.querySelectorAll<SVGTextElement>("text.circles__text");
+const getContentChildren = (contentElement: HTMLDivElement | null) =>
+	contentElement?.children;
 
-const killIntroTweens = (circleText, enterControl, enterBackground) => {
-	gsap.killTweensOf?.(circleText);
-	gsap.killTweensOf?.(enterControl);
-	gsap.killTweensOf?.(enterBackground);
+const killIntroTweens = (
+	circleText: NodeListOf<SVGTextElement> | undefined,
+	enterControl: HTMLButtonElement | null,
+	enterBackground: HTMLSpanElement | null
+) => {
+	if (circleText) gsap.killTweensOf?.(circleText);
+	if (enterControl) gsap.killTweensOf?.(enterControl);
+	if (enterBackground) gsap.killTweensOf?.(enterBackground);
 };
 
-const animateIntroHover = (circleText, enterBackground) => {
+const animateIntroHover = (
+	circleText: NodeListOf<SVGTextElement> | undefined,
+	enterBackground: HTMLSpanElement | null
+) => {
+	if (!circleText || !enterBackground) return;
 	gsap.killTweensOf?.(enterBackground);
 	gsap.killTweensOf?.(circleText);
 	gsap.to?.(enterBackground, {
@@ -33,7 +43,11 @@ const animateIntroHover = (circleText, enterBackground) => {
 	});
 };
 
-const resetIntroHover = (circleText, enterBackground) => {
+const resetIntroHover = (
+	circleText: NodeListOf<SVGTextElement> | undefined,
+	enterBackground: HTMLSpanElement | null
+) => {
+	if (!circleText || !enterBackground) return;
 	gsap.killTweensOf?.(enterBackground);
 	gsap.killTweensOf?.(circleText);
 	gsap.to?.(enterBackground, {
@@ -51,17 +65,21 @@ const resetIntroHover = (circleText, enterBackground) => {
 	});
 };
 
-const ContentWrapper = ({ data }) => {
+interface ContentWrapperProps {
+	data: Partial<PortfolioData>;
+}
+
+const ContentWrapper = ({ data }: ContentWrapperProps) => {
 	const [introActive, setIntroActive] = useState(true);
 	const [introReady, setIntroReady] = useState(false);
 	const [introExiting, setIntroExiting] = useState(false);
-	const circlesRef = useRef(null);
-	const enterRef = useRef(null);
-	const enterBackgroundRef = useRef(null);
-	const contentRef = useRef(null);
+	const circlesRef = useRef<SVGSVGElement | null>(null);
+	const enterRef = useRef<HTMLButtonElement | null>(null);
+	const enterBackgroundRef = useRef<HTMLSpanElement | null>(null);
+	const contentRef = useRef<HTMLDivElement | null>(null);
 	const focusContentAfterIntroRef = useRef(false);
-	const startTimelineRef = useRef(null);
-	const exitTimelineRef = useRef(null);
+	const startTimelineRef = useRef<gsap.core.Timeline | null>(null);
+	const exitTimelineRef = useRef<gsap.core.Timeline | null>(null);
 
 	useLayoutEffect(() => {
 		if (!introActive) {
@@ -91,8 +109,8 @@ const ContentWrapper = ({ data }) => {
 		const enterControl = enterRef.current;
 		const enterBackground = enterBackgroundRef.current;
 		const contentChildren = getContentChildren(contentRef.current);
-		const holder = contentRef.current?.querySelector(".holder");
-		let mobileHoverTimer;
+		const holder = contentRef.current?.querySelector<HTMLElement>(".holder");
+		let mobileHoverTimer: number | undefined;
 
 		const bypassUnavailableIntro = () => {
 			queueMicrotask(() => {
@@ -156,19 +174,21 @@ const ContentWrapper = ({ data }) => {
 			bypassUnavailableIntro();
 		}
 
-		const handleMotionPreference = (event) => {
+		const handleMotionPreference = (event: MediaQueryListEvent) => {
 			if (event.matches) setIntroActive(false);
 		};
 		reducedMotion?.addEventListener?.("change", handleMotionPreference);
 
 		return () => {
 			cancelled = true;
-			window.clearTimeout(mobileHoverTimer);
+			if (mobileHoverTimer !== undefined) {
+				window.clearTimeout(mobileHoverTimer);
+			}
 			startTimelineRef.current?.kill();
 			exitTimelineRef.current?.kill();
 			killIntroTweens(circleText, enterControl, enterBackground);
 			gsap.set?.(contentChildren, { opacity: 1, scale: 1 });
-			gsap.set?.(holder, { pointerEvents: "auto" });
+			if (holder) gsap.set?.(holder, { pointerEvents: "auto" });
 			startTimelineRef.current = null;
 			exitTimelineRef.current = null;
 			reducedMotion?.removeEventListener?.("change", handleMotionPreference);
@@ -186,9 +206,9 @@ const ContentWrapper = ({ data }) => {
 		startTimelineRef.current?.kill();
 		exitTimelineRef.current?.kill();
 		const contentChildren = getContentChildren(contentRef.current);
-		const holder = contentRef.current?.querySelector(".holder");
-		gsap.set?.(contentChildren, { opacity: 1, scale: 1 });
-		gsap.set?.(holder, { pointerEvents: "auto" });
+		const holder = contentRef.current?.querySelector<HTMLElement>(".holder");
+		if (contentChildren) gsap.set?.(contentChildren, { opacity: 1, scale: 1 });
+		if (holder) gsap.set?.(holder, { pointerEvents: "auto" });
 		completeIntro();
 	};
 
@@ -199,7 +219,7 @@ const ContentWrapper = ({ data }) => {
 		const enterControl = enterRef.current;
 		const enterBackground = enterBackgroundRef.current;
 		const contentChildren = getContentChildren(contentRef.current);
-		const holder = contentRef.current?.querySelector(".holder");
+		const holder = contentRef.current?.querySelector<HTMLElement>(".holder");
 		if (!circleText?.length || !enterControl || !contentChildren?.length) {
 			skipIntro();
 			return;
@@ -209,7 +229,7 @@ const ContentWrapper = ({ data }) => {
 		setIntroExiting(true);
 		startTimelineRef.current?.kill();
 		killIntroTweens(circleText, enterControl, enterBackground);
-		gsap.set?.(holder, { pointerEvents: "auto" });
+		if (holder) gsap.set?.(holder, { pointerEvents: "auto" });
 		gsap.set?.(enterControl, { pointerEvents: "none" });
 		gsap.set?.(contentRef.current, { opacity: 1 });
 
@@ -352,7 +372,7 @@ const ContentWrapper = ({ data }) => {
 					ref={contentRef}
 					id="portfolio-content"
 					className="content"
-					tabIndex="-1"
+					tabIndex={-1}
 				>
 					<Holder data={data} />
 				</div>

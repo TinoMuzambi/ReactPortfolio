@@ -12,13 +12,21 @@ const DEFAULT_META = {
 	url: "https://tinomuzambi.com",
 };
 
+interface MetaProps {
+	title?: string;
+	description?: string;
+	keywords?: string;
+	url?: string;
+	image?: string;
+}
+
 const Meta = ({
 	title = DEFAULT_META.title,
 	description = DEFAULT_META.description,
 	keywords = DEFAULT_META.keywords,
 	url = DEFAULT_META.url,
 	image = DEFAULT_META.image,
-} = {}) => {
+}: MetaProps = {}) => {
 	return (
 		<Head>
 			<meta

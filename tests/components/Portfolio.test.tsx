@@ -1,29 +1,35 @@
 import React from "react";
+import type { HTMLAttributes, ImgHTMLAttributes } from "react";
 import { render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import Portfolio, { getProjectKey } from "../../components/Portfolio";
+import type { Project } from "../../types/portfolio";
 
 vi.mock("next/image", () => ({
-	default: function MockImage(props) {
-		const imageProps = { ...props };
-		delete imageProps.objectFit;
-		return React.createElement("img", imageProps);
+	default: function MockImage(props: ImgHTMLAttributes<HTMLImageElement>) {
+		return React.createElement("img", props);
 	},
 }));
 
 vi.mock("framer-motion", async () => {
 	const ReactModule = await import("react");
 	const motion = new Proxy(
-		{},
+		{} as Record<string, unknown>,
 		{
 			get: (_target, element) => {
-				return function MotionElement(props) {
+				if (typeof element !== "string") return undefined;
+				return function MotionElement(
+					props: Record<string, unknown>
+				) {
 					const elementProps = { ...props };
 					["initial", "animate", "variants", "transition"].forEach((name) =>
 						delete elementProps[name]
 					);
-					return ReactModule.createElement(element, elementProps);
+					return ReactModule.createElement(
+						element,
+						elementProps as HTMLAttributes<HTMLElement>
+					);
 				};
 			},
 		}
@@ -31,7 +37,7 @@ vi.mock("framer-motion", async () => {
 	return { motion };
 });
 
-const projects = [
+const projects: Project[] = [
 	{
 		shortname: "first",
 		title: "First Project",

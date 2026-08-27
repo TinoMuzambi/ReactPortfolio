@@ -5,8 +5,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ContentWrapper from "../../components/ContentWrapper";
 
 const animation = vi.hoisted(() => {
-	const instances = [];
-	const timeline = vi.fn((options = {}) => {
+	type TimelineOptions = { onComplete?: () => void };
+	type TimelineInstance = {
+		options: TimelineOptions;
+		kill: ReturnType<typeof vi.fn>;
+		add: ReturnType<typeof vi.fn>;
+		addLabel: ReturnType<typeof vi.fn>;
+		to: ReturnType<typeof vi.fn>;
+	};
+	const instances: TimelineInstance[] = [];
+	const timeline = vi.fn((options: TimelineOptions = {}) => {
 		const instance = {
 			options,
 			kill: vi.fn(),
@@ -44,7 +52,7 @@ vi.mock("../../components/Holder", () => ({
 	default: () => <div data-testid="portfolio-holder">Portfolio content</div>,
 }));
 
-const setMotionPreference = (matches) => {
+const setMotionPreference = (matches: boolean) => {
 	Object.defineProperty(window, "matchMedia", {
 		configurable: true,
 		writable: true,
@@ -54,6 +62,12 @@ const setMotionPreference = (matches) => {
 			removeEventListener: vi.fn(),
 		}),
 	});
+};
+
+const getContentElement = (): HTMLElement => {
+	const content = screen.getByTestId("portfolio-holder").parentElement;
+	if (!content) throw new Error("Expected the portfolio content wrapper");
+	return content;
 };
 
 describe("ContentWrapper", () => {
@@ -76,7 +90,7 @@ describe("ContentWrapper", () => {
 		vi.stubGlobal("queueMicrotask", vi.fn());
 		render(<ContentWrapper data={{}} />);
 
-		const content = screen.getByTestId("portfolio-holder").parentElement;
+		const content = getContentElement();
 		const wrapper = content.closest("section");
 		expect(content).toBeInTheDocument();
 		expect(wrapper).toHaveClass("intro-active");
@@ -86,7 +100,7 @@ describe("ContentWrapper", () => {
 	it("matches the production entrance and keeps an accessible icon-only control", async () => {
 		render(<ContentWrapper data={{}} />);
 
-		const content = screen.getByTestId("portfolio-holder").parentElement;
+		const content = getContentElement();
 		const wrapper = content.closest("section");
 		const enter = screen.getByRole("button", { name: "Enter portfolio" });
 		expect(content).toBeInTheDocument();
@@ -149,7 +163,7 @@ describe("ContentWrapper", () => {
 	it("matches the production exit before handing focus to content", async () => {
 		render(<ContentWrapper data={{}} />);
 
-		const content = screen.getByTestId("portfolio-holder").parentElement;
+		const content = getContentElement();
 		const wrapper = content.closest("section");
 		const enter = screen.getByRole("button", { name: "Enter portfolio" });
 		await waitFor(() => expect(wrapper).toHaveClass("intro-ready"));
@@ -197,7 +211,7 @@ describe("ContentWrapper", () => {
 			"start+=1"
 		);
 
-		act(() => exitTimeline.options.onComplete());
+		act(() => exitTimeline.options.onComplete?.());
 
 		expect(
 			screen.queryByRole("button", { name: "Enter portfolio" })
@@ -208,7 +222,7 @@ describe("ContentWrapper", () => {
 
 	it("keeps focus on the skip-link destination", () => {
 		render(<ContentWrapper data={{}} />);
-		const content = screen.getByTestId("portfolio-holder").parentElement;
+		const content = getContentElement();
 
 		fireEvent.click(screen.getByRole("link", { name: /skip intro/i }));
 

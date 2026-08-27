@@ -1,4 +1,9 @@
 import React from "react";
+import type {
+	HTMLAttributes,
+	ImgHTMLAttributes,
+	ReactNode,
+} from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -6,7 +11,7 @@ import Education from "../../components/Education";
 import Experience from "../../components/Experience";
 
 vi.mock("next/image", () => ({
-	default: function MockImage(props) {
+	default: function MockImage(props: ImgHTMLAttributes<HTMLImageElement>) {
 		return React.createElement("img", props);
 	},
 }));
@@ -14,7 +19,10 @@ vi.mock("next/image", () => ({
 vi.mock("react-vertical-timeline-component", async () => {
 	const ReactModule = await import("react");
 	return {
-		VerticalTimeline: function MockTimeline({ children, ...props }) {
+		VerticalTimeline: function MockTimeline({
+			children,
+			...props
+		}: { children?: ReactNode } & HTMLAttributes<HTMLDivElement>) {
 			return ReactModule.createElement("div", props, children);
 		},
 		VerticalTimelineElement: function MockTimelineElement({
@@ -22,6 +30,11 @@ vi.mock("react-vertical-timeline-component", async () => {
 			date,
 			icon,
 			className,
+		}: {
+			children?: ReactNode;
+			date?: ReactNode;
+			icon?: ReactNode;
+			className?: string;
 		}) {
 			return ReactModule.createElement(
 				"article",

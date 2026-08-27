@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import type { NextApiHandler, NextApiRequest } from "next";
+import type Mail from "nodemailer/lib/mailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 import { getHtml } from "../../../utils";
 
@@ -9,6 +12,56 @@ export const CONTACT_LIMITS = Object.freeze({
 	message: 5000,
 	website: 200,
 });
+
+type ContactField = keyof typeof CONTACT_LIMITS;
+type Environment = Readonly<Record<string, string | undefined>>;
+
+export interface ContactSubmission {
+	name: string;
+	email: string;
+	subject: string;
+	message: string;
+	website: string;
+}
+
+export interface ContactResponse {
+	success: boolean;
+	error?: string;
+	contactEmail?: string;
+}
+
+export interface ContactApiRequest {
+	method?: string;
+	headers: NextApiRequest["headers"];
+	body: unknown;
+	socket: { remoteAddress?: string };
+}
+
+export interface ContactApiResponse {
+	setHeader(name: string, value: number | string | readonly string[]): void;
+	status(statusCode: number): ContactApiResponse;
+	json(body: ContactResponse): unknown;
+}
+
+interface RateLimitResult {
+	allowed: boolean;
+	retryAfter: number;
+}
+
+interface RateLimiter {
+	consume(key: string): RateLimitResult;
+}
+
+interface RateLimitEntry {
+	count: number;
+	resetAt: number;
+}
+
+interface TransporterLike {
+	sendMail(options: Mail.Options): Promise<unknown>;
+}
+
+type TransportFactory = (options: SMTPTransport.Options) => TransporterLike;
 
 const MAX_REQUEST_BYTES = 16 * 1024;
 const EMAIL_PATTERN = /^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,16 +84,23 @@ export const config = {
 	},
 };
 
-export const escapeHtml = (value) =>
-	value.replace(/[&<>"']/g, (character) => HTML_ENTITIES[character]);
+export const escapeHtml = (value: string): string =>
+	value.replace(
+		/[&<>"']/g,
+		(character) => HTML_ENTITIES[character as keyof typeof HTML_ENTITIES]
+	);
 
-const isRecord = (value) => {
+const isRecord = (value: unknown): value is Record<string, unknown> => {
 	if (!value || typeof value !== "object" || Array.isArray(value)) return false;
 	const prototype = Object.getPrototypeOf(value);
 	return prototype === Object.prototype || prototype === null;
 };
 
-const readString = (body, field, { required = true } = {}) => {
+const readString = (
+	body: Record<string, unknown>,
+	field: ContactField,
+	{ required = true }: { required?: boolean } = {}
+): string => {
 	const value = body[field];
 
 	if (!required && value == null) return "";
@@ -59,7 +119,7 @@ const readString = (body, field, { required = true } = {}) => {
 	return trimmed;
 };
 
-export const validateContactSubmission = (body) => {
+export const validateContactSubmission = (body: unknown): ContactSubmission => {
 	if (!isRecord(body)) throw new TypeError("body must be an object");
 
 	const submission = {
@@ -88,18 +148,24 @@ export const createRateLimiter = ({
 	windowMs = 10 * 60 * 1000,
 	now = () => Date.now(),
 	maxEntries = 10000,
-} = {}) => {
-	const attempts = new Map();
+}: {
+	limit?: number;
+	windowMs?: number;
+	now?: () => number;
+	maxEntries?: number;
+} = {}): RateLimiter => {
+	const attempts = new Map<string, RateLimitEntry>();
 	const entryLimit = Math.max(1, maxEntries);
 
-	const touch = (key, entry) => {
+	const touch = (key: string, entry: RateLimitEntry) => {
 		attempts.delete(key);
 		attempts.set(key, entry);
 
 		// Refreshing insertion order makes this a bounded LRU map: a client that
 		// continues making attempts cannot reset its quota through key churn.
 		if (attempts.size > entryLimit) {
-			attempts.delete(attempts.keys().next().value);
+			const oldestKey = attempts.keys().next().value;
+			if (oldestKey !== undefined) attempts.delete(oldestKey);
 		}
 	};
 
@@ -128,12 +194,15 @@ export const createRateLimiter = ({
 	};
 };
 
-const getHeader = (req, name) => {
+const getHeader = (req: ContactApiRequest, name: string): string | undefined => {
 	const value = req.headers?.[name];
 	return Array.isArray(value) ? value[0] : value;
 };
 
-export const getClientKey = (req, env = process.env) => {
+export const getClientKey = (
+	req: ContactApiRequest,
+	env: Environment = process.env
+): string => {
 	const vercelForwardedFor = getHeader(req, "x-vercel-forwarded-for");
 	const trustedForwardedAddress =
 		env.VERCEL === "1" && typeof vercelForwardedFor === "string"
@@ -144,7 +213,12 @@ export const getClientKey = (req, env = process.env) => {
 	return String(address).slice(0, 100);
 };
 
-export const buildMailOptions = ({ email, name, message, subject }) => ({
+export const buildMailOptions = ({
+	email,
+	name,
+	message,
+	subject,
+}: ContactSubmission): Mail.Options => ({
 	from: "tinomuzambi@gmail.com",
 	to: "tino@tinomuzambi.com",
 	replyTo: email,
@@ -161,17 +235,27 @@ export const buildMailOptions = ({ email, name, message, subject }) => ({
 	),
 });
 
-const readEnvironmentValue = (value) =>
+interface MailConfig {
+	user: string;
+	password: string;
+	to: string;
+}
+
+const readEnvironmentValue = (value: string | undefined): string =>
 	typeof value === "string" ? value.trim() : "";
 
-export const getFallbackContactEmail = (env = process.env) => {
+export const getFallbackContactEmail = (
+	env: Environment = process.env
+): string => {
 	const configuredAddress = readEnvironmentValue(env.CONTACT_EMAIL_TO);
 	return EMAIL_PATTERN.test(configuredAddress)
 		? configuredAddress
 		: DEFAULT_CONTACT_EMAIL;
 };
 
-export const getMailConfig = (env = process.env) => {
+export const getMailConfig = (
+	env: Environment = process.env
+): MailConfig | null => {
 	const appPassword = readEnvironmentValue(env.GMAIL_APP_PASSWORD);
 	const legacyPassword = readEnvironmentValue(env.GMAIL_PASS);
 	const password = appPassword || legacyPassword;
@@ -189,11 +273,42 @@ export const getMailConfig = (env = process.env) => {
 	};
 };
 
-const getDeliveryFailureStatus = (error) =>
-	error?.code === "EAUTH" || error?.responseCode === 535 ? 503 : 502;
+const getDeliveryErrorMetadata = (error: unknown) => {
+	if (typeof error !== "object" || error === null) {
+		return { code: "UNKNOWN", responseCode: undefined };
+	}
 
-const getDeliveryLogContext = (error, sensitiveValues = []) => {
-	const errorObject = error && typeof error === "object" ? error : {};
+	const { code, responseCode } = error as {
+		code?: unknown;
+		responseCode?: unknown;
+	};
+
+	return { code, responseCode };
+};
+
+const getDeliveryFailureStatus = (error: unknown): number => {
+	const { code, responseCode } = getDeliveryErrorMetadata(error);
+	return code === "EAUTH" || responseCode === 535 ? 503 : 502;
+};
+
+interface EmailHandlerDependencies {
+	createTransport?: TransportFactory;
+	rateLimiter?: RateLimiter;
+	env?: Environment;
+	logger?: Pick<Console, "error">;
+}
+
+const defaultTransportFactory: TransportFactory = (options) =>
+	nodemailer.createTransport(options);
+
+const getDeliveryLogContext = (
+	error: unknown,
+	sensitiveValues: readonly (string | undefined)[] = []
+) => {
+	const errorObject =
+		error && typeof error === "object"
+			? (error as { code?: unknown; message?: unknown; responseCode?: unknown })
+			: {};
 	const rawMessage =
 		typeof errorObject.message === "string"
 			? errorObject.message
@@ -201,8 +316,8 @@ const getDeliveryLogContext = (error, sensitiveValues = []) => {
 				? error
 				: "Unknown delivery error";
 	const message = sensitiveValues
-		.filter(
-			(value) => typeof value === "string" && value.trim().length > 0
+		.filter((value): value is string =>
+			Boolean(typeof value === "string" && value.trim().length > 0)
 		)
 		.reduce(
 			(currentMessage, value) =>
@@ -220,12 +335,15 @@ const getDeliveryLogContext = (error, sensitiveValues = []) => {
 };
 
 export const createEmailHandler = ({
-	createTransport = nodemailer.createTransport,
+	createTransport = defaultTransportFactory,
 	rateLimiter = createRateLimiter(),
 	env = process.env,
 	logger = console,
-} = {}) =>
-	async function emailHandler(req, res) {
+}: EmailHandlerDependencies = {}) =>
+	async function emailHandler(
+		req: ContactApiRequest,
+		res: ContactApiResponse
+	) {
 		res.setHeader("Cache-Control", "no-store");
 
 		if (req.method !== "POST") {
@@ -319,4 +437,6 @@ export const createEmailHandler = ({
 		}
 	};
 
-export default createEmailHandler();
+const handler = createEmailHandler();
+
+export default handler satisfies NextApiHandler<ContactResponse>;

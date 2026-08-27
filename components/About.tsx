@@ -13,9 +13,15 @@ import { motion } from "framer-motion";
 import parse from "html-react-parser";
 
 import { left, right } from "../data/variants";
+import type { AboutItem } from "../types/portfolio";
 import Contact from "./Contact";
 
-const About = ({ about, isActive = true }) => {
+interface AboutProps {
+	about: AboutItem[];
+	isActive?: boolean;
+}
+
+const About = ({ about, isActive = true }: AboutProps) => {
 	const animationState = isActive ? "end" : "start";
 
 	return (

@@ -128,10 +128,10 @@ describe("ContactForm", () => {
 	});
 
 	it("prevents duplicate submissions while the first request is pending", async () => {
-		let resolveRequest;
+		let resolveRequest: ((value: { ok: boolean }) => void) | undefined;
 		const fetchMock = vi.fn(
 			() =>
-				new Promise((resolve) => {
+				new Promise<{ ok: boolean }>((resolve) => {
 					resolveRequest = resolve;
 				})
 		);
@@ -139,6 +139,7 @@ describe("ContactForm", () => {
 		render(<ContactForm />);
 		fillForm();
 		const form = screen.getByDisplayValue("Send").closest("form");
+		if (!form) throw new Error("Expected the submit control to belong to a form");
 
 		fireEvent.submit(form);
 		fireEvent.submit(form);
@@ -148,16 +149,16 @@ describe("ContactForm", () => {
 		expect(screen.getByRole("status")).toHaveClass("form-status");
 		expect(screen.getByRole("status")).not.toHaveClass("form-status--pending");
 
-		resolveRequest({ ok: true });
+		resolveRequest?.({ ok: true });
 		await waitFor(() => expect(screen.getByDisplayValue("Send")).toBeEnabled());
 	});
 
 	it("aborts a stalled request, unlocks the form, and preserves its values", async () => {
 		vi.useFakeTimers();
 		const fetchMock = vi.fn(
-			(_url, { signal }) =>
-				new Promise((_resolve, reject) => {
-					signal.addEventListener("abort", () =>
+			(_url: string, { signal }: RequestInit) =>
+				new Promise<never>((_resolve, reject) => {
+					signal?.addEventListener("abort", () =>
 						reject(new DOMException("Aborted", "AbortError"))
 					);
 				})
@@ -171,7 +172,8 @@ describe("ContactForm", () => {
 			await vi.advanceTimersByTimeAsync(CONTACT_REQUEST_TIMEOUT_MS);
 		});
 
-		expect(fetchMock.mock.calls[0][1].signal.aborted).toBe(true);
+		const requestInit = fetchMock.mock.calls[0]?.[1];
+		expect(requestInit?.signal?.aborted).toBe(true);
 		expect(screen.getByText(/Sending timed out/)).toHaveClass(
 			"form-status--error"
 		);
@@ -183,8 +185,11 @@ describe("ContactForm", () => {
 
 	it("keeps the honeypot out of keyboard navigation", () => {
 		render(<ContactForm />);
-		const honeypot = document.querySelector('input[name="website"]');
+		const honeypot = document.querySelector<HTMLInputElement>(
+			'input[name="website"]'
+		);
 		const feedback = screen.getByRole("status");
+		if (!honeypot) throw new Error("Expected the honeypot input to render");
 
 		expect(honeypot).toHaveAttribute("tabindex", "-1");
 		expect(honeypot.closest("div")).toHaveAttribute("aria-hidden", "true");

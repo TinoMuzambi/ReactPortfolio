@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import Meta from "../components/Meta";
@@ -7,12 +8,22 @@ vi.mock("next/head", async () => {
 	const React = await import("react");
 
 	return {
-		default: function MockHead({ children }) {
+		default: function MockHead({ children }: { children: ReactNode }) {
 			return React.createElement(
 				"div",
 				{ "data-testid": "document-head" },
 				React.Children.map(children, (child, index) => {
-					if (!React.isValidElement(child)) {
+					if (
+						!React.isValidElement<{
+							name?: string;
+							property?: string;
+							itemProp?: string;
+							rel?: string;
+							content?: ReactNode;
+							href?: string;
+							children?: ReactNode;
+						}>(child)
+					) {
 						return null;
 					}
 
@@ -21,7 +32,7 @@ vi.mock("next/head", async () => {
 						child.props.property ||
 						child.props.itemProp ||
 						child.props.rel ||
-						child.type;
+						(typeof child.type === "string" ? child.type : "component");
 
 					return React.createElement(
 						"span",

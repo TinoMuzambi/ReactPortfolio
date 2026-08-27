@@ -13,8 +13,14 @@ import {
 	getMailConfig,
 	validateContactSubmission,
 } from "../../pages/api/email";
+import type {
+	ContactApiRequest,
+	ContactApiResponse,
+	ContactResponse,
+	ContactSubmission,
+} from "../../pages/api/email";
 
-const validBody = {
+const validBody: ContactSubmission = {
 	name: "Tino",
 	email: "tino@example.com",
 	subject: "Hello",
@@ -22,7 +28,9 @@ const validBody = {
 	website: "",
 };
 
-const createRequest = (overrides = {}) => ({
+const createRequest = (
+	overrides: Partial<ContactApiRequest> = {}
+): ContactApiRequest => ({
 	method: "POST",
 	headers: {
 		"content-type": "application/json",
@@ -34,18 +42,23 @@ const createRequest = (overrides = {}) => ({
 });
 
 const createResponse = () => {
-	const response = {
-		body: undefined,
+	type HeaderValue = number | string | readonly string[];
+	type TestResponse = ContactApiResponse & {
+		body?: ContactResponse;
+		headers: Record<string, HeaderValue>;
+		statusCode?: number;
+	};
+
+	const response: TestResponse = {
 		headers: {},
-		statusCode: undefined,
-		setHeader: vi.fn((name, value) => {
+		setHeader: vi.fn((name: string, value: HeaderValue) => {
 			response.headers[name] = value;
 		}),
-		status: vi.fn((statusCode) => {
+		status: vi.fn((statusCode: number) => {
 			response.statusCode = statusCode;
 			return response;
 		}),
-		json: vi.fn((body) => {
+		json: vi.fn((body: ContactResponse) => {
 			response.body = body;
 			return response;
 		}),
@@ -53,7 +66,9 @@ const createResponse = () => {
 	return response;
 };
 
-const createHandler = (overrides = {}) => {
+const createHandler = (
+	overrides: Parameters<typeof createEmailHandler>[0] = {}
+) => {
 	const sendMail = vi.fn().mockResolvedValue({ messageId: "message-id" });
 	const createTransport = vi.fn(() => ({ sendMail }));
 	const logger = { error: vi.fn() };
@@ -135,7 +150,7 @@ describe("contact submission validation", () => {
 			{ ...validBody, message: "x".repeat(CONTACT_LIMITS.message + 1) },
 			"overlong field",
 		],
-	])("rejects %s (%s)", (body) => {
+	])("rejects %s (%s)", (body: unknown, _label: string) => {
 		expect(() => validateContactSubmission(body)).toThrow(TypeError);
 	});
 

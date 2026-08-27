@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import type { CSSProperties, FormEvent } from "react";
 
 export const CONTACT_REQUEST_TIMEOUT_MS = 10_000;
 
-const HONEYPOT_STYLE = {
+const HONEYPOT_STYLE: CSSProperties = {
 	position: "absolute",
 	left: "-10000px",
 	width: "1px",
@@ -10,15 +11,33 @@ const HONEYPOT_STYLE = {
 	overflow: "hidden",
 };
 
-const readContactEmail = async (response) => {
+type FormStatus = {
+	type: "idle" | "pending" | "success" | "error";
+	message: string;
+};
+
+class ContactRequestError extends Error {
+	constructor(
+		readonly status: number,
+		readonly contactEmail: string
+	) {
+		super("Contact request failed");
+	}
+}
+
+const readContactEmail = async (response: Response): Promise<string> => {
 	if (typeof response.json !== "function") return "";
 
 	try {
-		const body = await response.json();
-		const contactEmail = body?.contactEmail?.trim();
-		return typeof contactEmail === "string" &&
-			/^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmail)
-			? contactEmail
+		const body: unknown = await response.json();
+		const contactEmail =
+			body && typeof body === "object" && "contactEmail" in body
+				? body.contactEmail
+				: undefined;
+		const normalizedEmail =
+			typeof contactEmail === "string" ? contactEmail.trim() : "";
+		return /^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)
+			? normalizedEmail
 			: "";
 	} catch {
 		return "";
@@ -32,9 +51,12 @@ const ContactForm = () => {
 	const [message, setMessage] = useState("");
 	const [website, setWebsite] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [status, setStatus] = useState({ type: "idle", message: "" });
+	const [status, setStatus] = useState<FormStatus>({
+		type: "idle",
+		message: "",
+	});
 	const submittingRef = useRef(false);
-	const requestControllerRef = useRef(null);
+	const requestControllerRef = useRef<AbortController | null>(null);
 
 	useEffect(
 		() => () => {
@@ -43,7 +65,7 @@ const ContactForm = () => {
 		[]
 	);
 
-	const handleSubmit = async (event) => {
+	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		if (submittingRef.current) return;
 
@@ -68,10 +90,10 @@ const ContactForm = () => {
 			});
 
 			if (!response.ok) {
-				const error = new Error("Contact request failed");
-				error.status = response.status;
-				error.contactEmail = await readContactEmail(response);
-				throw error;
+				throw new ContactRequestError(
+					response.status,
+					await readContactEmail(response)
+				);
 			}
 
 			setName("");
@@ -81,9 +103,12 @@ const ContactForm = () => {
 			setWebsite("");
 			setStatus({ type: "success", message: "Message sent successfully." });
 		} catch (error) {
-			const serviceUnavailable = error?.status === 503;
-			const unavailableAdvice = error?.contactEmail
-				? `please email ${error.contactEmail} or try again.`
+			const serviceUnavailable =
+				error instanceof ContactRequestError && error.status === 503;
+			const contactEmail =
+				error instanceof ContactRequestError ? error.contactEmail : "";
+			const unavailableAdvice = contactEmail
+				? `please email ${contactEmail} or try again.`
 				: "please try again.";
 			setStatus({
 				type: "error",

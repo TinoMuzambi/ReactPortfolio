@@ -1,14 +1,11 @@
+import type { GetStaticProps } from "next";
+
 import Wrapper from "../components/ContentWrapper";
 import Meta from "../components/Meta";
+import type { PortfolioData } from "../types/portfolio";
 import { getPortfolioData } from "../utils/fetch";
 
-export default function Home({
-	projects,
-	about,
-	education,
-	experience,
-	tools,
-}) {
+export default function Home({ projects, about, education, experience, tools }: PortfolioData) {
 	return (
 		<>
 			<Meta />
@@ -17,7 +14,7 @@ export default function Home({
 	);
 }
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<PortfolioData> = async () => {
 	const data = await getPortfolioData();
 
 	return {
