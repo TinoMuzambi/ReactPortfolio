@@ -13,6 +13,8 @@ export const CONTACT_LIMITS = Object.freeze({
 const MAX_REQUEST_BYTES = 16 * 1024;
 const EMAIL_PATTERN = /^(?=.{3,254}$)[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const HEADER_LINE_BREAK = /[\r\n]/;
+const DEFAULT_GMAIL_USER = "tinomuzambi@gmail.com";
+export const DEFAULT_CONTACT_EMAIL = "tino@tinomuzambi.com";
 const HTML_ENTITIES = Object.freeze({
 	"&": "&amp;",
 	"<": "&lt;",
@@ -159,6 +161,64 @@ export const buildMailOptions = ({ email, name, message, subject }) => ({
 	),
 });
 
+const readEnvironmentValue = (value) =>
+	typeof value === "string" ? value.trim() : "";
+
+export const getFallbackContactEmail = (env = process.env) => {
+	const configuredAddress = readEnvironmentValue(env.CONTACT_EMAIL_TO);
+	return EMAIL_PATTERN.test(configuredAddress)
+		? configuredAddress
+		: DEFAULT_CONTACT_EMAIL;
+};
+
+export const getMailConfig = (env = process.env) => {
+	const appPassword = readEnvironmentValue(env.GMAIL_APP_PASSWORD);
+	const legacyPassword = readEnvironmentValue(env.GMAIL_PASS);
+	const password = appPassword || legacyPassword;
+
+	if (!password) return null;
+
+	const user = readEnvironmentValue(env.GMAIL_USER) || DEFAULT_GMAIL_USER;
+	const to = readEnvironmentValue(env.CONTACT_EMAIL_TO) || DEFAULT_CONTACT_EMAIL;
+	if (!EMAIL_PATTERN.test(user) || !EMAIL_PATTERN.test(to)) return null;
+
+	return {
+		user,
+		password: password.replace(/\s/g, ""),
+		to,
+	};
+};
+
+const getDeliveryFailureStatus = (error) =>
+	error?.code === "EAUTH" || error?.responseCode === 535 ? 503 : 502;
+
+const getDeliveryLogContext = (error, sensitiveValues = []) => {
+	const errorObject = error && typeof error === "object" ? error : {};
+	const rawMessage =
+		typeof errorObject.message === "string"
+			? errorObject.message
+			: typeof error === "string"
+				? error
+				: "Unknown delivery error";
+	const message = sensitiveValues
+		.filter(
+			(value) => typeof value === "string" && value.trim().length > 0
+		)
+		.reduce(
+			(currentMessage, value) =>
+				currentMessage.split(value).join("[REDACTED]"),
+			rawMessage
+		)
+		.replace(/[\r\n\t]+/g, " ")
+		.slice(0, 500);
+
+	return {
+		code: errorObject.code || "UNKNOWN",
+		responseCode: errorObject.responseCode || null,
+		message,
+	};
+};
+
 export const createEmailHandler = ({
 	createTransport = nodemailer.createTransport,
 	rateLimiter = createRateLimiter(),
@@ -166,6 +226,8 @@ export const createEmailHandler = ({
 	logger = console,
 } = {}) =>
 	async function emailHandler(req, res) {
+		res.setHeader("Cache-Control", "no-store");
+
 		if (req.method !== "POST") {
 			res.setHeader("Allow", "POST");
 			return res.status(405).json({ success: false, error: "Method not allowed." });
@@ -201,11 +263,18 @@ export const createEmailHandler = ({
 				.json({ success: false, error: "Invalid form submission." });
 		}
 
-		if (!env.GMAIL_PASS) {
-			logger.error("Contact email is not configured: GMAIL_PASS is missing.");
+		const mailConfig = getMailConfig(env);
+		if (!mailConfig) {
+			logger.error(
+				"Contact email is not configured: credentials or addresses are missing or invalid."
+			);
 			return res
 				.status(503)
-				.json({ success: false, error: "Message service is unavailable." });
+				.json({
+					success: false,
+					error: "Message service is unavailable.",
+					contactEmail: getFallbackContactEmail(env),
+				});
 		}
 
 		const rateLimit = rateLimiter.consume(getClientKey(req, env));
@@ -220,20 +289,33 @@ export const createEmailHandler = ({
 			const transporter = createTransport({
 				service: "gmail",
 				auth: {
-					user: "tinomuzambi@gmail.com",
-					pass: env.GMAIL_PASS,
+					user: mailConfig.user,
+					pass: mailConfig.password,
 				},
 			});
-			await transporter.sendMail(buildMailOptions(submission));
+			await transporter.sendMail({
+				...buildMailOptions(submission),
+				from: mailConfig.user,
+				to: mailConfig.to,
+			});
 			return res.status(200).json({ success: true });
 		} catch (error) {
 			logger.error(
 				"Contact email delivery failed.",
-				error instanceof Error ? error.message : "Unknown error"
+				getDeliveryLogContext(error, [
+					mailConfig.password,
+					env.GMAIL_APP_PASSWORD,
+					env.GMAIL_PASS,
+				])
 			);
+			const status = getDeliveryFailureStatus(error);
 			return res
-				.status(502)
-				.json({ success: false, error: "Message could not be delivered." });
+				.status(status)
+				.json({
+					success: false,
+					error: "Message could not be delivered.",
+					...(status === 503 ? { contactEmail: mailConfig.to } : {}),
+				});
 		}
 	};
 
