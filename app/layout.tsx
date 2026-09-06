@@ -9,7 +9,7 @@ import "./globals.css";
 
 const siteUrl = "https://tinomuzambi.com";
 const description =
-	"Tino Muzambi is a full-stack web developer in Cape Town with experience building web platforms, serverless systems and data-focused products.";
+	"Tino Muzambi is a full-stack developer in Cape Town working across product engineering, web and mobile applications, and applied data.";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteUrl),
@@ -56,10 +56,10 @@ export const metadata: Metadata = {
 		locale: "en_ZA",
 		images: [
 			{
-				url: "/logo512.png",
-				width: 512,
-				height: 512,
-				alt: "Tino Muzambi",
+				url: "/tino-muzambi-graduation.png",
+				width: 1254,
+				height: 1254,
+				alt: "Portrait of Tino Muzambi in graduation attire",
 			},
 		],
 	},
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
 		card: "summary",
 		title: "Tino Muzambi — Full-Stack Web Developer",
 		description,
-		images: ["/logo512.png"],
+		images: ["/tino-muzambi-graduation.png"],
 	},
 	icons: {
 		icon: "/favicon.ico",

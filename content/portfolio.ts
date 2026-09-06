@@ -5,9 +5,9 @@ export const portfolio: PortfolioContent = {
 		name: "Tino Muzambi",
 		role: "Full-Stack Web Developer",
 		headline:
-			"Full-stack developer in Cape Town, building web platforms and studying data science.",
+			"Full-stack developer in Cape Town, working where product engineering and applied data meet.",
 		summary:
-			"I'm Tino, an avid techie and software developer based in Cape Town, South Africa. I'm keen on creating software that solves the problems that everyday people have. I have a strong foundation in Computer Science and am always looking to learn new things.",
+			"I'm Tino, a full-stack developer based in Cape Town, South Africa. I build responsive web and mobile products, connect the systems behind them, and use data to ask better questions about how software behaves. I completed an MSc in Data Science at the University of Cape Town in 2026.",
 		location: "Cape Town, South Africa",
 		email: "tino@tinomuzambi.com",
 		website: "https://tinomuzambi.com",
@@ -23,7 +23,13 @@ export const portfolio: PortfolioContent = {
 			role: "Intermediate Developer",
 			organisation: "OVEX",
 			period: "May 2025 – present",
-			highlights: [],
+			highlights: [
+				"Develop and maintain responsive web and mobile applications using Next.js and React Native.",
+				"Build and integrate GraphQL endpoints, ensuring seamless data flow and system interoperability.",
+				"Collaborate with designers and back-end developers to implement polished, user-centric interfaces.",
+				"Optimise performance and accessibility across devices and browsers while maintaining reusable component libraries.",
+				"Write clean, efficient and well-tested code aligned with modern development practices.",
+			],
 		},
 		{
 			id: "uct-web-developer",
@@ -150,7 +156,8 @@ export const portfolio: PortfolioContent = {
 			institution: "University of Cape Town",
 			period: "2024 – 2026",
 			details: [
-				"Coursework includes data visualisation, exploratory data analysis, supervised and unsupervised learning, simulation and optimisation, data science for industry, and machine learning.",
+				"Completed in 2026 with a distinction in the coursework component; graduation is scheduled for March 2027.",
+				"Coursework included data visualisation, exploratory data analysis, supervised and unsupervised learning, simulation and optimisation, data science for industry, and machine learning.",
 				"Dissertation: fair and explainable music recommendation systems using path signatures and transformer architectures, with a focus on reducing algorithmic bias in content delivery.",
 			],
 		},

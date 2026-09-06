@@ -1,6 +1,6 @@
 # Tino Muzambi
 
-Tino Muzambi is a full-stack web developer based in Cape Town, South Africa. This is his professional portfolio. The site is intentionally static and its public professional data is available in both human-readable HTML and structured JSON.
+Tino Muzambi is a full-stack developer based in Cape Town, South Africa, working where product engineering and applied data meet. This is his professional portfolio. The site is intentionally static and its public professional data is available in both human-readable HTML and structured JSON.
 
 ## Canonical pages
 
@@ -18,7 +18,7 @@ Tino Muzambi is a full-stack web developer based in Cape Town, South Africa. Thi
 - Location: Cape Town, South Africa
 - Current role: Intermediate Developer at OVEX
 - Professional focus: full-stack web development
-- Current education: MSc Data Science, University of Cape Town, 2024–2026
+- Education: MSc Data Science, University of Cape Town, completed in 2026 with a distinction in the coursework component; graduation scheduled for March 2027
 - Lead project: MusicRecPathSignatures, a reproducible Python evaluation pipeline for music-recommendation research
 - Public email: tino@tinomuzambi.com
 

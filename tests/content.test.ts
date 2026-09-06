@@ -43,11 +43,20 @@ describe("canonical portfolio content", () => {
 		}
 	});
 
-	it("does not publish an uninformative current-role placeholder", () => {
+	it("publishes the supplied current-role responsibilities", () => {
 		expect(portfolio.experience[0]).toMatchObject({
 			role: "Intermediate Developer",
 			organisation: "OVEX",
-			highlights: [],
 		});
+		expect(portfolio.experience[0].highlights).toHaveLength(5);
+		expect(portfolio.experience[0].highlights.join(" ")).toContain("React Native");
+		expect(portfolio.experience[0].highlights.join(" ")).toContain("GraphQL");
+	});
+
+	it("records the MSc as completed without claiming graduation", () => {
+		const masters = portfolio.education[0];
+		expect(masters.period).toBe("2024 – 2026");
+		expect(masters.details.join(" ")).toContain("Completed in 2026");
+		expect(masters.details.join(" ")).toContain("graduation is scheduled for March 2027");
 	});
 });

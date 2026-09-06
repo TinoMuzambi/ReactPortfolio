@@ -31,7 +31,7 @@ export const personJsonLd = {
 	"@id": `${portfolio.profile.website}/#person`,
 	name: portfolio.profile.name,
 	url: portfolio.profile.website,
-	image: `${portfolio.profile.website}/tino-muzambi.jpg`,
+	image: `${portfolio.profile.website}/tino-muzambi-graduation.png`,
 	jobTitle: portfolio.experience[0].role,
 	description: portfolio.profile.summary,
 	email: `mailto:${portfolio.profile.email}`,
