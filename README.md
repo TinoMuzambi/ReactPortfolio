@@ -52,4 +52,4 @@ GitHub Actions runs the same commands using `npm ci`. The production build is de
 
 ## Design foundation
 
-The reference presentation is intentionally restrained: IBM Plex Sans, a slate-and-blue technical palette, structured evidence instead of decorative cards, visible keyboard focus, reduced-motion support and print styles. The content, routes and accessibility semantics are independent of those tokens so alternate visual treatments can replace `app/globals.css` without duplicating data or weakening machine readability.
+This branch uses the “Decision Files” direction: Roboto Flex, a frost/blueprint/ultraviolet palette, and a project-first master/detail layout. Stable `/work/[slug]` routes show constraint-to-decision traces, supported evidence and explicitly labelled unknowns. The content, routes and accessibility semantics remain independent of the visual tokens.

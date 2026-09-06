@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import "@fontsource-variable/ibm-plex-sans";
+import "@fontsource-variable/roboto-flex";
 
 import { personJsonLd } from "@/lib/public-data";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 		template: "%s — Tino Muzambi",
 	},
 	description,
-	applicationName: "Tino Muzambi Portfolio",
+	applicationName: "Tino Muzambi — Decision Files",
 	authors: [{ name: "Tino Muzambi", url: siteUrl }],
 	creator: "Tino Muzambi",
 	publisher: "Tino Muzambi",
@@ -90,7 +90,7 @@ export const viewport: Viewport = {
 	width: "device-width",
 	initialScale: 1,
 	colorScheme: "light",
-	themeColor: "#f7f9fc",
+	themeColor: "#F6F8FB",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

@@ -1,4 +1,5 @@
 import { portfolio, selectedProjects } from "@/content/portfolio";
+import { caseStudies } from "@/content/case-studies";
 
 export const contentSnapshotDate = "2026-09-06";
 
@@ -23,6 +24,7 @@ export const projectsPayload = {
 	owner: portfolio.profile.name,
 	count: portfolio.projects.length,
 	projects: portfolio.projects,
+	decisionFiles: caseStudies,
 } as const;
 
 export const personJsonLd = {

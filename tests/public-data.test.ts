@@ -2,11 +2,13 @@ import { describe, expect, it } from "vitest";
 
 import { portfolio, selectedProjects } from "@/content/portfolio";
 import { projectsPayload, resumePayload } from "@/lib/public-data";
+import { caseStudies } from "@/content/case-studies";
 
 describe("machine-readable portfolio data", () => {
 	it("projects output derives from canonical project content", () => {
 		expect(projectsPayload.count).toBe(portfolio.projects.length);
 		expect(projectsPayload.projects).toBe(portfolio.projects);
+		expect(projectsPayload.decisionFiles).toBe(caseStudies);
 	});
 
 	it("résumé output derives from canonical profile and selections", () => {

@@ -6,11 +6,15 @@ Tino Muzambi is a full-stack web developer based in Cape Town, South Africa. Thi
 
 - Portfolio: https://tinomuzambi.com/
 - Contact: https://tinomuzambi.com/contact
+- MusicRecPathSignatures decision file: https://tinomuzambi.com/work/music-rec-path-signatures
+- Advice decision file: https://tinomuzambi.com/work/advice
+- Clock In/Out decision file: https://tinomuzambi.com/work/clock-in-out
+- ReComments decision file: https://tinomuzambi.com/work/recomments
 
 ## Structured resources
 
 - Résumé, experience, education and skills: https://tinomuzambi.com/resume.json
-- Complete project catalogue: https://tinomuzambi.com/projects.json
+- Complete project catalogue and selected decision traces: https://tinomuzambi.com/projects.json
 
 ## Preferred facts
 
