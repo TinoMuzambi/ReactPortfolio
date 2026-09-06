@@ -1,205 +1,215 @@
-import Image from "next/image";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { portfolio, selectedProjects } from "@/content/portfolio";
 
-const primaryExperience = portfolio.experience.slice(0, 8);
+const visibleExperience = portfolio.experience.slice(0, 7);
 const higherEducation = portfolio.education.slice(0, 3);
 
-function TextLink({ href, children }: Readonly<{ href: string; children: string }>) {
-	const external = href.startsWith("http");
-
+function ExternalLink({ href, children }: Readonly<{ href: string; children: string }>) {
 	return (
-		<a
-			className="text-link"
-			href={href}
-			target={external ? "_blank" : undefined}
-			rel={external ? "noreferrer" : undefined}
-		>
+		<a href={href} target="_blank" rel="me noreferrer">
 			{children}
-			{external ? <span className="sr-only"> (opens in a new tab)</span> : null}
+			<span className="sr-only"> (opens in a new tab)</span>
 		</a>
 	);
 }
 
+function Source({ children }: Readonly<{ children: ReactNode }>) {
+	return (
+		<details className="source-disclosure">
+			<summary>Show source</summary>
+			<div>{children}</div>
+		</details>
+	);
+}
+
 export default function Home() {
+	const currentRole = portfolio.experience[0];
+	const currentStudy = portfolio.education[0];
+
 	return (
 		<>
-			<a className="skip-link" href="#main-content">
-				Skip to main content
-			</a>
-			<header className="site-header">
-				<div className="shell flex items-center justify-between gap-6 py-5">
-					<Link className="wordmark" href="/" aria-label="Tino Muzambi, home">
-						TM
-					</Link>
-					<nav aria-label="Primary navigation">
-						<ul className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 text-sm">
-							<li>
-								<a href="#experience">Experience</a>
-							</li>
-							<li>
-								<a href="#work">Work</a>
-							</li>
-							<li>
-								<a href="#education">Education</a>
-							</li>
-							<li>
-								<Link href="/contact">Contact</Link>
-							</li>
-						</ul>
-					</nav>
-				</div>
+			<a className="skip-link" href="#main-content">Skip to main content</a>
+
+			<aside className="name-spine" aria-hidden="true">
+				<span>Tino Muzambi</span>
+			</aside>
+
+			<header className="mobile-header">
+				<Link href="/">Tino Muzambi</Link>
+				<a href={`mailto:${portfolio.profile.email}`}>Email</a>
 			</header>
 
-			<main id="main-content">
-				<section className="shell hero" aria-labelledby="intro-title">
-					<div className="hero-copy">
-						<p className="role-line">{portfolio.profile.role}</p>
-						<h1 id="intro-title">{portfolio.profile.name}</h1>
-						<p className="hero-headline">{portfolio.profile.headline}</p>
-						<p className="hero-summary">{portfolio.profile.summary}</p>
-						<div className="flex flex-wrap gap-x-5 gap-y-3">
-							<TextLink href={`mailto:${portfolio.profile.email}`}>Email Tino</TextLink>
-							{portfolio.profile.links.map((link) => (
-								<TextLink href={link.href} key={link.label}>
-									{link.label}
-								</TextLink>
-							))}
+			<aside className="action-rail" aria-label="Contact and profile links">
+				<p>Let’s talk</p>
+				<a href={`mailto:${portfolio.profile.email}`}>Email</a>
+				<ExternalLink href="https://github.com/TinoMuzambi">GitHub</ExternalLink>
+				<ExternalLink href="https://linkedin.com/in/tinomuzambi">LinkedIn</ExternalLink>
+				<Link href="/resume.json">Résumé</Link>
+			</aside>
+
+			<main className="profile-main" id="main-content">
+				<section className="answer-section opening-answer" aria-labelledby="current-question">
+					<p className="short-answer">{portfolio.profile.location}</p>
+					<h1 className="sr-only">{portfolio.profile.name}</h1>
+					<h2 id="current-question">What is Tino doing now?</h2>
+					<p className="answer-lead">
+						{currentRole.role} at {currentRole.organisation}, working across full-stack
+						product engineering and applied data.
+					</p>
+					<div className="current-facts">
+						<div>
+							<p>Current role</p>
+							<strong>{currentRole.role}</strong>
+							<span>{currentRole.organisation} · {currentRole.period}</span>
+						</div>
+						<div>
+							<p>Current study record</p>
+							<strong>{currentStudy.qualification}</strong>
+							<span>{currentStudy.institution} · {currentStudy.period}</span>
 						</div>
 					</div>
-
-					<figure className="portrait-frame">
-						<Image
-							priority
-							src="/tino-muzambi.jpg"
-							alt="Portrait of Tino Muzambi"
-							width={1376}
-							height={1376}
-							sizes="(max-width: 768px) 45vw, 280px"
-						/>
-						<figcaption>{portfolio.profile.location}</figcaption>
-					</figure>
+					<Source>
+						<p>
+							These titles and dates come from Tino’s public portfolio record. The OVEX
+							role has no public project details, so this design does not infer them.
+						</p>
+					</Source>
 				</section>
 
-				<section className="shell section" id="experience" aria-labelledby="experience-title">
-					<div className="section-heading">
-						<h2 id="experience-title">Experience</h2>
-						<p>A chronological record of product delivery, technical leadership and teaching.</p>
+				<section className="answer-section" aria-labelledby="impact-question">
+					<p className="short-answer">Selected outcomes</p>
+					<h2 id="impact-question">Which work changed something?</h2>
+					<div className="outcome-list">
+						<article>
+							<strong>5,000+</strong>
+							<h3>students served</h3>
+							<p>A personalised Next.js support dashboard for UCT Commerce students.</p>
+							<Source><p>UCT Academic Development Programme role, December 2021–December 2023.</p></Source>
+						</article>
+						<article>
+							<strong>38+</strong>
+							<h3>research projects aligned</h3>
+							<p>Data standards developed through the DS-I Africa working group.</p>
+							<Source><p>University of Cape Town Web Developer role, February 2023–May 2025.</p></Source>
+						</article>
+						<article>
+							<strong>50+</strong>
+							<h3>cloud learners supported</h3>
+							<p>AWS re/Start training co-facilitated during a Vodacom internship.</p>
+							<Source><p>Vodacom Solutions Management internship, February 2022–February 2023.</p></Source>
+						</article>
 					</div>
-					<ol className="timeline">
-						{primaryExperience.map((entry) => (
+					<p className="evidence-caveat">
+						These figures are self-published portfolio claims and should be confirmed
+						during a hiring process.
+					</p>
+				</section>
+
+				<section className="answer-section" id="work" aria-labelledby="work-question">
+					<p className="short-answer">Public evidence</p>
+					<h2 id="work-question">Where can I inspect the work?</h2>
+					<div className="work-list">
+						{selectedProjects.map((project) => (
+							<article id={project.id} key={project.id}>
+								<div className="work-heading">
+									<h3>{project.name}</h3>
+									<p>{project.technologies.slice(0, 4).join(" · ")}</p>
+								</div>
+								<p>{project.summary}</p>
+								<div className="work-links">
+									{project.sourceUrl ? <ExternalLink href={project.sourceUrl}>Source code</ExternalLink> : null}
+									{project.liveUrl ? <ExternalLink href={project.liveUrl}>Live project</ExternalLink> : null}
+									{project.referenceUrl ? <ExternalLink href={project.referenceUrl}>Reference</ExternalLink> : null}
+								</div>
+							</article>
+						))}
+					</div>
+					<p className="section-tail">
+						All {portfolio.projects.length} projects are indexed in <Link href="/projects.json">projects.json</Link>.
+					</p>
+				</section>
+
+				<section className="answer-section" aria-labelledby="build-question">
+					<p className="short-answer">Capabilities with context</p>
+					<h2 id="build-question">How does he build?</h2>
+					<div className="capability-list">
+						{portfolio.skillGroups.map((group, index) => (
+							<article key={group.label}>
+								<h3>{group.label}</h3>
+								<p>{group.items.join(", ")}</p>
+								<Source>
+									<p>
+										See {index === 0 ? "MusicRecPathSignatures and Advice" : index === 1 ? "Advice and ReComments" : index === 2 ? "MusicRecPathSignatures and UCT roles" : "the linked repositories and professional chronology"}.
+									</p>
+								</Source>
+							</article>
+						))}
+					</div>
+				</section>
+
+				<section className="answer-section" id="experience" aria-labelledby="experience-question">
+					<p className="short-answer">Professional chronology</p>
+					<h2 id="experience-question">Where has he worked?</h2>
+					<ol className="role-list">
+						{visibleExperience.map((entry) => (
 							<li key={entry.id}>
-								<div className="timeline-date">{entry.period}</div>
-								<article>
+								<div>
 									<h3>{entry.role}</h3>
-									<p className="organisation">{entry.organisation}</p>
-									{entry.highlights.length > 0 ? (
-										<ul>
-											{entry.highlights.map((highlight) => (
-												<li key={highlight}>{highlight}</li>
-											))}
-										</ul>
-									) : null}
-								</article>
+									<p>{entry.organisation}</p>
+								</div>
+								<time>{entry.period}</time>
+								{entry.highlights.length ? (
+									<Source><ul>{entry.highlights.map((item) => <li key={item}>{item}</li>)}</ul></Source>
+								) : <p className="no-detail">No public project detail is listed.</p>}
 							</li>
 						))}
 					</ol>
-					<p className="machine-note">
-						The complete timeline is available in the <TextLink href="/resume.json">machine-readable résumé</TextLink>.
-					</p>
+					<p className="section-tail">The full record is available in <Link href="/resume.json">résumé JSON</Link>.</p>
 				</section>
 
-				<section className="shell section" id="work" aria-labelledby="work-title">
-					<div className="section-heading">
-						<h2 id="work-title">Selected work</h2>
-						<p>Projects spanning full-stack products, applied machine learning and data analysis.</p>
-					</div>
-					<div className="project-list">
-						{selectedProjects.map((project) => (
-							<article className="project" key={project.id}>
-								<div>
-									<h3>{project.name}</h3>
-									<p>{project.summary}</p>
-								</div>
-								<ul className="technology-list" aria-label={`${project.name} technologies`}>
-									{project.technologies.map((technology) => (
-										<li key={technology}>{technology}</li>
-									))}
-								</ul>
-								<div className="project-links">
-									{project.liveUrl ? <TextLink href={project.liveUrl}>View project</TextLink> : null}
-									{project.sourceUrl ? <TextLink href={project.sourceUrl}>Source code</TextLink> : null}
-									{project.referenceUrl ? <TextLink href={project.referenceUrl}>Documentation</TextLink> : null}
-								</div>
-							</article>
-						))}
-					</div>
-					<p className="machine-note">
-						Browse all {portfolio.projects.length} projects in <TextLink href="/projects.json">structured JSON</TextLink>.
-					</p>
-				</section>
-
-				<section className="shell section" aria-labelledby="capabilities-title">
-					<div className="section-heading">
-						<h2 id="capabilities-title">Capabilities</h2>
-						<p>An inventory of technologies used across professional, academic and personal work.</p>
-					</div>
-					<dl className="capabilities">
-						{portfolio.skillGroups.map((group) => (
-							<div key={group.label}>
-								<dt>{group.label}</dt>
-								<dd>{group.items.join(", ")}</dd>
-							</div>
-						))}
-					</dl>
-				</section>
-
-				<section className="shell section" id="education" aria-labelledby="education-title">
-					<div className="section-heading">
-						<h2 id="education-title">Education</h2>
-						<p>Computer science foundations with current postgraduate work in data science.</p>
-					</div>
-					<div className="education-list">
+				<section className="answer-section" id="education" aria-labelledby="education-question">
+					<p className="short-answer">Education</p>
+					<h2 id="education-question">What has he studied?</h2>
+					<div className="study-list">
 						{higherEducation.map((item) => (
 							<article key={item.id}>
-								<p className="education-date">{item.period}</p>
+								<time>{item.period}</time>
 								<h3>{item.qualification}</h3>
-								<p className="organisation">{item.institution}</p>
-								<ul>
-									{item.details.map((detail) => (
-										<li key={detail}>{detail}</li>
-									))}
-								</ul>
+								<p>{item.institution}</p>
+								<Source><ul>{item.details.map((detail) => <li key={detail}>{detail}</li>)}</ul></Source>
 							</article>
 						))}
 					</div>
 				</section>
 
-				<section className="contact-strip" aria-labelledby="contact-title">
-					<div className="shell contact-inner">
-						<div>
-							<h2 id="contact-title">Start a conversation</h2>
-							<p>The most reliable way to reach Tino is email.</p>
-						</div>
-						<a className="contact-link" href={`mailto:${portfolio.profile.email}`}>
-							{portfolio.profile.email}
-						</a>
-					</div>
+				<section className="answer-section machine-answer" aria-labelledby="machine-question">
+					<p className="short-answer">For agents and ATS tools</p>
+					<h2 id="machine-question">Can a machine read this?</h2>
+					<p className="answer-lead">
+						Yes. The same canonical content is published as plain text, JSON and semantic
+						HTML, with Person structured data and stable URLs.
+					</p>
+					<nav aria-label="Machine-readable portfolio resources">
+						<Link href="/llms.txt">llms.txt</Link>
+						<Link href="/resume.json">Résumé JSON</Link>
+						<Link href="/projects.json">Projects JSON</Link>
+						<Link href="/sitemap.xml">Sitemap</Link>
+					</nav>
+				</section>
+
+				<section className="answer-section contact-answer" aria-labelledby="contact-question">
+					<p className="short-answer">Direct contact</p>
+					<h2 id="contact-question">What is the next step?</h2>
+					<p className="answer-lead">Send the role, problem or collaboration brief.</p>
+					<a className="large-email" href={`mailto:${portfolio.profile.email}`}>{portfolio.profile.email}</a>
 				</section>
 			</main>
 
-			<footer className="site-footer">
-				<div className="shell flex flex-wrap items-center justify-between gap-4 py-8 text-sm">
-					<p>© {new Date().getUTCFullYear()} {portfolio.profile.name}</p>
-					<nav aria-label="Machine-readable resources">
-						<ul className="flex flex-wrap gap-5">
-							<li><Link href="/llms.txt">llms.txt</Link></li>
-							<li><Link href="/resume.json">Résumé JSON</Link></li>
-							<li><Link href="/projects.json">Projects JSON</Link></li>
-						</ul>
-					</nav>
-				</div>
+			<footer className="plain-footer">
+				<p>© {new Date().getUTCFullYear()} {portfolio.profile.name}</p>
+				<p>Built with Next.js, TypeScript and Tailwind CSS.</p>
 			</footer>
 		</>
 	);
