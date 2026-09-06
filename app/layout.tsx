@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "@fontsource-variable/ibm-plex-sans";
+import "@fontsource/ibm-plex-sans-condensed/500.css";
+import "@fontsource/ibm-plex-sans-condensed/600.css";
+import "@fontsource/ibm-plex-sans-condensed/700.css";
 
 import { personJsonLd } from "@/lib/public-data";
 
@@ -90,7 +93,7 @@ export const viewport: Viewport = {
 	width: "device-width",
 	initialScale: 1,
 	colorScheme: "light",
-	themeColor: "#f7f9fc",
+	themeColor: "#12233f",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
