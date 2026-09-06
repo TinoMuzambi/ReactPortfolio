@@ -52,8 +52,8 @@ export default function Home() {
 							<p className="short-answer">{portfolio.profile.location}</p>
 							<h1 id="intro-title">Software systems, studied closely.</h1>
 							<p className="answer-lead">
-								I’m {portfolio.profile.name}, a full-stack developer working where product
-								engineering and applied data meet.
+								I’m {portfolio.profile.name}, a full-stack developer with strong software
+								foundations and fluent AI-assisted delivery.
 							</p>
 							<div className="intro-status" aria-label="Current professional and academic status">
 								<p><span>Now</span>{currentRole.role} at {currentRole.organisation}</p>
@@ -76,7 +76,7 @@ export default function Home() {
 								height={1254}
 								sizes="(max-width: 700px) calc(100vw - 2.5rem), (max-width: 1200px) 34vw, 430px"
 							/>
-							<figcaption>Full-stack engineering · Applied data</figcaption>
+							<figcaption>Foundations first · AI fluent</figcaption>
 						</figure>
 					</div>
 				</section>

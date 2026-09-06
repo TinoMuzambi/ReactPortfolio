@@ -5,7 +5,7 @@ export const portfolio: PortfolioContent = {
 		name: "Tino Muzambi",
 		role: "Full-Stack Web Developer",
 		headline:
-			"Full-stack developer in Cape Town, working where product engineering and applied data meet.",
+			"Full-stack developer in Cape Town, combining strong software foundations with fluent AI-assisted delivery.",
 		summary:
 			"I'm Tino, a full-stack developer based in Cape Town, South Africa. I build responsive web and mobile products, connect the systems behind them, and use data to ask better questions about how software behaves. I completed an MSc in Data Science at the University of Cape Town in 2026.",
 		location: "Cape Town, South Africa",

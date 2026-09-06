@@ -1,6 +1,6 @@
 # Tino Muzambi
 
-Tino Muzambi is a full-stack developer based in Cape Town, South Africa, working where product engineering and applied data meet. This is his professional portfolio. The site is intentionally static and its public professional data is available in both human-readable HTML and structured JSON.
+Tino Muzambi is a full-stack developer based in Cape Town, South Africa, combining strong software foundations with fluent AI-assisted delivery. This is his professional portfolio. The site is intentionally static and its public professional data is available in both human-readable HTML and structured JSON.
 
 ## Canonical pages
 

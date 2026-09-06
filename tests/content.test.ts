@@ -62,6 +62,9 @@ describe("canonical portfolio content", () => {
 
 	it("publishes AI-assisted engineering and home-server practice", () => {
 		const skills = portfolio.skillGroups.flatMap((group) => group.items);
+		expect(portfolio.profile.headline).toContain("strong software foundations");
+		expect(portfolio.profile.headline).toContain("AI-assisted delivery");
+		expect(portfolio.profile.headline.toLowerCase()).not.toContain("applied data");
 		expect(skills).toContain("Claude Code");
 		expect(skills).toContain("Codex");
 		expect(skills).toContain("Home server administration");

@@ -9,7 +9,7 @@ import "./globals.css";
 
 const siteUrl = "https://tinomuzambi.com";
 const description =
-	"Tino Muzambi is a full-stack developer in Cape Town working across product engineering, web and mobile applications, and applied data.";
+	"Tino Muzambi is a full-stack developer in Cape Town with strong software foundations and fluent AI-assisted delivery.";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteUrl),
