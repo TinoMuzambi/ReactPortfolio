@@ -328,7 +328,7 @@
 
 .margin-note {
 	margin: 1.2rem 0 0;
-	color: color-mix(in srgb, var(--color-graphite) 63%, transparent);
+	color: color-mix(in srgb, var(--color-graphite) 74%, transparent);
 	font-size: 0.85rem;
 	line-height: 1.65;
 }
@@ -493,7 +493,7 @@
 .experience-heading p,
 .experience-heading time {
 	margin: 0.15rem 0 0;
-	color: color-mix(in srgb, var(--color-graphite) 65%, transparent);
+	color: color-mix(in srgb, var(--color-graphite) 74%, transparent);
 }
 
 .experience-heading time {
@@ -529,7 +529,7 @@
 
 .quiet-note {
 	margin: 0.9rem 0 0;
-	color: color-mix(in srgb, var(--color-graphite) 58%, transparent);
+	color: color-mix(in srgb, var(--color-graphite) 74%, transparent);
 	font-style: italic;
 }
 
@@ -580,7 +580,7 @@
 }
 
 .education-records time {
-	color: color-mix(in srgb, var(--color-graphite) 62%, transparent);
+	color: color-mix(in srgb, var(--color-graphite) 74%, transparent);
 	font-size: 0.88rem;
 }
 
