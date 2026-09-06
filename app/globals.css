@@ -280,13 +280,6 @@
 	object-fit: cover;
 }
 
-.portrait-card figcaption {
-	padding: 0.85rem 1rem;
-	border-top: 2px solid var(--color-ink);
-	font-size: 0.82rem;
-	font-weight: 650;
-}
-
 .work-list h3,
 .capability-list h3,
 .practice-list h3,
@@ -722,11 +715,6 @@
 
 	.portrait-card {
 		width: 8.75rem;
-	}
-
-	.portrait-card figcaption {
-		padding: 0.45rem 0.55rem;
-		font-size: 0.67rem;
 	}
 
 	.role-list > li {

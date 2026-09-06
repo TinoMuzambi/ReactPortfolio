@@ -67,7 +67,7 @@ export default function Home() {
 							</div>
 						</div>
 
-						<figure className="portrait-card">
+						<div className="portrait-card">
 							<Image
 								priority
 								src="/tino-muzambi-graduation.png"
@@ -76,8 +76,7 @@ export default function Home() {
 								height={1254}
 								sizes="(max-width: 700px) calc(100vw - 2.5rem), (max-width: 1200px) 34vw, 430px"
 							/>
-							<figcaption>Foundations first · AI fluent</figcaption>
-						</figure>
+						</div>
 					</div>
 				</section>
 
