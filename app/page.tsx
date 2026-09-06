@@ -59,8 +59,8 @@ export default function Home() {
 					<h1 className="sr-only">{portfolio.profile.name}</h1>
 					<h2 id="current-question">What is Tino doing now?</h2>
 					<p className="answer-lead">
-						{currentRole.role} at {currentRole.organisation}, working across full-stack
-						product engineering and applied data.
+						{currentRole.role} at {currentRole.organisation}. His broader public record
+						spans full-stack product engineering and applied data.
 					</p>
 					<div className="current-facts">
 						<div>
@@ -139,13 +139,14 @@ export default function Home() {
 					<p className="short-answer">Capabilities with context</p>
 					<h2 id="build-question">How does he build?</h2>
 					<div className="capability-list">
-						{portfolio.skillGroups.map((group, index) => (
+						{portfolio.skillGroups.map((group) => (
 							<article key={group.label}>
 								<h3>{group.label}</h3>
 								<p>{group.items.join(", ")}</p>
 								<Source>
 									<p>
-										See {index === 0 ? "MusicRecPathSignatures and Advice" : index === 1 ? "Advice and ReComments" : index === 2 ? "MusicRecPathSignatures and UCT roles" : "the linked repositories and professional chronology"}.
+										This is a self-published skills inventory. The selected work above provides
+										inspectable evidence for current tools; confirm the recency of other items.
 									</p>
 								</Source>
 							</article>
