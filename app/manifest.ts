@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
 		description: "Professional portfolio for Tino Muzambi.",
 		start_url: "/",
 		display: "standalone",
-		background_color: "#f7f9fc",
-		theme_color: "#f7f9fc",
+		background_color: "#f3f7f6",
+		theme_color: "#f3f7f6",
 		icons: [
 			{ src: "/logo192.png", sizes: "192x192", type: "image/png" },
 			{ src: "/logo512.png", sizes: "512x512", type: "image/png" },

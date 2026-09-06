@@ -50,6 +50,6 @@ npm run build
 
 GitHub Actions runs the same commands using `npm ci`. The production build is deterministic and does not need fixture flags or secrets.
 
-## Design foundation
+## Cape Lines design
 
-The reference presentation is intentionally restrained: IBM Plex Sans, a slate-and-blue technical palette, structured evidence instead of decorative cards, visible keyboard focus, reduced-motion support and print styles. The content, routes and accessibility semantics are independent of those tokens so alternate visual treatments can replace `app/globals.css` without duplicating data or weakening machine readability.
+The presentation uses locally packaged Schibsted Grotesk and a Cape-inspired palette. Its three continuous routes—Build, Data and Lead—connect only to roles, study, outcomes and projects supported by the canonical content. A sticky identity and contact rail keeps orientation quiet while the evidence map carries the visual identity. The single line-draw load sequence and interaction highlighting both respect reduced-motion preferences; print styles remove navigation and map graphics without removing their associated text.

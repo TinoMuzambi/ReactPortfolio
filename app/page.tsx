@@ -1,10 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import CareerMap from "@/components/CareerMap";
 import { portfolio, selectedProjects } from "@/content/portfolio";
 
-const primaryExperience = portfolio.experience.slice(0, 8);
 const higherEducation = portfolio.education.slice(0, 3);
+
+const projectRoutes: Readonly<Record<string, readonly string[]>> = {
+	"music-rec-path-signatures": ["Build", "Data"],
+	advice: ["Build", "Data"],
+	"clock-in-out": ["Data"],
+	recomments: ["Build"],
+};
 
 function TextLink({ href, children }: Readonly<{ href: string; children: string }>) {
 	const external = href.startsWith("http");
@@ -23,184 +30,178 @@ function TextLink({ href, children }: Readonly<{ href: string; children: string 
 }
 
 export default function Home() {
+	const currentPosition = portfolio.experience[0];
+
 	return (
 		<>
 			<a className="skip-link" href="#main-content">
 				Skip to main content
 			</a>
-			<header className="site-header">
-				<div className="shell flex items-center justify-between gap-6 py-5">
-					<Link className="wordmark" href="/" aria-label="Tino Muzambi, home">
-						TM
-					</Link>
-					<nav aria-label="Primary navigation">
-						<ul className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 text-sm">
-							<li>
-								<a href="#experience">Experience</a>
-							</li>
-							<li>
-								<a href="#work">Work</a>
-							</li>
-							<li>
-								<a href="#education">Education</a>
-							</li>
-							<li>
-								<Link href="/contact">Contact</Link>
-							</li>
+			<div className="site-frame">
+				<aside className="identity-rail">
+					<div>
+						<Link className="rail-home" href="/" aria-label="Tino Muzambi, home">
+							TM
+						</Link>
+						<figure className="rail-portrait">
+							<Image
+								priority
+								src="/tino-muzambi.jpg"
+								alt="Portrait of Tino Muzambi"
+								width={1376}
+								height={1376}
+								sizes="(max-width: 1024px) 112px, 152px"
+							/>
+						</figure>
+						<p className="identity-role">{portfolio.profile.role}</p>
+						<h1>{portfolio.profile.name}</h1>
+						<p className="identity-summary">{portfolio.profile.headline}</p>
+
+						<dl className="identity-facts">
+							<div>
+								<dt>Based in</dt>
+								<dd>{portfolio.profile.location}</dd>
+							</div>
+							<div>
+								<dt>Current role</dt>
+								<dd>
+									{currentPosition.role}, {currentPosition.organisation}
+								</dd>
+							</div>
+						</dl>
+					</div>
+
+					<nav className="rail-nav" aria-label="On this page">
+						<ul>
+							<li><a href="#map">Career map</a></li>
+							<li><a href="#work">Selected work</a></li>
+							<li><a href="#capabilities">Capabilities</a></li>
+							<li><a href="#education">Education</a></li>
 						</ul>
 					</nav>
-				</div>
-			</header>
 
-			<main id="main-content">
-				<section className="shell hero" aria-labelledby="intro-title">
-					<div className="hero-copy">
-						<p className="role-line">{portfolio.profile.role}</p>
-						<h1 id="intro-title">{portfolio.profile.name}</h1>
-						<p className="hero-headline">{portfolio.profile.headline}</p>
-						<p className="hero-summary">{portfolio.profile.summary}</p>
-						<div className="flex flex-wrap gap-x-5 gap-y-3">
-							<TextLink href={`mailto:${portfolio.profile.email}`}>Email Tino</TextLink>
-							{portfolio.profile.links.map((link) => (
-								<TextLink href={link.href} key={link.label}>
-									{link.label}
-								</TextLink>
-							))}
-						</div>
-					</div>
-
-					<figure className="portrait-frame">
-						<Image
-							priority
-							src="/tino-muzambi.jpg"
-							alt="Portrait of Tino Muzambi"
-							width={1376}
-							height={1376}
-							sizes="(max-width: 768px) 45vw, 280px"
-						/>
-						<figcaption>{portfolio.profile.location}</figcaption>
-					</figure>
-				</section>
-
-				<section className="shell section" id="experience" aria-labelledby="experience-title">
-					<div className="section-heading">
-						<h2 id="experience-title">Experience</h2>
-						<p>A chronological record of product delivery, technical leadership and teaching.</p>
-					</div>
-					<ol className="timeline">
-						{primaryExperience.map((entry) => (
-							<li key={entry.id}>
-								<div className="timeline-date">{entry.period}</div>
-								<article>
-									<h3>{entry.role}</h3>
-									<p className="organisation">{entry.organisation}</p>
-									{entry.highlights.length > 0 ? (
-										<ul>
-											{entry.highlights.map((highlight) => (
-												<li key={highlight}>{highlight}</li>
-											))}
-										</ul>
-									) : null}
-								</article>
-							</li>
-						))}
-					</ol>
-					<p className="machine-note">
-						The complete timeline is available in the <TextLink href="/resume.json">machine-readable résumé</TextLink>.
-					</p>
-				</section>
-
-				<section className="shell section" id="work" aria-labelledby="work-title">
-					<div className="section-heading">
-						<h2 id="work-title">Selected work</h2>
-						<p>Projects spanning full-stack products, applied machine learning and data analysis.</p>
-					</div>
-					<div className="project-list">
-						{selectedProjects.map((project) => (
-							<article className="project" key={project.id}>
-								<div>
-									<h3>{project.name}</h3>
-									<p>{project.summary}</p>
-								</div>
-								<ul className="technology-list" aria-label={`${project.name} technologies`}>
-									{project.technologies.map((technology) => (
-										<li key={technology}>{technology}</li>
-									))}
-								</ul>
-								<div className="project-links">
-									{project.liveUrl ? <TextLink href={project.liveUrl}>View project</TextLink> : null}
-									{project.sourceUrl ? <TextLink href={project.sourceUrl}>Source code</TextLink> : null}
-									{project.referenceUrl ? <TextLink href={project.referenceUrl}>Documentation</TextLink> : null}
-								</div>
-							</article>
-						))}
-					</div>
-					<p className="machine-note">
-						Browse all {portfolio.projects.length} projects in <TextLink href="/projects.json">structured JSON</TextLink>.
-					</p>
-				</section>
-
-				<section className="shell section" aria-labelledby="capabilities-title">
-					<div className="section-heading">
-						<h2 id="capabilities-title">Capabilities</h2>
-						<p>An inventory of technologies used across professional, academic and personal work.</p>
-					</div>
-					<dl className="capabilities">
-						{portfolio.skillGroups.map((group) => (
-							<div key={group.label}>
-								<dt>{group.label}</dt>
-								<dd>{group.items.join(", ")}</dd>
-							</div>
-						))}
-					</dl>
-				</section>
-
-				<section className="shell section" id="education" aria-labelledby="education-title">
-					<div className="section-heading">
-						<h2 id="education-title">Education</h2>
-						<p>Computer science foundations with current postgraduate work in data science.</p>
-					</div>
-					<div className="education-list">
-						{higherEducation.map((item) => (
-							<article key={item.id}>
-								<p className="education-date">{item.period}</p>
-								<h3>{item.qualification}</h3>
-								<p className="organisation">{item.institution}</p>
-								<ul>
-									{item.details.map((detail) => (
-										<li key={detail}>{detail}</li>
-									))}
-								</ul>
-							</article>
-						))}
-					</div>
-				</section>
-
-				<section className="contact-strip" aria-labelledby="contact-title">
-					<div className="shell contact-inner">
-						<div>
-							<h2 id="contact-title">Start a conversation</h2>
-							<p>The most reliable way to reach Tino is email.</p>
-						</div>
-						<a className="contact-link" href={`mailto:${portfolio.profile.email}`}>
+					<div className="rail-contact">
+						<a className="rail-email" href={`mailto:${portfolio.profile.email}`}>
 							{portfolio.profile.email}
 						</a>
+						<div className="rail-links">
+							{portfolio.profile.links.map((link) => (
+								<TextLink href={link.href} key={link.label}>{link.label}</TextLink>
+							))}
+							<Link className="text-link" href="/contact">Contact page</Link>
+						</div>
 					</div>
-				</section>
-			</main>
+				</aside>
 
-			<footer className="site-footer">
-				<div className="shell flex flex-wrap items-center justify-between gap-4 py-8 text-sm">
-					<p>© {new Date().getUTCFullYear()} {portfolio.profile.name}</p>
-					<nav aria-label="Machine-readable resources">
-						<ul className="flex flex-wrap gap-5">
-							<li><Link href="/llms.txt">llms.txt</Link></li>
-							<li><Link href="/resume.json">Résumé JSON</Link></li>
-							<li><Link href="/projects.json">Projects JSON</Link></li>
-						</ul>
-					</nav>
+				<div className="flow-column">
+					<main id="main-content">
+						<section className="map-section" id="map" aria-labelledby="map-title">
+							<header className="map-intro">
+								<p className="career-range">2019 to present</p>
+								<h2 id="map-title">Three routes through the work.</h2>
+								<p>
+									Build, Data and Lead trace the work Tino has published: roles,
+									study, projects and specific outcomes. Select a route to follow it;
+									the complete evidence always stays on the page.
+								</p>
+							</header>
+							<CareerMap />
+						</section>
+
+						<section className="content-section" id="work" aria-labelledby="work-title">
+							<header className="content-heading">
+								<h2 id="work-title">Selected evidence</h2>
+								<p>Four public projects that show different parts of the route.</p>
+							</header>
+
+							<div className="project-ledger">
+								{selectedProjects.map((project) => {
+									const routes = projectRoutes[project.id] ?? ["Build"];
+
+									return (
+										<article key={project.id}>
+											<p className="project-routes">{routes.join(" + ")}</p>
+											<div>
+												<h3>{project.name}</h3>
+												<p className="project-summary">{project.summary}</p>
+												<ul className="technology-list" aria-label={`${project.name} technologies`}>
+													{project.technologies.map((technology) => (
+														<li key={technology}>{technology}</li>
+													))}
+												</ul>
+												<div className="project-links">
+													{project.liveUrl ? <TextLink href={project.liveUrl}>View project</TextLink> : null}
+													{project.sourceUrl ? <TextLink href={project.sourceUrl}>Source code</TextLink> : null}
+													{project.referenceUrl ? <TextLink href={project.referenceUrl}>Documentation</TextLink> : null}
+												</div>
+											</div>
+										</article>
+									);
+								})}
+							</div>
+
+							<p className="machine-note">
+								Browse all {portfolio.projects.length} projects in <TextLink href="/projects.json">structured JSON</TextLink>.
+							</p>
+						</section>
+
+						<section className="content-section" id="capabilities" aria-labelledby="capabilities-title">
+							<header className="content-heading">
+								<h2 id="capabilities-title">Capabilities</h2>
+								<p>Technologies evidenced across professional, academic and personal work.</p>
+							</header>
+							<dl className="capability-ledger">
+								{portfolio.skillGroups.map((group) => (
+									<div key={group.label}>
+										<dt>{group.label}</dt>
+										<dd>{group.items.join(", ")}</dd>
+									</div>
+								))}
+							</dl>
+						</section>
+
+						<section className="content-section" id="education" aria-labelledby="education-title">
+							<header className="content-heading">
+								<h2 id="education-title">Formal study</h2>
+								<p>Computer science foundations followed by postgraduate data-science research.</p>
+							</header>
+							<div className="education-ledger">
+								{higherEducation.map((item) => (
+									<article key={item.id}>
+										<p className="education-period">{item.period}</p>
+										<div>
+											<h3>{item.qualification}</h3>
+											<p className="education-institution">{item.institution}</p>
+											<ul>
+												{item.details.map((detail) => <li key={detail}>{detail}</li>)}
+											</ul>
+										</div>
+									</article>
+								))}
+							</div>
+						</section>
+
+						<section className="contact-panel" aria-labelledby="contact-title">
+							<div>
+								<h2 id="contact-title">Talk about the work.</h2>
+								<p>For roles, engineering collaboration or project enquiries, email Tino directly.</p>
+							</div>
+							<a href={`mailto:${portfolio.profile.email}`}>{portfolio.profile.email}</a>
+						</section>
+					</main>
+
+					<footer className="site-footer">
+						<p>© {new Date().getUTCFullYear()} {portfolio.profile.name}</p>
+						<nav aria-label="Machine-readable resources">
+							<ul>
+								<li><Link href="/llms.txt">llms.txt</Link></li>
+								<li><Link href="/resume.json">Résumé JSON</Link></li>
+								<li><Link href="/projects.json">Projects JSON</Link></li>
+							</ul>
+						</nav>
+					</footer>
 				</div>
-			</footer>
+			</div>
 		</>
 	);
 }
