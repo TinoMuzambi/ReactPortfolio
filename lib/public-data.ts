@@ -13,6 +13,7 @@ export const resumePayload = {
 	selectedProjects,
 	resources: {
 		allProjects: `${portfolio.profile.website}/projects.json`,
+		projectArchive: "https://projects.tinomuzambi.com",
 		plainTextGuide: `${portfolio.profile.website}/llms.txt`,
 	},
 } as const;

@@ -14,6 +14,7 @@ export const portfolio: PortfolioContent = {
 		links: [
 			{ label: "GitHub", href: "https://github.com/TinoMuzambi" },
 			{ label: "LinkedIn", href: "https://linkedin.com/in/tinomuzambi" },
+			{ label: "Project archive", href: "https://projects.tinomuzambi.com" },
 			{ label: "Blog", href: "https://blog.tinomuzambi.com" },
 		],
 	},
@@ -156,7 +157,7 @@ export const portfolio: PortfolioContent = {
 			institution: "University of Cape Town",
 			period: "2024 – 2026",
 			details: [
-				"Completed in 2026 with a distinction in the coursework component; graduation is scheduled for March 2027.",
+				"Completed in 2026 with a distinction in the coursework component. Graduation is scheduled for March 2027.",
 				"Coursework included data visualisation, exploratory data analysis, supervised and unsupervised learning, simulation and optimisation, data science for industry, and machine learning.",
 				"Dissertation: fair and explainable music recommendation systems using path signatures and transformer architectures, with a focus on reducing algorithmic bias in content delivery.",
 			],
@@ -179,7 +180,7 @@ export const portfolio: PortfolioContent = {
 			details: [
 				"Coursework covered algorithms, data structures, databases, concurrent programming, networks, operating systems, software design, C++, Java, Python, mathematics and statistics.",
 				"Capstone: co-developed a searchable catalogue for rating Python learning resources.",
-				"Golden Key International Honour Society chapter award; Dean's Merit List in 2018 and 2020.",
+				"Golden Key International Honour Society chapter award. Dean's Merit List in 2018 and 2020.",
 			],
 		},
 		{
@@ -189,7 +190,7 @@ export const portfolio: PortfolioContent = {
 			period: "2013 – 2017",
 			details: [
 				"Studied Mathematics, Advanced Programme Mathematics, Physical Sciences, Information Technology and Accounting.",
-				"Four distinctions; highest achievement in Information Technology in 2017; top-ten achiever from 2013 to 2017.",
+				"Four distinctions. Highest achievement in Information Technology in 2017. Top-ten achiever from 2013 to 2017.",
 			],
 		},
 	],
@@ -490,12 +491,32 @@ export const portfolio: PortfolioContent = {
 			],
 		},
 		{
-			label: "Cloud and data",
-			items: ["AWS", "Azure", "Firebase", "Machine learning", "Data visualisation"],
+			label: "Cloud, data and systems",
+			items: [
+				"AWS",
+				"Azure",
+				"Firebase",
+				"Machine learning",
+				"Data visualisation",
+				"Linux",
+				"Home server administration",
+				"Networking",
+				"Backups",
+				"Monitoring",
+			],
 		},
 		{
-			label: "Delivery",
-			items: ["Git", "GitHub", "Vercel", "Netlify", "Ubuntu"],
+			label: "Delivery and AI tools",
+			items: [
+				"Git",
+				"GitHub",
+				"Vercel",
+				"Netlify",
+				"Claude Code",
+				"Codex",
+				"AI-assisted software delivery",
+				"Code review",
+			],
 		},
 	],
 };

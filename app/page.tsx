@@ -41,6 +41,7 @@ export default function Home() {
 				<a href={`mailto:${portfolio.profile.email}`}>Email</a>
 				<ExternalLink href="https://github.com/TinoMuzambi" identity>GitHub</ExternalLink>
 				<ExternalLink href="https://linkedin.com/in/tinomuzambi" identity>LinkedIn</ExternalLink>
+				<ExternalLink href="https://projects.tinomuzambi.com">Projects</ExternalLink>
 				<Link href="/resume.json">Résumé</Link>
 			</aside>
 
@@ -54,10 +55,6 @@ export default function Home() {
 								I’m {portfolio.profile.name}, a full-stack developer working where product
 								engineering and applied data meet.
 							</p>
-							<p className="opening-summary">
-								I build responsive web and mobile products, connect the systems behind them,
-								and use data to ask better questions about how software behaves.
-							</p>
 							<div className="intro-status" aria-label="Current professional and academic status">
 								<p><span>Now</span>{currentRole.role} at {currentRole.organisation}</p>
 								<p><span>Completed</span>MSc Data Science at the University of Cape Town</p>
@@ -66,6 +63,7 @@ export default function Home() {
 								<a className="primary-link" href="#work">Review selected work</a>
 								<ExternalLink href="https://github.com/TinoMuzambi" identity>GitHub</ExternalLink>
 								<ExternalLink href="https://linkedin.com/in/tinomuzambi" identity>LinkedIn</ExternalLink>
+								<ExternalLink href="https://projects.tinomuzambi.com">Projects</ExternalLink>
 							</div>
 						</div>
 
@@ -83,55 +81,40 @@ export default function Home() {
 					</div>
 				</section>
 
-				<section className="answer-section research-answer" id="research" aria-labelledby="research-question">
-					<p className="short-answer">Completed MSc research</p>
-					<h2 id="research-question">What did I investigate?</h2>
-					<p className="answer-lead">
-						My MSc examined fair and explainable music recommendation: how path
-						signatures and reproducible evaluation can help measure ranking quality,
-						diversity and bias.
-					</p>
-					<article className="research-record">
-						<div className="research-intro">
-							<p>MSc Data Science · 2024–2026</p>
-							<h3 aria-label={researchProject.name}>
-								MusicRec<wbr />Path<wbr />Signatures
-							</h3>
-							<p>{researchProject.summary}</p>
-							{researchProject.sourceUrl ? (
-								<ExternalLink href={researchProject.sourceUrl}>Explore the research repository</ExternalLink>
-							) : null}
-						</div>
-						<dl>
-							<div><dt>Focus</dt><dd>Fair and explainable music recommendation</dd></div>
-							<div><dt>Methods</dt><dd>Path signatures, transformer architectures, ranking and diversity metrics</dd></div>
-							<div><dt>Academic result</dt><dd>Completed in 2026, with a distinction in the coursework component</dd></div>
-						</dl>
-					</article>
-				</section>
-
 				<section className="answer-section" id="work" aria-labelledby="work-question">
 					<p className="short-answer">Selected public work</p>
 					<h2 id="work-question">What have I built and analysed?</h2>
 					<div className="work-list">
-						{selectedProjects.slice(1).map((project) => (
+						{selectedProjects.map((project) => (
 							<article id={project.id} key={project.id}>
 								<div className="work-heading">
-									<h3>{project.name}</h3>
+									<h3 aria-label={project.name}>
+										{project.id === researchProject.id ? (
+											<>MusicRec<wbr />Path<wbr />Signatures</>
+										) : project.name}
+									</h3>
 									<p>{project.technologies.slice(0, 5).join(" · ")}</p>
 								</div>
-								<p>{project.summary}</p>
-								<div className="work-links">
-									{project.sourceUrl ? <ExternalLink href={project.sourceUrl}>Source code</ExternalLink> : null}
-									{project.liveUrl ? <ExternalLink href={project.liveUrl}>Open project</ExternalLink> : null}
-									{project.referenceUrl ? <ExternalLink href={project.referenceUrl}>Documentation</ExternalLink> : null}
+								<div className="work-detail">
+									<p>{project.summary}</p>
+									{project.id === researchProject.id ? (
+										<p className="project-context">
+											MSc Data Science research completed in 2026 with a distinction in the coursework component.
+										</p>
+									) : null}
+									<div className="work-links">
+										{project.sourceUrl ? <ExternalLink href={project.sourceUrl}>Source code</ExternalLink> : null}
+										{project.liveUrl ? <ExternalLink href={project.liveUrl}>Open project</ExternalLink> : null}
+										{project.referenceUrl ? <ExternalLink href={project.referenceUrl}>Documentation</ExternalLink> : null}
+									</div>
 								</div>
 							</article>
 						))}
 					</div>
 					<p className="section-tail">
-						The research repository above and these three projects are the short list.
-						All {portfolio.projects.length} public projects are indexed in <Link href="/projects.json">projects.json</Link>.
+						For the wider archive of experiments, tutorials and earlier builds, visit{" "}
+						<ExternalLink href="https://projects.tinomuzambi.com">projects.tinomuzambi.com</ExternalLink>.
+						All {portfolio.projects.length} public projects are also indexed in <Link href="/projects.json">projects.json</Link>.
 					</p>
 				</section>
 
@@ -158,6 +141,35 @@ export default function Home() {
 				<section className="answer-section methods-answer" aria-labelledby="build-question">
 					<p className="short-answer">Working methods</p>
 					<h2 id="build-question">How do I work?</h2>
+					<div className="practice-list">
+						<article>
+							<h3>AI-assisted engineering</h3>
+							<div>
+								<p>
+									I use Claude Code and Codex throughout software delivery. They help me
+									understand repositories, plan changes, implement and refactor features,
+									generate tests, review diffs and document work.
+								</p>
+								<p>
+									My proficiency is in directing agentic coding workflows, not accepting output
+									unchecked. I set constraints, keep work scoped, inspect changes and verify
+									behaviour before treating a task as complete.
+								</p>
+							</div>
+						</article>
+						<article>
+							<h3>Home server operations</h3>
+							<div>
+								<p>I run and maintain a home server as a practical systems lab.</p>
+								<ul>
+									<li>Deploying and maintaining self-hosted services</li>
+									<li>Managing local networking and remote access</li>
+									<li>Planning storage, backups and recovery</li>
+									<li>Monitoring health, applying updates and troubleshooting failures</li>
+								</ul>
+							</div>
+						</article>
+					</div>
 					<div className="capability-list">
 						{portfolio.skillGroups.map((group) => (
 							<article key={group.label}>

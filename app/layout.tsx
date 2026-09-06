@@ -14,8 +14,8 @@ const description =
 export const metadata: Metadata = {
 	metadataBase: new URL(siteUrl),
 	title: {
-		default: "Tino Muzambi — Full-Stack Web Developer",
-		template: "%s — Tino Muzambi",
+		default: "Tino Muzambi | Full-Stack Web Developer",
+		template: "%s | Tino Muzambi",
 	},
 	description,
 	applicationName: "Tino Muzambi Portfolio",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: "profile",
 		url: siteUrl,
-		title: "Tino Muzambi — Full-Stack Web Developer",
+		title: "Tino Muzambi | Full-Stack Web Developer",
 		description,
 		siteName: "Tino Muzambi",
 		locale: "en_ZA",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary",
-		title: "Tino Muzambi — Full-Stack Web Developer",
+		title: "Tino Muzambi | Full-Stack Web Developer",
 		description,
 		images: ["/tino-muzambi-graduation.png"],
 	},

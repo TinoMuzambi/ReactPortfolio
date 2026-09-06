@@ -21,5 +21,8 @@ describe("machine-readable portfolio data", () => {
 		expect(resumePayload.resources.allProjects).toBe(
 			"https://tinomuzambi.com/projects.json"
 		);
+		expect(resumePayload.resources.projectArchive).toBe(
+			"https://projects.tinomuzambi.com"
+		);
 	});
 });

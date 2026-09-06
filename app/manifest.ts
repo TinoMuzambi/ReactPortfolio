@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-		name: "Tino Muzambi — Full-Stack Web Developer",
+		name: "Tino Muzambi | Full-Stack Web Developer",
 		short_name: "Tino Muzambi",
 		description: "Professional portfolio for Tino Muzambi.",
 		start_url: "/",

@@ -57,6 +57,25 @@ describe("canonical portfolio content", () => {
 		const masters = portfolio.education[0];
 		expect(masters.period).toBe("2024 – 2026");
 		expect(masters.details.join(" ")).toContain("Completed in 2026");
-		expect(masters.details.join(" ")).toContain("graduation is scheduled for March 2027");
+		expect(masters.details.join(" ")).toContain("Graduation is scheduled for March 2027");
+	});
+
+	it("publishes AI-assisted engineering and home-server practice", () => {
+		const skills = portfolio.skillGroups.flatMap((group) => group.items);
+		expect(skills).toContain("Claude Code");
+		expect(skills).toContain("Codex");
+		expect(skills).toContain("Home server administration");
+		expect(skills).toContain("Backups");
+	});
+
+	it("links to the wider project archive", () => {
+		expect(portfolio.profile.links).toContainEqual({
+			label: "Project archive",
+			href: "https://projects.tinomuzambi.com",
+		});
+	});
+
+	it("keeps semicolons and em dashes out of public content", () => {
+		expect(JSON.stringify(portfolio)).not.toMatch(/[;—]/);
 	});
 });

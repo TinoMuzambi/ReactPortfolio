@@ -158,23 +158,26 @@
 .answer-section h2,
 .contact-page h1 {
 	margin-top: 0;
-	font-family: var(--font-display);
-	font-variation-settings: "wdth" 88, "wght" 690;
 	letter-spacing: -0.062em;
 	line-height: 0.9;
 }
 
 .answer-section h1 {
-	max-width: 10ch;
-	margin-bottom: 2rem;
-	font-size: clamp(4.2rem, 7vw, 8rem);
+	max-width: 11ch;
+	margin-bottom: 1.5rem;
+	font-family: var(--font-sans);
+	font-size: clamp(3.8rem, 5.8vw, 6.7rem);
+	font-variation-settings: "wdth" 84, "wght" 760;
+	letter-spacing: -0.072em;
 }
 
 .answer-section h2,
 .contact-page h1 {
 	max-width: 14ch;
 	margin-bottom: 1.8rem;
+	font-family: var(--font-display);
 	font-size: clamp(3.5rem, 5.9vw, 6.6rem);
+	font-variation-settings: "wdth" 88, "wght" 690;
 }
 
 .answer-lead {
@@ -188,16 +191,19 @@
 }
 
 .opening-answer {
-	min-height: 100svh;
-	padding-top: clamp(4rem, 7vw, 7rem);
-	padding-bottom: clamp(4rem, 7vw, 7rem);
+	display: grid;
+	height: 100svh;
+	min-height: 42rem;
+	align-items: center;
+	padding-top: clamp(2rem, 4vh, 3.5rem);
+	padding-bottom: clamp(2rem, 4vh, 3.5rem);
 }
 
 .opening-grid {
 	display: grid;
-	grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
+	grid-template-columns: minmax(0, 1.3fr) minmax(17rem, 0.7fr);
 	gap: clamp(2.5rem, 6vw, 6.5rem);
-	align-items: end;
+	align-items: center;
 	width: min(100%, 76rem);
 }
 
@@ -205,14 +211,14 @@
 	animation: opening-arrive 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.opening-summary {
-	max-width: 52ch;
-	margin: 0;
+.opening-answer .answer-lead {
+	margin-bottom: 0;
+	font-size: clamp(1.2rem, 1.7vw, 1.65rem);
 }
 
 .intro-status {
 	display: grid;
-	margin-top: 2.5rem;
+	margin-top: 1.75rem;
 	border-top: 2px solid var(--color-ink);
 	border-bottom: 2px solid var(--color-ink);
 }
@@ -241,7 +247,7 @@
 	flex-wrap: wrap;
 	gap: 0.65rem 1.4rem;
 	align-items: center;
-	margin-top: 2rem;
+	margin-top: 1.5rem;
 	font-size: 0.9rem;
 	font-weight: 720;
 }
@@ -281,31 +287,9 @@
 	font-weight: 650;
 }
 
-.research-answer {
-	background: color-mix(in srgb, var(--color-lilac) 42%, white);
-}
-
-.research-record {
-	display: grid;
-	grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
-	margin-top: 3.25rem;
-	border: 2px solid var(--color-ink);
-	background: white;
-}
-
-.research-intro {
-	padding: clamp(1.5rem, 3.4vw, 3rem);
-}
-
-.research-intro > p:first-child {
-	margin: 0 0 2.5rem;
-	color: var(--color-plum);
-	font-weight: 700;
-}
-
-.research-intro h3,
 .work-list h3,
 .capability-list h3,
+.practice-list h3,
 .role-list h3,
 .study-list h3 {
 	margin: 0;
@@ -314,43 +298,6 @@
 	font-variation-settings: "wght" 680;
 	letter-spacing: -0.028em;
 	line-height: 1.2;
-}
-
-.research-intro h3 {
-	font-size: clamp(1.8rem, 2.5vw, 2.4rem);
-}
-
-.research-intro h3 + p {
-	max-width: 55ch;
-	margin-block: 1rem 1.8rem;
-}
-
-.research-intro a {
-	font-weight: 720;
-}
-
-.research-record dl {
-	margin: 0;
-	border-left: 2px solid var(--color-ink);
-}
-
-.research-record dl > div {
-	padding: 1.4rem 1.6rem;
-}
-
-.research-record dl > div + div {
-	border-top: 1px solid var(--color-ink);
-}
-
-.research-record dt {
-	margin-bottom: 0.35rem;
-	color: var(--color-plum);
-	font-size: 0.86rem;
-	font-weight: 750;
-}
-
-.research-record dd {
-	margin: 0;
 }
 
 .work-list {
@@ -374,14 +321,22 @@
 	font-weight: 680;
 }
 
-.work-list article > p {
+.work-detail > p:first-child {
 	max-width: 58ch;
 	margin: 0;
 }
 
+.project-context {
+	max-width: 58ch;
+	margin: 1rem 0 0;
+	padding-left: 0.9rem;
+	border-left: 0.3rem solid var(--color-aqua);
+	font-size: 0.9rem;
+	font-weight: 650;
+}
+
 .work-links {
-	grid-column: 2;
-	margin-top: 0;
+	margin-top: 1.1rem;
 }
 
 .section-tail {
@@ -443,6 +398,40 @@
 
 .methods-answer {
 	background: var(--color-interface);
+}
+
+.practice-list {
+	margin-top: 3.5rem;
+	border-top: 2px solid var(--color-ink);
+	background: white;
+}
+
+.practice-list article {
+	display: grid;
+	grid-template-columns: minmax(14rem, 0.7fr) minmax(20rem, 1.3fr);
+	gap: 2rem 3rem;
+	padding: 2rem;
+	border-right: 2px solid var(--color-ink);
+	border-bottom: 2px solid var(--color-ink);
+	border-left: 2px solid var(--color-ink);
+}
+
+.practice-list article > div > p {
+	max-width: 62ch;
+	margin: 0;
+}
+
+.practice-list article > div > p + p {
+	margin-top: 1rem;
+}
+
+.practice-list ul {
+	margin: 1rem 0 0;
+	padding-left: 1.2rem;
+}
+
+.practice-list li + li {
+	margin-top: 0.45rem;
 }
 
 .capability-list {
@@ -621,7 +610,7 @@
 	}
 
 	.answer-section h1 {
-		font-size: clamp(4rem, 6.8vw, 6.5rem);
+		font-size: clamp(3.6rem, 5.7vw, 5.8rem);
 	}
 }
 
@@ -672,40 +661,81 @@
 		padding: 4.5rem 1.25rem;
 	}
 
-	.answer-section h1,
 	.answer-section h2 {
 		font-size: clamp(3.35rem, 15vw, 5.4rem);
 	}
 
+	.answer-section h1 {
+		margin-bottom: 1rem;
+		font-size: clamp(2.85rem, 12.4vw, 3.8rem);
+		letter-spacing: -0.068em;
+	}
+
 	.opening-answer {
+		height: calc(100svh - 4.5rem);
 		min-height: 0;
-		padding-top: 3.75rem;
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
 	}
 
 	.opening-grid,
-	.research-record,
 	.work-list > article,
 	.role-list > li,
+	.practice-list article,
 	.capability-list,
 	.study-list {
 		grid-template-columns: 1fr;
 	}
 
+	.opening-grid {
+		gap: 1rem;
+	}
+
+	.opening-answer .short-answer {
+		margin-bottom: 0.55rem;
+	}
+
+	.opening-answer .answer-lead {
+		font-size: 1.02rem;
+		line-height: 1.42;
+	}
+
+	.intro-status {
+		margin-top: 1rem;
+	}
+
+	.intro-status p {
+		grid-template-columns: 5.4rem 1fr;
+		padding-block: 0.55rem;
+		font-size: 0.84rem;
+	}
+
+	.intro-links {
+		gap: 0.4rem 0.85rem;
+		margin-top: 0.85rem;
+		font-size: 0.8rem;
+	}
+
+	.primary-link {
+		padding: 0.45rem 0.65rem;
+	}
+
 	.portrait-card {
-		width: min(100%, 31rem);
+		width: 8.75rem;
 	}
 
-	.research-record dl {
-		border-top: 2px solid var(--color-ink);
-		border-left: 0;
-	}
-
-	.work-links {
-		grid-column: 1;
+	.portrait-card figcaption {
+		padding: 0.45rem 0.55rem;
+		font-size: 0.67rem;
 	}
 
 	.role-list > li {
 		gap: 1.4rem;
+	}
+
+	.practice-list article {
+		gap: 1rem;
+		padding: 1.4rem;
 	}
 
 	.role-heading {
