@@ -6,9 +6,13 @@ import { portfolio, selectedProjects } from "@/content/portfolio";
 const visibleExperience = portfolio.experience.slice(0, 7);
 const higherEducation = portfolio.education.slice(0, 3);
 
-function ExternalLink({ href, children }: Readonly<{ href: string; children: string }>) {
+function ExternalLink({
+	href,
+	children,
+	identity = false,
+}: Readonly<{ href: string; children: string; identity?: boolean }>) {
 	return (
-		<a href={href} target="_blank" rel="me noreferrer">
+		<a href={href} target="_blank" rel={identity ? "me noreferrer" : "noreferrer"}>
 			{children}
 			<span className="sr-only"> (opens in a new tab)</span>
 		</a>
@@ -44,8 +48,8 @@ export default function Home() {
 			<aside className="action-rail" aria-label="Contact and profile links">
 				<p>Let’s talk</p>
 				<a href={`mailto:${portfolio.profile.email}`}>Email</a>
-				<ExternalLink href="https://github.com/TinoMuzambi">GitHub</ExternalLink>
-				<ExternalLink href="https://linkedin.com/in/tinomuzambi">LinkedIn</ExternalLink>
+				<ExternalLink href="https://github.com/TinoMuzambi" identity>GitHub</ExternalLink>
+				<ExternalLink href="https://linkedin.com/in/tinomuzambi" identity>LinkedIn</ExternalLink>
 				<Link href="/resume.json">Résumé</Link>
 			</aside>
 
