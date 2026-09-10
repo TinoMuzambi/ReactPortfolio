@@ -1,8 +1,8 @@
 import { portfolio, selectedProjects } from "@/content/portfolio";
 
-export const contentSnapshotDate = "2026-09-06";
+export const contentSnapshotDate = "2026-09-10";
 
-export const resumePayload = {
+export const cvPayload = {
 	schemaVersion: "1.0",
 	asOf: contentSnapshotDate,
 	person: portfolio.profile,

@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 		canonical: "/",
 		types: {
 			"text/plain": "/llms.txt",
-			"application/json": "/resume.json",
+			"application/json": "/cv.json",
 		},
 	},
 	openGraph: {

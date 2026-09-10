@@ -5,6 +5,18 @@ import { portfolio, selectedProjects } from "@/content/portfolio";
 
 const visibleExperience = portfolio.experience.slice(0, 6);
 const higherEducation = portfolio.education.slice(0, 3);
+const workingToolkit = [
+	{ name: "TypeScript", src: "/tools/typescript.png" },
+	{ name: "React", src: "/tools/react.webp" },
+	{ name: "Node.js", src: "/tools/nodejs.png" },
+	{ name: "JavaScript", src: "/tools/javascript.png" },
+	{ name: "Python", src: "/tools/python.png" },
+	{ name: "MongoDB", src: "/tools/mongodb.png" },
+	{ name: "Git", src: "/tools/git.png" },
+	{ name: "GitHub", src: "/tools/github.png" },
+	{ name: "Ubuntu", src: "/tools/ubuntu.png" },
+	{ name: "Vercel", src: "/tools/vercel.png" },
+] as const;
 
 function ExternalLink({
 	href,
@@ -27,10 +39,6 @@ export default function Home() {
 		<>
 			<a className="skip-link" href="#main-content">Skip to main content</a>
 
-			<aside className="name-spine" aria-hidden="true">
-				<span>Tino Muzambi</span>
-			</aside>
-
 			<header className="mobile-header">
 				<Link href="/">Tino Muzambi</Link>
 				<a href={`mailto:${portfolio.profile.email}`}>Email</a>
@@ -42,25 +50,23 @@ export default function Home() {
 				<ExternalLink href="https://github.com/TinoMuzambi" identity>GitHub</ExternalLink>
 				<ExternalLink href="https://linkedin.com/in/tinomuzambi" identity>LinkedIn</ExternalLink>
 				<ExternalLink href="https://projects.tinomuzambi.com">Projects</ExternalLink>
-				<Link href="/resume.json">Résumé</Link>
+				<Link href="/cv.json">CV</Link>
 			</aside>
 
 			<main className="profile-main" id="main-content">
 				<section className="answer-section opening-answer" aria-labelledby="intro-title">
 					<div className="opening-grid">
 						<div className="opening-copy">
-							<p className="short-answer">{portfolio.profile.location}</p>
 							<h1 id="intro-title">Software systems, studied closely.</h1>
 							<p className="answer-lead">
-								I’m {portfolio.profile.name}, a full-stack developer with strong software
-								foundations and fluent AI-assisted delivery.
+								I’m {portfolio.profile.name}, a full-stack developer based in Cape Town with
+								strong software foundations and fluent AI-assisted delivery.
 							</p>
 							<div className="intro-status" aria-label="Current professional and academic status">
 								<p><span>Now</span>{currentRole.role} at {currentRole.organisation}</p>
 								<p><span>Completed</span>MSc Data Science at the University of Cape Town</p>
 							</div>
 							<div className="intro-links" aria-label="Profile links">
-								<a className="primary-link" href="#work">Review selected work</a>
 								<ExternalLink href="https://github.com/TinoMuzambi" identity>GitHub</ExternalLink>
 								<ExternalLink href="https://linkedin.com/in/tinomuzambi" identity>LinkedIn</ExternalLink>
 								<ExternalLink href="https://projects.tinomuzambi.com">Projects</ExternalLink>
@@ -72,17 +78,15 @@ export default function Home() {
 								priority
 								src="/tino-muzambi-graduation.png"
 								alt="Portrait of Tino Muzambi in graduation attire"
-								width={1254}
-								height={1254}
-								sizes="(max-width: 700px) calc(100vw - 2.5rem), (max-width: 1200px) 34vw, 430px"
+								fill
+								sizes="(max-width: 740px) 100vw, (max-width: 1080px) 44vw, 38vw"
 							/>
 						</div>
 					</div>
 				</section>
 
 				<section className="answer-section" id="work" aria-labelledby="work-question">
-					<p className="short-answer">Selected public work</p>
-					<h2 id="work-question">What have I built and analysed?</h2>
+					<h2 id="work-question">Selected public work</h2>
 					<div className="work-list">
 						{selectedProjects.map((project) => (
 							<article id={project.id} key={project.id}>
@@ -118,11 +122,10 @@ export default function Home() {
 				</section>
 
 				<section className="answer-section" id="experience" aria-labelledby="experience-question">
-					<p className="short-answer">Professional experience</p>
-					<h2 id="experience-question">Where have I applied this work?</h2>
-					<ol className="role-list">
+					<h2 id="experience-question">Professional experience</h2>
+					<div className="role-list">
 						{visibleExperience.map((entry) => (
-							<li key={entry.id}>
+							<article key={entry.id}>
 								<div className="role-heading">
 									<div>
 										<h3>{entry.role}</h3>
@@ -131,63 +134,70 @@ export default function Home() {
 									<time>{entry.period}</time>
 								</div>
 								<ul>{entry.highlights.map((item) => <li key={item}>{item}</li>)}</ul>
-							</li>
+							</article>
 						))}
-					</ol>
-					<p className="section-tail">The complete chronology is available in <Link href="/resume.json">résumé JSON</Link>.</p>
+					</div>
+					<p className="section-tail">The complete chronology is available in <Link href="/cv.json">CV JSON</Link>.</p>
 				</section>
 
 				<section className="answer-section methods-answer" aria-labelledby="build-question">
-					<p className="short-answer">Working methods</p>
-					<h2 id="build-question">How do I work?</h2>
-					<div className="practice-list">
+					<h2 id="build-question">Working methods</h2>
+					<div className="method-stories">
 						<article>
-							<h3>AI-assisted engineering</h3>
-							<div>
+							<div className="method-intro">
+								<h3>AI-assisted engineering</h3>
 								<p>
-									I use Claude Code and Codex throughout software delivery. They help me
-									understand repositories, plan changes, implement and refactor features,
-									generate tests, review diffs and document work.
-								</p>
-								<p>
-									My proficiency is in directing agentic coding workflows, not accepting output
-									unchecked. I set constraints, keep work scoped, inspect changes and verify
-									behaviour before treating a task as complete.
+									My software foundations predate today’s AI tools. That experience lets me
+									use Claude Code and Codex with useful context, clear constraints and informed
+									review.
 								</p>
 							</div>
+							<ul>
+								<li>Repository analysis and task planning</li>
+								<li>Implementation, refactoring and test generation</li>
+								<li>Diff review, behavioural verification and documentation</li>
+							</ul>
 						</article>
 						<article>
-							<h3>Home server operations</h3>
-							<div>
+							<div className="method-intro">
+								<h3>Home server operations</h3>
 								<p>I run and maintain a home server as a practical systems lab.</p>
-								<ul>
-									<li>Deploying and maintaining self-hosted services</li>
-									<li>Managing local networking and remote access</li>
-									<li>Planning storage, backups and recovery</li>
-									<li>Monitoring health, applying updates and troubleshooting failures</li>
-								</ul>
 							</div>
+							<ul>
+								<li>Deploying and maintaining self-hosted services</li>
+								<li>Managing local networking and remote access</li>
+								<li>Planning storage, backups and recovery</li>
+								<li>Monitoring health, applying updates and troubleshooting failures</li>
+							</ul>
 						</article>
 					</div>
-					<div className="capability-list">
-						{portfolio.skillGroups.map((group) => (
-							<article key={group.label}>
-								<h3>{group.label}</h3>
-								<p>{group.items.join(", ")}</p>
-							</article>
-						))}
+					<div className="toolkit">
+						<div className="toolkit-heading">
+							<h3>A working toolkit</h3>
+							<p>Familiar tools, chosen to fit the work rather than lead it.</p>
+						</div>
+						<ul aria-label="Frequently used tools and technologies">
+							{workingToolkit.map((tool) => (
+								<li key={tool.name}>
+									<Image src={tool.src} alt="" width={56} height={56} loading="eager" />
+									<span>{tool.name}</span>
+								</li>
+							))}
+						</ul>
+						<p className="toolkit-note">The broader inventory is available in <Link href="/cv.json">CV JSON</Link>.</p>
 					</div>
 				</section>
 
 				<section className="answer-section" id="education" aria-labelledby="education-question">
-					<p className="short-answer">Academic record</p>
-					<h2 id="education-question">What have I studied?</h2>
+					<h2 id="education-question">Education</h2>
 					<div className="study-list">
 						{higherEducation.map((item) => (
 							<article key={item.id}>
-								<time>{item.period}</time>
-								<h3>{item.qualification}</h3>
-								<p>{item.institution}</p>
+								<div className="study-heading">
+									<time>{item.period}</time>
+									<h3>{item.qualification}</h3>
+									<p>{item.institution}</p>
+								</div>
 								<ul>{item.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
 							</article>
 						))}
@@ -195,7 +205,6 @@ export default function Home() {
 				</section>
 
 				<section className="answer-section machine-answer" aria-labelledby="machine-question">
-					<p className="short-answer">For agents and ATS tools</p>
 					<h2 id="machine-question">Can a machine read this?</h2>
 					<p className="answer-lead">
 						Yes. The same canonical content is published as plain text, JSON and semantic
@@ -203,14 +212,13 @@ export default function Home() {
 					</p>
 					<nav aria-label="Machine-readable portfolio resources">
 						<Link href="/llms.txt">llms.txt</Link>
-						<Link href="/resume.json">Résumé JSON</Link>
+						<Link href="/cv.json">CV JSON</Link>
 						<Link href="/projects.json">Projects JSON</Link>
 						<Link href="/sitemap.xml">Sitemap</Link>
 					</nav>
 				</section>
 
 				<section className="answer-section contact-answer" aria-labelledby="contact-question">
-					<p className="short-answer">Direct contact</p>
 					<h2 id="contact-question">What should we talk about next?</h2>
 					<p className="answer-lead">Send the role, problem or collaboration brief.</p>
 					<a className="large-email" href={`mailto:${portfolio.profile.email}`}>{portfolio.profile.email}</a>

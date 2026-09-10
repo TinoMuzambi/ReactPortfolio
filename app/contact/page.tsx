@@ -16,7 +16,6 @@ export default function ContactPage() {
 				Back to portfolio
 			</Link>
 			<div>
-				<p className="role-line">Contact</p>
 				<h1>Start with an email.</h1>
 				<p>
 					For roles, engineering collaboration or project enquiries, email Tino directly.

@@ -10,7 +10,7 @@ Tino Muzambi is a full-stack developer based in Cape Town, South Africa, combini
 
 ## Structured resources
 
-- Résumé, experience, education and skills: https://tinomuzambi.com/resume.json
+- CV, experience, education and skills: https://tinomuzambi.com/cv.json
 - Complete project catalogue: https://tinomuzambi.com/projects.json
 
 ## Preferred facts

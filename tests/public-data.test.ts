@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { portfolio, selectedProjects } from "@/content/portfolio";
-import { projectsPayload, resumePayload } from "@/lib/public-data";
+import { cvPayload, projectsPayload } from "@/lib/public-data";
 
 describe("machine-readable portfolio data", () => {
 	it("projects output derives from canonical project content", () => {
@@ -9,19 +9,19 @@ describe("machine-readable portfolio data", () => {
 		expect(projectsPayload.projects).toBe(portfolio.projects);
 	});
 
-	it("résumé output derives from canonical profile and selections", () => {
-		expect(resumePayload.person).toBe(portfolio.profile);
-		expect(resumePayload.experience).toBe(portfolio.experience);
-		expect(resumePayload.education).toBe(portfolio.education);
-		expect(resumePayload.selectedProjects).toBe(selectedProjects);
+	it("CV output derives from canonical profile and selections", () => {
+		expect(cvPayload.person).toBe(portfolio.profile);
+		expect(cvPayload.experience).toBe(portfolio.experience);
+		expect(cvPayload.education).toBe(portfolio.education);
+		expect(cvPayload.selectedProjects).toBe(selectedProjects);
 	});
 
 	it("exposes explicit, versioned public-resource metadata", () => {
-		expect(resumePayload.schemaVersion).toBe("1.0");
-		expect(resumePayload.resources.allProjects).toBe(
+		expect(cvPayload.schemaVersion).toBe("1.0");
+		expect(cvPayload.resources.allProjects).toBe(
 			"https://tinomuzambi.com/projects.json"
 		);
-		expect(resumePayload.resources.projectArchive).toBe(
+		expect(cvPayload.resources.projectArchive).toBe(
 			"https://projects.tinomuzambi.com"
 		);
 	});

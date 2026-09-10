@@ -23,13 +23,13 @@ Open [http://localhost:3000](http://localhost:3000). No environment variables ar
 ```text
 app/                    App Router pages, metadata routes and JSON endpoints
 content/portfolio.ts    Canonical, typed public portfolio content
-lib/public-data.ts      Shared résumé, project and Person JSON-LD projections
+lib/public-data.ts      Shared CV, project and Person JSON-LD projections
 public/llms.txt         Plain-text discovery guide for AI agents
 types/                  Content contracts
 tests/                  Content-integrity and machine-output tests
 ```
 
-The visible portfolio is semantic server-rendered HTML. `/resume.json` and `/projects.json` expose the same content in stable JSON shapes; `/llms.txt` points agents to those resources. Metadata includes canonical links, Open Graph, Twitter, robots, sitemap and Person JSON-LD.
+The visible portfolio is semantic server-rendered HTML. `/cv.json` and `/projects.json` expose the same content in stable JSON shapes. `/llms.txt` points agents to those resources. Metadata includes canonical links, Open Graph, Twitter, robots, sitemap and Person JSON-LD.
 
 Contact is deliberately handled through a public `mailto:` path on `/contact`. This keeps delivery reliable without exposing client credentials or requiring a server-side mail account.
 
