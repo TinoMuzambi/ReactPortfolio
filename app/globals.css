@@ -314,7 +314,7 @@
 }
 
 .role-list {
-	margin: 3.5rem 0 0;
+	margin-top: 3.5rem;
 	border-top: 2px solid var(--color-ink);
 }
 
@@ -364,16 +364,14 @@
 }
 
 .method-stories {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: clamp(2.5rem, 6vw, 5rem);
 	margin-top: 3.5rem;
-	padding-top: 2.6rem;
 	border-top: 2px solid var(--color-ink);
 }
 
 .method-stories article {
-	max-width: 31rem;
+	max-width: 56rem;
+	padding-block: 2.6rem;
+	border-bottom: 1px solid var(--color-ink);
 }
 
 .method-intro p {
@@ -413,7 +411,7 @@
 
 .toolkit > ul {
 	display: grid;
-	grid-template-columns: repeat(5, minmax(0, 1fr));
+	grid-template-columns: repeat(6, minmax(0, 1fr));
 	gap: 2rem 1.25rem;
 	margin: 2.6rem 0 0;
 	padding: 0;
@@ -612,6 +610,10 @@
 	.skip-link {
 		left: 0.75rem;
 	}
+
+	.toolkit > ul {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
 }
 
 @media (max-width: 740px) {
@@ -689,20 +691,6 @@
 
 	.study-list article {
 		gap: 1rem;
-	}
-
-	.method-stories {
-		gap: 0;
-	}
-
-	.method-stories article {
-		max-width: none;
-	}
-
-	.method-stories article + article {
-		margin-top: 2.4rem;
-		padding-top: 2.4rem;
-		border-top: 1px solid var(--color-ink);
 	}
 
 	.role-heading {

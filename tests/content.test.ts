@@ -67,6 +67,11 @@ describe("canonical portfolio content", () => {
 		expect(portfolio.profile.headline.toLowerCase()).not.toContain("applied data");
 		expect(skills).toContain("Claude Code");
 		expect(skills).toContain("Codex");
+		expect(skills).toContain("React Native");
+		expect(skills).toContain("R");
+		expect(skills).toContain("AWS");
+		expect(skills).toContain("Azure");
+		expect(skills).toContain("GCP");
 		expect(skills).toContain("Home server administration");
 		expect(skills).toContain("Backups");
 	});

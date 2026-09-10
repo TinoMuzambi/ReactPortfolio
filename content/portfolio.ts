@@ -475,12 +475,13 @@ export const portfolio: PortfolioContent = {
 	skillGroups: [
 		{
 			label: "Languages",
-			items: ["TypeScript", "JavaScript", "Python", "Java", "Go", "C", "C++", "C#"],
+			items: ["TypeScript", "JavaScript", "Python", "R", "Java", "Go", "C", "C++", "C#"],
 		},
 		{
 			label: "Web application development",
 			items: [
 				"React",
+				"React Native",
 				"Next.js",
 				"Node.js",
 				"Tailwind CSS",
@@ -495,6 +496,7 @@ export const portfolio: PortfolioContent = {
 			items: [
 				"AWS",
 				"Azure",
+				"GCP",
 				"Firebase",
 				"Machine learning",
 				"Data visualisation",

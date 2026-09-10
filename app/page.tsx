@@ -6,16 +6,18 @@ import { portfolio, selectedProjects } from "@/content/portfolio";
 const visibleExperience = portfolio.experience.slice(0, 6);
 const higherEducation = portfolio.education.slice(0, 3);
 const workingToolkit = [
-	{ name: "TypeScript", src: "/tools/typescript.png" },
 	{ name: "React", src: "/tools/react.webp" },
-	{ name: "Node.js", src: "/tools/nodejs.png" },
-	{ name: "JavaScript", src: "/tools/javascript.png" },
+	{ name: "Next.js", src: "/tools/nextjs.svg" },
+	{ name: "TypeScript", src: "/tools/typescript.png" },
+	{ name: "Claude Code", src: "/tools/claude.svg" },
+	{ name: "Codex", src: "/tools/codex.svg" },
 	{ name: "Python", src: "/tools/python.png" },
-	{ name: "MongoDB", src: "/tools/mongodb.png" },
 	{ name: "Git", src: "/tools/git.png" },
-	{ name: "GitHub", src: "/tools/github.png" },
-	{ name: "Ubuntu", src: "/tools/ubuntu.png" },
-	{ name: "Vercel", src: "/tools/vercel.png" },
+	{ name: "AWS", src: "/tools/aws.svg" },
+	{ name: "Azure", src: "/tools/azure.svg" },
+	{ name: "GCP", src: "/tools/gcp.svg" },
+	{ name: "React Native", src: "/tools/react.webp" },
+	{ name: "R", src: "/tools/r.svg" },
 ] as const;
 
 function ExternalLink({
