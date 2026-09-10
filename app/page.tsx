@@ -186,7 +186,14 @@ export default function Home() {
 						<ul className="toolkit-logo-list" aria-label="Frequently used tools and technologies">
 							{workingToolkit.map((tool) => (
 								<li key={tool.name}>
-									<Image src={tool.src} alt="" width={56} height={56} loading="eager" />
+									<Image
+										className={tool.name === "Next.js" || tool.name === "Codex" ? "tool-logo-adaptive" : undefined}
+										src={tool.src}
+										alt=""
+										width={56}
+										height={56}
+										loading="eager"
+									/>
 									<span>{tool.name}</span>
 								</li>
 							))}

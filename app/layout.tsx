@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import "@fontsource-variable/bricolage-grotesque";
+import "@fontsource-variable/instrument-sans";
 import "@fontsource-variable/noto-sans";
 
+import { PaletteStudio } from "@/components/palette-studio";
 import { personJsonLd } from "@/lib/public-data";
 
 import "./globals.css";
@@ -102,6 +103,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
 		<html lang="en-ZA">
 			<body>
 				{children}
+				<PaletteStudio />
 				<script
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{ __html: jsonLd }}
