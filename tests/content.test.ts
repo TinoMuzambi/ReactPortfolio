@@ -9,6 +9,7 @@ describe("canonical portfolio content", () => {
 		for (const collection of [
 			portfolio.experience,
 			portfolio.education,
+			portfolio.certifications,
 			portfolio.projects,
 		]) {
 			const ids = collectIds(collection);
@@ -72,8 +73,19 @@ describe("canonical portfolio content", () => {
 		expect(skills).toContain("AWS");
 		expect(skills).toContain("Azure");
 		expect(skills).toContain("GCP");
+		expect(skills).toContain("Docker Compose");
+		expect(skills).toContain("Traefik");
+		expect(skills).toContain("Local LLMs");
+		expect(skills).toContain("Prompt and context engineering");
 		expect(skills).toContain("Home server administration");
 		expect(skills).toContain("Backups");
+	});
+
+	it("publishes the supplied cloud certifications", () => {
+		expect(portfolio.certifications.map((item) => item.name)).toEqual([
+			"AWS Certified Cloud Practitioner",
+			"Microsoft Certified: Azure Fundamentals (AZ-900)",
+		]);
 	});
 
 	it("links to the wider project archive", () => {

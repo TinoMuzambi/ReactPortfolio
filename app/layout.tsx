@@ -45,6 +45,7 @@ export const metadata: Metadata = {
 		types: {
 			"text/plain": "/llms.txt",
 			"application/json": "/cv.json",
+			"application/pdf": "/tinotenda-muzambi-cv.pdf",
 		},
 	},
 	openGraph: {

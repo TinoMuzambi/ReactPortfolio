@@ -13,6 +13,7 @@ describe("machine-readable portfolio data", () => {
 		expect(cvPayload.person).toBe(portfolio.profile);
 		expect(cvPayload.experience).toBe(portfolio.experience);
 		expect(cvPayload.education).toBe(portfolio.education);
+		expect(cvPayload.certifications).toBe(portfolio.certifications);
 		expect(cvPayload.selectedProjects).toBe(selectedProjects);
 	});
 
@@ -20,6 +21,9 @@ describe("machine-readable portfolio data", () => {
 		expect(cvPayload.schemaVersion).toBe("1.0");
 		expect(cvPayload.resources.allProjects).toBe(
 			"https://tinomuzambi.com/projects.json"
+		);
+		expect(cvPayload.resources.cvPdf).toBe(
+			"https://tinomuzambi.com/tinotenda-muzambi-cv.pdf"
 		);
 		expect(cvPayload.resources.projectArchive).toBe(
 			"https://projects.tinomuzambi.com"

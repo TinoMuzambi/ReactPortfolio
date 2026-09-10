@@ -7,7 +7,7 @@ export const portfolio: PortfolioContent = {
 		headline:
 			"Full-stack developer in Cape Town, combining strong software foundations with fluent AI-assisted delivery.",
 		summary:
-			"I'm Tino, a full-stack developer based in Cape Town, South Africa. I build responsive web and mobile products, connect the systems behind them, and use data to ask better questions about how software behaves. I completed an MSc in Data Science at the University of Cape Town in 2026.",
+			"I'm Tino, a full-stack developer based in Cape Town, South Africa, with more than five years of experience. I build responsive web and mobile products, connect the systems behind them, and use Claude Code, Codex and local language models with strong software foundations. I completed an MSc in Data Science at the University of Cape Town in 2026.",
 		location: "Cape Town, South Africa",
 		email: "tino@tinomuzambi.com",
 		website: "https://tinomuzambi.com",
@@ -75,7 +75,7 @@ export const portfolio: PortfolioContent = {
 			organisation: "Vodacom",
 			period: "February 2022 – February 2023",
 			highlights: [
-				"Conducted more than 1,000 site-feasibility assessments using Afrigis.",
+				"Conducted more than 1,000 site-feasibility assessments using Afrigis with 98% accuracy.",
 				"Co-facilitated the AWS re/Start programme for more than 50 students.",
 				"Automated parts of the solution-quotation process with Excel macros and Siebel/Ignite integrations.",
 				"Completed the Programme in Enterprise and Technology Management.",
@@ -110,7 +110,7 @@ export const portfolio: PortfolioContent = {
 			period: "August 2020 – January 2022",
 			highlights: [
 				"Delivered more than 15 custom web solutions for business clients.",
-				"Implemented responsive designs and managed hosting infrastructure for multiple clients.",
+				"Implemented responsive designs and managed hosting infrastructure for multiple clients with 99.9% uptime.",
 			],
 		},
 		{
@@ -150,7 +150,7 @@ export const portfolio: PortfolioContent = {
 			],
 		},
 	],
-	education: [
+		education: [
 		{
 			id: "uct-msc-data-science",
 			qualification: "MSc Data Science",
@@ -192,6 +192,18 @@ export const portfolio: PortfolioContent = {
 				"Studied Mathematics, Advanced Programme Mathematics, Physical Sciences, Information Technology and Accounting.",
 				"Four distinctions. Highest achievement in Information Technology in 2017. Top-ten achiever from 2013 to 2017.",
 			],
+		},
+	],
+	certifications: [
+		{
+			id: "aws-certified-cloud-practitioner",
+			name: "AWS Certified Cloud Practitioner",
+			issuer: "Amazon Web Services",
+		},
+		{
+			id: "microsoft-certified-azure-fundamentals",
+			name: "Microsoft Certified: Azure Fundamentals (AZ-900)",
+			issuer: "Microsoft",
 		},
 	],
 	projects: [
@@ -484,6 +496,8 @@ export const portfolio: PortfolioContent = {
 				"React Native",
 				"Next.js",
 				"Node.js",
+				"GraphQL",
+				"REST APIs",
 				"Tailwind CSS",
 				"HTML",
 				"CSS",
@@ -497,7 +511,15 @@ export const portfolio: PortfolioContent = {
 				"AWS",
 				"Azure",
 				"GCP",
+				"Docker",
+				"Docker Compose",
+				"Traefik",
+				"SSO",
 				"Firebase",
+				"PostgreSQL",
+				"MySQL",
+				"DynamoDB",
+				"REDCap",
 				"Machine learning",
 				"Data visualisation",
 				"Linux",
@@ -516,7 +538,9 @@ export const portfolio: PortfolioContent = {
 				"Netlify",
 				"Claude Code",
 				"Codex",
+				"Local LLMs",
 				"AI-assisted software delivery",
+				"Prompt and context engineering",
 				"Code review",
 			],
 		},

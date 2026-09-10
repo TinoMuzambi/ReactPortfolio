@@ -30,6 +30,12 @@ export interface Education {
 	readonly details: readonly string[];
 }
 
+export interface Certification {
+	readonly id: string;
+	readonly name: string;
+	readonly issuer: string;
+}
+
 export interface Project {
 	readonly id: string;
 	readonly name: string;
@@ -50,6 +56,7 @@ export interface PortfolioContent {
 	readonly profile: Profile;
 	readonly experience: readonly Experience[];
 	readonly education: readonly Education[];
+	readonly certifications: readonly Certification[];
 	readonly projects: readonly Project[];
 	readonly skillGroups: readonly SkillGroup[];
 }

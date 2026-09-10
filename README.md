@@ -29,7 +29,7 @@ types/                  Content contracts
 tests/                  Content-integrity and machine-output tests
 ```
 
-The visible portfolio is semantic server-rendered HTML. `/cv.json` and `/projects.json` expose the same content in stable JSON shapes. `/llms.txt` points agents to those resources. Metadata includes canonical links, Open Graph, Twitter, robots, sitemap and Person JSON-LD.
+The visible portfolio is semantic server-rendered HTML. `/tinotenda-muzambi-cv.pdf` publishes the current CV. `/cv.json` and `/projects.json` expose the same canonical content in stable JSON shapes. `/llms.txt` points agents to those resources. Metadata includes canonical links, Open Graph, Twitter, robots, sitemap and Person JSON-LD.
 
 Contact is deliberately handled through a public `mailto:` path on `/contact`. This keeps delivery reliable without exposing client credentials or requiring a server-side mail account.
 

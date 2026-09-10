@@ -43,7 +43,10 @@ export default function Home() {
 
 			<header className="mobile-header">
 				<Link href="/">Tino Muzambi</Link>
-				<a href={`mailto:${portfolio.profile.email}`}>Email</a>
+				<nav aria-label="Mobile profile links">
+					<ExternalLink href="/tinotenda-muzambi-cv.pdf">CV</ExternalLink>
+					<a href={`mailto:${portfolio.profile.email}`}>Email</a>
+				</nav>
 			</header>
 
 			<aside className="action-rail" aria-label="Contact and profile links">
@@ -52,7 +55,7 @@ export default function Home() {
 				<ExternalLink href="https://github.com/TinoMuzambi" identity>GitHub</ExternalLink>
 				<ExternalLink href="https://linkedin.com/in/tinomuzambi" identity>LinkedIn</ExternalLink>
 				<ExternalLink href="https://projects.tinomuzambi.com">Projects</ExternalLink>
-				<Link href="/cv.json">CV</Link>
+				<ExternalLink href="/tinotenda-muzambi-cv.pdf">CV</ExternalLink>
 			</aside>
 
 			<main className="profile-main" id="main-content">
@@ -62,7 +65,8 @@ export default function Home() {
 							<h1 id="intro-title">Software systems, studied closely.</h1>
 							<p className="answer-lead">
 								I’m {portfolio.profile.name}, a full-stack developer based in Cape Town with
-								strong software foundations and fluent AI-assisted delivery.
+								more than five years of experience, strong software foundations and fluent
+								AI-assisted delivery.
 							</p>
 							<div className="intro-status" aria-label="Current professional and academic status">
 								<p><span>Now</span>{currentRole.role} at {currentRole.organisation}</p>
@@ -150,13 +154,14 @@ export default function Home() {
 								<h3>AI-assisted engineering</h3>
 								<p>
 									My software foundations predate today’s AI tools. That experience lets me
-									use Claude Code and Codex with useful context, clear constraints and informed
-									review.
+									use Claude Code, Codex and local language models with useful context, clear
+									constraints and informed review.
 								</p>
 							</div>
 							<ul>
 								<li>Repository analysis and task planning</li>
 								<li>Implementation, refactoring and test generation</li>
+								<li>Prompt and context engineering with explicit human validation</li>
 								<li>Diff review, behavioural verification and documentation</li>
 							</ul>
 						</article>
@@ -166,9 +171,9 @@ export default function Home() {
 								<p>I run and maintain a home server as a practical systems lab.</p>
 							</div>
 							<ul>
-								<li>Deploying and maintaining self-hosted services</li>
-								<li>Managing local networking and remote access</li>
-								<li>Planning storage, backups and recovery</li>
+								<li>Running containerised services with Docker Compose</li>
+								<li>Routing services with Traefik, HTTPS and SSO</li>
+								<li>Managing networking, remote access, storage, backups and recovery</li>
 								<li>Monitoring health, applying updates and troubleshooting failures</li>
 							</ul>
 						</article>
@@ -178,12 +183,17 @@ export default function Home() {
 							<h3>A working toolkit</h3>
 							<p>Familiar tools, chosen to fit the work rather than lead it.</p>
 						</div>
-						<ul aria-label="Frequently used tools and technologies">
+						<ul className="toolkit-logo-list" aria-label="Frequently used tools and technologies">
 							{workingToolkit.map((tool) => (
 								<li key={tool.name}>
 									<Image src={tool.src} alt="" width={56} height={56} loading="eager" />
 									<span>{tool.name}</span>
 								</li>
+							))}
+						</ul>
+						<ul className="credential-list" aria-label="Cloud certifications">
+							{portfolio.certifications.map((certification) => (
+								<li key={certification.id}>{certification.name}</li>
 							))}
 						</ul>
 						<p className="toolkit-note">The broader inventory is available in <Link href="/cv.json">CV JSON</Link>.</p>
@@ -204,20 +214,6 @@ export default function Home() {
 							</article>
 						))}
 					</div>
-				</section>
-
-				<section className="answer-section machine-answer" aria-labelledby="machine-question">
-					<h2 id="machine-question">Can a machine read this?</h2>
-					<p className="answer-lead">
-						Yes. The same canonical content is published as plain text, JSON and semantic
-						HTML, with Person structured data and stable URLs.
-					</p>
-					<nav aria-label="Machine-readable portfolio resources">
-						<Link href="/llms.txt">llms.txt</Link>
-						<Link href="/cv.json">CV JSON</Link>
-						<Link href="/projects.json">Projects JSON</Link>
-						<Link href="/sitemap.xml">Sitemap</Link>
-					</nav>
 				</section>
 
 				<section className="answer-section contact-answer" aria-labelledby="contact-question">

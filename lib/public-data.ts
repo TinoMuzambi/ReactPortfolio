@@ -9,9 +9,11 @@ export const cvPayload = {
 	currentPosition: portfolio.experience[0],
 	experience: portfolio.experience,
 	education: portfolio.education,
+	certifications: portfolio.certifications,
 	skills: portfolio.skillGroups,
 	selectedProjects,
 	resources: {
+		cvPdf: `${portfolio.profile.website}/tinotenda-muzambi-cv.pdf`,
 		allProjects: `${portfolio.profile.website}/projects.json`,
 		projectArchive: "https://projects.tinomuzambi.com",
 		plainTextGuide: `${portfolio.profile.website}/llms.txt`,
@@ -49,6 +51,15 @@ export const personJsonLd = {
 		"@type": "CollegeOrUniversity",
 		name: "University of Cape Town",
 	},
+	hasCredential: portfolio.certifications.map((certification) => ({
+		"@type": "EducationalOccupationalCredential",
+		name: certification.name,
+		credentialCategory: "certification",
+		recognizedBy: {
+			"@type": "Organization",
+			name: certification.issuer,
+		},
+	})),
 	sameAs: portfolio.profile.links.map((link) => link.href),
 	knowsAbout: portfolio.skillGroups.flatMap((group) => group.items),
 } as const;
