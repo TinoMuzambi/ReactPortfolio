@@ -12,9 +12,18 @@ type Palette = {
 	readonly surface: string;
 };
 
-const storageKey = "tinomuzambi-palette-v1";
+const storageKey = "tinomuzambi-palette-v2";
 
 const defaultPalette: Palette = {
+	paper: "#f8fbf7",
+	ink: "#142018",
+	rule: "#9baaa0",
+	primary: "#236b4a",
+	secondary: "#c77d13",
+	surface: "#e5eee7",
+};
+
+const originalPalette: Palette = {
 	paper: "#ffffff",
 	ink: "#000000",
 	rule: "#000000",
@@ -24,7 +33,8 @@ const defaultPalette: Palette = {
 };
 
 const presets = [
-	{ id: "original", name: "Original", colors: defaultPalette },
+	{ id: "pine", name: "Pine", colors: defaultPalette },
+	{ id: "original", name: "Original", colors: originalPalette },
 	{
 		id: "cobalt",
 		name: "Cobalt",
@@ -47,18 +57,6 @@ const presets = [
 			primary: "#8b2942",
 			secondary: "#398da8",
 			surface: "#f1e6ea",
-		},
-	},
-	{
-		id: "pine",
-		name: "Pine",
-		colors: {
-			paper: "#f8fbf7",
-			ink: "#142018",
-			rule: "#9baaa0",
-			primary: "#236b4a",
-			secondary: "#c77d13",
-			surface: "#e5eee7",
 		},
 	},
 	{

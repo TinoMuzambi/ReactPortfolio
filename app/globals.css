@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme inline {
-	--color-paper: #ffffff;
-	--color-ink: #000000;
-	--color-rule: #000000;
-	--color-plum: #6437b6;
-	--color-aqua: #58cdb7;
-	--color-interface: #e8ebee;
+	--color-paper: #f8fbf7;
+	--color-ink: #142018;
+	--color-rule: #9baaa0;
+	--color-plum: #236b4a;
+	--color-aqua: #c77d13;
+	--color-interface: #e5eee7;
 	--font-display: "Instrument Sans Variable", "Instrument Sans", sans-serif;
 	--font-sans: "Noto Sans Variable", "Noto Sans", sans-serif;
 }
@@ -28,6 +28,9 @@
 	body {
 		margin: 0;
 		background: var(--color-paper);
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.045'/%3E%3C/svg%3E");
+		background-size: 180px 180px;
+		background-attachment: fixed;
 		color: var(--color-ink);
 		font-family: var(--font-sans);
 		font-size: 1rem;
@@ -425,6 +428,29 @@ body:has(.action-rail) .palette-studio {
 	font-weight: 720;
 }
 
+.intro-links a {
+	position: relative;
+	text-decoration: none;
+}
+
+.intro-links a::after {
+	position: absolute;
+	right: 0;
+	bottom: -0.32rem;
+	left: 0;
+	height: 0.16rem;
+	background: var(--color-aqua);
+	content: "";
+	transform: scaleX(0.34);
+	transform-origin: left center;
+	transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.intro-links a:hover::after,
+.intro-links a:focus-visible::after {
+	transform: scaleX(1);
+}
+
 .portrait-card {
 	position: relative;
 	margin: 0;
@@ -561,7 +587,7 @@ body:has(.action-rail) .palette-studio {
 .portal-contour-outer {
 	inset: 4% 0 5% 4%;
 	z-index: -2;
-	border-radius: 43% 57% 37% 63% / 55% 41% 59% 45%;
+	border-radius: 20% 28% 18% 26% / 24% 17% 27% 19%;
 	background: color-mix(in srgb, var(--color-aqua) 76%, var(--color-paper));
 	animation: portal-drift 17s ease-in-out infinite alternate;
 }
@@ -569,16 +595,16 @@ body:has(.action-rail) .palette-studio {
 .portal-contour-inner {
 	inset: 0 5% 9% 0;
 	z-index: -1;
-	border-radius: 62% 38% 53% 47% / 39% 59% 41% 61%;
+	border-radius: 26% 17% 24% 18% / 16% 27% 18% 25%;
 	background: color-mix(in srgb, var(--color-plum) 82%, var(--color-paper));
 	animation: portal-drift-reverse 21s ease-in-out infinite alternate;
 }
 
 .project-portal {
-	inset: 7% 4% 10% 5%;
+	inset: 6% 3% 8% 4%;
 	overflow: hidden;
 	border-width: 3px;
-	border-radius: 48% 52% 42% 58% / 44% 38% 62% 56%;
+	border-radius: 12% 22% 16% 20% / 14% 17% 21% 15%;
 	background: #ffffff;
 	box-shadow: 0 0 0 0.7rem var(--color-paper);
 	animation: portal-morph 19s ease-in-out infinite;
@@ -799,6 +825,15 @@ body:has(.action-rail) .palette-studio {
 	text-decoration-thickness: 0.18em;
 }
 
+.contact-answer {
+	text-align: left;
+}
+
+.contact-answer > * {
+	margin-right: auto;
+	margin-left: 0;
+}
+
 .plain-footer {
 	display: flex;
 	min-height: 7rem;
@@ -888,10 +923,10 @@ body:has(.action-rail) .palette-studio {
 @keyframes portal-morph {
 	0%,
 	100% {
-		border-radius: 48% 52% 42% 58% / 44% 38% 62% 56%;
+		border-radius: 12% 22% 16% 20% / 14% 17% 21% 15%;
 	}
 	50% {
-		border-radius: 42% 58% 50% 50% / 55% 48% 52% 45%;
+		border-radius: 17% 14% 21% 13% / 11% 22% 15% 20%;
 	}
 }
 
@@ -1106,7 +1141,7 @@ body:has(.action-rail) .palette-studio {
 	}
 
 	.project-portal {
-		inset: 8% 3% 12% 4%;
+		inset: 6% 2% 9% 3%;
 		box-shadow: 0 0 0 0.45rem var(--color-paper);
 	}
 

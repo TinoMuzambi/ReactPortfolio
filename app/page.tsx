@@ -102,11 +102,7 @@ export default function Home() {
 						{selectedProjects.map((project) => (
 							<article id={project.id} key={project.id}>
 								<div className="work-heading">
-									<h3 aria-label={project.name}>
-										{project.id === researchProject.id ? (
-											<>MusicRec<wbr />Path<wbr />Signatures</>
-										) : project.name}
-									</h3>
+									<h3>{project.name}</h3>
 									<p>{project.technologies.slice(0, 5).join(" · ")}</p>
 								</div>
 								<div className="work-detail">
@@ -128,7 +124,6 @@ export default function Home() {
 					<p className="section-tail">
 						For the wider archive of experiments, tutorials and earlier builds, visit{" "}
 						<ExternalLink href="https://projects.tinomuzambi.com">projects.tinomuzambi.com</ExternalLink>.
-						All {portfolio.projects.length} public projects are also indexed in <Link href="/projects.json">projects.json</Link>.
 					</p>
 				</section>
 
@@ -183,7 +178,6 @@ export default function Home() {
 							</article>
 						))}
 					</div>
-					<p className="section-tail">The complete chronology is available in <Link href="/cv.json">CV JSON</Link>.</p>
 				</section>
 
 				<section className="answer-section methods-answer" aria-labelledby="build-question">

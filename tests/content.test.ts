@@ -24,6 +24,7 @@ describe("canonical portfolio content", () => {
 			"clock-in-out",
 			"recomments",
 		]);
+		expect(selectedProjects[0].name).toBe("Music Recommendation Evaluation");
 	});
 
 	it("contains only direct or local public URLs", () => {

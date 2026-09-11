@@ -21,7 +21,7 @@ Tino Muzambi is a full-stack developer based in Cape Town, South Africa, combini
 - Current role: Intermediate Developer at OVEX
 - Professional focus: full-stack web development
 - Education: MSc Data Science, University of Cape Town, completed in 2026 with a distinction in the coursework component. Graduation scheduled for March 2027
-- Lead project: MusicRecPathSignatures, a reproducible Python evaluation pipeline for music-recommendation research
+- Lead project: Music Recommendation Evaluation, a reproducible Python evaluation pipeline for music-recommendation research
 - AI-assisted engineering: uses Claude Code and Codex for repository analysis, planning, implementation, refactoring, testing, diff review and documentation
 - Local AI practice: uses local language models for private, offline and experimental development workflows
 - Systems practice: runs containerised home-server services with Docker Compose, Traefik, HTTPS, SSO, storage, backups and monitoring

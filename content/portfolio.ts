@@ -209,7 +209,7 @@ export const portfolio: PortfolioContent = {
 	projects: [
 		{
 			id: "music-rec-path-signatures",
-			name: "MusicRecPathSignatures",
+			name: "Music Recommendation Evaluation",
 			summary:
 				"A reproducible Python evaluation pipeline for music-recommendation research using path signatures, ranking metrics and diversity metrics. Its tested pipeline fails closed when required inputs or validation steps are missing.",
 			technologies: [
