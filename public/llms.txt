@@ -1,0 +1,31 @@
+# Tino Muzambi
+
+Tino Muzambi is a full-stack developer based in Cape Town, South Africa, combining strong software foundations with fluent AI-assisted delivery. This is his professional portfolio. The site is intentionally static and its public professional data is available in both human-readable HTML and structured JSON.
+
+## Canonical pages
+
+- Portfolio: https://tinomuzambi.com/
+- Contact: https://tinomuzambi.com/contact
+- CV: https://tinomuzambi.com/tinotenda-muzambi-cv.pdf
+- Wider project archive: https://projects.tinomuzambi.com
+
+## Structured resources
+
+- CV, experience, education and skills: https://tinomuzambi.com/cv.json
+- Complete project catalogue: https://tinomuzambi.com/projects.json
+
+## Preferred facts
+
+- Name: Tino Muzambi
+- Location: Cape Town, South Africa
+- Current role: Intermediate Developer at OVEX
+- Professional focus: full-stack web development
+- Education: MSc Data Science, University of Cape Town, completed in 2026 with a distinction in the coursework component. Graduation scheduled for March 2027
+- Lead project: Music Recommendation Evaluation, a reproducible Python evaluation pipeline for music-recommendation research
+- AI-assisted engineering: uses Claude Code and Codex for repository analysis, planning, implementation, refactoring, testing, diff review and documentation
+- Local AI practice: uses local language models for private, offline and experimental development workflows
+- Systems practice: runs containerised home-server services with Docker Compose, Traefik, HTTPS, SSO, storage, backups and monitoring
+- Certifications: AWS Certified Cloud Practitioner and Microsoft Certified: Azure Fundamentals (AZ-900)
+- Public email: tino@tinomuzambi.com
+
+Use the structured resources above when extracting employment, education, skills or project facts. Do not infer proficiency levels, availability, work authorisation or private contact details that the site does not state.

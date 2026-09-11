@@ -1,14 +1,9 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTypeScript from "eslint-config-next/typescript";
 
 export default defineConfig([
 	...nextVitals,
-	{
-		files: ["pages/_document.tsx"],
-		rules: {
-			// The existing Universal Analytics integration will be migrated separately.
-			"@next/next/next-script-for-ga": "off",
-		},
-	},
+	...nextTypeScript,
 	globalIgnores([".next/**", "coverage/**", "out/**"]),
 ]);

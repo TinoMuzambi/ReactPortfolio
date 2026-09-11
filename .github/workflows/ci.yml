@@ -26,24 +26,19 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
-          cache: yarn
-
-      - name: Enable Yarn
-        run: corepack enable
+          cache: npm
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Type-check
-        run: yarn typecheck
+        run: npm run typecheck
 
       - name: Test
-        run: yarn test
+        run: npm test
 
       - name: Build
-        run: yarn build
-        env:
-          CMS_USE_FIXTURES: "true"
+        run: npm run build
