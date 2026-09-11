@@ -433,15 +433,24 @@ body:has(.action-rail) .palette-studio {
 	text-decoration: none;
 }
 
+.intro-links a::before,
 .intro-links a::after {
 	position: absolute;
 	right: 0;
 	bottom: -0.32rem;
 	left: 0;
+	content: "";
+}
+
+.intro-links a::before {
+	height: 1px;
+	background: var(--color-rule);
+}
+
+.intro-links a::after {
 	height: 0.16rem;
 	background: var(--color-aqua);
-	content: "";
-	transform: scaleX(0.34);
+	transform: scaleX(0);
 	transform-origin: left center;
 	transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
