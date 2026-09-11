@@ -36,6 +36,11 @@ function ExternalLink({
 export default function Home() {
 	const currentRole = portfolio.experience[0];
 	const researchProject = selectedProjects[0];
+	const liveDemoProject = selectedProjects.find((project) => project.id === "clock-in-out");
+
+	if (!liveDemoProject?.liveUrl || !liveDemoProject.sourceUrl) {
+		throw new Error("The live demo project needs public live and source URLs");
+	}
 
 	return (
 		<>
@@ -125,6 +130,41 @@ export default function Home() {
 						<ExternalLink href="https://projects.tinomuzambi.com">projects.tinomuzambi.com</ExternalLink>.
 						All {portfolio.projects.length} public projects are also indexed in <Link href="/projects.json">projects.json</Link>.
 					</p>
+				</section>
+
+				<section className="answer-section demo-answer" aria-labelledby="demo-question">
+					<div className="demo-layout">
+						<div className="demo-copy">
+							<h2 id="demo-question">One project, still running.</h2>
+							<p className="answer-lead">
+								Explore the live Clock In/Out Analysis. Scroll through the portal to see how
+								personal office data became an interactive visual story.
+							</p>
+							<p className="demo-tech">{liveDemoProject.technologies.join(" · ")}</p>
+							<div className="demo-links">
+								<ExternalLink href={liveDemoProject.liveUrl}>Open full project</ExternalLink>
+								<ExternalLink href={liveDemoProject.sourceUrl}>View source</ExternalLink>
+							</div>
+						</div>
+
+						<figure className="portal-figure">
+							<div className="portal-contour portal-contour-outer" aria-hidden="true" />
+							<div className="portal-contour portal-contour-inner" aria-hidden="true" />
+							<div className="project-portal">
+								<iframe
+									title="Live Clock In/Out Analysis project"
+									src={liveDemoProject.liveUrl}
+									loading="lazy"
+									referrerPolicy="strict-origin-when-cross-origin"
+									sandbox="allow-forms allow-popups allow-same-origin allow-scripts"
+								/>
+							</div>
+							<figcaption>
+								<span aria-hidden="true" />
+								Live project. Scroll and interact inside the portal.
+							</figcaption>
+						</figure>
+					</div>
 				</section>
 
 				<section className="answer-section" id="experience" aria-labelledby="experience-question">
