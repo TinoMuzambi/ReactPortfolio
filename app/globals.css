@@ -28,7 +28,7 @@
 	body {
 		margin: 0;
 		background: var(--color-paper);
-		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.045'/%3E%3C/svg%3E");
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.46' numOctaves='5' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 .078 0 0 0 0 .125 0 0 0 0 .094 .2126 .7152 .0722 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.15'/%3E%3C/svg%3E");
 		background-size: 180px 180px;
 		background-attachment: fixed;
 		color: var(--color-ink);
@@ -730,20 +730,6 @@ body:has(.action-rail) .palette-studio {
 	border-top: 2px solid var(--color-rule);
 }
 
-.toolkit-heading {
-	display: flex;
-	align-items: baseline;
-	justify-content: space-between;
-	gap: 2rem;
-}
-
-.toolkit-heading p {
-	max-width: 32rem;
-	margin: 0;
-	color: color-mix(in srgb, var(--color-ink) 68%, var(--color-paper));
-	font-size: 0.92rem;
-}
-
 .toolkit-logo-list {
 	display: grid;
 	grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -768,16 +754,6 @@ body:has(.action-rail) .palette-studio {
 	width: 3.5rem;
 	height: 3.5rem;
 	object-fit: contain;
-}
-
-.toolkit-note {
-	margin: 1rem 0 0;
-	font-size: 0.88rem;
-}
-
-.toolkit-note a {
-	color: var(--color-plum);
-	font-weight: 720;
 }
 
 .credential-list {
@@ -1147,12 +1123,6 @@ body:has(.action-rail) .palette-studio {
 
 	.portal-figure figcaption {
 		display: none;
-	}
-
-	.toolkit-heading {
-		align-items: flex-start;
-		flex-direction: column;
-		gap: 0.5rem;
 	}
 
 	.toolkit-logo-list {

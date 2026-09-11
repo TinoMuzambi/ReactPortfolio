@@ -213,10 +213,7 @@ export default function Home() {
 						</article>
 					</div>
 					<div className="toolkit">
-						<div className="toolkit-heading">
-							<h3>A working toolkit</h3>
-							<p>Familiar tools, chosen to fit the work rather than lead it.</p>
-						</div>
+						<h3>A working toolkit</h3>
 						<ul className="toolkit-logo-list" aria-label="Frequently used tools and technologies">
 							{workingToolkit.map((tool) => (
 								<li key={tool.name}>
@@ -237,7 +234,6 @@ export default function Home() {
 								<li key={certification.id}>{certification.name}</li>
 							))}
 						</ul>
-						<p className="toolkit-note">The broader inventory is available in <Link href="/cv.json">CV JSON</Link>.</p>
 					</div>
 				</section>
 
